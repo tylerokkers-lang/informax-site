@@ -26,8 +26,8 @@ export default function MeetInformax() {
             <span className="font-serif-display italic text-[13px] text-brass-deep block mb-1">
               01
             </span>
-            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(19,34,28,0.35)]">
-              <div className="relative flex aspect-[9/16] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-[radial-gradient(circle_at_50%_45%,rgba(111,224,172,0.22),var(--charcoal-950)_65%)] p-4">
+            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(33,29,23,0.35)]">
+              <div className="relative flex aspect-[9/16] flex-col items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-[radial-gradient(circle_at_50%_45%,rgba(212,171,111,0.22),var(--charcoal-950)_65%)] p-4">
                 <div className="relative h-[46px] w-[46px] rounded-full border border-brass-light">
                   <span className="absolute -inset-2.5 rounded-full border border-brass-light/35 animate-ripple" />
                   <span
@@ -58,7 +58,7 @@ export default function MeetInformax() {
             <span className="font-serif-display italic text-[13px] text-brass-deep block mb-1">
               02
             </span>
-            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(19,34,28,0.35)]">
+            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(33,29,23,0.35)]">
               <div className="flex aspect-[9/16] flex-col items-center justify-center gap-1.5 overflow-hidden rounded-2xl bg-charcoal-950 p-4">
                 <span className="self-start text-[9px] font-bold uppercase tracking-[0.08em] text-brass-light mb-0.5">
                   The Grand Hotel
@@ -95,7 +95,7 @@ export default function MeetInformax() {
             <span className="font-serif-display italic text-[13px] text-brass-deep block mb-1">
               03
             </span>
-            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(19,34,28,0.35)]">
+            <div className="max-w-[220px] mx-auto mb-5 rounded-3xl border border-line bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-2.5 shadow-[0_24px_50px_-24px_rgba(33,29,23,0.35)]">
               <div className="flex aspect-[9/16] flex-col justify-center gap-2 overflow-hidden rounded-2xl bg-charcoal-950 p-4">
                 <div className="h-11 w-full rounded-lg border border-line-dark bg-gradient-to-br from-brass-light/35 to-brass-light/10" />
                 <div className="h-1.5 w-[90%] rounded bg-charcoal-850" />

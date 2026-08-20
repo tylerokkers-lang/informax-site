@@ -22,7 +22,7 @@ export default function FinalCta() {
       <div className="mx-auto max-w-8xl px-6 md:px-8">
         <Reveal>
           <div className="relative overflow-hidden rounded-[32px] border border-line-dark bg-gradient-to-br from-charcoal-900 to-charcoal-950 px-6 py-16 md:px-10 md:py-20 text-center text-cream">
-            <div className="pointer-events-none absolute -bottom-64 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(111,224,172,0.16),transparent_70%)] blur-[20px]" />
+            <div className="pointer-events-none absolute -bottom-64 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,171,111,0.16),transparent_70%)] blur-[20px]" />
 
             <div className="relative">
               <Eyebrow tone="dark" center>

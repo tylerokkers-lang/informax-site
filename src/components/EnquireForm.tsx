@@ -103,7 +103,7 @@ export default function EnquireForm() {
         role="status"
         className="flex flex-col items-center text-center gap-4 py-10"
       >
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(35,138,92,0.12)]">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(93,138,96,0.12)]">
           <CheckCircle2 size={28} className="text-moss" />
         </div>
         <h3 className="font-serif-display text-2xl font-medium text-ink">
@@ -120,7 +120,7 @@ export default function EnquireForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       {status === "error" && errorMessage && (
-        <div className="form-status show error mb-7 flex items-start gap-3.5 rounded-2xl border border-[rgba(193,80,58,0.3)] bg-[rgba(193,80,58,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#8a3a28]">
+        <div className="form-status show error mb-7 flex items-start gap-3.5 rounded-2xl border border-[rgba(181,71,58,0.3)] bg-[rgba(181,71,58,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a13d31]">
           <AlertCircle size={20} className="mt-0.5 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -246,7 +246,7 @@ export default function EnquireForm() {
             {ENQUIRY_INTERESTS.map((option) => (
               <label
                 key={option}
-                className="flex items-center gap-2.5 rounded-[10px] border border-line bg-white px-3.5 py-3 cursor-pointer transition-colors duration-[250ms] has-[:checked]:border-brass has-[:checked]:bg-[rgba(31,157,107,0.06)]"
+                className="flex items-center gap-2.5 rounded-[10px] border border-line bg-white px-3.5 py-3 cursor-pointer transition-colors duration-[250ms] has-[:checked]:border-brass has-[:checked]:bg-[rgba(168,121,63,0.06)]"
               >
                 <input
                   type="checkbox"
@@ -276,7 +276,7 @@ export default function EnquireForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-7 py-4 text-[14.5px] font-semibold text-[#06231a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(18,115,76,0.55)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+        className="mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-7 py-4 text-[14.5px] font-semibold text-[#201705] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(129,92,44,0.55)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
       >
         {status === "submitting" && (
           <Loader2 size={16} className="animate-spin" />
@@ -299,7 +299,7 @@ export default function EnquireForm() {
 function inputClass(hasError: boolean) {
   return `w-full rounded-[10px] border ${
     hasError ? "border-rust" : "border-line"
-  } bg-white px-4 py-[13px] text-[14.5px] text-ink transition-all duration-300 focus:outline-none focus:border-brass focus:ring-[3px] focus:ring-[rgba(31,157,107,0.14)]`;
+  } bg-white px-4 py-[13px] text-[14.5px] text-ink transition-all duration-300 focus:outline-none focus:border-brass focus:ring-[3px] focus:ring-[rgba(168,121,63,0.14)]`;
 }
 
 function Field({

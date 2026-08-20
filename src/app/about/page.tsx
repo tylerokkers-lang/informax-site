@@ -50,7 +50,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line-dark bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-9 sm:p-11">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(111,224,172,0.14),transparent_55%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,171,111,0.14),transparent_55%)]" />
               <span className="absolute top-2 left-7 font-serif-display text-[140px] leading-none text-brass-light/[0.18]">
                 &ldquo;
               </span>

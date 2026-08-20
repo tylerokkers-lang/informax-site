@@ -51,7 +51,7 @@ export default function Customise() {
 
         <Reveal delay={0.1}>
           <div className="relative overflow-hidden rounded-3xl bg-charcoal-950 p-10 md:p-12 text-white">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(111,224,172,0.18),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(212,171,111,0.18),transparent_60%)]" />
             <div className="relative text-xs font-bold uppercase tracking-[0.1em] text-brass-light mb-5">
               The Physical Tag Stays Put
             </div>

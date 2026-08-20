@@ -94,7 +94,7 @@ export function BtnPrimary({
   return (
     <Link
       href={href}
-      className={`${baseBtn} bg-gradient-to-br from-brass-light to-brass-deep text-[#06231a] hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(18,115,76,0.55)] ${className}`}
+      className={`${baseBtn} bg-gradient-to-br from-brass-light to-brass-deep text-[#201705] hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(129,92,44,0.55)] ${className}`}
     >
       {children}
       {arrow && (

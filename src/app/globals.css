@@ -1,39 +1,31 @@
 @import "tailwindcss";
 
-/*
- * Informax brand system — "Jade & Porcelain".
- * Deliberately distinct from a warm cream / brass / brown-charcoal look:
- * cool porcelain-sage neutrals, deep ink-teal (not brown) bookends, and a
- * jade-green accent in place of gold/brass. Token names below (--brass*)
- * are kept for a minimal-diff swap across components; treat them as the
- * "accent" family — they now hold jade values, not literal brass.
- */
 :root {
-  --paper: #eef3f0;
-  --paper-alt: #e1eae4;
-  --panel: #fcfefc;
+  --paper: #f6f1e7;
+  --paper-alt: #efe6d5;
+  --panel: #fffcf6;
 
-  --charcoal-950: #081310;
-  --charcoal-900: #0d1c17;
-  --charcoal-850: #12241e;
-  --charcoal-800: #172d25;
-  --charcoal-700: #1f3c31;
+  --charcoal-950: #131110;
+  --charcoal-900: #1b1815;
+  --charcoal-850: #221e19;
+  --charcoal-800: #2b261f;
+  --charcoal-700: #3a3327;
 
-  --ink: #13221c;
-  --ink-soft: #3c5049;
-  --ink-mute: #72877e;
-  --cream: #eaf3ee;
-  --cream-mute: #b8ccc1;
+  --ink: #211d17;
+  --ink-soft: #4d473c;
+  --ink-mute: #837a68;
+  --cream: #f3ede1;
+  --cream-mute: #cfc6b3;
 
-  --brass: #1f9d6b;
-  --brass-deep: #12734c;
-  --brass-light: #6fe0ac;
+  --brass: #a8793f;
+  --brass-deep: #815c2c;
+  --brass-light: #d4ab6f;
 
-  --rust: #c1503a;
-  --moss: #238a5c;
+  --rust: #b5473a;
+  --moss: #4f7a52;
 
-  --line: rgba(19, 34, 28, 0.12);
-  --line-soft: rgba(19, 34, 28, 0.07);
+  --line: rgba(33, 29, 23, 0.12);
+  --line-soft: rgba(33, 29, 23, 0.07);
   --line-dark: rgba(255, 255, 255, 0.12);
   --line-dark-soft: rgba(255, 255, 255, 0.07);
 }
@@ -112,8 +104,8 @@ svg {
 
 .bg-grid-fade {
   background-image:
-    linear-gradient(rgba(31, 157, 107, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(31, 157, 107, 0.09) 1px, transparent 1px);
+    linear-gradient(rgba(168, 121, 63, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 121, 63, 0.09) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -121,8 +113,8 @@ svg {
 
 .bg-grid-fade-dark {
   background-image:
-    linear-gradient(rgba(111, 224, 172, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(111, 224, 172, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(212, 171, 111, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 171, 111, 0.07) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -145,8 +137,8 @@ svg {
 .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(111, 224, 172, 0); border-color: var(--line-dark); }
-  50% { box-shadow: 0 0 0 6px rgba(111, 224, 172, 0.1); border-color: rgba(111, 224, 172, 0.4); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 171, 111, 0); border-color: var(--line-dark); }
+  50% { box-shadow: 0 0 0 6px rgba(212, 171, 111, 0.1); border-color: rgba(212, 171, 111, 0.4); }
 }
 .animate-pulse-ring { animation: pulse-ring 2.6s ease-in-out infinite; }
 
