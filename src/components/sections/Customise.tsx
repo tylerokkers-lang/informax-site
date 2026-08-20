@@ -61,7 +61,7 @@ export default function Customise() {
             </h3>
             <p className="relative text-cream-mute text-[15px] leading-relaxed">
               Change opening hours, swap a recommendation, launch a new
-              offer, or refresh the branding entirely — the tag on the wall
+              offer, or refresh the branding entirely. The tag on the wall
               never changes, but what appears behind it always can.
             </p>
             <div className="relative mt-6 inline-flex items-center gap-2 rounded-full border border-line-dark px-4 py-2.5 text-[12.5px] font-semibold text-cream">

@@ -9,7 +9,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "Website Design, Digital Brochures & Digital Directories",
   description:
-    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses — plus a specialist hospitality practice. Websites from £1,200.",
+    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice. Websites from £1,200.",
   alternates: { canonical: "/" },
 };
 

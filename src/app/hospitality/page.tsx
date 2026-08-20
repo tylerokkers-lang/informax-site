@@ -15,9 +15,9 @@ import Showcase from "@/components/sections/Showcase";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Hospitality — Digital Guest Directories & Hospitality Websites",
+  title: "Hospitality: Digital Guest Directories & Hospitality Websites",
   description:
-    "Informax's hospitality practice: digital guest directories accessed by NFC tap or QR scan, and hospitality websites — helping hotels, resorts and venues showcase dining, spa, facilities and offers.",
+    "Informax's hospitality practice: digital guest directories accessed by NFC tap or QR scan, and hospitality websites, helping hotels, resorts and venues showcase dining, spa, facilities and offers.",
   alternates: { canonical: "/hospitality" },
 };
 
@@ -67,12 +67,13 @@ export default function HospitalityPage() {
             <QrCode size={22} className="text-brass-deep shrink-0" />
             <p className="text-ink-soft text-[15px] leading-relaxed">
               A physical tag stays on the wall or in the room. Guests tap or
-              scan it and the directory opens instantly — no app required.
+              scan it and the directory opens instantly, with no app
+              required.
             </p>
           </div>
           <p className="text-ink-mute text-[15px] leading-relaxed">
             Beyond directories, we also design and build full hospitality
-            websites — see our{" "}
+            websites. See our{" "}
             <a href="/websites" className="text-brass-deep underline underline-offset-2">
               website service
             </a>{" "}
@@ -87,7 +88,7 @@ export default function HospitalityPage() {
       <FinalCta
         eyebrow="Ready When You Are"
         title={<>Give guests the <EmLight>full picture.</EmLight></>}
-        description="Tell us about your property, and we'll help design a digital guest directory — or a hospitality website — that puts everything you offer one tap away."
+        description="Tell us about your property, and we'll help design a digital guest directory, or a hospitality website, that puts everything you offer one tap away."
         primaryLabel="Start a Project"
         primaryHref="/enquire"
         secondaryLabel="See Our Pricing"

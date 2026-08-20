@@ -12,7 +12,7 @@ interface EnquiryPayload {
   budget?: string;
   interests?: string[];
   message?: string;
-  website?: string; // honeypot field — real visitors never fill this in
+  website?: string; // honeypot field: real visitors never fill this in
 }
 
 function isValidEmail(email: string) {
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error(
-      "[enquire] RESEND_API_KEY is not configured — enquiry was not delivered:",
+      "[enquire] RESEND_API_KEY is not configured. Enquiry was not delivered:",
       data
     );
     return NextResponse.json(
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
         from: fromEmail,
         to: [toEmail],
         reply_to: data.email,
-        subject: `New enquiry — ${data.company}`,
+        subject: `New enquiry from ${data.company}`,
         text: body,
       }),
     });

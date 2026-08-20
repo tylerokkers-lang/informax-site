@@ -7,7 +7,7 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Enquire",
   description:
-    "Tell us what you're looking to create and we'll work out the best way to bring it to life — a website, a brochure, a directory, or something bespoke.",
+    "Tell us what you're looking to create and we'll work out the best way to bring it to life, whether that's a website, a brochure, a directory or something bespoke.",
   alternates: { canonical: "/enquire" },
 };
 
@@ -15,7 +15,7 @@ const SIDE_POINTS = [
   "A project designed entirely around your business and brand",
   "Websites from £1,200, priced honestly around what you need",
   "Brochures, directories, hospitality and bespoke work all welcome",
-  "A clear, no-pressure proposal — never a hard sell",
+  "A clear, no-pressure proposal, never a hard sell",
 ];
 
 export default function EnquirePage() {
@@ -44,7 +44,7 @@ export default function EnquirePage() {
             <MetaItem
               icon={Sparkles}
               title="Not sure what you need yet?"
-              desc="That's fine — tell us the problem and we'll help shape it."
+              desc="That's fine. Tell us the problem and we'll help shape it."
             />
             <MetaItem
               icon={Mail}
@@ -64,7 +64,7 @@ export default function EnquirePage() {
             </h3>
             <p className="text-[14.5px] text-ink-mute leading-relaxed mb-6">
               Every Informax enquiry starts with a conversation, not a sales
-              pitch — we want to understand what you&rsquo;re trying to
+              pitch. We want to understand what you&rsquo;re trying to
               achieve before we suggest anything.
             </p>
             <ul className="flex flex-col gap-4">

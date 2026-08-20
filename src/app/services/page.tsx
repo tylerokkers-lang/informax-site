@@ -12,7 +12,7 @@ import { BtnGhost, Em, Eyebrow, EmLight } from "@/components/ui";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Services — Websites, Digital Brochures, Directories & Hospitality",
+  title: "Services: Websites, Digital Brochures, Directories & Hospitality",
   description:
     "Informax's core services: custom website design and development, digital brochures and pamphlets, digital directories, hospitality guest experiences, and bespoke digital projects.",
   alternates: { canonical: "/services" },
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
 const SERVICES = [
   {
     icon: Monitor,
-    eyebrow: "01 — Websites",
+    eyebrow: "01 · Websites",
     title: "Custom-designed websites, built around your business.",
-    desc: "Professional, custom-designed websites built around the client's business — not a generic template.",
+    desc: "Professional, custom-designed websites built around the client's business, not a generic template.",
     examples: [
       "Business websites",
       "Service websites",
@@ -39,7 +39,7 @@ const SERVICES = [
   },
   {
     icon: BookOpen,
-    eyebrow: "02 — Digital Brochures",
+    eyebrow: "02 · Digital Brochures",
     title: "Beautiful digital brochures your business can share online.",
     desc: "Instead of a dull PDF attachment, a professionally designed digital experience your business can share anywhere.",
     examples: [
@@ -56,9 +56,9 @@ const SERVICES = [
   },
   {
     icon: FileText,
-    eyebrow: "03 — Digital Pamphlets",
-    title: "Simple, attractive information — designed for digital use.",
-    desc: "Focused digital information documents designed specifically for a single service, product, event or purpose — not a printed page shrunk to fit a screen.",
+    eyebrow: "03 · Digital Pamphlets",
+    title: "Simple, attractive information designed for digital use.",
+    desc: "Focused digital information documents designed specifically for a single service, product, event or purpose, rather than a printed page shrunk to fit a screen.",
     examples: [
       "Service one-pagers",
       "Event information",
@@ -69,9 +69,9 @@ const SERVICES = [
   },
   {
     icon: LayoutGrid,
-    eyebrow: "04 — Digital Directories",
+    eyebrow: "04 · Digital Directories",
     title: "Custom directories that make information easy to find.",
-    desc: "When there's a lot to communicate, a directory makes it navigable — accessed by QR, NFC, direct link or built into your website.",
+    desc: "When there's a lot to communicate, a directory makes it navigable. Access it by QR code, NFC, direct link or straight from your website.",
     examples: [
       "Hotels",
       "Hospitality businesses",
@@ -86,9 +86,9 @@ const SERVICES = [
   },
   {
     icon: ConciergeBell,
-    eyebrow: "05 — Hospitality",
+    eyebrow: "05 · Hospitality",
     title: "A specialist application of the wider Informax platform.",
-    desc: "Digital guest directories and hospitality websites, designed specifically for hotels, resorts and venues — where Informax started, and still one of our specialisms.",
+    desc: "Digital guest directories and hospitality websites, designed specifically for hotels, resorts and venues. This is where Informax started, and it remains one of our specialisms.",
     examples: [
       "Digital guest directories",
       "Hotel & resort websites",
@@ -99,7 +99,7 @@ const SERVICES = [
   },
   {
     icon: WandSparkles,
-    eyebrow: "06 — Bespoke Projects",
+    eyebrow: "06 · Bespoke Projects",
     title: "Have something different in mind?",
     desc: "If your idea doesn't fit neatly into a website, brochure or directory, talk to us. We design and build bespoke digital experiences around what you need.",
     examples: [],
@@ -119,7 +119,7 @@ export default function ServicesPage() {
             Everything we design and build, <EmLight>in one place.</EmLight>
           </h1>
           <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
-            Six ways to work with Informax — from a full website to a single
+            Six ways to work with Informax, from a full website to a single
             bespoke idea.
           </p>
         </div>
@@ -179,7 +179,7 @@ export default function ServicesPage() {
 
       <FinalCta
         title={<>Not sure which one fits? <Em>Let&rsquo;s talk it through.</Em></>}
-        description="Tell us what you're trying to achieve and we'll recommend the right starting point — whether that's a website, a directory, a brochure, or something bespoke."
+        description="Tell us what you're trying to achieve and we'll recommend the right starting point, whether that's a website, a directory, a brochure or something bespoke."
       />
     </>
   );

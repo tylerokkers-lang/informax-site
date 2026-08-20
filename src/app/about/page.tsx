@@ -5,7 +5,7 @@ import { BtnPrimary, Em, EmLight, Eyebrow } from "@/components/ui";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Informax is a digital design and development studio — we build websites, digital brochures, directories and bespoke digital experiences, with a specialist hospitality practice.",
+    "Informax is a digital design and development studio. We build websites, digital brochures, directories and bespoke digital experiences, with a specialist hospitality practice.",
   alternates: { canonical: "/about" },
 };
 
@@ -23,7 +23,7 @@ const VALUES = [
   {
     num: "03",
     title: "Priced honestly",
-    desc: "A clear starting point, with functionality priced to what you actually need — nothing bundled in to inflate the number.",
+    desc: "A clear starting point, with functionality priced to what you actually need. Nothing is bundled in just to inflate the number.",
   },
 ];
 
@@ -40,7 +40,7 @@ export default function AboutPage() {
             <EmLight>something worth using.</EmLight>
           </h1>
           <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
-            Informax is a digital design and development studio — websites,
+            Informax is a digital design and development studio: websites,
             digital brochures, directories and bespoke digital experiences,
             with a specialist hospitality practice.
           </p>
@@ -63,7 +63,7 @@ export default function AboutPage() {
                   I started Informax because I kept seeing the same problem:
                   businesses with genuinely good things to say, presented
                   badly. We build the websites, brochures and directories
-                  that fix that — properly designed, not templated. This is
+                  that fix that: properly designed, not templated. This is
                   just the beginning.
                 </p>
               </div>
@@ -90,23 +90,23 @@ export default function AboutPage() {
               Our founder spent almost ten years working across the
               hospitality industry, and kept seeing the same story play out:
               a hotel with a great spa, a great restaurant, a great story to
-              tell — and no good way to actually tell it. Information was
+              tell, and no good way to actually tell it. Information was
               scattered across a tired website, a printed guide, and
               whatever reception had time to mention at check-in.
             </p>
             <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-5">
               That problem turned out not to be unique to hotels. Talk to
-              almost any business and you&rsquo;ll find the same thing —
-              good information, badly presented, spread across too many
-              places. Informax exists to fix that properly: through
-              considered design and solid engineering, not templates.
+              almost any business and you&rsquo;ll find the same thing:
+              good information, badly presented and spread across too many
+              places. Informax exists to fix that properly, through
+              considered design and solid engineering rather than templates.
             </p>
             <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-8">
               <strong className="text-ink font-semibold">
                 Today, that means websites, digital brochures, directories
                 and bespoke digital projects
               </strong>{" "}
-              for businesses across sectors — alongside a dedicated
+              for businesses across sectors, alongside a dedicated
               hospitality practice that still carries the lessons the
               company was built on.
             </p>

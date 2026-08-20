@@ -5,7 +5,7 @@ import { BtnGhost, BtnPrimary, Eyebrow, EmLight } from "@/components/ui";
 const DEFAULT_META = [
   {
     title: "Start with a conversation",
-    desc: "No pressure, no jargon — just a clear picture of what you need.",
+    desc: "No pressure, no jargon, just a clear picture of what you need.",
   },
   {
     title: "Built around your business",
@@ -24,7 +24,7 @@ export default function FinalCta({
       Have something to <EmLight>build?</EmLight>
     </>
   ),
-  description = "Tell us what you're looking to create and we'll work out the best way to bring it to life — a website, a brochure, a directory, or something entirely bespoke.",
+  description = "Tell us what you're looking to create and we'll work out the best way to bring it to life, whether that's a website, a brochure, a directory or something entirely bespoke.",
   primaryLabel = "Start a Project",
   primaryHref = "/enquire",
   secondaryLabel = "Explore Our Services",

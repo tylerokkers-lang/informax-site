@@ -5,7 +5,7 @@ const VERTICALS = [
   {
     num: "01",
     title: "Hotels",
-    desc: "Guest information, facilities, dining, services and experiences — all in one place.",
+    desc: "Guest information, facilities, dining, services and experiences, all in one place.",
   },
   {
     num: "02",
@@ -38,7 +38,7 @@ export default function Verticals() {
           </h2>
           <p className="text-ink-mute text-[17px] leading-relaxed">
             Informax is designed around the specific needs of hotels and
-            hospitality businesses — not retrofitted from a generic
+            hospitality businesses, not retrofitted from a generic
             directory product.
           </p>
         </Reveal>

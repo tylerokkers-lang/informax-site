@@ -23,11 +23,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Informax — Website Design, Digital Brochures & Directories",
-    template: "%s — Informax",
+    default: "Informax | Website Design, Digital Brochures & Directories",
+    template: "%s | Informax",
   },
   description:
-    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses — plus a specialist hospitality practice. Websites from £1,200.",
+    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice. Websites from £1,200.",
   keywords: [
     "website design",
     "website development",
@@ -45,15 +45,15 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: "Informax",
-    title: "Informax — Website Design, Digital Brochures & Directories",
+    title: "Informax | Website Design, Digital Brochures & Directories",
     description:
-      "Digital experiences, designed around your business — websites, digital brochures, directories and bespoke digital projects. Websites from £1,200.",
+      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects. Websites from £1,200.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Informax — Website Design, Digital Brochures & Directories",
+    title: "Informax | Website Design, Digital Brochures & Directories",
     description:
-      "Digital experiences, designed around your business — websites, digital brochures, directories and bespoke digital projects.",
+      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects.",
   },
   icons: {
     icon: "/favicon.ico",

@@ -13,7 +13,7 @@ const STEPS = [
     index: "02",
     icon: MapPin,
     title: "Discover",
-    desc: "They encounter an Informax tag — on the desk, wall, or key wallet.",
+    desc: "They encounter an Informax tag, on the desk, the wall or their key wallet.",
   },
   {
     index: "03",

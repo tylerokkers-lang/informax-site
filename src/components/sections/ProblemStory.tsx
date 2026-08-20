@@ -35,7 +35,7 @@ export default function ProblemStory() {
               It&rsquo;s just <Em>everywhere else.</Em>
             </h2>
             <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-[460px] mb-6">
-              Services, offers, facilities, availability, policies — the
+              Services, offers, facilities, availability and policies: the
               information is usually there. It&rsquo;s just scattered across
               a website that&rsquo;s falling behind, a PDF nobody opens, a
               printed brochure that goes out of date, and a dozen other
@@ -65,7 +65,7 @@ export default function ProblemStory() {
 
         <Reveal delay={0.15} className="mt-16 pt-14 border-t border-line max-w-2xl">
           <p className="text-ink-mute text-[17px] leading-relaxed">
-            Informax brings that information together — designing and
+            Informax brings that information together, designing and
             building the websites, brochures, directories and digital
             experiences businesses actually use to present themselves
             professionally.

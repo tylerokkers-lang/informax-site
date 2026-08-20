@@ -59,7 +59,7 @@ export default function DigitalInformationPage() {
             Digital Information
           </Eyebrow>
           <h1 className="font-serif-display font-medium text-[clamp(32px,4.6vw,50px)] leading-[1.2] text-white mx-auto mb-5 max-w-2xl">
-            Beyond the website — the other information your business shares.
+            Beyond the website: the other information your business shares.
           </h1>
           <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
             Brochures, pamphlets and directories, designed as digital
@@ -77,8 +77,9 @@ export default function DigitalInformationPage() {
             </h2>
             <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-4">
               Instead of sending a dull PDF attachment, Informax designs a
-              professionally built digital experience — easy to share, easy
-              to explore, and built to reflect your brand properly.
+              professionally built digital experience that is easy to
+              share, easy to explore, and built to reflect your brand
+              properly.
             </p>
             <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-8">
               Digital pamphlets follow the same principle at a smaller
@@ -125,9 +126,9 @@ export default function DigitalInformationPage() {
             </h2>
             <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-6">
               Directories aren&rsquo;t limited to hotels. Anywhere there&rsquo;s
-              a lot of information — facilities, services, contacts,
-              locations — a custom digital directory makes it navigable
-              instead of overwhelming.
+              a lot of information to manage, such as facilities, services,
+              contacts or locations, a custom digital directory makes it
+              navigable instead of overwhelming.
             </p>
             <div className="flex flex-wrap gap-2 mb-8">
               {ACCESS_METHODS.map((m) => (
@@ -161,7 +162,7 @@ export default function DigitalInformationPage() {
 
       <FinalCta
         title={<>Have information that deserves <EmLight>better design?</EmLight></>}
-        description="Tell us what you're trying to communicate — we'll help you work out whether a brochure, pamphlet or directory is the right shape for it."
+        description="Tell us what you're trying to communicate and we'll help you work out whether a brochure, pamphlet or directory is the right shape for it."
       />
     </>
   );

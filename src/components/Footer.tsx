@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-charcoal-950 text-cream-mute pt-20 pb-8">
       <div className="mx-auto max-w-8xl px-6 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 pb-14 border-b border-line-dark">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 pb-14 border-b border-line-dark">
           <div>
             <Link href="/" className="inline-flex">
               <Image
@@ -19,13 +19,13 @@ export default function Footer() {
                 alt="Informax"
                 width={420}
                 height={140}
-                className="h-24 w-auto"
+                className="h-28 lg:h-36 w-auto"
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
               A digital design and development studio. We build websites,
               digital brochures, directories and bespoke digital experiences
-              for businesses — including a specialist hospitality practice.
+              for businesses, including a specialist hospitality practice.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a

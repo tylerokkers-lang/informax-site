@@ -13,9 +13,9 @@ export default function NoApp() {
           </h2>
           <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-[440px]">
             Tap or scan, and the hotel&rsquo;s digital experience opens
-            instantly in the guest&rsquo;s own browser. No app store, no
-            account, no download — just information, right when it&rsquo;s
-            needed.
+            instantly in the guest&rsquo;s own browser. There is no app
+            store, no account and no download, just information, right when
+            it&rsquo;s needed.
           </p>
         </Reveal>
 

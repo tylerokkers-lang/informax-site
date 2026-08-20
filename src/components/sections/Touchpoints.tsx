@@ -49,9 +49,9 @@ export default function Touchpoints() {
         <Reveal className="max-w-2xl mb-14">
           <Eyebrow>Beyond Information</Eyebrow>
           <h2 className="font-serif-display font-medium leading-[1.15] tracking-tight text-[clamp(28px,3.6vw,44px)] text-ink mb-4">
-            It&rsquo;s not just information.
+            More than information.
             <br />
-            It&rsquo;s another <Em>touchpoint with your guest.</Em>
+            Another <Em>touchpoint with your guest.</Em>
           </h2>
         </Reveal>
 

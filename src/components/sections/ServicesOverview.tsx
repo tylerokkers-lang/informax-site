@@ -22,7 +22,7 @@ const SERVICES = [
   {
     icon: BookOpen,
     title: "Digital Brochures",
-    desc: "Beautiful digital brochures your business can share online — easy to send, easy to explore.",
+    desc: "Beautiful digital brochures your business can share online, easy to send and easy to explore.",
     href: "/digital-information#brochures",
   },
   {
@@ -58,7 +58,7 @@ export default function ServicesOverview() {
         <Reveal className="max-w-2xl mb-14">
           <Eyebrow>What We Create</Eyebrow>
           <h2 className="font-serif-display font-medium leading-[1.15] tracking-tight text-[clamp(28px,3.6vw,44px)] text-ink mb-4">
-            Websites, brochures, directories —{" "}
+            Websites, brochures, directories{" "}
             <Em>and everything in between.</Em>
           </h2>
           <p className="text-ink-mute text-[17px] leading-relaxed">

@@ -44,7 +44,7 @@ export default function Hero() {
             className="text-lg leading-relaxed text-cream-mute max-w-[500px] mb-10"
           >
             Informax designs and builds websites, digital brochures,
-            directories and bespoke digital experiences — turning the
+            directories and bespoke digital experiences, turning the
             information your business needs to share into something
             professional, useful and engaging.
           </motion.p>
@@ -74,7 +74,7 @@ export default function Hero() {
         </div>
 
         <div className="relative flex items-center justify-center min-h-[420px] md:min-h-[540px]">
-          {/* Laptop — website */}
+          {/* Laptop: website */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ export default function Hero() {
             <div className="h-2.5 rounded-b-xl bg-gradient-to-b from-charcoal-700 to-charcoal-850 border-x border-b border-line-dark" />
           </motion.div>
 
-          {/* Tablet — brochure */}
+          {/* Tablet: brochure */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Phone — directory */}
+          {/* Phone: directory */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

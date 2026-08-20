@@ -10,7 +10,7 @@ const THEMES = [
     rows: ["Fine Dining", "The Cellar Bar", "Private Spa", "Turndown Service"],
     rowStyle: "text-[#3a3327]",
     rowBg: ["bg-[#f6f1e7]", "bg-[#fbf8f2]"],
-    desc: "Reserved, editorial, brass-on-charcoal — built for a five-star address.",
+    desc: "Reserved and editorial, brass-on-charcoal tones built for a five-star address.",
   },
   {
     label: "Boutique Hotel",
@@ -20,7 +20,7 @@ const THEMES = [
     rows: ["Rooftop Terrace", "Studio Rooms", "Local Guides", "Late Checkout"],
     rowStyle: "text-[#5c3a2c]",
     rowBg: ["bg-[#fbeee4]", "bg-[#fff8f3]"],
-    desc: "Warm terracotta tones with personality — a true extension of the brand.",
+    desc: "Warm terracotta tones with personality, a true extension of the brand.",
   },
   {
     label: "Resort",
@@ -30,7 +30,7 @@ const THEMES = [
     rows: ["Beach Club", "Water Sports", "Kids' Club", "Evening Entertainment"],
     rowStyle: "text-[#1c4740]",
     rowBg: ["bg-[#eaf5f2]", "bg-[#f6fbfa]"],
-    desc: "Coastal teal and sand — energetic, activity-first navigation.",
+    desc: "Coastal teal and sand tones with energetic, activity-first navigation.",
   },
 ];
 

@@ -20,8 +20,8 @@ export default function HospitalityTeaser() {
               <p className="text-ink-mute text-[15.5px] leading-relaxed max-w-xl">
                 From hotel websites to digital guest directories, we create
                 digital experiences that help hospitality businesses
-                communicate more effectively with their guests — one of the
-                specialisms Informax serves.
+                communicate more effectively with their guests. It is one
+                of the specialisms Informax serves.
               </p>
             </div>
 

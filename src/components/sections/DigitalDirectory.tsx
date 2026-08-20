@@ -36,16 +36,16 @@ export default function DigitalDirectory() {
             Everything your property offers, <Em>beautifully organised.</Em>
           </h2>
           <p className="text-cream-mute text-[16.5px] leading-relaxed max-w-[460px] mb-7">
-            One tap opens a complete, navigable directory of the hotel —
+            One tap opens a complete, navigable directory of the hotel:
             dining, spa, facilities, guest services, local recommendations
             and offers, all in a single beautifully designed experience.
           </p>
           <div className="max-w-[460px] rounded-2xl border border-line-dark bg-charcoal-900 px-6 py-5 text-[14.5px] text-cream-mute">
             <strong className="text-white">
-              Every Informax directory is built around the property
+              Every Informax directory is built around the property,
             </strong>{" "}
-            — its brand, its photography, its tone of voice and everything
-            it wants guests to discover.
+            its brand, its photography, its tone of voice and everything it
+            wants guests to discover.
           </div>
         </Reveal>
 

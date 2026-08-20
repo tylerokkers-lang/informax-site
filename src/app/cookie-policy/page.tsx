@@ -55,7 +55,7 @@ export default function CookiePolicyPage() {
             <p>
               We do not currently share cookie data with third parties.
               If we introduce third-party services that set their own
-              cookies — for analytics or similar purposes — they will be
+              cookies, for analytics or similar purposes, they will be
               named here along with a link to their own privacy and
               cookie policies.
             </p>

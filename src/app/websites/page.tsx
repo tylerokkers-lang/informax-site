@@ -22,7 +22,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "Website Design & Development",
   description:
-    "Custom website design and development built around your business — responsive, SEO-ready and designed to grow with additional functionality. Websites from £1,200.",
+    "Custom website design and development built around your business. Responsive, SEO-ready and designed to grow with additional functionality. Websites from £1,200.",
   alternates: { canonical: "/websites" },
 };
 
@@ -61,7 +61,7 @@ export default function WebsitesPage() {
             <p className="text-cream-mute text-[17px] leading-relaxed max-w-xl mb-9">
               We don&rsquo;t sell generic templates. We design and build
               websites around the business, its customers, its goals and its
-              brand — from a focused brochure site to something far more
+              brand, from a focused brochure site to something far more
               involved.
             </p>
             <div className="flex flex-wrap items-center gap-5">
@@ -82,9 +82,9 @@ export default function WebsitesPage() {
               </div>
               <p className="text-sm text-cream-mute leading-relaxed">
                 A professionally designed and developed website. The exact
-                price depends on your requirements —{" "}
+                price depends on your requirements.{" "}
                 <a href="/pricing" className="text-brass-light underline underline-offset-2">
-                  see how pricing works
+                  See how pricing works
                 </a>
                 .
               </p>
@@ -103,7 +103,7 @@ export default function WebsitesPage() {
             <p className="text-ink-mute text-[16px] leading-relaxed">
               Every project starts with a custom-designed, responsive
               website. From there, functionality is added based on your
-              requirements — not bundled in by default.
+              requirements, not bundled in by default.
             </p>
           </Reveal>
 

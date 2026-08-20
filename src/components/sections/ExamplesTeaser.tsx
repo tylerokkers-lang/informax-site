@@ -73,8 +73,8 @@ export default function ExamplesTeaser() {
           </h2>
           <p className="text-ink-mute text-[17px] leading-relaxed">
             We&rsquo;re building out a full portfolio of client work. In the
-            meantime, here are a few concept explorations — clearly not real
-            client projects — that show the kind of range we work across.
+            meantime, here are a few concept explorations, clearly not real
+            client projects, that show the kind of range we work across.
           </p>
         </Reveal>
 

@@ -64,7 +64,7 @@ export default function ProblemJourney() {
             </h3>
             <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-[440px]">
               Multiple restaurants, a spa, a gym, a pool, bars, events,
-              experiences, room service — a property&rsquo;s full offering
+              experiences and room service: a property&rsquo;s full offering
               rarely fits into a two-minute check-in. Whatever doesn&rsquo;t
               get said at the desk usually stays unknown for the rest of the
               stay.

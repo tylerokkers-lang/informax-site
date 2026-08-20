@@ -106,7 +106,7 @@ export default function EnquireForm() {
           <CheckCircle2 size={28} className="text-moss" />
         </div>
         <h3 className="font-serif-display text-2xl font-medium text-ink">
-          Thank you — that&rsquo;s on its way.
+          Thank you, that&rsquo;s on its way.
         </h3>
         <p className="text-ink-mute text-[15px] max-w-md leading-relaxed">
           We&rsquo;ve received your enquiry and will be in touch shortly to
@@ -125,7 +125,7 @@ export default function EnquireForm() {
         </div>
       )}
 
-      {/* Honeypot — hidden from real visitors, catches basic bots */}
+      {/* Honeypot: hidden from real visitors, catches basic bots */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
