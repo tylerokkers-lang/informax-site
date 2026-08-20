@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informax — Ease of Information, One Tap Away</title>
+<meta name="description" content="Informax turns everything your property offers into one custom-designed information directory guests can access with a single tap — no app, no download, no delay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#top" class="logo">
+      <img src="assets/informax-logo-white.png" alt="Informax" class="logo-img">
+    </a>
+
+    <nav class="main-nav">
+      <a href="#top">Home</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#story">Story</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="mailto:info@informax.co.uk" class="btn btn-ghost">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#top">Home</a>
+  <a href="#how-it-works">How It Works</a>
+  <a href="#features">Features</a>
+  <a href="#faq">FAQ</a>
+  <a href="#story">Story</a>
+  <a href="mailto:info@informax.co.uk" class="btn btn-primary" style="margin-top:10px;">Get in Touch</a>
+</nav>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow reveal">NFC-Powered Digital Access</div>
+        <h1 class="reveal">Tap. Access. <em class="italic-blue">Enjoy.</em></h1>
+        <p class="hero-sub reveal">
+          Informax turns everything your property offers into <b>one custom-designed information directory</b> —
+          Wi-Fi, amenities, dining, local recommendations and more — that every guest can read and use easily.
+          No app, no download, no delay.
+        </p>
+        <div class="hero-cta-row reveal">
+          <a href="mailto:info@informax.co.uk" class="btn btn-primary">
+            Get in Touch
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+        </div>
+        <div class="hero-note reveal">
+          <span class="dot"></span>
+          Built for hospitality, property, events &amp; retail
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="orbit-ring"></div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="welcome-screen">
+            <div class="welcome-glow"></div>
+            <img src="assets/informax-logo-white.png" alt="Informax" class="welcome-logo">
+            <div class="welcome-title">Welcome to the</div>
+            <div class="welcome-title welcome-title-accent">Ease of Information</div>
+            <div class="welcome-tap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5V6a2 2 0 0 1 4 0v5.5"/><path d="M13 11.5V5a2 2 0 0 1 4 0v8"/><path d="M17 12.5V9a2 2 0 0 1 4 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-6.29-3.94l-2.3-4.6a1.74 1.74 0 0 1 3-1.74L9 14"/></svg>
+              Tap anywhere to begin
+            </div>
+          </div>
+        </div>
+
+        <div class="pdf-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          PDF guide included
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TICKER ===================== -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack">
+      <div class="ticker-item">What's the Wi-Fi password?</div>
+      <div class="ticker-item">What time is checkout?</div>
+      <div class="ticker-item">Where's a good place to eat nearby?</div>
+      <div class="ticker-item">Is there parking on site?</div>
+      <div class="ticker-item">What time does breakfast start?</div>
+      <div class="ticker-item">Do you have a late checkout option?</div>
+      <div class="ticker-item">Is the pool or gym open today?</div>
+      <div class="ticker-item">What else does this place offer?</div>
+    </div>
+  </div>
+
+  <!-- ===================== PROBLEM ===================== -->
+  <section class="problem">
+    <div class="container problem-grid">
+      <div class="reveal">
+        <div class="eyebrow">The Real Cost of Staying Quiet</div>
+        <h2 style="font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.4vw,40px);line-height:1.18;color:var(--white);margin-bottom:20px;">
+          If it's not said in the first two minutes, it's <em class="italic-blue">never said.</em>
+        </h2>
+        <p style="color:var(--muted);font-size:16.5px;line-height:1.75;max-width:460px;">
+          Every property offers more than any single conversation can cover. Too many questions,
+          too little time to answer them all — and not every member of staff is equipped to sell
+          your property the way your best host would. Whatever doesn't get said at check-in
+          usually stays unknown for the rest of the stay.
+        </p>
+      </div>
+
+      <div class="problem-points reveal-stagger reveal">
+        <div class="problem-point">
+          <span class="num">01</span>
+          <div>
+            <h4>Too Much to Say, Too Little Time</h4>
+            <p>Amenities, offers, local knowledge, house rules — there's more to a property than a two-minute check-in can cover.</p>
+          </div>
+        </div>
+        <div class="problem-point">
+          <span class="num">02</span>
+          <div>
+            <h4>Not Every Team Member Can Sell It</h4>
+            <p>Your best host makes a property come alive. Not everyone on shift has the same knowledge, confidence, or time to do the same.</p>
+          </div>
+        </div>
+        <div class="problem-point">
+          <span class="num">03</span>
+          <div>
+            <h4>Unasked Questions, Unmade Sales</h4>
+            <p>The spa, the late checkout, the restaurant next door — if a guest never finds out it's there, they never get to say yes to it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" style="justify-content:center;">How It Works</div>
+        <h2>Tap. Access. <em class="italic-blue">Enjoy.</em></h2>
+        <p>Three steps between your guests and everything your property offers. No app, no login, no waiting.</p>
+      </div>
+
+      <div class="steps reveal-stagger reveal">
+        <div class="step-card">
+          <span class="step-index">01 — Tap</span>
+          <div class="step-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/><path d="M4 9c0-1 .5-2 1.5-2M20 9c0-1-.5-2-1.5-2" stroke-dasharray="2 2"/></svg>
+          </div>
+          <h3>Guests Tap</h3>
+          <p>An NFC card, sticker, or QR code — at check-in, in the room, or anywhere on-property. Nothing to download, nothing to install.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-index">02 — Access</span>
+          <div class="step-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 4v5"/></svg>
+          </div>
+          <h3>They Access</h3>
+          <p>Their custom information directory opens instantly on their own phone — organised, searchable, and always up to date.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-index">03 — Enjoy</span>
+          <div class="step-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <h3>They Enjoy</h3>
+          <p>Guests get more out of every visit, your team spends less time repeating the same answers, and everyone enjoys a smoother stay.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Features</div>
+        <h2>A directory <em class="italic-blue">built around</em> your property.</h2>
+        <p>We custom design your business a complete information directory that every guest can read and operate easily — from the first tap to the last day of the stay.</p>
+      </div>
+
+      <div class="feature-list reveal reveal-stagger">
+        <div class="feature-row">
+          <span class="feature-tag">01 / Design</span>
+          <div class="feature-copy">
+            <h3>A directory designed around your property, not a template.</h3>
+            <p>Your branding, your photography, your tone of voice — built to feel like a natural part of the guest experience, not a bolted-on app.</p>
+          </div>
+          <div class="feature-pills">
+            <span class="pill">Custom design</span>
+            <span class="pill">Your branding</span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-tag">02 / Content</span>
+          <div class="feature-copy">
+            <h3>Everything a guest could ask, organised in one place.</h3>
+            <p>Wi-Fi, amenities, dining, local recommendations, transport, house rules, checkout — your property's full offering, mapped into a directory guests can actually navigate.</p>
+          </div>
+          <div class="feature-pills">
+            <span class="pill">Unlimited categories</span>
+            <span class="pill">Always current</span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-tag">03 / Access</span>
+          <div class="feature-copy">
+            <h3>Open in a tap. No app required.</h3>
+            <p>Guests tap an NFC card or scan a QR code and the directory opens instantly in their phone's browser — nothing to download, no account to create.</p>
+          </div>
+          <div class="feature-pills">
+            <span class="pill">NFC tap</span>
+            <span class="pill">QR code</span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-tag">04 / Format</span>
+          <div class="feature-copy">
+            <h3>Digital directory, downloadable PDF, or both.</h3>
+            <p>Every property gets a tap-to-access digital guide — and, for guests who want it, a complete PDF covering everything on offer, ready to send before arrival or print in-room.</p>
+          </div>
+          <div class="feature-pills">
+            <span class="pill">Digital guide</span>
+            <span class="pill">PDF guide</span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-tag">05 / Control</span>
+          <div class="feature-copy">
+            <h3>Your team updates it. We handle the rest.</h3>
+            <p>Change opening hours, swap a recommendation, add a new offer — update your directory anytime, without reprinting a single sign.</p>
+          </div>
+          <div class="feature-pills">
+            <span class="pill">Self-service edits</span>
+            <span class="pill">Support included</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VALUE STRIP ===================== -->
+  <section class="value-strip">
+    <div class="container value-grid reveal reveal-stagger">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        </div>
+        <h4>No App Required</h4>
+        <p>Works with any modern smartphone. Guests tap and go — nothing to install, nothing to remember.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h4>Always Up To Date</h4>
+        <p>Change what's behind the tap in seconds. Hours, offers, and recommendations, kept current without new signage.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83 3 12l9.59 9.59a2 2 0 0 0 2.82 0l5.18-5.18a2 2 0 0 0 0-2.82z"/><path d="M7.5 8.5h.01"/></svg>
+        </div>
+        <h4>Simple, Fair Pricing</h4>
+        <p>No inflated guest-directory fees. Straightforward pricing that makes sense for properties of any size.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMPARE ===================== -->
+  <section class="compare">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" style="justify-content:center;">The Difference</div>
+        <h2>A better stay, <em class="italic-blue">from the first tap.</em></h2>
+        <p>What changes when guests have the full picture from the moment they arrive.</p>
+      </div>
+
+      <div class="compare-grid reveal">
+        <div class="compare-col before">
+          <div class="compare-label">Without Informax</div>
+          <h3>A typical check-in.</h3>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div>Guests get a two-minute overview at check-in and are left to figure out the rest.</div>
+          </div>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div>Questions pile up at the desk — Wi-Fi, breakfast times, parking — the same ones, every shift.</div>
+          </div>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div>Half of what the property offers goes unnoticed and unused.</div>
+          </div>
+        </div>
+
+        <div class="compare-col after">
+          <div class="compare-label">With Informax</div>
+          <h3>The same check-in, upgraded.</h3>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>Guests tap once and have the full picture — from Wi-Fi to local recommendations — from the moment they arrive.</div>
+          </div>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>Your team fields fewer repeat questions and has more time for the guests who need them.</div>
+          </div>
+          <div class="compare-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div>Every offer, amenity, and recommendation gets seen — not just the ones staff remember to mention.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STORY ===================== -->
+  <section class="story" id="story">
+    <div class="container story-grid">
+      <div class="story-portrait reveal">
+        <div class="portrait-frame">
+          <span class="quote-mark">&ldquo;</span>
+          <div class="founder-message">
+            <div class="founder-message-label">A Message From Our Founder &amp; CEO</div>
+            <p class="founder-message-text">I founded Informax with one goal: to make every guest journey simpler, smarter, and more connected. We&rsquo;re empowering businesses to give guests instant access to the information they need, without apps or unnecessary barriers. This is just the beginning.</p>
+          </div>
+        </div>
+        <div class="founder-credit">
+          <span class="dash"></span>
+          <div>
+            <div class="name">Tyler Okkers</div>
+            <div class="role">Founder &amp; CEO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-copy reveal">
+        <div class="eyebrow">Our Story</div>
+        <h2 style="font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.6vw,40px);line-height:1.18;color:var(--white);margin-bottom:26px;">
+          Built from the front desk, <em class="italic-blue">not a boardroom.</em>
+        </h2>
+        <p>
+          Our founder and CEO spent almost ten years working across the hospitality and hotel industry —
+          and kept seeing the same gap play out at property after property. Important information about a
+          stay was going unsaid. If it wasn't communicated at check-in, guests could go through their entire
+          visit without ever knowing everything the property had to offer.
+        </p>
+        <p>
+          There were always too many questions and never enough time to answer them all. And not every
+          member of staff was equipped, or confident, to sell the property the way it deserved — through
+          no fault of their own.
+        </p>
+        <p>
+          <strong>With Informax, that changes.</strong> Everything a property offers — amenities, local
+          knowledge, house rules, recommendations — brought together into one custom-designed information
+          directory covering everything a guest should know about your offerings.
+        </p>
+        <p>
+          And unlike many guest-directory providers charging outrageous fees for the privilege, Informax is
+          priced to make sense — so properties of any size can give their guests the full picture, not just
+          the ones with the biggest budgets.
+        </p>
+        <a href="mailto:info@informax.co.uk" class="btn btn-primary">
+          Get in Touch
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="faq" id="faq">
+    <div class="container faq-layout">
+      <div class="faq-side reveal">
+        <div class="eyebrow">FAQ</div>
+        <h2 style="font-family:var(--serif);font-weight:500;font-size:clamp(26px,3vw,34px);line-height:1.2;color:var(--white);">
+          Everything you need to know <em class="italic-blue">before getting started.</em>
+        </h2>
+        <div class="faq-groups">
+          <a href="#faq-getting-started" class="faq-group-btn active" data-group>Getting started</a>
+          <a href="#faq-content" class="faq-group-btn" data-group>Content &amp; updates</a>
+          <a href="#faq-pricing" class="faq-group-btn" data-group>Pricing</a>
+        </div>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item open" data-group="faq-getting-started">
+          <button class="faq-q">
+            <span class="faq-q-text">Do my customers need to download an app?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">No. Any modern smartphone reads NFC automatically — guests simply tap and their directory opens straight in the browser.</div></div>
+        </div>
+        <div class="faq-item" data-group="faq-getting-started">
+          <button class="faq-q">
+            <span class="faq-q-text">How quickly can we get set up?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Most properties are live the same day. We help you place the tags and build your directory around what you already offer.</div></div>
+        </div>
+        <div class="faq-item" data-group="faq-getting-started">
+          <button class="faq-q">
+            <span class="faq-q-text">What if we don't have guest information ready yet?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Get in touch and we'll help pull it together — from what your team already tells guests at check-in to a full custom-designed directory.</div></div>
+        </div>
+        <div class="faq-item" data-group="faq-content">
+          <button class="faq-q">
+            <span class="faq-q-text">Can I change what a tag shows after it's printed?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. The tag itself never changes — update the content behind it anytime and every tap reflects it instantly.</div></div>
+        </div>
+        <div class="faq-item" data-group="faq-content">
+          <button class="faq-q">
+            <span class="faq-q-text">Can guests get a PDF instead of the tap version?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Alongside the tap-to-access digital directory, every property can offer a downloadable PDF guide covering everything guests should know — ideal for sending before arrival or printing in-room.</div></div>
+        </div>
+        <div class="faq-item" data-group="faq-pricing">
+          <button class="faq-q">
+            <span class="faq-q-text">How much does it cost?</span>
+            <span class="plus"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">A simple setup fee and a low ongoing cost, sized to your property — not the inflated rates some guest-directory providers charge. Get in touch for a straightforward quote.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="final-cta">
+    <div class="bg-glow"></div>
+    <div class="container">
+      <div class="cta-panel reveal">
+        <div class="eyebrow" style="justify-content:center;">Ready When You Are</div>
+        <h2>Give guests the <em class="italic-blue">full picture.</em></h2>
+        <p>Tell us what you'd like guests to see, and we'll help design a directory that puts it one tap away.</p>
+        <div class="cta-buttons">
+          <a href="mailto:info@informax.co.uk" class="btn btn-primary">
+            Get in Touch
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+        </div>
+        <div class="cta-meta">
+          <div class="cta-meta-item">
+            <h5>Free walkthrough</h5>
+            <p>A short call to see how a directory would look for your property — no pitch deck.</p>
+          </div>
+          <div class="cta-meta-item">
+            <h5>Same-day setup</h5>
+            <p>Most properties are live the same day the tags arrive on site.</p>
+          </div>
+          <div class="cta-meta-item">
+            <h5>No long tie-in</h5>
+            <p>Straightforward, fair pricing — not a long contract you can't get out of.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <img src="assets/informax-logo-white.png" alt="Informax" class="logo-img">
+        </a>
+        <p>Ease of information. Custom-designed guest and customer information directories, one tap away.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Industries</h5>
+        <ul>
+          <li><a href="#">Hospitality</a></li>
+          <li><a href="#">Property</a></li>
+          <li><a href="#">Events &amp; Tourism</a></li>
+          <li><a href="#">Retail &amp; Corporate</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="mailto:info@informax.co.uk">Get in Touch</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Informax. All rights reserved.</div>
+      <div class="legal-links">
+        <a href="https://informax.co.uk/privacy-policy/">Privacy Policy</a>
+        <a href="https://informax.co.uk/terms-and-conditions/">Terms &amp; Conditions</a>
+        <a href="https://informax.co.uk/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
