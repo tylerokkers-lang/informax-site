@@ -88,21 +88,21 @@ export default function DigitalDirectory() {
           </div>
 
           <div className="hidden lg:flex animate-float-slow absolute left-[-8%] top-[12%] items-center gap-2 rounded-full border border-line-dark bg-charcoal-800 py-2.5 pl-2.5 pr-4 text-xs font-semibold text-cream shadow-[0_20px_40px_-16px_rgba(0,0,0,0.6)]">
-            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(212,171,111,0.18)]" />
+            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(111,224,172,0.18)]" />
             Your hotel&rsquo;s branding
           </div>
           <div
             className="hidden lg:flex animate-float-slow absolute right-[-12%] top-[46%] items-center gap-2 rounded-full border border-line-dark bg-charcoal-800 py-2.5 pl-2.5 pr-4 text-xs font-semibold text-cream shadow-[0_20px_40px_-16px_rgba(0,0,0,0.6)]"
             style={{ animationDelay: "1.4s" }}
           >
-            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(212,171,111,0.18)]" />
+            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(111,224,172,0.18)]" />
             Editable anytime
           </div>
           <div
             className="hidden lg:flex animate-float-slow absolute left-[-4%] bottom-[8%] items-center gap-2 rounded-full border border-line-dark bg-charcoal-800 py-2.5 pl-2.5 pr-4 text-xs font-semibold text-cream shadow-[0_20px_40px_-16px_rgba(0,0,0,0.6)]"
             style={{ animationDelay: "2.6s" }}
           >
-            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(212,171,111,0.18)]" />
+            <span className="h-[7px] w-[7px] rounded-full bg-brass-light shadow-[0_0_0_4px_rgba(111,224,172,0.18)]" />
             Guest favourites highlighted
           </div>
         </div>

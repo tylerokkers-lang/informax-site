@@ -120,7 +120,7 @@ export default function Header() {
               <Link
                 href="/#digital-directory"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-6 py-3.5 text-sm font-semibold text-[#201705]"
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-6 py-3.5 text-sm font-semibold text-[#06231a]"
               >
                 See Informax in Action
               </Link>
