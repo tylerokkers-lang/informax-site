@@ -9,8 +9,7 @@ interface EnquiryPayload {
   jobTitle?: string;
   email?: string;
   phone?: string;
-  rooms?: string;
-  propertyType?: string;
+  budget?: string;
   interests?: string[];
   message?: string;
   website?: string; // honeypot field — real visitors never fill this in
@@ -35,7 +34,7 @@ export async function POST(request: Request) {
   const fieldErrors: Record<string, string> = {};
   if (!data.name?.trim()) fieldErrors.name = "Please enter your name.";
   if (!data.company?.trim())
-    fieldErrors.company = "Please enter your hotel or company.";
+    fieldErrors.company = "Please enter your company name.";
   if (!data.email?.trim() || !isValidEmail(data.email.trim()))
     fieldErrors.email = "Please enter a valid email address.";
   if (!data.message?.trim())
@@ -68,12 +67,11 @@ export async function POST(request: Request) {
 
   const body = [
     `Name: ${data.name}`,
-    `Hotel / Company: ${data.company}`,
+    `Company: ${data.company}`,
     data.jobTitle ? `Job Title: ${data.jobTitle}` : null,
     `Email: ${data.email}`,
     data.phone ? `Phone: ${data.phone}` : null,
-    data.rooms ? `Number of Rooms: ${data.rooms}` : null,
-    data.propertyType ? `Property Type: ${data.propertyType}` : null,
+    data.budget ? `Budget: ${data.budget}` : null,
     data.interests?.length ? `Interested In: ${data.interests.join(", ")}` : null,
     "",
     "Message:",

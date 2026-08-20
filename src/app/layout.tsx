@@ -23,36 +23,37 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Informax — Digital Guest Directories for Hotels",
+    default: "Informax — Website Design, Digital Brochures & Directories",
     template: "%s — Informax",
   },
   description:
-    "Informax gives hotels a digital guest directory guests reach with one tap or scan — no app required. Showcase dining, spa, facilities and offers the moment a guest walks in.",
+    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses — plus a specialist hospitality practice. Websites from £1,200.",
   keywords: [
-    "hotel digital directory",
-    "digital hotel directory",
-    "hotel guest information",
-    "hotel guest experience technology",
-    "digital guest directory",
-    "hotel NFC",
-    "NFC hotel information",
-    "hotel QR directory",
+    "website design",
+    "website development",
+    "custom websites",
+    "business website design",
+    "digital brochures",
+    "digital directories",
+    "digital guest directories",
+    "hospitality websites",
     "hospitality technology",
+    "custom digital experiences",
   ],
   authors: [{ name: "Informax" }],
   openGraph: {
     type: "website",
     url: SITE_URL,
     siteName: "Informax",
-    title: "Informax — Digital Guest Directories for Hotels",
+    title: "Informax — Website Design, Digital Brochures & Directories",
     description:
-      "Your hotel has more to say. Give guests a reason to discover it — a tap-to-access digital directory built for hospitality.",
+      "Digital experiences, designed around your business — websites, digital brochures, directories and bespoke digital projects. Websites from £1,200.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Informax — Digital Guest Directories for Hotels",
+    title: "Informax — Website Design, Digital Brochures & Directories",
     description:
-      "Your hotel has more to say. Give guests a reason to discover it.",
+      "Digital experiences, designed around your business — websites, digital brochures, directories and bespoke digital projects.",
   },
   icons: {
     icon: "/favicon.ico",

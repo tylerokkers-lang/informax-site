@@ -7,15 +7,15 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Enquire",
   description:
-    "Tell us about your property and what you'd like Informax to achieve for your guests. We'll help design a digital directory built around your hotel.",
+    "Tell us what you're looking to create and we'll work out the best way to bring it to life — a website, a brochure, a directory, or something bespoke.",
   alternates: { canonical: "/enquire" },
 };
 
 const SIDE_POINTS = [
-  "A digital directory designed entirely around your property and brand",
-  "NFC tags and QR access — guests need no app to get started",
-  "Content you can update yourself, any time, without new hardware",
-  "Straightforward pricing sized to your property, not inflated guest-directory fees",
+  "A project designed entirely around your business and brand",
+  "Websites from £1,200, priced honestly around what you need",
+  "Brochures, directories, hospitality and bespoke work all welcome",
+  "A clear, no-pressure proposal — never a hard sell",
 ];
 
 export default function EnquirePage() {
@@ -27,12 +27,11 @@ export default function EnquirePage() {
           <div>
             <Eyebrow tone="dark">Enquire</Eyebrow>
             <h1 className="font-serif-display font-medium leading-[1.16] tracking-tight text-[clamp(32px,4.4vw,50px)] text-white mb-5">
-              Let&rsquo;s make more of <EmLight>your guest journey.</EmLight>
+              Let&rsquo;s build <EmLight>something.</EmLight>
             </h1>
             <p className="text-cream-mute text-[17px] leading-relaxed max-w-[480px]">
-              Tell us a little about your property and what you&rsquo;d like
-              Informax to achieve for your guests. We&rsquo;ll get back to
-              you shortly to start the conversation.
+              Tell us what you&rsquo;re looking to create and we&rsquo;ll
+              work out the best way to bring it to life.
             </p>
           </div>
 
@@ -40,12 +39,12 @@ export default function EnquirePage() {
             <MetaItem
               icon={Clock}
               title="We reply within one business day"
-              desc="A short, no-pressure conversation about your property."
+              desc="A short, no-pressure conversation about your project."
             />
             <MetaItem
               icon={Sparkles}
-              title="No obligation walkthrough"
-              desc="See what a directory could look like before deciding anything."
+              title="Not sure what you need yet?"
+              desc="That's fine — tell us the problem and we'll help shape it."
             />
             <MetaItem
               icon={Mail}
@@ -65,8 +64,8 @@ export default function EnquirePage() {
             </h3>
             <p className="text-[14.5px] text-ink-mute leading-relaxed mb-6">
               Every Informax enquiry starts with a conversation, not a sales
-              pitch — we want to understand your property before we suggest
-              anything.
+              pitch — we want to understand what you&rsquo;re trying to
+              achieve before we suggest anything.
             </p>
             <ul className="flex flex-col gap-4">
               {SIDE_POINTS.map((point) => (

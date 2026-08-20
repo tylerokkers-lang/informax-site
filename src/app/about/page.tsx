@@ -5,25 +5,25 @@ import { BtnPrimary, Em, EmLight, Eyebrow } from "@/components/ui";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Informax was built from years working the front desk of the hospitality industry — not a boardroom. Learn why we built a digital gateway for hotel guests.",
+    "Informax is a digital design and development studio — we build websites, digital brochures, directories and bespoke digital experiences, with a specialist hospitality practice.",
   alternates: { canonical: "/about" },
 };
 
 const VALUES = [
   {
     num: "01",
-    title: "Built for hospitality, only",
-    desc: "We don't split our attention across industries. Every decision is made for hotels, resorts and serviced apartments.",
+    title: "Design first",
+    desc: "Good information deserves good design. We start with how something should feel to use, not just how it should function.",
   },
   {
     num: "02",
-    title: "Designed around the property",
-    desc: "No shared templates. Every directory is built to feel like a natural extension of the hotel it belongs to.",
+    title: "Built around you",
+    desc: "No shared templates. Every project is designed to feel like a natural extension of the business it belongs to.",
   },
   {
     num: "03",
-    title: "Priced to make sense",
-    desc: "Straightforward pricing sized to your property — not the inflated fees some guest-directory providers charge.",
+    title: "Priced honestly",
+    desc: "A clear starting point, with functionality priced to what you actually need — nothing bundled in to inflate the number.",
   },
 ];
 
@@ -36,12 +36,13 @@ export default function AboutPage() {
             About Informax
           </Eyebrow>
           <h1 className="font-serif-display font-medium text-[clamp(32px,4.6vw,50px)] leading-[1.2] text-white mx-auto mb-5 max-w-3xl">
-            Built from the front desk, <EmLight>not a boardroom.</EmLight>
+            We turn information businesses need to share into{" "}
+            <EmLight>something worth using.</EmLight>
           </h1>
           <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
-            Informax exists because one gap kept showing up at property
-            after property — guests were never told everything a hotel had
-            to offer.
+            Informax is a digital design and development studio — websites,
+            digital brochures, directories and bespoke digital experiences,
+            with a specialist hospitality practice.
           </p>
         </div>
       </section>
@@ -50,7 +51,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line-dark bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-9 sm:p-11">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,171,111,0.14),transparent_55%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(138,124,255,0.14),transparent_55%)]" />
               <span className="absolute top-2 left-7 font-serif-display text-[140px] leading-none text-brass-light/[0.18]">
                 &ldquo;
               </span>
@@ -59,11 +60,11 @@ export default function AboutPage() {
                   A Message From Our Founder &amp; CEO
                 </div>
                 <p className="font-serif-display italic text-[19px] leading-[1.6] text-cream">
-                  I founded Informax with one goal: to make every guest
-                  journey simpler, smarter, and more connected. We&rsquo;re
-                  giving hotels a way to put everything they offer directly
-                  in front of guests, without apps or unnecessary barriers.
-                  This is just the beginning.
+                  I started Informax because I kept seeing the same problem:
+                  businesses with genuinely good things to say, presented
+                  badly. We build the websites, brochures and directories
+                  that fix that — properly designed, not templated. This is
+                  just the beginning.
                 </p>
               </div>
             </div>
@@ -83,36 +84,33 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <Eyebrow>Our Story</Eyebrow>
             <h2 className="font-serif-display font-medium text-[clamp(28px,3.6vw,40px)] leading-[1.18] text-ink mb-6">
-              Almost a decade in hospitality, <Em>seeing the same gap.</Em>
+              It started in hospitality. <Em>It didn&rsquo;t stay there.</Em>
             </h2>
             <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-5">
               Our founder spent almost ten years working across the
-              hospitality and hotel industry — and kept seeing the same
-              story play out at property after property. Important
-              information about a stay was going unsaid. If it wasn&rsquo;t
-              communicated at check-in, guests could go through their
-              entire visit without ever knowing everything the property
-              had to offer.
+              hospitality industry, and kept seeing the same story play out:
+              a hotel with a great spa, a great restaurant, a great story to
+              tell — and no good way to actually tell it. Information was
+              scattered across a tired website, a printed guide, and
+              whatever reception had time to mention at check-in.
             </p>
             <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-5">
-              There were always too many questions and never enough time to
-              answer them all. And not every member of staff was equipped,
-              or confident, to sell the property the way it deserved —
-              through no fault of their own.
+              That problem turned out not to be unique to hotels. Talk to
+              almost any business and you&rsquo;ll find the same thing —
+              good information, badly presented, spread across too many
+              places. Informax exists to fix that properly: through
+              considered design and solid engineering, not templates.
             </p>
             <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-8">
               <strong className="text-ink font-semibold">
-                With Informax, that changes.
+                Today, that means websites, digital brochures, directories
+                and bespoke digital projects
               </strong>{" "}
-              Everything a hotel offers — dining, spa, facilities,
-              experiences, local knowledge — brought together into one
-              digital directory a guest can reach with a single tap. And
-              unlike many guest-directory providers charging outrageous
-              fees for the privilege, Informax is priced to make sense —
-              so properties of any size can give their guests the full
-              picture.
+              for businesses across sectors — alongside a dedicated
+              hospitality practice that still carries the lessons the
+              company was built on.
             </p>
-            <BtnPrimary href="/enquire">Start the Conversation</BtnPrimary>
+            <BtnPrimary href="/enquire">Start a Project</BtnPrimary>
           </Reveal>
         </div>
       </section>

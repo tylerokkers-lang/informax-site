@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
-import { ENQUIRY_INTERESTS, PROPERTY_TYPES } from "@/lib/constants";
+import { BUDGET_OPTIONS, ENQUIRY_INTERESTS } from "@/lib/constants";
 
 type FieldErrors = Record<string, string>;
 type Status = "idle" | "submitting" | "success" | "error";
@@ -13,8 +13,7 @@ const initialValues = {
   jobTitle: "",
   email: "",
   phone: "",
-  rooms: "",
-  propertyType: "",
+  budget: "",
   message: "",
 };
 
@@ -41,14 +40,14 @@ export default function EnquireForm() {
     const next: FieldErrors = {};
     if (!values.name.trim()) next.name = "Please enter your name.";
     if (!values.company.trim())
-      next.company = "Please enter your hotel or company.";
+      next.company = "Please enter your company name.";
     if (!values.email.trim()) {
       next.email = "Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
       next.email = "Please enter a valid email address.";
     }
     if (!values.message.trim())
-      next.message = "Tell us a little about what you need.";
+      next.message = "Tell us a little about what you're looking to create.";
     return next;
   }
 
@@ -103,7 +102,7 @@ export default function EnquireForm() {
         role="status"
         className="flex flex-col items-center text-center gap-4 py-10"
       >
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(93,138,96,0.12)]">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(31,157,107,0.12)]">
           <CheckCircle2 size={28} className="text-moss" />
         </div>
         <h3 className="font-serif-display text-2xl font-medium text-ink">
@@ -111,7 +110,7 @@ export default function EnquireForm() {
         </h3>
         <p className="text-ink-mute text-[15px] max-w-md leading-relaxed">
           We&rsquo;ve received your enquiry and will be in touch shortly to
-          talk through what Informax could look like for your property.
+          talk through the best way to bring your project to life.
         </p>
       </div>
     );
@@ -120,7 +119,7 @@ export default function EnquireForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       {status === "error" && errorMessage && (
-        <div className="form-status show error mb-7 flex items-start gap-3.5 rounded-2xl border border-[rgba(181,71,58,0.3)] bg-[rgba(181,71,58,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a13d31]">
+        <div className="form-status show error mb-7 flex items-start gap-3.5 rounded-2xl border border-[rgba(217,54,54,0.3)] bg-[rgba(217,54,54,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a12020]">
           <AlertCircle size={20} className="mt-0.5 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -139,12 +138,7 @@ export default function EnquireForm() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
-        <Field
-          label="Name"
-          required
-          error={errors.name}
-          htmlFor="name"
-        >
+        <Field label="Name" required error={errors.name} htmlFor="name">
           <input
             id="name"
             name="name"
@@ -157,12 +151,7 @@ export default function EnquireForm() {
           />
         </Field>
 
-        <Field
-          label="Hotel / Company"
-          required
-          error={errors.company}
-          htmlFor="company"
-        >
+        <Field label="Company" required error={errors.company} htmlFor="company">
           <input
             id="company"
             name="company"
@@ -212,30 +201,18 @@ export default function EnquireForm() {
           />
         </Field>
 
-        <Field label="Number of Rooms" htmlFor="rooms">
-          <input
-            id="rooms"
-            name="rooms"
-            type="text"
-            inputMode="numeric"
-            value={values.rooms}
-            onChange={(e) => update("rooms", e.target.value)}
-            className={inputClass(false)}
-          />
-        </Field>
-
-        <Field label="Property Type" htmlFor="propertyType" full>
+        <Field label="Budget" htmlFor="budget">
           <select
-            id="propertyType"
-            name="propertyType"
-            value={values.propertyType}
-            onChange={(e) => update("propertyType", e.target.value)}
+            id="budget"
+            name="budget"
+            value={values.budget}
+            onChange={(e) => update("budget", e.target.value)}
             className={inputClass(false)}
           >
-            <option value="">Select a property type</option>
-            {PROPERTY_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
+            <option value="">Select a budget range</option>
+            {BUDGET_OPTIONS.map((b) => (
+              <option key={b} value={b}>
+                {b}
               </option>
             ))}
           </select>
@@ -246,7 +223,7 @@ export default function EnquireForm() {
             {ENQUIRY_INTERESTS.map((option) => (
               <label
                 key={option}
-                className="flex items-center gap-2.5 rounded-[10px] border border-line bg-white px-3.5 py-3 cursor-pointer transition-colors duration-[250ms] has-[:checked]:border-brass has-[:checked]:bg-[rgba(168,121,63,0.06)]"
+                className="flex items-center gap-2.5 rounded-[10px] border border-line bg-white px-3.5 py-3 cursor-pointer transition-colors duration-[250ms] has-[:checked]:border-brass has-[:checked]:bg-[rgba(86,67,224,0.06)]"
               >
                 <input
                   type="checkbox"
@@ -265,6 +242,7 @@ export default function EnquireForm() {
             id="message"
             name="message"
             rows={5}
+            placeholder="Tell us what you're looking to create..."
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             aria-invalid={Boolean(errors.message)}
@@ -276,7 +254,7 @@ export default function EnquireForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-7 py-4 text-[14.5px] font-semibold text-[#201705] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(129,92,44,0.55)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+        className="mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-7 py-4 text-[14.5px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(60,46,176,0.55)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
       >
         {status === "submitting" && (
           <Loader2 size={16} className="animate-spin" />
@@ -285,8 +263,8 @@ export default function EnquireForm() {
       </button>
 
       <p className="mt-4 text-[12.5px] text-ink-mute leading-relaxed">
-        By submitting this form you agree to be contacted about Informax.
-        We&rsquo;ll never share your details. See our{" "}
+        By submitting this form you agree to be contacted about your
+        project. We&rsquo;ll never share your details. See our{" "}
         <a href="/privacy-policy" className="underline underline-offset-2">
           Privacy Policy
         </a>
@@ -299,7 +277,7 @@ export default function EnquireForm() {
 function inputClass(hasError: boolean) {
   return `w-full rounded-[10px] border ${
     hasError ? "border-rust" : "border-line"
-  } bg-white px-4 py-[13px] text-[14.5px] text-ink transition-all duration-300 focus:outline-none focus:border-brass focus:ring-[3px] focus:ring-[rgba(168,121,63,0.14)]`;
+  } bg-white px-4 py-[13px] text-[14.5px] text-ink transition-all duration-300 focus:outline-none focus:border-brass focus:ring-[3px] focus:ring-[rgba(86,67,224,0.14)]`;
 }
 
 function Field({
@@ -326,9 +304,7 @@ function Field({
         {label} {required && <span className="text-brass-deep">*</span>}
       </label>
       {children}
-      {error && (
-        <p className="mt-1.5 text-[12.5px] text-rust">{error}</p>
-      )}
+      {error && <p className="mt-1.5 text-[12.5px] text-rust">{error}</p>}
     </div>
   );
 }

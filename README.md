@@ -1,9 +1,11 @@
 # Informax
 
-Informax's marketing website — a digital guest directory platform for hotels,
-resorts, serviced apartments and boutique hotels. Built as an independent
-Next.js application; no WordPress dependency. The retired WordPress-era
-static site is kept for reference in `legacy-wordpress-site/`.
+Informax's marketing website — a digital design and development studio
+offering custom websites, digital brochures/pamphlets, digital directories,
+bespoke digital projects, and a specialist hospitality practice (digital
+guest directories, hospitality websites). Built as an independent Next.js
+application; no WordPress dependency. The retired WordPress-era static site
+is kept for reference in `legacy-wordpress-site/`.
 
 ## Stack
 
@@ -25,21 +27,31 @@ Open http://localhost:3000.
 
 ```
 src/app/                 Routes (App Router)
-  page.tsx                 Homepage — all narrative sections in order
-  about/                    Founder story / company page
-  enquire/                  Dedicated enquiry page
+  page.tsx                 Homepage — hero, problem, services overview, etc.
+  services/                Services hub — all six service lines in depth
+  websites/                Website design & development service page
+  digital-information/     Digital brochures/pamphlets + directories (#brochures, #directories)
+  hospitality/             Hospitality practice (assembles the hospitality-specific sections)
+  pricing/                 £1,200 starting price + modular add-ons
+  about/                   Founder story / company page
+  enquire/                 Dedicated enquiry page
   privacy-policy/
   terms-and-conditions/
   cookie-policy/
   api/enquire/route.ts     Enquiry form submission handler
   sitemap.ts, robots.ts    Generated SEO files
 src/components/
-  Header.tsx, Footer.tsx   Site chrome
+  Header.tsx, Footer.tsx   Site chrome (Header includes a Services dropdown)
   EnquireForm.tsx          Client-side form: validation + submit states
   Reveal.tsx               Scroll-reveal wrappers (framer-motion)
   ui.tsx                   Shared buttons/eyebrow/heading primitives
-  sections/                One component per homepage section
-src/lib/constants.ts       Nav links, footer links, form option lists
+  sections/                Section components — homepage ones, plus the
+                            hospitality-specific set (MeetInformax,
+                            DigitalDirectory, Customise, Verticals,
+                            Touchpoints, GuestJourney, Locations, NoApp,
+                            Showcase) reused on /hospitality
+src/lib/constants.ts       Nav links (incl. NAV_SERVICES dropdown), footer
+                            links, enquiry interest/budget options
 ```
 
 ## Enquiry form email delivery
@@ -83,3 +95,10 @@ before going live.
   broadly.
 - No analytics are wired in. The Cookie Policy reflects that honestly; update
   it if/when an analytics provider is added.
+- The visual identity is white/near-black neutrals with an indigo + coral
+  accent pair (tokens `--brass*` and `--coral*` in `globals.css` — the
+  `brass` name is legacy from an earlier palette iteration and now holds
+  indigo values; kept to avoid a site-wide class rename).
+- The homepage "concept" examples (Aldergate & Marsh, Selwyn Property Group,
+  The Exchange) are clearly-labelled illustrative concepts, not real client
+  work — swap them for actual portfolio pieces once available.

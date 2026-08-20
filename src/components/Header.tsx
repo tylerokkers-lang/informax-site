@@ -1,14 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { NAV_LINKS } from "@/lib/constants";
+import { ChevronDown } from "lucide-react";
+import { NAV_LINKS, NAV_SERVICES } from "@/lib/constants";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -23,6 +27,23 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setServicesOpen(false);
+    }
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
 
   return (
     <>
@@ -46,7 +67,57 @@ export default function Header() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-9" aria-label="Primary">
-            {NAV_LINKS.map((link) => (
+            <div className="relative" ref={servicesRef}>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((v) => !v)}
+                aria-expanded={servicesOpen}
+                className="flex items-center gap-1.5 text-sm font-medium text-cream-mute py-1 transition-colors duration-300 hover:text-white"
+              >
+                Services
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute left-1/2 top-full mt-3 w-[300px] -translate-x-1/2 rounded-2xl border border-line-dark bg-charcoal-900 p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]"
+                  >
+                    <Link
+                      href="/services"
+                      onClick={() => setServicesOpen(false)}
+                      className="block rounded-xl px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-charcoal-800"
+                    >
+                      All Services
+                    </Link>
+                    <div className="my-1 h-px bg-line-dark" />
+                    {NAV_SERVICES.map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        onClick={() => setServicesOpen(false)}
+                        className="block rounded-xl px-4 py-3 transition-colors hover:bg-charcoal-800"
+                      >
+                        <span className="block text-sm font-semibold text-white">
+                          {service.label}
+                        </span>
+                        <span className="block text-xs text-cream-mute mt-0.5">
+                          {service.desc}
+                        </span>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {NAV_LINKS.filter((l) => l.label !== "Services").map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -59,10 +130,10 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             <Link
-              href="/#digital-directory"
-              className="hidden md:inline-flex items-center gap-2 rounded-full border border-line-dark px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-brass-light hover:text-brass-light hover:-translate-y-0.5"
+              href="/enquire"
+              className="hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(60,46,176,0.5)]"
             >
-              See Informax in Action
+              Start a Project
             </Link>
             <button
               type="button"
@@ -105,24 +176,66 @@ export default function Header() {
               exit={{ x: "100%" }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               aria-label="Mobile"
-              className="fixed top-0 right-0 bottom-0 z-[150] w-[min(320px,84vw)] bg-charcoal-950 border-l border-line-dark px-8 pb-10 pt-28 flex flex-col gap-7"
+              className="fixed top-0 right-0 bottom-0 z-[150] w-[min(320px,84vw)] overflow-y-auto bg-charcoal-950 border-l border-line-dark px-8 pb-10 pt-28 flex flex-col gap-1"
             >
-              {NAV_LINKS.map((link) => (
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen((v) => !v)}
+                aria-expanded={mobileServicesOpen}
+                className="flex items-center justify-between py-3 text-lg font-medium text-cream"
+              >
+                Services
+                <ChevronDown
+                  size={18}
+                  className={`transition-transform duration-300 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {mobileServicesOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden flex flex-col pl-4 border-l border-line-dark ml-1"
+                  >
+                    <Link
+                      href="/services"
+                      onClick={() => setOpen(false)}
+                      className="py-2.5 text-[15px] font-medium text-brass-light"
+                    >
+                      All Services
+                    </Link>
+                    {NAV_SERVICES.map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        onClick={() => setOpen(false)}
+                        className="py-2.5 text-[15px] text-cream-mute"
+                      >
+                        {service.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {NAV_LINKS.filter((l) => l.label !== "Services").map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-lg font-medium text-cream"
+                  className="py-3 text-lg font-medium text-cream"
                 >
                   {link.label}
                 </Link>
               ))}
               <Link
-                href="/#digital-directory"
+                href="/enquire"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-6 py-3.5 text-sm font-semibold text-[#201705]"
+                className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-6 py-3.5 text-sm font-semibold text-white"
               >
-                See Informax in Action
+                Start a Project
               </Link>
             </motion.nav>
           </>

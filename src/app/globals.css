@@ -1,31 +1,44 @@
 @import "tailwindcss";
 
+/*
+ * Informax brand system — "Studio" identity: white/near-black neutrals with
+ * an indigo + coral accent pair. Deliberately distinct from both the old
+ * cream/brass hospitality look and from an executive-consultancy palette —
+ * reads as a creative digital studio, not a heritage or corporate brand.
+ * Token names below (--brass*) are kept for a minimal-diff swap across
+ * components; treat them as the "primary accent" family — they hold indigo
+ * values now, not literal brass. --coral* is a new secondary accent family.
+ */
 :root {
-  --paper: #f6f1e7;
-  --paper-alt: #efe6d5;
-  --panel: #fffcf6;
+  --paper: #fbfbfd;
+  --paper-alt: #f1f1f6;
+  --panel: #ffffff;
 
-  --charcoal-950: #131110;
-  --charcoal-900: #1b1815;
-  --charcoal-850: #221e19;
-  --charcoal-800: #2b261f;
-  --charcoal-700: #3a3327;
+  --charcoal-950: #0a0a10;
+  --charcoal-900: #0f0f18;
+  --charcoal-850: #15151f;
+  --charcoal-800: #1b1b28;
+  --charcoal-700: #262638;
 
-  --ink: #211d17;
-  --ink-soft: #4d473c;
-  --ink-mute: #837a68;
-  --cream: #f3ede1;
-  --cream-mute: #cfc6b3;
+  --ink: #14141c;
+  --ink-soft: #45455a;
+  --ink-mute: #83839a;
+  --cream: #f1f1f7;
+  --cream-mute: #b3b3c7;
 
-  --brass: #a8793f;
-  --brass-deep: #815c2c;
-  --brass-light: #d4ab6f;
+  --brass: #5643e0;
+  --brass-deep: #3c2eb0;
+  --brass-light: #8a7cff;
 
-  --rust: #b5473a;
-  --moss: #4f7a52;
+  --coral: #ff6b4e;
+  --coral-deep: #e14e33;
+  --coral-light: #ff9b84;
 
-  --line: rgba(33, 29, 23, 0.12);
-  --line-soft: rgba(33, 29, 23, 0.07);
+  --rust: #d93636;
+  --moss: #1f9d6b;
+
+  --line: rgba(20, 20, 28, 0.1);
+  --line-soft: rgba(20, 20, 28, 0.06);
   --line-dark: rgba(255, 255, 255, 0.12);
   --line-dark-soft: rgba(255, 255, 255, 0.07);
 }
@@ -50,6 +63,10 @@
   --color-brass: var(--brass);
   --color-brass-deep: var(--brass-deep);
   --color-brass-light: var(--brass-light);
+
+  --color-coral: var(--coral);
+  --color-coral-deep: var(--coral-deep);
+  --color-coral-light: var(--coral-light);
 
   --color-rust: var(--rust);
   --color-moss: var(--moss);
@@ -104,8 +121,8 @@ svg {
 
 .bg-grid-fade {
   background-image:
-    linear-gradient(rgba(168, 121, 63, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 121, 63, 0.09) 1px, transparent 1px);
+    linear-gradient(rgba(86, 67, 224, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(86, 67, 224, 0.09) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -113,8 +130,8 @@ svg {
 
 .bg-grid-fade-dark {
   background-image:
-    linear-gradient(rgba(212, 171, 111, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 171, 111, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(138, 124, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 124, 255, 0.07) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -137,8 +154,8 @@ svg {
 .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 171, 111, 0); border-color: var(--line-dark); }
-  50% { box-shadow: 0 0 0 6px rgba(212, 171, 111, 0.1); border-color: rgba(212, 171, 111, 0.4); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(138, 124, 255, 0); border-color: var(--line-dark); }
+  50% { box-shadow: 0 0 0 6px rgba(138, 124, 255, 0.1); border-color: rgba(138, 124, 255, 0.4); }
 }
 .animate-pulse-ring { animation: pulse-ring 2.6s ease-in-out infinite; }
 
