@@ -24,18 +24,21 @@ const SERVICES = [
     title: "Digital Brochures",
     desc: "Beautiful digital brochures your business can share online, easy to send and easy to explore.",
     href: "/digital-information#brochures",
+    tag: "From £400",
   },
   {
     icon: FileText,
     title: "Digital Pamphlets",
     desc: "Focused digital information designed for a specific service, product, event or purpose.",
     href: "/digital-information#brochures",
+    tag: "From £200",
   },
   {
     icon: LayoutGrid,
     title: "Digital Directories",
     desc: "Custom digital directories that make large amounts of information simple to find.",
     href: "/digital-information#directories",
+    tag: "From £900",
   },
   {
     icon: ConciergeBell,

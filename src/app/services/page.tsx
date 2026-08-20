@@ -53,6 +53,7 @@ const SERVICES = [
       "Corporate information",
     ],
     cta: { label: "Explore Digital Information", href: "/digital-information#brochures" },
+    tag: "From £400",
   },
   {
     icon: FileText,
@@ -66,6 +67,7 @@ const SERVICES = [
       "Welcome guides",
     ],
     cta: { label: "Explore Digital Information", href: "/digital-information#brochures" },
+    tag: "From £200",
   },
   {
     icon: LayoutGrid,
@@ -83,6 +85,7 @@ const SERVICES = [
       "Other businesses",
     ],
     cta: { label: "Explore Digital Directories", href: "/digital-information#directories" },
+    tag: "From £900",
   },
   {
     icon: ConciergeBell,

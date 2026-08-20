@@ -238,16 +238,42 @@ export default function PricingPage() {
 
       <section className="bg-paper py-20 md:py-24">
         <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Reveal className="max-w-2xl">
+          <Reveal className="max-w-2xl mb-10">
             <Eyebrow>Beyond Websites</Eyebrow>
             <h2 className="font-serif-display font-medium text-[clamp(24px,2.8vw,32px)] leading-[1.2] text-ink mb-4">
               Brochures, directories, hospitality and bespoke work
             </h2>
             <p className="text-ink-mute text-[16px] leading-relaxed">
-              Digital brochures, pamphlets, directories, hospitality guest
-              experiences and bespoke projects are quoted individually based
-              on scope. Get in touch with a sense of what you need and
-              we&rsquo;ll put a proposal together.
+              Brochures, pamphlets and directories also have a clear starting
+              point. Hospitality guest experiences and bespoke projects are
+              quoted individually based on scope.
+            </p>
+          </Reveal>
+
+          <RevealStagger className="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-3xl border border-line bg-line overflow-hidden max-w-3xl mb-10">
+            {[
+              { title: "Digital Brochures", price: "From £400" },
+              { title: "Digital Pamphlets", price: "From £200" },
+              { title: "Digital Directories", price: "From £900" },
+            ].map((item) => (
+              <RevealStaggerItem key={item.title} className="bg-panel px-6 py-6">
+                <h4 className="text-[14px] font-semibold text-ink mb-1.5">
+                  {item.title}
+                </h4>
+                <div className="text-lg font-semibold text-brass-deep">
+                  {item.price}
+                </div>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+
+          <Reveal delay={0.1}>
+            <p className="text-ink-mute text-[15px] leading-relaxed max-w-2xl">
+              As with websites, these are starting prices: the final cost
+              depends on scope and complexity. Hospitality guest experiences
+              and bespoke projects don&rsquo;t have a fixed starting point,
+              since each one is scoped from scratch. Get in touch with a
+              sense of what you need and we&rsquo;ll put a proposal together.
             </p>
           </Reveal>
         </div>

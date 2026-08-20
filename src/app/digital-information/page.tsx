@@ -87,7 +87,19 @@ export default function DigitalInformationPage() {
               specifically for digital use, rather than a printed page
               shrunk to fit a screen.
             </p>
-            <BtnGhost href="/enquire">Discuss a Brochure or Pamphlet</BtnGhost>
+            <div className="flex flex-wrap items-center gap-5">
+              <BtnGhost href="/enquire">Discuss a Brochure or Pamphlet</BtnGhost>
+              <span className="text-sm text-ink-mute">
+                Brochures{" "}
+                <strong className="font-semibold text-brass-deep">
+                  from £400
+                </strong>{" "}
+                &middot; Pamphlets{" "}
+                <strong className="font-semibold text-brass-deep">
+                  from £200
+                </strong>
+              </span>
+            </div>
           </Reveal>
 
           <RevealStagger className="grid grid-cols-2 gap-3">
@@ -141,7 +153,15 @@ export default function DigitalInformationPage() {
                 </span>
               ))}
             </div>
-            <BtnGhost href="/enquire">Discuss a Directory</BtnGhost>
+            <div className="flex flex-wrap items-center gap-5">
+              <BtnGhost href="/enquire">Discuss a Directory</BtnGhost>
+              <span className="text-sm text-ink-mute">
+                Directories{" "}
+                <strong className="font-semibold text-brass-deep">
+                  from £900
+                </strong>
+              </span>
+            </div>
           </Reveal>
         </div>
       </section>
