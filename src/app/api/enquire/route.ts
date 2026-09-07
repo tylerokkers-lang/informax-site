@@ -9,7 +9,6 @@ interface EnquiryPayload {
   jobTitle?: string;
   email?: string;
   phone?: string;
-  budget?: string;
   interests?: string[];
   message?: string;
   website?: string; // honeypot field: real visitors never fill this in
@@ -71,7 +70,6 @@ export async function POST(request: Request) {
     data.jobTitle ? `Job Title: ${data.jobTitle}` : null,
     `Email: ${data.email}`,
     data.phone ? `Phone: ${data.phone}` : null,
-    data.budget ? `Budget: ${data.budget}` : null,
     data.interests?.length ? `Interested In: ${data.interests.join(", ")}` : null,
     "",
     "Message:",
@@ -97,8 +95,15 @@ export async function POST(request: Request) {
     });
 
     if (!res.ok) {
-      const errBody = await res.text();
-      console.error("[enquire] Resend API error:", res.status, errBody);
+      const raw = await res.text();
+      let reason = raw;
+      try {
+        const parsed = JSON.parse(raw) as { name?: string; message?: string };
+        reason = parsed.message ? `${parsed.name}: ${parsed.message}` : raw;
+      } catch {
+        // Resend returned a non-JSON error body; fall back to the raw text.
+      }
+      console.error(`[enquire] Resend API error (status ${res.status}):`, reason);
       return NextResponse.json(
         {
           error: `Something went wrong sending your enquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`,

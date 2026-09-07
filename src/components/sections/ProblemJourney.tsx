@@ -1,19 +1,18 @@
-import { Bed, DoorClosed, ChevronsUpDown, KeyRound, X } from "lucide-react";
+import { Bed, ChevronsUpDown, ConciergeBell, Coffee, X } from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { Eyebrow, Em } from "@/components/ui";
 
 const JOURNEY = [
-  { label: "Check-In", icon: KeyRound },
+  { label: "Front Desk", icon: ConciergeBell },
+  { label: "Breakfast", icon: Coffee },
+  { label: "Lifts", icon: ChevronsUpDown },
   { label: "Room", icon: Bed },
-  { label: "Lift", icon: ChevronsUpDown },
-  { label: "Door", icon: DoorClosed },
 ];
 
 const MISSED = [
   "The restaurant",
   "The bar",
   "The spa",
-  "Breakfast",
   "The gym",
   "Room service",
   "Events",
@@ -34,8 +33,8 @@ export default function ProblemJourney() {
           </h2>
         </Reveal>
 
-        <RevealStagger className="relative grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 mb-10 max-w-3xl mx-auto">
-          <div className="hidden md:block absolute top-[26px] left-[8%] right-[8%] h-px bg-[repeating-linear-gradient(90deg,var(--line)_0_8px,transparent_8px_16px)]" />
+        <RevealStagger className="relative grid grid-cols-2 sm:grid-cols-4 gap-y-10 gap-x-6 mb-10 max-w-3xl mx-auto">
+          <div className="hidden sm:block absolute top-[26px] left-[8%] right-[8%] h-px bg-[repeating-linear-gradient(90deg,var(--line)_0_8px,transparent_8px_16px)]" />
           {JOURNEY.map((step) => (
             <RevealStaggerItem
               key={step.label}

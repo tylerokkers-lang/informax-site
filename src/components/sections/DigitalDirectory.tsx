@@ -1,10 +1,10 @@
 import {
   Building2,
-  ChevronRight,
   Compass,
   ConciergeBell,
   Gift,
   Martini,
+  Nfc,
   Sparkles,
   Bed,
   Utensils,
@@ -50,40 +50,102 @@ export default function DigitalDirectory() {
         </Reveal>
 
         <div className="relative flex items-center justify-center">
-          <div className="relative z-[2] w-[300px] md:w-[320px] rounded-[42px] border border-line-dark bg-gradient-to-br from-charcoal-800 to-charcoal-850 p-4 shadow-[0_50px_100px_-30px_rgba(0,0,0,0.75)]">
-            <div className="min-h-[520px] md:min-h-[540px] overflow-hidden rounded-[28px] bg-panel">
-              <div className="bg-gradient-to-br from-charcoal-900 to-charcoal-800 px-6 pt-8 pb-5 text-center text-white">
-                <div className="mx-auto mb-3.5 flex h-[34px] w-[34px] items-center justify-center rounded-full border border-brass-light font-serif-display italic text-[15px] text-brass-light">
-                  G
+          <div className="relative z-[2] w-[300px] md:w-[340px] rounded-[26px] border border-line-dark bg-charcoal-900 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.8)] overflow-hidden">
+            {/* Photographic hero: a luxury hotel at dusk, standing in for real property photography */}
+            <div className="relative h-[210px] w-full overflow-hidden">
+              <svg
+                viewBox="0 0 340 210"
+                className="absolute inset-0 h-full w-full"
+                preserveAspectRatio="xMidYMid slice"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="dd-sky" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#241f45" />
+                    <stop offset="55%" stopColor="#3c2eb0" />
+                    <stop offset="100%" stopColor="#e17a52" />
+                  </linearGradient>
+                  <linearGradient id="dd-facade" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#1b1830" />
+                    <stop offset="100%" stopColor="#100e1f" />
+                  </linearGradient>
+                </defs>
+                <rect width="340" height="210" fill="url(#dd-sky)" />
+                <ellipse cx="270" cy="46" rx="30" ry="30" fill="#ffd9a8" opacity="0.9" />
+                <rect x="0" y="126" width="340" height="84" fill="url(#dd-facade)" />
+                <rect x="24" y="96" width="292" height="34" rx="3" fill="#141228" />
+                {Array.from({ length: 11 }).map((_, i) => (
+                  <rect
+                    key={`u-${i}`}
+                    x={32 + i * 26}
+                    y={103}
+                    width="14"
+                    height="18"
+                    rx="1.5"
+                    fill={i % 3 === 0 ? "#ffcf8f" : "#8a7cff"}
+                    opacity={i % 3 === 0 ? 0.85 : 0.35}
+                  />
+                ))}
+                {Array.from({ length: 11 }).map((_, i) => (
+                  <rect
+                    key={`l-${i}`}
+                    x={32 + i * 26}
+                    y={148}
+                    width="14"
+                    height="18"
+                    rx="1.5"
+                    fill={i % 4 === 1 ? "#ffcf8f" : "#8a7cff"}
+                    opacity={i % 4 === 1 ? 0.85 : 0.3}
+                  />
+                ))}
+                <path
+                  d="M110 180 h120 l16 22 h-152 z"
+                  fill="#ff6b4e"
+                  opacity="0.92"
+                />
+                <rect x="150" y="182" width="40" height="28" fill="#100e1f" />
+                <rect x="0" y="200" width="340" height="10" fill="#0a0916" />
+              </svg>
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-charcoal-900 to-transparent" />
+              <div className="absolute left-4 right-4 bottom-3.5 flex items-end justify-between">
+                <div>
+                  <div className="text-[9.5px] tracking-[0.14em] uppercase text-cream-mute mb-1">
+                    Guest Directory
+                  </div>
+                  <div className="font-serif-display text-[19px] font-medium text-white leading-tight">
+                    The Grand Hotel
+                  </div>
                 </div>
-                <div className="text-[10px] tracking-[0.14em] uppercase text-cream-mute mb-1.5">
-                  Welcome to
-                </div>
-                <div className="font-serif-display text-[18px] font-medium">
-                  The Grand Hotel
+                <div className="flex items-center gap-1.5 rounded-full border border-brass-light/40 bg-charcoal-950/70 px-2.5 py-1.5 backdrop-blur-sm">
+                  <Nfc size={12} className="text-brass-light" />
+                  <span className="text-[8.5px] font-bold uppercase tracking-[0.08em] text-brass-light">
+                    Tap to Open
+                  </span>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 p-4">
-                {DIRECTORY_ROWS.map((row) => (
-                  <div
-                    key={row.title}
-                    className="flex items-center gap-3 rounded-xl border border-line bg-white px-3.5 py-3 transition-all duration-300 hover:border-brass hover:translate-x-1"
-                  >
-                    <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] bg-paper-alt">
-                      <row.icon size={16} className="text-brass-deep" />
-                    </div>
+            </div>
+
+            {/* Editorial index, styled like a printed directory contents page rather than an app screen */}
+            <div className="flex flex-col px-5 py-4">
+              {DIRECTORY_ROWS.map((row, i) => (
+                <div key={row.title}>
+                  {i > 0 && <div className="h-px bg-line-dark-soft" />}
+                  <div className="flex items-center gap-3.5 py-3">
+                    <span className="font-serif-display italic text-[12px] text-brass-light w-4 shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <row.icon size={15} className="shrink-0 text-brass-light" />
                     <div className="min-w-0 flex-1">
-                      <div className="text-[13.5px] font-semibold text-ink">
+                      <div className="text-[13px] font-semibold text-white">
                         {row.title}
                       </div>
-                      <div className="truncate text-[11.5px] text-ink-mute">
+                      <div className="truncate text-[11px] text-cream-mute">
                         {row.sub}
                       </div>
                     </div>
-                    <ChevronRight size={14} className="shrink-0 text-ink-mute" />
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
 

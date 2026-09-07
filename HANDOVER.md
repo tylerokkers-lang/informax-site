@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 20 August 2026.
+Last updated: 8 September 2026.
 
 ## 1. What this project is
 
@@ -34,9 +34,15 @@ site and has no build dependency on it.
   deleted — that decision belongs to the user (Tyler), not to any agent
   working in this repo. Do not touch WordPress hosting/domain settings
   without being explicitly asked to.
-- **One functional gap:** the enquiry form (`/enquire`) validates and
-  handles errors correctly, but cannot actually send email yet because
-  `RESEND_API_KEY` is not set in Vercel. See §7.
+- **Enquiry email delivery is fully working.** `informax.co.uk` is verified
+  as a sending domain in Resend (DKIM + SPF CNAMEs added at WordPress.com,
+  confirmed `Verified` in the Resend dashboard), `ENQUIRY_FROM_EMAIL` is
+  set in Vercel Production to `Informax Enquiries
+  <enquiries@informax.co.uk>`, and a real test enquiry sent through the
+  live `/enquire` form on `informax.co.uk` was confirmed **Delivered** to
+  `info@informax.co.uk` in the Resend Emails dashboard. See §7 for the
+  full history (kept for context, since sandbox-mode issues like this tend
+  to recur if the domain or key ever changes).
 
 ## 3. Stack & repository
 
@@ -72,6 +78,13 @@ site and has no build dependency on it.
   install — a global `npm install -g vercel` will fail in this environment
   due to permissions, and was deliberately avoided to keep `vercel` out of
   the project's own `package.json`.
+  **Important:** this command deploys whatever is on local disk, committed
+  or not — it does not deploy the last git commit. Only run it when the
+  local working tree is either clean (matches the last commit) or when
+  shipping the uncommitted state is explicitly intended, e.g. to pick up a
+  newly-added environment variable without unrelated pending edits going
+  live prematurely. If uncommitted work ships this way, commit it
+  afterwards so git and production stay in sync.
 - Production aliases: `informax.co.uk`, `www.informax.co.uk`,
   `informax-site.vercel.app`.
 
@@ -107,11 +120,22 @@ below exactly.**
   (`ns1/ns2/ns3.wordpress.com`) — it was deliberately **not** migrated to
   Vercel's nameservers, specifically to avoid having to recreate every
   email-related record by hand.
-- Only two records were ever changed, both by the user directly in the
-  WordPress.com DNS panel (no agent has DNS write access):
-  - `A @ 76.76.21.21` (root domain → Vercel)
+- Records changed since launch, all added directly in the WordPress.com
+  DNS panel (an authenticated Chrome session with DNS write access was
+  available when these were added; the values came verbatim from the
+  Vercel/Resend dashboards, never invented):
+  - `A @ 76.76.21.21` (root domain → Vercel), by the user.
   - `www` remains a `CNAME → informax.co.uk`; it resolves correctly through
     the updated root A record and needs no separate change.
+  - `TXT resend._domainkey` → DKIM public key for Resend (added 8 September
+    2026, to verify `informax.co.uk` as a Resend sending domain — see §7).
+  - `CNAME rsend` → `rsend-euw1.forge.rmta.net` (Resend SPF/return-path,
+    added same day).
+  - `CNAME send` → `send.forge.rmta.net` (Resend SPF/return-path, added
+    same day).
+  - Resend's "Enable Receiving" option was left **off** when the domain was
+    added, specifically so no Resend MX record was created — the existing
+    Microsoft 365 MX record (below) stays the only mail-receiving path.
 - **Every one of these must remain untouched.** Confirmed present via
   direct public DNS lookup (`dig`), both before and after the cutover:
   - `MX @` → `informax-co-uk.mail.protection.outlook.com` (Microsoft 365
@@ -141,25 +165,45 @@ below exactly.**
 
 | Variable | Status | Notes |
 |---|---|---|
-| `RESEND_API_KEY` | **Not set** | Required for `/enquire` to actually send email via Resend. Without it, the form still validates correctly and shows an honest "email us directly" error rather than a false success — this is intentional, working-as-designed behaviour, not a bug to silently paper over. |
+| `RESEND_API_KEY` | **Set in Production** (added by user, confirmed via `npx vercel env ls production`) | Required for `/enquire` to send email via Resend. |
 | `ENQUIRY_TO_EMAIL` | Not set (optional) | Defaults to `info@informax.co.uk` in code if unset. |
-| `ENQUIRY_FROM_EMAIL` | Not set (optional) | Defaults to Resend's shared `onboarding@resend.dev` sender, which works with zero extra setup. A branded `@informax.co.uk` sender is possible later but requires verifying that domain in Resend, which adds its own DNS TXT/CNAME records — coordinate with §6 if that's ever done. |
+| `ENQUIRY_FROM_EMAIL` | **Set in Production**: `Informax Enquiries <enquiries@informax.co.uk>` | Sends from the verified `informax.co.uk` domain in Resend. Without this set, the code falls back to Resend's shared `onboarding@resend.dev` sandbox sender, which can only deliver to the Resend account's own registered email, never to arbitrary recipients — this was the original bug, see below. |
 
-**If asked to fix the enquiry form's email delivery:** do not attempt to
-generate or guess a `RESEND_API_KEY`. Ask the user to add it directly in
-the Vercel dashboard
-(`https://vercel.com/informax/informax-site/settings/environment-variables`)
-so it never passes through chat, then redeploy and verify with a real test
-submission.
+**History (8 September 2026):** the enquiry form initially failed in
+production with `403 validation_error: You can only send testing emails to
+your own email address (tylerokkers@gmail.com). To send emails to other
+recipients, please verify a domain at resend.com/domains, and change the
+from address to an email using this domain.` This was a Resend sandbox-mode
+restriction, not a code bug. Resolved by:
+1. Adding `informax.co.uk` as a sending domain in Resend
+   (resend.com/domains), with "Enable Receiving" left off.
+2. Adding the DKIM TXT record and two SPF CNAME records Resend generated
+   to WordPress.com's DNS panel (see §6) — copied verbatim from Resend, and
+   double-checked byte-for-byte against public DNS after a first attempt
+   at typing the ~220-character DKIM key silently dropped four characters
+   (a known risk with long values and simulated keystrokes — prefer
+   copy/paste over typing for anything over a few dozen characters, and
+   verify the published record's length/content matches before trusting
+   it).
+3. Once Resend showed the domain `Verified`, setting `ENQUIRY_FROM_EMAIL`
+   in Vercel Production and redeploying.
+4. Submitting a real enquiry through the live `/enquire` form and
+   confirming `Delivered` status for `info@informax.co.uk` in
+   resend.com/emails, not just a 200 response from the API.
+
+**If this ever regresses:** do not attempt to generate or guess a
+`RESEND_API_KEY`, a verified domain, or a `from` address on an unverified
+domain. `npx vercel logs <deployment-url>` (CLI is already authenticated as
+`tylerokkers-8214`, project already linked in `.vercel/`) is the correct
+way to see the real Resend error without ever touching the key value
+itself. Check resend.com/domains for the domain's verification status and
+resend.com/emails for individual send/delivery status.
 
 ## 8. Outstanding items
 
-1. **Add `RESEND_API_KEY` in Vercel** — owner: user. Once done, redeploy
-   and verify a real enquiry send end-to-end on the live domain.
-2. **Decide when to retire WordPress** — owner: user. Nothing gets
+1. **Decide when to retire WordPress** — owner: user. Nothing gets
    cancelled automatically.
-3. Optional: branded Resend sending domain (see §7).
-4. Optional: redundant Vercel A records (see §6).
+2. Optional: redundant Vercel A records (see §6).
 
 ## 9. Every route
 

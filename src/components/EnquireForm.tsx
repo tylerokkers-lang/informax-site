@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
-import { BUDGET_OPTIONS, ENQUIRY_INTERESTS } from "@/lib/constants";
+import { ENQUIRY_INTERESTS } from "@/lib/constants";
 
 type FieldErrors = Record<string, string>;
 type Status = "idle" | "submitting" | "success" | "error";
@@ -13,7 +13,6 @@ const initialValues = {
   jobTitle: "",
   email: "",
   phone: "",
-  budget: "",
   message: "",
 };
 
@@ -199,23 +198,6 @@ export default function EnquireForm() {
             onChange={(e) => update("phone", e.target.value)}
             className={inputClass(false)}
           />
-        </Field>
-
-        <Field label="Budget" htmlFor="budget">
-          <select
-            id="budget"
-            name="budget"
-            value={values.budget}
-            onChange={(e) => update("budget", e.target.value)}
-            className={inputClass(false)}
-          >
-            <option value="">Select a budget range</option>
-            {BUDGET_OPTIONS.map((b) => (
-              <option key={b} value={b}>
-                {b}
-              </option>
-            ))}
-          </select>
         </Field>
 
         <Field label="What are you interested in?" htmlFor="interests" full>

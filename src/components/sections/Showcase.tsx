@@ -1,35 +1,76 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  BedDouble,
+  Clock,
+  Compass,
+  Martini,
+  Music,
+  Sparkles,
+  Umbrella,
+  UtensilsCrossed,
+  Waves,
+} from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { Eyebrow, Em } from "@/components/ui";
 
-const THEMES = [
+interface Row {
+  icon: LucideIcon;
+  label: string;
+}
+
+const THEMES: {
+  label: string;
+  brand: string;
+  sub: string;
+  monogram: string;
+  header: string;
+  accent: string;
+  rows: Row[];
+  desc: string;
+}[] = [
   {
     label: "Luxury Hotel",
     brand: "The Aldwyn",
     sub: "Est. London",
-    header: "bg-gradient-to-br from-[#1c1913] to-[#2b2617] text-[#f2e4c9]",
-    rows: ["Fine Dining", "The Cellar Bar", "Private Spa", "Turndown Service"],
-    rowStyle: "text-[#3a3327]",
-    rowBg: ["bg-[#f6f1e7]", "bg-[#fbf8f2]"],
-    desc: "Reserved and editorial, brass-on-charcoal tones built for a five-star address.",
+    monogram: "A",
+    header: "bg-[linear-gradient(155deg,#1c1913_0%,#332c1a_100%)] text-[#f2e4c9]",
+    accent: "#c9a961",
+    rows: [
+      { icon: UtensilsCrossed, label: "Fine Dining" },
+      { icon: Martini, label: "The Cellar Bar" },
+      { icon: Sparkles, label: "Private Spa" },
+      { icon: BedDouble, label: "Turndown Service" },
+    ],
+    desc: "Reserved and editorial, gold-on-charcoal tones built for a five-star address.",
   },
   {
     label: "Boutique Hotel",
     brand: "Maren House",
     sub: "Independent · Coastal",
-    header: "bg-gradient-to-br from-[#7a4632] to-[#a9613f] text-[#fdf1e8]",
-    rows: ["Rooftop Terrace", "Studio Rooms", "Local Guides", "Late Checkout"],
-    rowStyle: "text-[#5c3a2c]",
-    rowBg: ["bg-[#fbeee4]", "bg-[#fff8f3]"],
+    monogram: "M",
+    header: "bg-[linear-gradient(155deg,#7a4632_0%,#b06e46_100%)] text-[#fdf1e8]",
+    accent: "#e8977a",
+    rows: [
+      { icon: Umbrella, label: "Rooftop Terrace" },
+      { icon: BedDouble, label: "Studio Rooms" },
+      { icon: Compass, label: "Local Guides" },
+      { icon: Clock, label: "Late Checkout" },
+    ],
     desc: "Warm terracotta tones with personality, a true extension of the brand.",
   },
   {
     label: "Resort",
     brand: "Isla Bay Resort",
     sub: "All-Inclusive",
-    header: "bg-gradient-to-br from-[#123832] to-[#1f5a4f] text-[#e6f5f0]",
-    rows: ["Beach Club", "Water Sports", "Kids' Club", "Evening Entertainment"],
-    rowStyle: "text-[#1c4740]",
-    rowBg: ["bg-[#eaf5f2]", "bg-[#f6fbfa]"],
+    monogram: "I",
+    header: "bg-[linear-gradient(155deg,#123832_0%,#1f6a5c_100%)] text-[#e6f5f0]",
+    accent: "#5fbfa8",
+    rows: [
+      { icon: Waves, label: "Beach Club" },
+      { icon: Umbrella, label: "Water Sports" },
+      { icon: Sparkles, label: "Kids’ Club" },
+      { icon: Music, label: "Evening Entertainment" },
+    ],
     desc: "Coastal teal and sand tones with energetic, activity-first navigation.",
   },
 ];
@@ -54,31 +95,50 @@ export default function Showcase() {
           {THEMES.map((theme) => (
             <RevealStaggerItem
               key={theme.label}
-              className="rounded-3xl border border-line bg-paper p-7"
+              className="group rounded-3xl border border-line bg-paper p-7 shadow-[0_1px_2px_rgba(20,20,28,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-24px_rgba(20,20,28,0.22)]"
             >
-              <div className="text-xs font-bold uppercase tracking-[0.08em] text-ink-mute mb-5">
-                {theme.label}
+              <div className="flex items-center justify-between mb-5">
+                <span className="text-xs font-bold uppercase tracking-[0.08em] text-ink-mute">
+                  {theme.label}
+                </span>
+                <span
+                  className="flex h-7 w-7 items-center justify-center rounded-full font-serif-display italic text-[13px] text-white"
+                  style={{ backgroundColor: theme.accent }}
+                >
+                  {theme.monogram}
+                </span>
               </div>
-              <div className="overflow-hidden rounded-2xl border border-line">
-                <div className={`px-5 pt-5 pb-4 text-center ${theme.header}`}>
-                  <div className="font-serif-display text-[15px] font-medium">
+
+              <div className="overflow-hidden rounded-2xl border border-line shadow-[0_18px_36px_-20px_rgba(20,20,28,0.35)]">
+                <div className={`relative px-5 pt-6 pb-5 text-center ${theme.header}`}>
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:10px_10px]"
+                    aria-hidden="true"
+                  />
+                  <div className="relative font-serif-display text-[16px] font-medium">
                     {theme.brand}
                   </div>
-                  <div className="mt-1 text-[9.5px] uppercase tracking-[0.1em] opacity-70">
+                  <div className="relative mt-1 text-[9.5px] uppercase tracking-[0.14em] opacity-70">
                     {theme.sub}
                   </div>
                 </div>
-                <div className="flex flex-col gap-1.5 bg-white p-3">
+                <div className="flex flex-col bg-white px-3.5">
                   {theme.rows.map((row, i) => (
-                    <div
-                      key={row}
-                      className={`flex h-[30px] items-center rounded-lg border border-line-soft px-2.5 text-[10.5px] font-semibold ${theme.rowStyle} ${theme.rowBg[i % 2]}`}
-                    >
-                      {row}
+                    <div key={row.label}>
+                      {i > 0 && <div className="h-px bg-line-soft" />}
+                      <div className="flex items-center gap-2.5 py-[9px] text-[11px] font-semibold text-ink-soft">
+                        <row.icon
+                          size={14}
+                          className="shrink-0"
+                          style={{ color: theme.accent }}
+                        />
+                        {row.label}
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
+
               <p className="mt-5 text-[13.5px] text-ink-mute leading-relaxed">
                 {theme.desc}
               </p>

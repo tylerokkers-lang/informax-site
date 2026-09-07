@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Clock, Mail, Sparkles } from "lucide-react";
+import {
+  Clock,
+  FileCheck2,
+  Layers,
+  Mail,
+  PoundSterling,
+  Sparkles,
+} from "lucide-react";
 import EnquireForm from "@/components/EnquireForm";
 import { Eyebrow, EmLight } from "@/components/ui";
 import { CONTACT_EMAIL } from "@/lib/constants";
@@ -12,10 +19,32 @@ export const metadata: Metadata = {
 };
 
 const SIDE_POINTS = [
-  "A project designed entirely around your business and brand",
-  "Websites from £1,200, priced honestly around what you need",
-  "Brochures, directories, hospitality and bespoke work all welcome",
-  "A clear, no-pressure proposal, never a hard sell",
+  {
+    icon: Sparkles,
+    title: "Designed around you",
+    desc: "Every project is built entirely around your business and brand, not a template.",
+  },
+  {
+    icon: PoundSterling,
+    title: "Honest pricing",
+    desc: "Websites from £1,200, priced around what your project actually needs.",
+  },
+  {
+    icon: Layers,
+    title: "Any kind of project",
+    desc: "Brochures, pamphlets, directories, hospitality and bespoke work, all welcome.",
+  },
+  {
+    icon: FileCheck2,
+    title: "No hard sell",
+    desc: "A clear, no-pressure proposal. If it's not the right fit, we'll say so.",
+  },
+];
+
+const PROCESS = [
+  { step: "01", title: "Tell us", desc: "Share a few details about your business and what you're looking to create." },
+  { step: "02", title: "We shape it", desc: "We work out the right approach and put together a clear, honest proposal." },
+  { step: "03", title: "You decide", desc: "No pressure. Take the proposal away and come back whenever you're ready." },
 ];
 
 export default function EnquirePage() {
@@ -57,26 +86,63 @@ export default function EnquirePage() {
       </section>
 
       <section className="bg-paper py-20 md:py-28">
-        <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-14 items-start">
-          <div className="lg:sticky lg:top-[130px]">
-            <h3 className="font-serif-display text-xl font-medium text-ink mb-3.5">
-              What to expect
-            </h3>
-            <p className="text-[14.5px] text-ink-mute leading-relaxed mb-6">
-              Every Informax enquiry starts with a conversation, not a sales
-              pitch. We want to understand what you&rsquo;re trying to
-              achieve before we suggest anything.
-            </p>
-            <ul className="flex flex-col gap-4">
-              {SIDE_POINTS.map((point) => (
-                <li key={point} className="flex items-start gap-3">
-                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
-                  <span className="text-sm text-ink-soft leading-relaxed">
-                    {point}
-                  </span>
-                </li>
-              ))}
-            </ul>
+        <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-14 items-start">
+          <div className="flex flex-col gap-8 lg:sticky lg:top-[130px]">
+            <div className="rounded-3xl border border-line bg-panel p-8 sm:p-9">
+              <h3 className="font-serif-display text-xl font-medium text-ink mb-3.5">
+                What to expect
+              </h3>
+              <p className="text-[14.5px] text-ink-mute leading-relaxed mb-7">
+                Every Informax enquiry starts with a conversation, not a
+                sales pitch. We want to understand what you&rsquo;re trying
+                to achieve before we suggest anything.
+              </p>
+              <ul className="flex flex-col gap-5">
+                {SIDE_POINTS.map((point) => (
+                  <li key={point.title} className="flex items-start gap-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[rgba(86,67,224,0.08)]">
+                      <point.icon size={16} className="text-brass-deep" />
+                    </span>
+                    <div>
+                      <div className="text-[14px] font-semibold text-ink mb-0.5">
+                        {point.title}
+                      </div>
+                      <p className="text-[13.5px] text-ink-mute leading-relaxed">
+                        {point.desc}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border border-line bg-charcoal-950 p-8 sm:p-9 text-cream">
+              <h3 className="font-serif-display text-lg font-medium text-white mb-6">
+                How an enquiry works
+              </h3>
+              <div className="flex flex-col gap-6">
+                {PROCESS.map((item, i) => (
+                  <div key={item.step} className="flex items-start gap-4">
+                    <div className="flex flex-col items-center">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-brass-light font-serif-display italic text-[13px] text-brass-light">
+                        {item.step}
+                      </span>
+                      {i < PROCESS.length - 1 && (
+                        <span className="mt-1.5 h-6 w-px bg-line-dark" />
+                      )}
+                    </div>
+                    <div className="pt-1">
+                      <div className="text-[14px] font-semibold text-white mb-0.5">
+                        {item.title}
+                      </div>
+                      <p className="text-[13px] text-cream-mute leading-relaxed max-w-[280px]">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="rounded-3xl border border-line bg-panel p-6 sm:p-10 md:p-12">
