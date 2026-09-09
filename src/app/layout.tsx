@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Informax",
   },
   description:
-    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice. Websites from £1,200.",
+    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice.",
   keywords: [
     "website design",
     "website development",
@@ -47,16 +47,13 @@ export const metadata: Metadata = {
     siteName: "Informax",
     title: "Informax | Website Design, Digital Brochures & Directories",
     description:
-      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects. Websites from £1,200.",
+      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Informax | Website Design, Digital Brochures & Directories",
     description:
       "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects.",
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 
