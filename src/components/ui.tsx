@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export function Eyebrow({
   children,
@@ -13,15 +13,10 @@ export function Eyebrow({
 }) {
   return (
     <div
-      className={`inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.16em] uppercase mb-4 ${
-        tone === "dark" ? "text-brass-light" : "text-brass-deep"
-      } ${center ? "justify-center w-full" : ""}`}
+      className={`block text-[11px] font-semibold tracking-[0.28em] uppercase mb-4 ${
+        tone === "dark" ? "text-brass-light" : "text-ink-mute"
+      } ${center ? "text-center w-full" : ""}`}
     >
-      <span
-        className={`h-px w-[22px] inline-block ${
-          tone === "dark" ? "bg-brass-light" : "bg-brass"
-        }`}
-      />
       {children}
     </div>
   );
@@ -78,31 +73,41 @@ export function EmLight({ children }: { children: ReactNode }) {
 }
 
 const baseBtn =
-  "inline-flex items-center justify-center gap-2.5 rounded-full px-7 py-4 text-[14.5px] font-semibold tracking-[0.01em] whitespace-nowrap transition-all duration-300 group";
+  "group inline-flex items-center gap-2.5 border-b pb-1 text-[15px] font-medium tracking-[0.01em] whitespace-nowrap transition-colors duration-300";
+
+function BtnArrow() {
+  return (
+    <ArrowUpRight
+      size={16}
+      className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+    />
+  );
+}
 
 export function BtnPrimary({
   href,
   children,
   className = "",
   arrow = true,
+  tone = "light",
 }: {
   href: string;
   children: ReactNode;
   className?: string;
   arrow?: boolean;
+  tone?: "light" | "dark";
 }) {
   return (
     <Link
       href={href}
-      className={`${baseBtn} bg-gradient-to-br from-brass-light to-brass-deep text-[#ffffff] hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(60,46,176,0.55)] ${className}`}
+      className={`${baseBtn} ${
+        tone === "dark"
+          ? "border-white/50 text-white hover:border-white"
+          : "border-ink text-ink hover:border-brass-deep hover:text-brass-deep"
+      } ${className}`}
     >
       {children}
-      {arrow && (
-        <ArrowRight
-          size={16}
-          className="transition-transform duration-300 group-hover:translate-x-1"
-        />
-      )}
+      {arrow && <BtnArrow />}
     </Link>
   );
 }
@@ -112,22 +117,25 @@ export function BtnGhost({
   children,
   className = "",
   tone = "light",
+  arrow = false,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
   tone?: "light" | "dark";
+  arrow?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className={`${baseBtn} border hover:-translate-y-0.5 ${
+      className={`${baseBtn} ${
         tone === "dark"
-          ? "border-line-dark text-white hover:border-brass-light hover:text-brass-light"
-          : "border-line text-ink hover:border-brass hover:text-brass-deep"
+          ? "border-white/25 text-white/65 hover:border-white/70 hover:text-white"
+          : "border-line text-ink-mute hover:border-ink hover:text-ink"
       } ${className}`}
     >
       {children}
+      {arrow && <BtnArrow />}
     </Link>
   );
 }

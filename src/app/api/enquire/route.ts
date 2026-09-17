@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
 import { CONTACT_EMAIL } from "@/lib/constants";
+import {
+  buildEnquiryEmailHtml,
+  buildEnquiryEmailText,
+  buildEnquirySubject,
+} from "@/lib/enquiryEmail";
 
 export const runtime = "nodejs";
 
@@ -64,19 +69,15 @@ export async function POST(request: Request) {
   const fromEmail =
     process.env.ENQUIRY_FROM_EMAIL || "Informax Enquiries <onboarding@resend.dev>";
 
-  const body = [
-    `Name: ${data.name}`,
-    `Company: ${data.company}`,
-    data.jobTitle ? `Job Title: ${data.jobTitle}` : null,
-    `Email: ${data.email}`,
-    data.phone ? `Phone: ${data.phone}` : null,
-    data.interests?.length ? `Interested In: ${data.interests.join(", ")}` : null,
-    "",
-    "Message:",
-    data.message,
-  ]
-    .filter((line): line is string => Boolean(line))
-    .join("\n");
+  const enquiry = {
+    name: data.name!.trim(),
+    company: data.company!.trim(),
+    jobTitle: data.jobTitle?.trim() || undefined,
+    email: data.email!.trim(),
+    phone: data.phone?.trim() || undefined,
+    interests: data.interests?.length ? data.interests : undefined,
+    message: data.message!.trim(),
+  };
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -88,9 +89,10 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from: fromEmail,
         to: [toEmail],
-        reply_to: data.email,
-        subject: `New enquiry from ${data.company}`,
-        text: body,
+        reply_to: enquiry.email,
+        subject: buildEnquirySubject(enquiry),
+        html: buildEnquiryEmailHtml(enquiry),
+        text: buildEnquiryEmailText(enquiry),
       }),
     });
 

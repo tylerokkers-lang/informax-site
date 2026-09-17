@@ -14,7 +14,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <section className="bg-charcoal-950 text-cream text-center pt-[150px] pb-14 md:pt-[170px]">
+      <section className="bg-charcoal-950 text-cream text-center pt-[112px] pb-14 md:pt-[128px]">
         <div className="mx-auto max-w-8xl px-6 md:px-8">
           <Eyebrow tone="dark" center>
             Legal

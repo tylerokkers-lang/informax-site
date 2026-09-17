@@ -118,7 +118,7 @@ export default function EnquireForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       {status === "error" && errorMessage && (
-        <div className="form-status show error mb-7 flex items-start gap-3.5 rounded-2xl border border-[rgba(217,54,54,0.3)] bg-[rgba(217,54,54,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a12020]">
+        <div className="form-status show error mb-7 flex items-start gap-3.5 border border-[rgba(217,54,54,0.3)] bg-[rgba(217,54,54,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a12020]">
           <AlertCircle size={20} className="mt-0.5 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -201,21 +201,28 @@ export default function EnquireForm() {
         </Field>
 
         <Field label="What are you interested in?" htmlFor="interests" full>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {ENQUIRY_INTERESTS.map((option) => (
-              <label
-                key={option}
-                className="flex items-center gap-2.5 rounded-[10px] border border-line bg-white px-3.5 py-3 cursor-pointer transition-colors duration-[250ms] has-[:checked]:border-brass has-[:checked]:bg-[rgba(86,67,224,0.06)]"
-              >
-                <input
-                  type="checkbox"
-                  checked={interests.includes(option)}
-                  onChange={() => toggleInterest(option)}
-                  className="h-4 w-4 shrink-0 accent-brass-deep"
-                />
-                <span className="text-[13.5px] text-ink-soft">{option}</span>
-              </label>
-            ))}
+          <div className="flex flex-wrap gap-2.5">
+            {ENQUIRY_INTERESTS.map((option) => {
+              const checked = interests.includes(option);
+              return (
+                <label
+                  key={option}
+                  className={`cursor-pointer border px-4 py-2.5 text-[13.5px] font-medium transition-colors duration-300 has-[:focus-visible]:outline has-[:focus-visible]:outline-1 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brass-deep ${
+                    checked
+                      ? "border-ink bg-ink text-white"
+                      : "border-line text-ink-soft hover:border-ink-mute"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleInterest(option)}
+                    className="sr-only"
+                  />
+                  {option}
+                </label>
+              );
+            })}
           </div>
         </Field>
 
@@ -236,7 +243,7 @@ export default function EnquireForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-brass-light to-brass-deep px-7 py-4 text-[14.5px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(60,46,176,0.55)] disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+        className="mt-4 inline-flex w-full items-center justify-center gap-2.5 bg-ink px-7 py-4 text-[14.5px] font-semibold tracking-[0.01em] text-white transition-colors duration-300 hover:bg-brass-deep disabled:opacity-60"
       >
         {status === "submitting" && (
           <Loader2 size={16} className="animate-spin" />
@@ -257,9 +264,11 @@ export default function EnquireForm() {
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-[10px] border ${
-    hasError ? "border-rust" : "border-line"
-  } bg-white px-4 py-[13px] text-[14.5px] text-ink transition-all duration-300 focus:outline-none focus:border-brass focus:ring-[3px] focus:ring-[rgba(86,67,224,0.14)]`;
+  return `w-full border-0 border-b bg-transparent px-0 py-3 text-[15px] text-ink transition-colors duration-300 focus:outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brass-deep ${
+    hasError
+      ? "border-rust"
+      : "border-line focus:border-ink"
+  }`;
 }
 
 function Field({

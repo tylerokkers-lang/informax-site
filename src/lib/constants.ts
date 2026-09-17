@@ -21,7 +21,6 @@ export const NAV_SERVICES = [
 
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },
 ] as const;
@@ -35,7 +34,6 @@ export const FOOTER_SERVICE_LINKS = [
 ] as const;
 
 export const FOOTER_COMPANY_LINKS = [
-  { label: "Pricing", href: "/pricing" },
   { label: "About Informax", href: "/about" },
   { label: "Enquire", href: "/enquire" },
   { label: "Contact", href: `mailto:${CONTACT_EMAIL}` },

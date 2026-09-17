@@ -19,7 +19,7 @@ export default function Footer() {
                 alt="Informax"
                 width={420}
                 height={140}
-                className="h-28 lg:h-36 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">

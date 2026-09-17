@@ -1,139 +1,110 @@
 import type { Metadata } from "next";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import { BtnPrimary, Em, EmLight, Eyebrow } from "@/components/ui";
+import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Informax is a digital design and development studio. We build websites, digital brochures, directories and bespoke digital experiences, with a specialist hospitality practice.",
+    "Informax began in hospitality and builds digital guest directories for hotels, alongside websites and digital information for businesses more broadly.",
   alternates: { canonical: "/about" },
 };
 
 const VALUES = [
   {
-    num: "01",
+    n: "01",
     title: "Design first",
     desc: "Good information deserves good design. We start with how something should feel to use, not just how it should function.",
   },
   {
-    num: "02",
+    n: "02",
     title: "Built around you",
     desc: "No shared templates. Every project is designed to feel like a natural extension of the business it belongs to.",
   },
   {
-    num: "03",
-    title: "Priced honestly",
-    desc: "A clear starting point, with functionality priced to what you actually need. Nothing is bundled in just to inflate the number.",
+    n: "03",
+    title: "Honest, not padded",
+    desc: "A clear scope and a straightforward quote. Nothing is bundled in just to inflate the number.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-charcoal-950 text-cream text-center pt-[150px] pb-16 md:pt-[170px] md:pb-20">
-        <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Eyebrow tone="dark" center>
-            About Informax
-          </Eyebrow>
-          <h1 className="font-serif-display font-medium text-[clamp(32px,4.6vw,50px)] leading-[1.2] text-white mx-auto mb-5 max-w-3xl">
-            We turn information businesses need to share into{" "}
-            <EmLight>something worth using.</EmLight>
-          </h1>
-          <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
-            Informax is a digital design and development studio: websites,
-            digital brochures, directories and bespoke digital experiences,
-            with a specialist hospitality practice.
-          </p>
+      <section className="bg-paper pt-[140px] pb-20 md:pt-[180px] md:pb-28">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Reveal className="max-w-[18ch]">
+            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+              About Informax
+            </span>
+            <h1 className="font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.6vw,62px)] text-ink">
+              We turn information into something worth using.
+            </h1>
+          </Reveal>
         </div>
       </section>
 
-      <section className="bg-panel py-24 md:py-32">
-        <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line-dark bg-gradient-to-br from-charcoal-800 to-charcoal-900 p-9 sm:p-11">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(138,124,255,0.14),transparent_55%)]" />
-              <span className="absolute top-2 left-7 font-serif-display text-[140px] leading-none text-brass-light/[0.18]">
-                &ldquo;
+      <section className="bg-paper pb-24 md:pb-32">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div className="grid grid-cols-1 gap-10 border-t border-line pt-14 md:grid-cols-12 md:pt-16">
+            <Reveal className="md:col-span-4">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+                Our Story
               </span>
-              <div className="relative mt-20">
-                <div className="text-xs font-bold uppercase tracking-[0.1em] text-brass-light mb-4">
-                  A Message From Our Founder &amp; CEO
-                </div>
-                <p className="font-serif-display italic text-[19px] leading-[1.6] text-cream">
-                  I started Informax because I kept seeing the same problem:
-                  businesses with genuinely good things to say, presented
-                  badly. We build the websites, brochures and directories
-                  that fix that: properly designed, not templated. This is
-                  just the beginning.
-                </p>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center gap-3">
-              <span className="h-px w-6 bg-brass" />
-              <div>
-                <div className="text-[14.5px] font-semibold text-ink">
-                  Tyler Okkers
-                </div>
-                <div className="text-[13px] text-ink-mute">
-                  Founder &amp; CEO
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <Eyebrow>Our Story</Eyebrow>
-            <h2 className="font-serif-display font-medium text-[clamp(28px,3.6vw,40px)] leading-[1.18] text-ink mb-6">
-              It started in hospitality. <Em>It didn&rsquo;t stay there.</Em>
-            </h2>
-            <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-5">
-              Our founder spent almost ten years working across the
-              hospitality industry, and kept seeing the same story play out:
-              a hotel with a great spa, a great restaurant, a great story to
-              tell, and no good way to actually tell it. Information was
-              scattered across a tired website, a printed guide, and
-              whatever reception had time to mention at check-in.
-            </p>
-            <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-5">
-              That problem turned out not to be unique to hotels. Talk to
-              almost any business and you&rsquo;ll find the same thing:
-              good information, badly presented and spread across too many
-              places. Informax exists to fix that properly, through
-              considered design and solid engineering rather than templates.
-            </p>
-            <p className="text-ink-mute text-[16.5px] leading-[1.85] mb-8">
-              <strong className="text-ink font-semibold">
-                Today, that means websites, digital brochures, directories
-                and bespoke digital projects
-              </strong>{" "}
-              for businesses across sectors, alongside a dedicated
-              hospitality practice that still carries the lessons the
-              company was built on.
-            </p>
-            <BtnPrimary href="/enquire">Start a Project</BtnPrimary>
-          </Reveal>
+            </Reveal>
+            <Reveal delay={0.08} className="md:col-span-8">
+              <p className="mb-6 font-serif-display text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.35] text-ink">
+                It started in hospitality. It didn&rsquo;t stay there.
+              </p>
+              <p className="mb-5 max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                Our founder spent almost ten years working across the
+                hospitality industry, and kept seeing the same story play
+                out: a hotel with a great spa, a great restaurant, a great
+                story to tell, and no good way to actually tell it.
+                Information was scattered across a tired website, a printed
+                guide, and whatever reception had time to mention at
+                check-in.
+              </p>
+              <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                That problem turned out not to be unique to hotels. Talk to
+                almost any business and you&rsquo;ll find the same thing:
+                good information, badly presented and spread across too many
+                places.{" "}
+                <strong className="font-semibold text-ink">
+                  Today, that means digital guest directories for hospitality
+                  first, and websites and digital information for businesses
+                  more broadly,
+                </strong>{" "}
+                built through considered design rather than templates.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <section className="bg-paper py-20 md:py-28">
-        <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Reveal className="max-w-2xl mb-14">
-            <Eyebrow>What We Believe</Eyebrow>
-            <h2 className="font-serif-display font-medium text-[clamp(26px,3.2vw,38px)] leading-[1.18] text-ink">
-              Three things that <Em>don&rsquo;t change.</Em>
+      <section className="bg-charcoal-950 py-24 text-cream md:py-32">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Reveal className="mb-16 max-w-xl md:mb-20">
+            <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">
+              What We Believe
+            </span>
+            <h2 className="font-serif-display font-medium leading-[1.12] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-white">
+              Three things that don&rsquo;t change.
             </h2>
           </Reveal>
 
-          <RevealStagger className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <RevealStagger className="flex flex-col border-t border-white/10 md:grid md:grid-cols-3 md:gap-x-12 md:border-t-0">
             {VALUES.map((v) => (
-              <RevealStaggerItem key={v.title}>
-                <span className="font-serif-display italic text-2xl text-brass-deep block mb-4">
-                  {v.num}
+              <RevealStaggerItem
+                key={v.n}
+                className="border-b border-white/10 py-8 md:border-b-0 md:border-t md:py-0 md:pt-8"
+              >
+                <span className="mb-4 block font-serif-display text-[15px] italic text-brass-light">
+                  {v.n}
                 </span>
-                <h4 className="font-serif-display text-lg font-medium text-ink mb-2.5">
+                <h4 className="mb-2.5 text-[18px] font-semibold text-white">
                   {v.title}
                 </h4>
-                <p className="text-sm text-ink-mute leading-relaxed">
+                <p className="max-w-[32ch] text-[14.5px] leading-relaxed text-cream-mute">
                   {v.desc}
                 </p>
               </RevealStaggerItem>
@@ -141,6 +112,11 @@ export default function AboutPage() {
           </RevealStagger>
         </div>
       </section>
+
+      <FinalCta
+        title={<>Have something to build?</>}
+        description="Tell us about your property or business and what you're trying to create."
+      />
     </>
   );
 }

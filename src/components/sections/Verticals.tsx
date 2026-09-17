@@ -1,5 +1,4 @@
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import { Eyebrow, Em } from "@/components/ui";
 
 const VERTICALS = [
   {
@@ -26,36 +25,34 @@ const VERTICALS = [
 
 export default function Verticals() {
   return (
-    <section
-      id="for-hotels"
-      className="scroll-mt-24 bg-panel border-y border-line py-24 md:py-32"
-    >
-      <div className="mx-auto max-w-8xl px-6 md:px-8">
-        <Reveal className="max-w-2xl mb-14">
-          <Eyebrow>Built For Hospitality</Eyebrow>
-          <h2 className="font-serif-display font-medium leading-[1.15] tracking-tight text-[clamp(28px,3.6vw,44px)] text-ink mb-4">
-            Built for hospitality. <Em>Not adapted for it.</Em>
+    <section id="for-hotels" className="scroll-mt-24 bg-panel border-y border-line py-24 md:py-32">
+      <div className="mx-auto max-w-8xl px-6 md:px-10">
+        <Reveal className="mb-16 max-w-xl md:mb-20">
+          <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+            Built For Hospitality
+          </span>
+          <h2 className="font-serif-display font-medium leading-[1.15] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-ink">
+            Built for hospitality. <span className="italic text-brass-deep">Not adapted for it.</span>
           </h2>
-          <p className="text-ink-mute text-[17px] leading-relaxed">
-            Informax is designed around the specific needs of hotels and
-            hospitality businesses, not retrofitted from a generic
-            directory product.
-          </p>
         </Reveal>
 
-        <RevealStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-3xl border border-line bg-line overflow-hidden">
-          {VERTICALS.map((v) => (
+        <RevealStagger className="grid grid-cols-1 border-t border-line md:grid-cols-2">
+          {VERTICALS.map((v, i) => (
             <RevealStaggerItem
               key={v.title}
-              className="bg-panel px-8 py-10 transition-colors duration-300 hover:bg-paper"
+              className={`border-b border-line py-8 md:py-10 ${
+                i % 2 === 0 ? "md:border-r md:pr-12" : "md:pl-12"
+              }`}
             >
-              <span className="font-serif-display italic text-[15px] text-brass-deep block mb-6">
+              <span className="mb-4 block font-serif-display text-[15px] italic text-brass-deep">
                 {v.num}
               </span>
-              <h3 className="text-lg font-semibold text-ink mb-2.5">
+              <h3 className="mb-2.5 text-[19px] font-semibold text-ink">
                 {v.title}
               </h3>
-              <p className="text-sm text-ink-mute leading-relaxed">{v.desc}</p>
+              <p className="max-w-[42ch] text-[14.5px] leading-relaxed text-ink-mute">
+                {v.desc}
+              </p>
             </RevealStaggerItem>
           ))}
         </RevealStagger>

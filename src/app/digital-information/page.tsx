@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import {
-  Building2,
-  Calendar,
-  Compass,
-  Link2,
-  Nfc,
-  Package,
-  QrCode,
-  ScrollText,
-  Gift,
-} from "lucide-react";
+import { MousePointerClick, QrCode, SquareCheckBig } from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import { BtnGhost, Em, Eyebrow, EmLight } from "@/components/ui";
+import { BtnGhost } from "@/components/ui";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
@@ -21,168 +11,192 @@ export const metadata: Metadata = {
   alternates: { canonical: "/digital-information" },
 };
 
+const FLOW = [
+  {
+    n: "01",
+    icon: QrCode,
+    title: "Scan",
+    desc: "A QR code, NFC tag or direct link. No app to find or install first.",
+  },
+  {
+    n: "02",
+    icon: SquareCheckBig,
+    title: "Access",
+    desc: "The content opens instantly, already organised, already on-brand.",
+  },
+  {
+    n: "03",
+    icon: MousePointerClick,
+    title: "Act",
+    desc: "Book, enquire, browse or share, right from what they're reading.",
+  },
+];
+
 const BROCHURE_USES = [
   "Company brochures",
   "Service brochures",
   "Property brochures",
   "Event information",
   "Product information",
-  "Hospitality information",
   "Sales material",
-  "Welcome guides",
 ];
 
 const DIRECTORY_USES = [
-  { icon: Building2, label: "Hotels" },
-  { icon: Building2, label: "Hospitality businesses" },
-  { icon: Package, label: "Property businesses" },
-  { icon: Compass, label: "Venues" },
-  { icon: Building2, label: "Offices" },
-  { icon: ScrollText, label: "Organisations" },
-  { icon: Calendar, label: "Events" },
-  { icon: Gift, label: "Other businesses" },
-];
-
-const ACCESS_METHODS = [
-  { icon: QrCode, label: "QR codes" },
-  { icon: Nfc, label: "NFC tap" },
-  { icon: Link2, label: "Direct links" },
-  { icon: Compass, label: "Website integration" },
+  "Hotels & venues",
+  "Property businesses",
+  "Offices",
+  "Organisations",
+  "Events",
+  "Other businesses",
 ];
 
 export default function DigitalInformationPage() {
   return (
     <>
-      <section className="bg-charcoal-950 text-cream text-center pt-[150px] pb-16 md:pt-[170px] md:pb-20">
-        <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Eyebrow tone="dark" center>
-            Digital Information
-          </Eyebrow>
-          <h1 className="font-serif-display font-medium text-[clamp(32px,4.6vw,50px)] leading-[1.2] text-white mx-auto mb-5 max-w-2xl">
-            Beyond the website: the other information your business shares.
-          </h1>
-          <p className="text-cream-mute text-[17px] max-w-xl mx-auto leading-relaxed">
-            Brochures, pamphlets and directories, designed as digital
-            experiences rather than documents.
-          </p>
+      <section className="bg-paper pt-[140px] pb-16 md:pt-[180px] md:pb-20">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Reveal className="max-w-[22ch]">
+            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+              Digital Information
+            </span>
+            <h1 className="font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
+              Beyond the website: the rest of what a business shares.
+            </h1>
+          </Reveal>
         </div>
       </section>
 
+      {/* The flow: scan, access, act */}
+      <section className="bg-charcoal-950 py-24 text-cream md:py-32">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Reveal className="mb-16 max-w-xl md:mb-20">
+            <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">
+              How Guests Reach It
+            </span>
+            <h2 className="font-serif-display font-medium leading-[1.12] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-white">
+              Documents, rebuilt as an experience.
+            </h2>
+          </Reveal>
+
+          <RevealStagger className="grid grid-cols-1 gap-x-10 gap-y-12 border-t border-white/10 pt-12 sm:grid-cols-3">
+            {FLOW.map((step) => (
+              <RevealStaggerItem key={step.n}>
+                <step.icon size={24} className="mb-6 text-brass-light" />
+                <span className="mb-2 block font-serif-display text-[13px] italic text-brass-light">
+                  {step.n}
+                </span>
+                <h3 className="mb-2 font-serif-display text-[22px] font-medium text-white">
+                  {step.title}
+                </h3>
+                <p className="max-w-[30ch] text-[14.5px] leading-relaxed text-cream-mute">
+                  {step.desc}
+                </p>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </div>
+      </section>
+
+      {/* Brochures & pamphlets */}
       <section id="brochures" className="scroll-mt-24 bg-paper py-24 md:py-32">
-        <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 items-center">
-          <Reveal>
-            <Eyebrow>Digital Brochures &amp; Pamphlets</Eyebrow>
-            <h2 className="font-serif-display font-medium leading-[1.16] tracking-tight text-[clamp(28px,3.4vw,40px)] text-ink mb-5">
-              Turn information into <Em>an experience.</Em>
-            </h2>
-            <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-4">
-              Instead of sending a dull PDF attachment, Informax designs a
-              professionally built digital experience that is easy to
-              share, easy to explore, and built to reflect your brand
-              properly.
-            </p>
-            <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-8">
-              Digital pamphlets follow the same principle at a smaller
-              scale: simple, focused, attractive information built
-              specifically for digital use, rather than a printed page
-              shrunk to fit a screen.
-            </p>
-            <div className="flex flex-wrap items-center gap-5">
-              <BtnGhost href="/enquire">Discuss a Brochure or Pamphlet</BtnGhost>
-              <span className="text-sm text-ink-mute">
-                Brochures{" "}
-                <strong className="font-semibold text-brass-deep">
-                  from £400
-                </strong>{" "}
-                &middot; Pamphlets{" "}
-                <strong className="font-semibold text-brass-deep">
-                  from £200
-                </strong>
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+            <Reveal>
+              <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+                Brochures &amp; Pamphlets
               </span>
-            </div>
-          </Reveal>
+              <h2 className="mb-6 font-serif-display font-medium leading-[1.15] tracking-[-0.01em] text-[clamp(26px,3.2vw,38px)] text-ink">
+                Turn information into an experience.
+              </h2>
+              <p className="mb-4 max-w-[48ch] text-[15.5px] leading-relaxed text-ink-mute">
+                Instead of a dull PDF attachment, a professionally designed
+                digital experience that&rsquo;s easy to share, easy to
+                explore, and built to reflect your brand properly.
+              </p>
+              <p className="mb-8 max-w-[48ch] text-[15.5px] leading-relaxed text-ink-mute">
+                Pamphlets follow the same principle at a smaller scale:
+                focused, attractive information built specifically for
+                digital use.
+              </p>
+              <BtnGhost href="/enquire" arrow>
+                Discuss a brochure or pamphlet
+              </BtnGhost>
+            </Reveal>
 
-          <RevealStagger className="grid grid-cols-2 gap-3">
-            {BROCHURE_USES.map((use) => (
-              <RevealStaggerItem
-                key={use}
-                className="rounded-xl border border-line bg-panel px-4 py-4 text-[13.5px] font-medium text-ink-soft"
-              >
-                {use}
-              </RevealStaggerItem>
-            ))}
-          </RevealStagger>
+            <Reveal delay={0.1}>
+              <div className="border-t border-line pt-8">
+                <ul className="flex flex-wrap gap-x-8 gap-y-4">
+                  {BROCHURE_USES.map((use) => (
+                    <li
+                      key={use}
+                      className="text-[14.5px] font-medium text-ink-soft"
+                    >
+                      {use}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <section id="directories" className="scroll-mt-24 bg-panel border-y border-line py-24 md:py-32">
-        <div className="mx-auto max-w-8xl px-6 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-16 items-center">
-          <RevealStagger className="order-2 lg:order-1 grid grid-cols-2 gap-3">
-            {DIRECTORY_USES.map((use) => (
-              <RevealStaggerItem
-                key={use.label}
-                className="flex items-center gap-3 rounded-xl border border-line bg-paper px-4 py-4"
-              >
-                <use.icon size={17} className="text-brass-deep shrink-0" />
-                <span className="text-[13.5px] font-medium text-ink-soft">
-                  {use.label}
-                </span>
-              </RevealStaggerItem>
-            ))}
-          </RevealStagger>
+      {/* Directories */}
+      <section
+        id="directories"
+        className="scroll-mt-24 bg-panel border-y border-line py-24 md:py-32"
+      >
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+            <Reveal>
+              <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+                Digital Directories
+              </span>
+              <h2 className="mb-6 font-serif-display font-medium leading-[1.15] tracking-[-0.01em] text-[clamp(26px,3.2vw,38px)] text-ink">
+                Put the information where people need it.
+              </h2>
+              <p className="mb-8 max-w-[48ch] text-[15.5px] leading-relaxed text-ink-mute">
+                Directories aren&rsquo;t limited to hotels. Anywhere there
+                &rsquo;s a lot to manage, such as facilities, services,
+                contacts or locations, a custom directory makes it navigable
+                instead of overwhelming.
+              </p>
+              <BtnGhost href="/enquire" arrow>
+                Discuss a directory
+              </BtnGhost>
+            </Reveal>
 
-          <Reveal className="order-1 lg:order-2">
-            <Eyebrow>Digital Directories</Eyebrow>
-            <h2 className="font-serif-display font-medium leading-[1.16] tracking-tight text-[clamp(28px,3.4vw,40px)] text-ink mb-5">
-              Put the information where <Em>people need it.</Em>
-            </h2>
-            <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-md mb-6">
-              Directories aren&rsquo;t limited to hotels. Anywhere there&rsquo;s
-              a lot of information to manage, such as facilities, services,
-              contacts or locations, a custom digital directory makes it
-              navigable instead of overwhelming.
-            </p>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {ACCESS_METHODS.map((m) => (
-                <span
-                  key={m.label}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-line bg-panel px-3.5 py-2 text-[12.5px] font-semibold text-ink-soft"
+            <Reveal delay={0.1}>
+              <div className="border-t border-line pt-8">
+                <ul className="flex flex-wrap gap-x-8 gap-y-4">
+                  {DIRECTORY_USES.map((use) => (
+                    <li
+                      key={use}
+                      className="text-[14.5px] font-medium text-ink-soft"
+                    >
+                      {use}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="mt-8 max-w-[48ch] text-[14px] leading-relaxed text-ink-mute">
+                Looking for a hospitality guest directory specifically?{" "}
+                <a
+                  href="/hospitality"
+                  className="font-medium text-brass-deep underline underline-offset-2"
                 >
-                  <m.icon size={13} className="text-brass-deep" />
-                  {m.label}
-                </span>
-              ))}
-            </div>
-            <div className="flex flex-wrap items-center gap-5">
-              <BtnGhost href="/enquire">Discuss a Directory</BtnGhost>
-              <span className="text-sm text-ink-mute">
-                Directories{" "}
-                <strong className="font-semibold text-brass-deep">
-                  from £900
-                </strong>
-              </span>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-paper py-16 md:py-20">
-        <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Reveal className="max-w-xl">
-            <p className="text-ink-mute text-[15px] leading-relaxed">
-              Looking for a hospitality guest directory specifically?{" "}
-              <a href="/hospitality" className="text-brass-deep underline underline-offset-2">
-                See our dedicated hospitality practice
-              </a>
-              .
-            </p>
-          </Reveal>
+                  See our dedicated hospitality practice
+                </a>
+                .
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       <FinalCta
-        title={<>Have information that deserves <EmLight>better design?</EmLight></>}
-        description="Tell us what you're trying to communicate and we'll help you work out whether a brochure, pamphlet or directory is the right shape for it."
+        title={<>Information that deserves better design?</>}
+        description="Tell us what you're trying to communicate and we'll help you work out the right shape for it."
       />
     </>
   );

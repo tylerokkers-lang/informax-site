@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 8 September 2026.
+Last updated: 17 September 2026.
 
 ## 1. What this project is
 
@@ -22,6 +22,65 @@ There is no CMS. All copy lives directly in the page and component files.
 The retired WordPress-era static site is archived at
 `legacy-wordpress-site/` for reference only — it is not part of the live
 site and has no build dependency on it.
+
+**17 September 2026 — homepage and visual identity redesign, then a
+second pass extending it site-wide.** The homepage was rebuilt from
+scratch as a hospitality-led, editorial-premium experience (cinematic
+video hero, large serif typography, no rounded cards/shadows/gradients,
+thin-rule dividers instead of borders). The homepage now leads with
+hospitality/guest-directory positioning specifically, even though §1
+above still describes Informax as a broader multi-service studio — that
+broader positioning is preserved on `/services`, `/websites`,
+`/digital-information`. This is a deliberate split: the homepage is the
+flagship hospitality story, the inner pages still explain the full
+studio. If asked to reconcile these, check with the user rather than
+picking a direction unilaterally — it's a business-positioning question,
+not a styling one.
+
+A second pass the same day extended the same visual system to
+`/services`, `/digital-information`, `/websites`, `/about`, `/enquire`
+and the top of `/hospitality` (each restructured with its own editorial
+composition, not a copy of the homepage layout), plus the shared
+primitives every page inherits from:
+- `src/components/ui.tsx` — `BtnPrimary`/`BtnGhost` are now underlined
+  text links (no more gradient pill buttons anywhere on the site).
+- `src/components/sections/FinalCta.tsx` — rebuilt as one large statement
+  + a link, no more dark box with a 3-card meta row.
+- `src/components/EnquireForm.tsx` — underline inputs instead of boxed
+  rounded fields, rectangular toggle tags instead of checkbox pills, a
+  solid rectangular submit button instead of a gradient pill.
+- `src/components/Header.tsx` — only transparent-over-hero on `/`
+  (`TRANSPARENT_AT_TOP_ROUTES`); every other route gets a solid header
+  from load, because their heroes are on light backgrounds and a
+  transparent header there made the white logo unreadable. **If you add
+  a new route with a full-bleed dark hero, add it to
+  `TRANSPARENT_AT_TOP_ROUTES`, otherwise leave new routes out of that
+  set.**
+
+**17 September 2026 — final consistency pass, closed out the redesign.**
+The remaining `/hospitality` sections (`Customise`, `Verticals`,
+`Locations`, `NoApp`, `GuestJourney`) were rebuilt to drop rounded
+feature-card/pill/icon-grid treatments in favour of the same thin-rule,
+numbered-list, inline-tag language used everywhere else. `Touchpoints`
+and `Showcase` were left as-is (thin-border grid and distinct
+per-property cards respectively — judged intentional, not generic, not
+touched). The shared `Eyebrow` component in `ui.tsx` was simplified to
+drop its leading dash-rule, matching the plain small-caps label pattern
+already established across every new section — this was a real,
+easy-to-miss inconsistency since `Eyebrow` was still used by
+`Touchpoints`, `Showcase`, and `LegalPage`, so fixing the one shared
+component fixed all three call sites. `EnquireForm.tsx` gained
+`focus-visible` outlines on the text inputs and the interest toggle
+labels — the previous `focus:outline-none` had no visible replacement,
+which was a genuine keyboard-accessibility gap, especially on the
+interest toggles where the real `<input>` is visually hidden inside a
+styled `<label>`.
+
+**Known remaining legacy component:** `LegalPage.tsx`'s `rounded-3xl`
+card wrapper around the legal-page body text. Judged intentional (a
+readable content container for long-form legal text, not a feature
+card) and left alone — flag it if that judgment call should be
+revisited.
 
 ## 2. Current status — read this first
 
@@ -88,27 +147,30 @@ site and has no build dependency on it.
 - Production aliases: `informax.co.uk`, `www.informax.co.uk`,
   `informax-site.vercel.app`.
 
-## 5. Pricing currently published
+## 5. Pricing — deliberately not published
 
-This is the single source of truth for what's live — if you change a
-price, update it here too, and in `src/app/pricing/page.tsx`.
+As of 8 September 2026, the site carries **no customer-facing pricing at
+all**, by explicit instruction. The dedicated `/pricing` page was removed
+entirely (route deleted, no longer in the sitemap, no longer linked from
+nav or footer), and every price figure and "from £X" mention was removed
+from: the homepage, `/services`, `/websites`, `/digital-information`,
+`/hospitality`, `/enquire`, the shared `ServicesOverview` and `FinalCta`
+components, and site-wide metadata in `layout.tsx`. Pages that used to link
+to `/pricing` ("See Pricing" etc.) now point at `/services` or `/enquire`
+instead. Generic pricing-*philosophy* copy with no figure (e.g. "priced
+honestly", "a clear, honest proposal") was left in place — only concrete
+prices and the pricing page/links were removed.
 
-| Service | Starting price | Appears on |
-|---|---|---|
-| Custom Websites | £1,200 | Home, /services, /websites, /pricing |
-| Digital Brochures | £400 | Home, /services, /digital-information, /pricing |
-| Digital Pamphlets | £200 | Home, /services, /digital-information, /pricing |
-| Digital Directories | £900 | Home, /services, /digital-information, /pricing |
-| Hospitality | Quoted individually | /hospitality, /pricing |
-| Bespoke Projects | Quoted individually | Home, /services, /pricing |
-
-Website add-ons (all on `/pricing`): Additional Page £100, Advanced Enquiry
-System £150, Reviews System £150, Blog £200, Advanced Animations £200,
-Third-Party Integrations £200 (complexity-dependent), Booking System £250,
-Online Payments £250, CMS & Content Management £300, Membership/Login Area
-£400, E-Commerce £500 (larger stores quoted individually), Ongoing
-Maintenance £75/mo (explicitly does not include new pages/features/major
-design work).
+If pricing is ever reinstated, there is no single source of truth to
+restore from; the last published figures (for reference only, not
+necessarily still accurate) were: Websites from £1,200, Digital Brochures
+from £400, Digital Pamphlets from £200, Digital Directories from £900, plus
+a set of website add-ons (Additional Page £100, Advanced Enquiry System
+£150, Reviews System £150, Blog £200, Advanced Animations £200, Third-Party
+Integrations £200, Booking System £250, Online Payments £250, CMS &
+Content Management £300, Membership/Login Area £400, E-Commerce £500,
+Ongoing Maintenance £75/mo). Get current figures from the user before
+reintroducing any of this — do not assume these are still right.
 
 ## 6. Domain & DNS — read before touching anything here
 
@@ -211,8 +273,7 @@ resend.com/emails for individual send/delivery status.
 |---|---|
 | `/` | Homepage — hero, problem story, services overview, hospitality teaser, concept examples |
 | `/services` | All six service lines in depth |
-| `/websites` | Website service detail, capability list, links to pricing |
-| `/pricing` | Full pricing breakdown (§5) |
+| `/websites` | Website service detail, capability list |
 | `/digital-information` | Brochures & pamphlets, plus directories |
 | `/hospitality` | The specialist hospitality practice |
 | `/about` | Founder story, company values |
@@ -231,10 +292,58 @@ to this file.
 | `src/lib/constants.ts` | Nav links, footer links, enquiry form options, contact email, site URL |
 | `src/app/globals.css` | All design tokens: colours, fonts, animation keyframes |
 | `src/app/[route]/page.tsx` | One file per page; copy lives directly in the JSX |
-| `src/app/pricing/page.tsx` | All pricing figures — keep in sync with §5 above |
 | `src/components/EnquireForm.tsx` | Client-side form logic, validation, states |
 | `src/app/api/enquire/route.ts` | Server-side validation and the Resend email send |
 | `src/components/Header.tsx` / `Footer.tsx` | Site chrome, including the Services dropdown |
+| `src/components/sections/VideoHero.tsx` | Shared cinematic video-hero engine (film + scrim + headline + CTAs). Takes video/poster/copy as props — holds no video path of its own. |
+| `src/components/sections/Hero.tsx` | Homepage hero. Passes the Earth/global-network film to `VideoHero`. |
+| `src/components/sections/HospitalityHero.tsx` | `/hospitality` hero. Passes the hospitality film to `VideoHero`. Entirely independent of `Hero.tsx` — different constants, different files, cannot overwrite each other. |
+| `src/components/Header.tsx` / `Footer.tsx` | Site chrome, including the Services dropdown |
+
+**Two permanent, independent hero films — confirmed by the user, not
+placeholders:**
+
+1. **Homepage (`/`)** — `public/hero-video.mp4` / `.webm` / `hero-poster.jpg`,
+   used by `Hero.tsx`. An animated Earth/global-network globe with light
+   trails. The user has explicitly confirmed (17 September 2026) that this
+   is the **permanent** homepage identity, representing Informax as a
+   technology platform connecting information and experiences — not
+   hospitality footage, and not to be swapped for any. Earlier notes in
+   this file calling it a placeholder are superseded.
+2. **Hospitality (`/hospitality`)** — `public/hospitality-hero-video.mp4` /
+   `.webm` / `hospitality-hero-poster.jpg`, used by `HospitalityHero.tsx`.
+   An illustrated/cartoon-style hotel arrival and check-in sequence,
+   supplied by the user specifically for this page.
+   - **The source file the user supplied was 15s long and included a
+     second, mismatched "Informax" wordmark and a marketing tagline
+     ("ONE TAP. A WORLD OF INFORMATION.") baked directly into the video
+     pixels, plus a few seconds of garbled/nonsense AI-generated signage
+     text.** That mismatched logo does not match the site's actual
+     wordmark and would have visually collided with the real headline
+     text and the real header logo. This was a genuine defect, not a
+     style judgment call, so it was trimmed out rather than shipped:
+     the current files keep only the two clean sub-scenes (hotel arrival
+     → check-in desk, and the room/phone scene), concatenated into a
+     6.5s loop, before the broken segment. Re-derive from the original
+     source (kept nowhere in this repo — it was only in the user's
+     Downloads folder) if a different cut is wanted; do not re-introduce
+     the untrimmed file.
+   - A small "Informax"-branded desk-card prop still appears in-frame in
+     the room scene, in a different logo style to the real site wordmark.
+     Lower-severity than the wordmark/tagline issue (small, low visual
+     weight) and was left as a disclosed minor inconsistency rather than
+     attempting per-frame masking.
+   - Source resolution is only 560×560, upscaled by nothing (re-encoded
+     at native resolution) — it will look soft on large desktop displays.
+     A higher-resolution replacement would be a straightforward
+     same-filename swap.
+
+Both heroes follow the same technical pattern: MP4 (H.264) + WebM (VP9)
+sources, a JPEG poster, `prefers-reduced-motion` fallback to the poster,
+and pause-on-tab-hidden. `Header.tsx`'s `TRANSPARENT_AT_TOP_ROUTES` set
+includes both `/` and `/hospitality` since both open with a full-bleed
+dark video hero — add any future full-bleed-video route here, and only
+here.
 
 ## 11. House style for copy
 

@@ -1,35 +1,16 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
-import { BtnGhost, BtnPrimary, Eyebrow, EmLight } from "@/components/ui";
-
-const DEFAULT_META = [
-  {
-    title: "Start with a conversation",
-    desc: "No pressure, no jargon, just a clear picture of what you need.",
-  },
-  {
-    title: "Built around your business",
-    desc: "Every project is designed from scratch, not pulled from a template.",
-  },
-  {
-    title: "Websites from £1,200",
-    desc: "A clear starting point, with functionality priced to what you need.",
-  },
-];
+import { BtnGhost, BtnPrimary } from "@/components/ui";
 
 export default function FinalCta({
-  eyebrow = "Ready When You Are",
-  title = (
-    <>
-      Have something to <EmLight>build?</EmLight>
-    </>
-  ),
-  description = "Tell us what you're looking to create and we'll work out the best way to bring it to life, whether that's a website, a brochure, a directory or something entirely bespoke.",
+  eyebrow,
+  title = <>Have something to build?</>,
+  description,
   primaryLabel = "Start a Project",
   primaryHref = "/enquire",
-  secondaryLabel = "Explore Our Services",
-  secondaryHref = "/services",
-  meta = DEFAULT_META,
+  secondaryLabel,
+  secondaryHref,
+  meta = [],
 }: {
   eyebrow?: string;
   title?: ReactNode;
@@ -42,45 +23,49 @@ export default function FinalCta({
 }) {
   return (
     <section className="bg-paper py-24 md:py-32">
-      <div className="mx-auto max-w-8xl px-6 md:px-8">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[32px] border border-line-dark bg-gradient-to-br from-charcoal-900 to-charcoal-950 px-6 py-16 md:px-10 md:py-20 text-center text-cream">
-            <div className="pointer-events-none absolute -bottom-64 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(138,124,255,0.16),transparent_70%)] blur-[20px]" />
-
-            <div className="relative">
-              <Eyebrow tone="dark" center>
-                {eyebrow}
-              </Eyebrow>
-              <h2 className="font-serif-display font-medium leading-[1.15] tracking-tight text-[clamp(30px,4vw,46px)] text-white mb-4">
+      <div className="mx-auto max-w-8xl px-6 md:px-10">
+        <Reveal className="border-t border-line pt-14 md:pt-16">
+          {eyebrow && (
+            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+              {eyebrow}
+            </span>
+          )}
+          <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
+            <div className="max-w-[20ch]">
+              <h2 className="font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(32px,5vw,54px)] text-ink">
                 {title}
               </h2>
-              <p className="text-cream-mute text-[17px] max-w-[520px] mx-auto mb-9">
-                {description}
-              </p>
+              {description && (
+                <p className="mt-6 max-w-[46ch] text-[16px] leading-relaxed text-ink-mute">
+                  {description}
+                </p>
+              )}
+            </div>
 
-              <div className="flex flex-wrap items-center justify-center gap-4 mb-11">
-                <BtnPrimary href={primaryHref}>{primaryLabel}</BtnPrimary>
-                <BtnGhost href={secondaryHref} tone="dark">
-                  {secondaryLabel}
-                </BtnGhost>
-              </div>
-
-              {meta.length > 0 && (
-                <div className="flex flex-wrap justify-center gap-10 border-t border-line-dark pt-9">
-                  {meta.map((item) => (
-                    <div key={item.title} className="max-w-[210px]">
-                      <h5 className="text-[13.5px] font-semibold text-brass-light mb-1.5">
-                        {item.title}
-                      </h5>
-                      <p className="text-[13px] text-cream-mute leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+            <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-4">
+              <BtnPrimary href={primaryHref} className="text-[17px]">
+                {primaryLabel}
+              </BtnPrimary>
+              {secondaryLabel && secondaryHref && (
+                <BtnGhost href={secondaryHref}>{secondaryLabel}</BtnGhost>
               )}
             </div>
           </div>
+
+          {meta.length > 0 && (
+            <div className="mt-16 flex flex-col flex-wrap gap-x-12 gap-y-6 border-t border-line pt-10 sm:flex-row">
+              {meta.map((item) => (
+                <div key={item.title} className="max-w-[260px]">
+                  <h5 className="mb-1.5 text-[13.5px] font-semibold text-ink">
+                    {item.title}
+                  </h5>
+                  <p className="text-[13.5px] leading-relaxed text-ink-mute">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </Reveal>
       </div>
     </section>

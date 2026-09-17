@@ -1,13 +1,7 @@
-import { Bed, ChevronsUpDown, ConciergeBell, Coffee, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import { Eyebrow, Em } from "@/components/ui";
 
-const JOURNEY = [
-  { label: "Front Desk", icon: ConciergeBell },
-  { label: "Breakfast", icon: Coffee },
-  { label: "Lifts", icon: ChevronsUpDown },
-  { label: "Room", icon: Bed },
-];
+const JOURNEY = ["Front Desk", "Breakfast", "Lifts", "Room"];
 
 const MISSED = [
   "The restaurant",
@@ -23,66 +17,68 @@ const MISSED = [
 
 export default function ProblemJourney() {
   return (
-    <section className="bg-paper pt-28 pb-24 md:pt-32 md:pb-28">
-      <div className="mx-auto max-w-8xl px-6 md:px-8">
-        <Reveal className="max-w-2xl mx-auto text-center mb-16">
-          <Eyebrow center>The Guest Journey, Today</Eyebrow>
-          <h2 className="font-serif-display font-medium leading-[1.15] tracking-tight text-[clamp(28px,3.6vw,44px)] text-ink">
+    <section className="bg-paper py-24 md:py-32">
+      <div className="mx-auto max-w-8xl px-6 md:px-10">
+        <Reveal className="mb-16 max-w-xl md:mb-20">
+          <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+            The Guest Journey, Today
+          </span>
+          <h2 className="font-serif-display font-medium leading-[1.15] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-ink">
             Your guests arrive. But how much do they{" "}
-            <Em>actually discover?</Em>
+            <span className="italic text-brass-deep">actually discover?</span>
           </h2>
         </Reveal>
 
-        <RevealStagger className="relative grid grid-cols-2 sm:grid-cols-4 gap-y-10 gap-x-6 mb-10 max-w-3xl mx-auto">
-          <div className="hidden sm:block absolute top-[26px] left-[8%] right-[8%] h-px bg-[repeating-linear-gradient(90deg,var(--line)_0_8px,transparent_8px_16px)]" />
-          {JOURNEY.map((step) => (
-            <RevealStaggerItem
-              key={step.label}
-              className="relative flex flex-col items-center text-center gap-3.5"
-            >
-              <div className="relative z-[2] flex h-[54px] w-[54px] items-center justify-center rounded-full border border-line bg-panel">
-                <step.icon size={22} className="text-brass-deep" />
-              </div>
-              <span className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-ink-mute">
-                {step.label}
-              </span>
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
+        <div className="relative mb-20 border-t border-line pt-8">
+          <RevealStagger className="grid grid-cols-2 gap-y-8 sm:grid-cols-4">
+            {JOURNEY.map((label, i) => (
+              <RevealStaggerItem key={label}>
+                <span
+                  className={`mb-3 block h-2.5 w-2.5 rounded-full ${
+                    i === 0 ? "bg-brass-deep" : "bg-line"
+                  }`}
+                />
+                <span className="text-[15px] font-semibold text-ink">
+                  {label}
+                </span>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+          <Reveal className="mt-10">
+            <p className="font-serif-display text-[18px] italic leading-snug text-ink-mute">
+              And that&rsquo;s often where the conversation ends.
+            </p>
+          </Reveal>
+        </div>
 
-        <Reveal className="text-center max-w-md mx-auto mb-24">
-          <p className="font-serif-display italic text-[19px] leading-snug text-ink-mute">
-            And that&rsquo;s often where the conversation ends.
-          </p>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-[70px] items-start">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 md:gap-[70px]">
           <Reveal>
-            <h3 className="font-serif-display font-medium text-[clamp(26px,3.2vw,36px)] leading-[1.2] text-ink mb-5">
-              But most hotels have <Em>so much more</Em> to offer.
+            <h3 className="mb-5 font-serif-display font-medium leading-[1.2] text-[clamp(26px,3.2vw,36px)] text-ink">
+              But most hotels have{" "}
+              <span className="italic text-ink-mute">so much more</span> to
+              offer.
             </h3>
-            <p className="text-ink-mute text-[16.5px] leading-relaxed max-w-[440px]">
+            <p className="max-w-[440px] text-[16.5px] leading-relaxed text-ink-mute">
               Multiple restaurants, a spa, a gym, a pool, bars, events,
               experiences and room service: a property&rsquo;s full offering
               rarely fits into a two-minute check-in. Whatever doesn&rsquo;t
               get said at the desk usually stays unknown for the rest of the
               stay.
             </p>
-            <div className="mt-10 pt-9 border-t border-line max-w-[440px]">
-              <p className="font-serif-display italic text-[clamp(20px,2.2vw,25px)] leading-snug text-ink">
+            <div className="mt-10 max-w-[440px] border-t border-line pt-9">
+              <p className="font-serif-display text-[clamp(20px,2.2vw,25px)] italic leading-snug text-ink">
                 What if everything they needed was one tap away?
               </p>
             </div>
           </Reveal>
 
-          <RevealStagger className="flex flex-col gap-2.5">
+          <RevealStagger className="flex flex-col border-t border-line">
             {MISSED.map((item) => (
-              <RevealStaggerItem
-                key={item}
-                className="flex items-center gap-3.5 rounded-lg border border-line bg-panel px-[18px] py-[14px] text-[14.5px] text-ink-soft transition-all duration-300 hover:border-brass hover:translate-x-1"
-              >
-                <X size={17} className="text-brass-deep shrink-0" />
-                {item}
+              <RevealStaggerItem key={item}>
+                <div className="flex items-center gap-3.5 border-b border-line py-4 text-[14.5px] text-ink-soft">
+                  <X size={15} className="shrink-0 text-brass-deep" />
+                  {item}
+                </div>
               </RevealStaggerItem>
             ))}
           </RevealStagger>

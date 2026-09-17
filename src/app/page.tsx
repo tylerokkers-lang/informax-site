@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
-import ProblemStory from "@/components/sections/ProblemStory";
-import ServicesOverview from "@/components/sections/ServicesOverview";
-import HospitalityTeaser from "@/components/sections/HospitalityTeaser";
-import ExamplesTeaser from "@/components/sections/ExamplesTeaser";
+import Statement from "@/components/sections/Statement";
+import GuestJourneyStrip from "@/components/sections/GuestJourneyStrip";
+import HowItWorks from "@/components/sections/HowItWorks";
+import AccessIndex from "@/components/sections/AccessIndex";
+import HotelBenefit from "@/components/sections/HotelBenefit";
+import Showcase from "@/components/sections/Showcase";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Website Design, Digital Brochures & Digital Directories",
+  title: "Digital Guest Directories for Hotels & Hospitality",
   description:
-    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice. Websites from £1,200.",
+    "Informax designs digital guest directories for hotels and hospitality businesses. Guests get instant, app-free access to everything a property offers; hotels control it from one place.",
   alternates: { canonical: "/" },
 };
 
@@ -17,11 +19,16 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ProblemStory />
-      <ServicesOverview />
-      <HospitalityTeaser />
-      <ExamplesTeaser />
-      <FinalCta />
+      <Statement />
+      <GuestJourneyStrip />
+      <HowItWorks />
+      <AccessIndex />
+      <HotelBenefit />
+      <Showcase />
+      <FinalCta
+        title={<>Give your guests the full picture.</>}
+        primaryLabel="Start a project"
+      />
     </>
   );
 }

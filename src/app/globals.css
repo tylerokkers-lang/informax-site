@@ -111,6 +111,14 @@ svg {
   color: var(--charcoal-950);
 }
 
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 .font-serif-display {
   font-family: var(--font-serif);
 }
