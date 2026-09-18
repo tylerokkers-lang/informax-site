@@ -6,7 +6,8 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 18 September 2026.
+Last updated: 18 September 2026 (navigation restructure + Websites hero +
+hospitality video re-trim correction — see end of §10).
 
 ## 1. What this project is
 
@@ -49,13 +50,19 @@ primitives every page inherits from:
 - `src/components/EnquireForm.tsx` — underline inputs instead of boxed
   rounded fields, rectangular toggle tags instead of checkbox pills, a
   solid rectangular submit button instead of a gradient pill.
-- `src/components/Header.tsx` — only transparent-over-hero on `/`
-  (`TRANSPARENT_AT_TOP_ROUTES`); every other route gets a solid header
-  from load, because their heroes are on light backgrounds and a
-  transparent header there made the white logo unreadable. **If you add
-  a new route with a full-bleed dark hero, add it to
-  `TRANSPARENT_AT_TOP_ROUTES`, otherwise leave new routes out of that
-  set.**
+- `src/components/Header.tsx` — transparent-over-hero only on routes with
+  a full-bleed dark video hero (`TRANSPARENT_AT_TOP_ROUTES`, currently
+  `/`, `/hospitality`, `/digital-information`, `/websites`); every other
+  route gets a solid header from load, because their heroes are on light
+  backgrounds and a transparent header there made the white logo
+  unreadable. **If you add a new route with a full-bleed dark hero, add
+  it to `TRANSPARENT_AT_TOP_ROUTES`, otherwise leave new routes out of
+  that set.** **18 September 2026: the old "Services" dropdown containing
+  Websites/Digital Brochures/Directories/Hospitality was removed.**
+  Hospitality, Digital Information and Websites are now first-class,
+  directly-visible top-level nav links (desktop and mobile) — see the
+  dated entry at the end of §10 for the full rationale and current
+  structure.
 
 **17 September 2026 — final consistency pass, closed out the redesign.**
 The remaining `/hospitality` sections (`Customise`, `Verticals`,
@@ -294,14 +301,14 @@ to this file.
 | `src/app/[route]/page.tsx` | One file per page; copy lives directly in the JSX |
 | `src/components/EnquireForm.tsx` | Client-side form logic, validation, states |
 | `src/app/api/enquire/route.ts` | Server-side validation and the Resend email send |
-| `src/components/Header.tsx` / `Footer.tsx` | Site chrome, including the Services dropdown |
+| `src/components/Header.tsx` / `Footer.tsx` | Site chrome. Flat top-level nav (no dropdown) as of 18 September 2026 — see §10 dated entry. |
 | `src/components/sections/VideoHero.tsx` | Shared cinematic video-hero engine (film + scrim + headline + CTAs). Takes video/poster/copy as props — holds no video path of its own. |
 | `src/components/sections/Hero.tsx` | Homepage hero. Passes the Earth/global-network film to `VideoHero`. |
 | `src/components/sections/HospitalityHero.tsx` | `/hospitality` hero. Passes the hospitality film to `VideoHero`. Entirely independent of `Hero.tsx` — different constants, different files, cannot overwrite each other. |
 | `src/components/sections/DigitalInformationHero.tsx` | `/digital-information` hero. Passes its own film to `VideoHero`. Independent of both other heroes. |
-| `src/components/Header.tsx` / `Footer.tsx` | Site chrome, including the Services dropdown |
+| `src/components/sections/WebsitesHero.tsx` | `/websites` hero. Passes its own film to `VideoHero`. Independent of all three other heroes. |
 
-**Three permanent, independent hero films — confirmed by the user, not
+**Four permanent, independent hero films — confirmed by the user, not
 placeholders:**
 
 1. **Homepage (`/`)** — `public/hero-video.mp4` / `.webm` / `hero-poster.jpg`,
@@ -315,20 +322,24 @@ placeholders:**
    `.webm` / `hospitality-hero-poster.jpg`, used by `HospitalityHero.tsx`.
    An illustrated/cartoon-style hotel arrival and check-in sequence,
    supplied by the user specifically for this page.
-   - **The source file the user supplied was 15s long and included a
-     second, mismatched "Informax" wordmark and a marketing tagline
-     ("ONE TAP. A WORLD OF INFORMATION.") baked directly into the video
-     pixels, plus a few seconds of garbled/nonsense AI-generated signage
-     text.** That mismatched logo does not match the site's actual
-     wordmark and would have visually collided with the real headline
-     text and the real header logo. This was a genuine defect, not a
-     style judgment call, so it was trimmed out rather than shipped:
-     the current files keep only the two clean sub-scenes (hotel arrival
-     → check-in desk, and the room/phone scene), concatenated into a
-     6.5s loop, before the broken segment. Re-derive from the original
-     source (kept nowhere in this repo — it was only in the user's
-     Downloads folder) if a different cut is wanted; do not re-introduce
-     the untrimmed file.
+   - **Corrected 18 September 2026 — supersedes every earlier note in
+     this file about a "6.5s loop" or "two clean sub-scenes
+     concatenated".** That earlier cut was too aggressive: it had used a
+     two-segment concat (0–4.3s + 6.0–8.2s) that dropped a perfectly good
+     middle transition (an elevator-lobby signage scene) purely to make
+     the loop shorter, which the user explicitly did not want. The fix
+     was to go back to the **true original source** (15.041667s,
+     560×560, in the user's Downloads folder — never stored in this
+     repo) and take one straight trim, inspected frame-by-frame at
+     0.1s granularity to find the exact point the footage turns bad. The
+     scene stays fully clean through 8.6s; the first crossfade/ghosting
+     artifact into the broken "floating document swirl" + mismatched
+     "Informax" wordmark/tagline segment appears at 8.7s. Current files
+     are trimmed at `-t 8.6`, encoding to a verified **8.625s** final
+     duration (rounds to the nearest frame at 24fps) — a single trim,
+     no scene removed except the genuinely broken tail.
+     **Reporting figures: original source 15.04s, final web hero 8.625s,
+     removed from the end ≈ 6.42s.**
    - A small "Informax"-branded desk-card prop still appears in-frame in
      the room scene, in a different logo style to the real site wordmark.
      Lower-severity than the wordmark/tagline issue (small, low visual
@@ -338,6 +349,9 @@ placeholders:**
      at native resolution) — it will look soft on large desktop displays.
      A higher-resolution replacement would be a straightforward
      same-filename swap.
+   - If re-deriving this cut again in future, always start from the true
+     original source file, never from a previously-shortened derivative
+     — re-cutting a derivative compounds the lost footage.
 3. **Digital Information (`/digital-information`)** —
    `public/digital-information-hero-video.mp4` / `.webm` /
    `digital-information-hero-poster.jpg`, used by
@@ -349,12 +363,22 @@ placeholders:**
    "creative studio" office content rather than something specifically
    depicting the guest-information product itself; noted as a disclosed
    thematic mismatch, not a defect, so nothing was altered.
+4. **Websites (`/websites`)** — `public/website-hero-video.mp4` / `.webm` /
+   `website-hero-poster.jpg`, used by `WebsitesHero.tsx`, added
+   18 September 2026. Illustrated footage of a professional viewing a
+   personal-brand website on a monitor, supplied by the user specifically
+   for this page. Source: 6.041667s, 784×1168 portrait, no logo collision
+   (the fake site shown isn't Informax-branded), no severe garbling (a
+   couple of minor AI-generated text typos in on-screen UI, judged too
+   trivial to be worth re-cutting). Kept at native resolution with no
+   pre-cropping — `object-fit: cover` in `VideoHero` handles the portrait
+   source across viewport shapes.
 
-All three heroes follow the same technical pattern: MP4 (H.264) + WebM
+All four heroes follow the same technical pattern: MP4 (H.264) + WebM
 (VP9) sources, a JPEG poster, `prefers-reduced-motion` fallback to the
 poster, and pause-on-tab-hidden. `Header.tsx`'s `TRANSPARENT_AT_TOP_ROUTES`
-set includes `/`, `/hospitality` and `/digital-information` since all
-three open with a full-bleed dark video hero — add any future
+set includes `/`, `/hospitality`, `/digital-information` and `/websites`
+since all four open with a full-bleed dark video hero — add any future
 full-bleed-video route here, and only here.
 
 **18 September 2026 — logo size and headline-wrapping fix.** Two more
@@ -380,6 +404,38 @@ changes from the same pass:
   instead. If a new page's heading looks artificially stacked, check for
   this exact pattern first — it's an easy one to reintroduce by copying
   the old structure.
+
+**18 September 2026 — navigation restructure and Websites hero.** By
+explicit user instruction, Hospitality, Digital Information and Websites
+are now first-class top-level nav destinations, not hidden inside a
+"Services" dropdown — the user's stated reasoning was that these are
+three of Informax's most important offerings and burying them behind a
+generic menu label undersold them. Changes:
+- `src/lib/constants.ts` — `NAV_SERVICES` removed; `NAV_LINKS` flattened
+  to `Hospitality, Digital Information, Websites, Services, About,
+  Enquire`. `Services` is kept as its own destination (the full six-service
+  overview page still exists and is still useful), it just no longer
+  contains the other three as dropdown items.
+- `src/components/Header.tsx` — dropdown state/click-outside/Escape logic
+  removed entirely. Desktop nav is now a flat `<Link>` map with an
+  underline active/hover state (`aria-current="page"` driven). `Enquire`
+  is excluded from the visible nav row since the separate "Start a
+  Project" CTA already covers it. The nav breakpoint was moved from `lg:`
+  (1024px) to `xl:` (1280px) specifically because the flat six-item nav
+  collided with the enlarged logo at medium laptop widths under `lg:`;
+  under `xl:` there's a comfortable gap at every width down to 1280px,
+  confirmed by measuring actual `getBoundingClientRect()` gaps (not just
+  screenshots) at 1920/1440/1280/1279/1024px. Below `xl:`, the hamburger
+  drawer lists the same flat set of links (all three destinations visible
+  on mobile too, not just desktop) plus the "Start a Project" CTA.
+- The logo was **not** shrunk to make room — it stays at the
+  `h-[72px] md:h-[86px]` size from the prior pass. Spacing was solved by
+  the breakpoint change above, not by reducing the logo.
+- `src/components/sections/WebsitesHero.tsx` (new) + `public/website-hero-*`
+  assets (new) — see item 4 in the hero-films list above.
+- If asked to add a further nav destination in future, check actual
+  measured gaps at 1280px before assuming it fits — that's the tightest
+  width the flat nav has to work at.
 
 ## 11. House style for copy
 

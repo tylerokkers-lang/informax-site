@@ -1,25 +1,10 @@
 export const SITE_URL = "https://informax.co.uk";
 export const CONTACT_EMAIL = "info@informax.co.uk";
 
-export const NAV_SERVICES = [
-  {
-    label: "Websites",
-    href: "/websites",
-    desc: "Custom-designed, custom-built websites.",
-  },
-  {
-    label: "Digital Information",
-    href: "/digital-information",
-    desc: "Brochures, pamphlets and directories.",
-  },
-  {
-    label: "Hospitality",
-    href: "/hospitality",
-    desc: "Digital guest experiences for hotels & venues.",
-  },
-] as const;
-
 export const NAV_LINKS = [
+  { label: "Hospitality", href: "/hospitality" },
+  { label: "Digital Information", href: "/digital-information" },
+  { label: "Websites", href: "/websites" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },

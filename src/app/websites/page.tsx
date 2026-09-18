@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import { BtnGhost } from "@/components/ui";
+import WebsitesHero from "@/components/sections/WebsitesHero";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
@@ -29,20 +30,9 @@ const CAPABILITIES = [
 export default function WebsitesPage() {
   return (
     <>
-      <section className="bg-paper pt-[140px] pb-16 md:pt-[180px] md:pb-20">
-        <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <Reveal className="max-w-3xl">
-            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
-              Websites
-            </span>
-            <h1 className="max-w-[19ch] font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
-              A website built around your business, not a template.
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <WebsitesHero />
 
-      <section className="bg-charcoal-950 py-24 text-cream md:py-32">
+      <section id="how-we-work" className="scroll-mt-24 bg-charcoal-950 py-24 text-cream md:py-32">
         <div className="mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:px-10 lg:grid-cols-[1fr_1fr] lg:gap-24">
           <Reveal>
             <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">
