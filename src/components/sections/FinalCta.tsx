@@ -31,8 +31,8 @@ export default function FinalCta({
             </span>
           )}
           <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-            <div className="max-w-[20ch]">
-              <h2 className="font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(32px,5vw,54px)] text-ink">
+            <div className="max-w-xl">
+              <h2 className="max-w-[16ch] font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(32px,5vw,54px)] text-ink">
                 {title}
               </h2>
               {description && (

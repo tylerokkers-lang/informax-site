@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MousePointerClick, QrCode, SquareCheckBig } from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { BtnGhost } from "@/components/ui";
+import DigitalInformationHero from "@/components/sections/DigitalInformationHero";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
@@ -53,21 +54,10 @@ const DIRECTORY_USES = [
 export default function DigitalInformationPage() {
   return (
     <>
-      <section className="bg-paper pt-[140px] pb-16 md:pt-[180px] md:pb-20">
-        <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <Reveal className="max-w-[22ch]">
-            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
-              Digital Information
-            </span>
-            <h1 className="font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
-              Beyond the website: the rest of what a business shares.
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <DigitalInformationHero />
 
       {/* The flow: scan, access, act */}
-      <section className="bg-charcoal-950 py-24 text-cream md:py-32">
+      <section id="flow" className="scroll-mt-24 bg-charcoal-950 py-24 text-cream md:py-32">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Reveal className="mb-16 max-w-xl md:mb-20">
             <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">

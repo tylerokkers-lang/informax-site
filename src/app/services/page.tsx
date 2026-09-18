@@ -53,11 +53,11 @@ export default function ServicesPage() {
     <>
       <section className="bg-paper pt-[140px] pb-16 md:pt-[180px] md:pb-20">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <Reveal className="max-w-[20ch]">
+          <Reveal className="max-w-3xl">
             <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
               Services
             </span>
-            <h1 className="font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
+            <h1 className="max-w-[17ch] font-serif-display font-medium leading-[1.08] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
               One studio. A few ways to work with it.
             </h1>
           </Reveal>

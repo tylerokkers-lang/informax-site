@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 17 September 2026.
+Last updated: 18 September 2026.
 
 ## 1. What this project is
 
@@ -298,9 +298,10 @@ to this file.
 | `src/components/sections/VideoHero.tsx` | Shared cinematic video-hero engine (film + scrim + headline + CTAs). Takes video/poster/copy as props — holds no video path of its own. |
 | `src/components/sections/Hero.tsx` | Homepage hero. Passes the Earth/global-network film to `VideoHero`. |
 | `src/components/sections/HospitalityHero.tsx` | `/hospitality` hero. Passes the hospitality film to `VideoHero`. Entirely independent of `Hero.tsx` — different constants, different files, cannot overwrite each other. |
+| `src/components/sections/DigitalInformationHero.tsx` | `/digital-information` hero. Passes its own film to `VideoHero`. Independent of both other heroes. |
 | `src/components/Header.tsx` / `Footer.tsx` | Site chrome, including the Services dropdown |
 
-**Two permanent, independent hero films — confirmed by the user, not
+**Three permanent, independent hero films — confirmed by the user, not
 placeholders:**
 
 1. **Homepage (`/`)** — `public/hero-video.mp4` / `.webm` / `hero-poster.jpg`,
@@ -337,13 +338,48 @@ placeholders:**
      at native resolution) — it will look soft on large desktop displays.
      A higher-resolution replacement would be a straightforward
      same-filename swap.
+3. **Digital Information (`/digital-information`)** —
+   `public/digital-information-hero-video.mp4` / `.webm` /
+   `digital-information-hero-poster.jpg`, used by
+   `DigitalInformationHero.tsx`. An illustrated tech-office scene
+   (people at desks with directory-style content on their monitors,
+   others playing table tennis/foosball in the background) supplied by
+   the user for this page on 18 September 2026. Clean footage — no
+   mismatched logos, no garbled text, nothing trimmed. It is generic
+   "creative studio" office content rather than something specifically
+   depicting the guest-information product itself; noted as a disclosed
+   thematic mismatch, not a defect, so nothing was altered.
 
-Both heroes follow the same technical pattern: MP4 (H.264) + WebM (VP9)
-sources, a JPEG poster, `prefers-reduced-motion` fallback to the poster,
-and pause-on-tab-hidden. `Header.tsx`'s `TRANSPARENT_AT_TOP_ROUTES` set
-includes both `/` and `/hospitality` since both open with a full-bleed
-dark video hero — add any future full-bleed-video route here, and only
-here.
+All three heroes follow the same technical pattern: MP4 (H.264) + WebM
+(VP9) sources, a JPEG poster, `prefers-reduced-motion` fallback to the
+poster, and pause-on-tab-hidden. `Header.tsx`'s `TRANSPARENT_AT_TOP_ROUTES`
+set includes `/`, `/hospitality` and `/digital-information` since all
+three open with a full-bleed dark video hero — add any future
+full-bleed-video route here, and only here.
+
+**18 September 2026 — logo size and headline-wrapping fix.** Two more
+changes from the same pass:
+- The header/footer logo (`informax-logo-white.png`) was enlarged twice
+  now at explicit user request — currently `h-[72px] md:h-[86px]` in
+  `Header.tsx` (constant across scroll states, so no resize jump) and
+  `h-[72px]` in `Footer.tsx`. Header vertical padding was trimmed
+  slightly (`py-3`/`py-2` instead of `py-4`/`py-2.5`) to keep the header
+  bar from growing as much as the logo did. If asked to enlarge it
+  again, adjust both files together and re-check for hamburger collision
+  and mobile-drawer top offset (`pt-24` in the mobile nav panel).
+- Found and fixed a real bug, not a style change: several page H1s (and
+  `FinalCta`'s H2) had their `max-w-[Nch]` character-width cap on the
+  *wrapping element* instead of the heading itself. Since a `ch` unit is
+  computed from the font-size of the element it's applied to, capping a
+  huge (34–88px) heading's width using a `ch` value set on a small
+  default-font wrapper produced a far narrower box than intended — the
+  heading then wrapped to one or two words per line (About, Services,
+  Websites, Digital Information were the worst-affected). Fixed by
+  moving `max-w-[Nch]` onto the `<h1>`/`<h2>` directly in each case, with
+  the wrapper given a plain generous width (`max-w-3xl`/`max-w-xl`)
+  instead. If a new page's heading looks artificially stacked, check for
+  this exact pattern first — it's an easy one to reintroduce by copying
+  the old structure.
 
 ## 11. House style for copy
 

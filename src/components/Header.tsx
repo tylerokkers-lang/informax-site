@@ -13,7 +13,7 @@ import { NAV_LINKS, NAV_SERVICES } from "@/lib/constants";
 // header must be solid dark from the start there — otherwise the white
 // wordmark disappears against it. Add a route here only if it opens with
 // its own full-bleed dark video hero.
-const TRANSPARENT_AT_TOP_ROUTES = new Set(["/", "/hospitality"]);
+const TRANSPARENT_AT_TOP_ROUTES = new Set(["/", "/hospitality", "/digital-information"]);
 
 export default function Header() {
   const pathname = usePathname();
@@ -61,8 +61,8 @@ export default function Header() {
       <header
         className={`fixed top-0 inset-x-0 z-[100] transition-[padding,background,box-shadow,border-color,backdrop-filter] duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] border-b ${
           scrolled
-            ? "py-2.5 bg-charcoal-950/90 backdrop-blur-md border-line-dark"
-            : "py-4 bg-transparent border-transparent"
+            ? "py-2 bg-charcoal-950/90 backdrop-blur-md border-line-dark"
+            : "py-3 bg-transparent border-transparent"
         }`}
       >
         <div className="mx-auto max-w-8xl px-6 md:px-10 flex items-center justify-between gap-6">
@@ -73,7 +73,7 @@ export default function Header() {
               width={420}
               height={140}
               priority
-              className="h-14 w-auto md:h-16"
+              className="h-[72px] w-auto md:h-[86px]"
             />
           </Link>
 
