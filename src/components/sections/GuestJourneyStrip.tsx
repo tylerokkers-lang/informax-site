@@ -40,12 +40,12 @@ export default function GuestJourneyStrip() {
 
         <div
           ref={trackRef}
-          className="scrollbar-none -mx-6 flex snap-x snap-mandatory gap-10 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-6 md:gap-6 md:overflow-visible md:px-0"
+          className="scrollbar-none -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scroll-padding-inline:1.5rem] md:mx-0 md:grid md:grid-cols-6 md:gap-6 md:overflow-visible md:px-0 md:[scroll-padding-inline:0]"
         >
           {STOPS.map((stop, i) => (
             <div
               key={stop.n}
-              className="w-[68vw] shrink-0 snap-start md:w-auto md:shrink"
+              className="w-[78vw] max-w-[280px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink"
             >
               <div className="relative z-[2] mb-8 flex h-[18px] items-center">
                 <span
@@ -60,7 +60,7 @@ export default function GuestJourneyStrip() {
               <h3 className="mb-2 font-serif-display text-[26px] font-medium leading-tight text-white md:text-[28px]">
                 {stop.label}
               </h3>
-              <p className="max-w-[22ch] text-[14px] leading-relaxed text-cream-mute">
+              <p className="max-w-[26ch] text-[14px] leading-relaxed text-cream-mute">
                 {stop.note}
               </p>
             </div>

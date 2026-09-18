@@ -2,10 +2,10 @@ export const SITE_URL = "https://informax.co.uk";
 export const CONTACT_EMAIL = "info@informax.co.uk";
 
 export const NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "Hospitality", href: "/hospitality" },
   { label: "Digital Information", href: "/digital-information" },
   { label: "Websites", href: "/websites" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },
 ] as const;

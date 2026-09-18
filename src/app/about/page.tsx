@@ -36,8 +36,8 @@ export default function AboutPage() {
             <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
               About Informax
             </span>
-            <h1 className="max-w-[15ch] font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.6vw,62px)] text-ink">
-              We turn information into something worth using.
+            <h1 className="max-w-[20ch] font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.6vw,62px)] text-ink">
+              Built in hospitality. Designed for every business.
             </h1>
           </Reveal>
         </div>
@@ -53,28 +53,49 @@ export default function AboutPage() {
             </Reveal>
             <Reveal delay={0.08} className="md:col-span-8">
               <p className="mb-6 font-serif-display text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.35] text-ink">
-                It started in hospitality. It didn&rsquo;t stay there.
+                Informax was born from nearly a decade of first-hand
+                experience in hospitality.
               </p>
               <p className="mb-5 max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
-                Our founder spent almost ten years working across the
-                hospitality industry, and kept seeing the same story play
-                out: a hotel with a great spa, a great restaurant, a great
-                story to tell, and no good way to actually tell it.
-                Information was scattered across a tired website, a printed
-                guide, and whatever reception had time to mention at
-                check-in.
+                Working across front office, meetings and events, and guest
+                relations, our founder saw how much care went into creating
+                exceptional guest experiences, and how often that work was
+                let down by the way information was delivered.
+              </p>
+              <p className="mb-5 max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                Hotels invested in remarkable restaurants, spas, experiences
+                and services, yet guests were expected to find them through
+                printed directories, disconnected webpages or a rushed
+                explanation at check-in. Important information was easily
+                missed, materials quickly became outdated, and valuable
+                opportunities to improve the guest experience and generate
+                revenue were lost.
+              </p>
+              <p className="mb-5 max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                Informax began as a better way for hotels to connect guests
+                with everything available to them: beautifully presented,
+                easy to access and simple to keep current.
               </p>
               <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
-                That problem turned out not to be unique to hotels. Talk to
-                almost any business and you&rsquo;ll find the same thing:
-                good information, badly presented and spread across too many
-                places.{" "}
+                But the challenge extends far beyond hospitality. Businesses
+                everywhere have valuable information, services and stories
+                that are difficult to find or poorly presented online.{" "}
                 <strong className="font-semibold text-ink">
-                  Today, that means digital guest directories for hospitality
-                  first, and websites and digital information for businesses
-                  more broadly,
-                </strong>{" "}
-                built through considered design rather than templates.
+                  Today, Informax combines considered design and practical
+                  technology to create digital guest directories for
+                  hospitality, alongside distinctive websites and digital
+                  information experiences for businesses more broadly.
+                </strong>
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-14 border-t border-line pt-10 md:mt-16 md:pt-12">
+            <Reveal className="max-w-[52ch]">
+              <p className="font-serif-display text-[clamp(19px,2vw,24px)] font-medium italic leading-[1.5] text-ink">
+                No generic templates. No unnecessary complexity. Just
+                thoughtfully designed digital experiences that help people
+                find what matters.
               </p>
             </Reveal>
           </div>
