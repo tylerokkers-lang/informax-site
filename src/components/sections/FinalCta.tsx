@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PRIMARY_CTA } from "@/lib/constants";
 import { Reveal } from "@/components/Reveal";
 import { BtnGhost, BtnPrimary } from "@/components/ui";
 
@@ -6,7 +7,7 @@ export default function FinalCta({
   eyebrow,
   title = <>Have something to build?</>,
   description,
-  primaryLabel = "Start a Project",
+  primaryLabel = PRIMARY_CTA,
   primaryHref = "/enquire",
   secondaryLabel,
   secondaryHref,

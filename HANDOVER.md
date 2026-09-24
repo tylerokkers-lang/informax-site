@@ -6,8 +6,84 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 18 September 2026 (navigation restructure + Websites hero +
-hospitality video re-trim correction — see end of §10).
+Last updated: 25 September 2026 (Informax Cloud repositioning and full site
+redesign — see §0 first; §1 and the old hero/nav notes below it are
+historical where they conflict).
+
+## 0. Current positioning (25 September 2026 redesign) — read this first
+
+**Not yet approved or deployed at the time of writing.** The user asked for
+the redesign to be reviewed before anything goes live. Check `git log` /
+production before assuming it shipped.
+
+Informax is now positioned as a **hospitality technology platform**, and
+**Informax Cloud** is the hero product. The old "digital guest directory
+company" framing is demoted: a Guest Directory is one Space among many.
+
+The product model (never misrepresent it in copy):
+- A hotel creates **Spaces** (Spa, Gym, Restaurants, Meetings & Events,
+  Bedrooms, Guest Directory, ...). Each Space has one **permanent Informax
+  address** that does not change when content is replaced, a website is
+  connected, the Space is renamed or content is rolled back.
+- A Space serves a **PDF or a website** and the hotel can switch at any time.
+- **Touch Points** are the physical products placed around the hotel. They
+  connect to a Space and **never own content**. Change the Space and every
+  connected Touch Point follows. The core benefit is that the hotel changes
+  what a physical Touch Point does without touching the Touch Point.
+- Customer-facing language: **Informax Touch / Informax Scan / Touch Point**.
+  Never "NFC", "QR code", "tag" or "sticker" in marketing copy. (The legal
+  pages still say "NFC-enabled tags"; that is contract wording and was left
+  for legal review, not changed.) Do not expose database terms such as
+  `public_code`, and do not invent a Space URL format.
+- Guests need no app. Activity is presented as aggregate insight only.
+
+Sitemap: `/` (home), `/informax-cloud` (product page), `/how-it-works`,
+`/hospitality` (problem-led), `/touch-points`, `/about`, `/enquire`, legal
+pages. `/services` was removed and 308-redirects to `/informax-cloud` in
+`next.config.ts`. `/websites` and `/digital-information` are **kept live but
+demoted**: out of the main nav, linked from the footer ("Also from
+Informax"), sitemap priority 0.5. They still carry their own video heroes and
+older copy; whether to keep, rewrite or retire them is a business decision
+for the user. Primary CTA everywhere is `PRIMARY_CTA` in `src/lib/constants.ts`
+("Talk to Informax"). Nav includes Home because the user explicitly asked
+for it earlier.
+
+Where things live:
+- `src/components/cloud/*` — the whole product story. `HomeHero` +
+  `HotelScene` (SVG hotel cross-section, warm rooms = physical, indigo arc =
+  Cloud, risers = connections); `CloudDemo` (scripted Space > change content
+  > publish > "N Touch Points updated"); `TouchPointStays`;
+  `OneSpaceManyTouchPoints` (400 rooms, wave update); `ContentFormats`;
+  `ActivityPanel` (illustrative data, labelled as such); `TouchAndScan`;
+  `Placements`; `SpacesGrid`; `HowSteps`; `PageHero`; `CloudCta`;
+  `TouchPoint` (the physical product drawn in CSS); `CloudChrome` (shared
+  Informax Cloud window frame so every mockup reads as one product).
+- `src/lib/spaces.ts` — Space data and Touch Point placements. Edit copy here.
+- Motion: `Reveal` gained a `blur` prop. Every animated component honours
+  `prefers-reduced-motion` (Framer via `useReducedMotion`, CSS via the media
+  query in `globals.css`). Demos only run while on screen. No new
+  dependencies were added.
+- Design tokens: new warm `--glow` / `--glow-deep` (physical hotel light) sit
+  beside the existing indigo `--brass*` family (digital / Cloud).
+
+Assets and decisions to know about:
+- **No photography or footage exists for the new hero.** The homepage hero
+  is an illustrative SVG scene, deliberately, so it ships with no video.
+  Replacing or layering real hotel footage is a design task for later.
+- The old **Earth hero** (`hero-video.*`, `hero-poster.jpg`) and the
+  **hospitality cartoon hero** (`hospitality-hero-*`) are no longer used by
+  any page but the files remain in `public/`. The hospitality video's second
+  half has a ghosted crossfade and a floating-documents swirl, and it was
+  judged wrong for a luxury-hotel brand. Their wrapper components (`Hero.tsx`,
+  `HospitalityHero.tsx`) were deleted; restore from git history
+  (`git show cb8b77b:src/components/sections/Hero.tsx`) if needed. The Earth
+  hero was earlier described as "permanent"; the redesign brief superseded that
+  for the homepage, so confirm with the user before treating it as gone forever.
+- `VideoHero.tsx`, `DigitalInformationHero.tsx`, `WebsitesHero.tsx` and their
+  assets are unchanged and still power the two demoted pages.
+- An uncommitted, partial `informax-cloud` draft (a document-only
+  `CloudStory.tsx`) that pre-dated this redesign was superseded. It was saved
+  to the Claude session scratchpad only, not the repo.
 
 ## 1. What this project is
 
@@ -278,164 +354,40 @@ resend.com/emails for individual send/delivery status.
 
 | Path | Purpose |
 |---|---|
-| `/` | Homepage — hero, problem story, services overview, hospitality teaser, concept examples |
-| `/services` | All six service lines in depth |
-| `/websites` | Website service detail, capability list |
-| `/digital-information` | Brochures & pamphlets, plus directories |
-| `/hospitality` | The specialist hospitality practice |
-| `/about` | Founder story, company values |
-| `/enquire` | Enquiry form |
+| `/` | Home: Informax Cloud narrative (hero, what it is, Spaces, how it works, Touch Point stays, live Cloud demo, Touch Points, 400-room update, PDF or website, Activity, Guest Directory, CTA) |
+| `/informax-cloud` | Product page: Spaces, permanent address, content, demo, scale, the three-rule model, Activity, version history, remote management |
+| `/how-it-works` | Three-stage story, worked Spa example, demo, FAQ |
+| `/hospitality` | Hotel problems mapped to Informax answers, per-department Spaces, founder credibility |
+| `/touch-points` | The physical product, Touch and Scan, placements, one Space many Touch Points |
+| `/about` | Founder story (copy supplied by the user, keep as is) |
+| `/enquire` | Enquiry form (interests updated for Cloud / Touch Points / demonstration) |
+| `/websites`, `/digital-information` | Legacy service pages, live but demoted (footer only) |
 | `/privacy-policy`, `/terms-and-conditions`, `/cookie-policy` | Legal |
+| `/services` | Removed. 308 redirect to `/informax-cloud` |
 | `/api/enquire` | POST handler for the enquiry form |
-| `/sitemap.xml`, `/robots.txt` | Generated, cover all routes above |
-
-All confirmed returning HTTP 200 on `informax.co.uk` as of the last update
-to this file.
+| `/sitemap.xml`, `/robots.txt` | Generated |
 
 ## 10. Key files for making changes
 
 | File | What's there |
 |---|---|
-| `src/lib/constants.ts` | Nav links, footer links, enquiry form options, contact email, site URL |
-| `src/app/globals.css` | All design tokens: colours, fonts, animation keyframes |
-| `src/app/[route]/page.tsx` | One file per page; copy lives directly in the JSX |
-| `src/components/EnquireForm.tsx` | Client-side form logic, validation, states |
-| `src/app/api/enquire/route.ts` | Server-side validation and the Resend email send |
-| `src/components/Header.tsx` / `Footer.tsx` | Site chrome. Flat top-level nav (no dropdown) as of 18 September 2026 — see §10 dated entry. |
-| `src/components/sections/VideoHero.tsx` | Shared cinematic video-hero engine (film + scrim + headline + CTAs). Takes video/poster/copy as props — holds no video path of its own. |
-| `src/components/sections/Hero.tsx` | Homepage hero. Passes the Earth/global-network film to `VideoHero`. |
-| `src/components/sections/HospitalityHero.tsx` | `/hospitality` hero. Passes the hospitality film to `VideoHero`. Entirely independent of `Hero.tsx` — different constants, different files, cannot overwrite each other. |
-| `src/components/sections/DigitalInformationHero.tsx` | `/digital-information` hero. Passes its own film to `VideoHero`. Independent of both other heroes. |
-| `src/components/sections/WebsitesHero.tsx` | `/websites` hero. Passes its own film to `VideoHero`. Independent of all three other heroes. |
+| `src/lib/constants.ts` | Nav, footer, `PRIMARY_CTA`, enquiry interests, contact email, site URL |
+| `src/lib/spaces.ts` | Space and placement data used across the product pages |
+| `src/components/cloud/*` | The product story components (see §0) |
+| `src/app/globals.css` | Design tokens and motion primitives (`tp-pulse`, `riser-travel`, `dot-in`) |
+| `src/app/layout.tsx` | Default metadata, Organization JSON-LD |
+| `src/app/informax-cloud/page.tsx` | SoftwareApplication JSON-LD (no price or offers published) |
+| `next.config.ts` | `/services` redirect |
+| `src/components/Header.tsx` / `Footer.tsx` | Chrome. Nav breakpoint is `xl` (1280px); below that it is the hamburger drawer. `TRANSPARENT_AT_TOP_ROUTES` lists routes that open with a dark hero; add new dark-hero routes there |
+| `src/components/EnquireForm.tsx`, `src/app/api/enquire/route.ts` | Enquiry form and Resend email (unchanged) |
+| `src/components/sections/VideoHero.tsx` + `DigitalInformationHero.tsx` + `WebsitesHero.tsx` | Video heroes for the two legacy pages |
 
-**Four permanent, independent hero films — confirmed by the user, not
-placeholders:**
-
-1. **Homepage (`/`)** — `public/hero-video.mp4` / `.webm` / `hero-poster.jpg`,
-   used by `Hero.tsx`. An animated Earth/global-network globe with light
-   trails. The user has explicitly confirmed (17 September 2026) that this
-   is the **permanent** homepage identity, representing Informax as a
-   technology platform connecting information and experiences — not
-   hospitality footage, and not to be swapped for any. Earlier notes in
-   this file calling it a placeholder are superseded.
-2. **Hospitality (`/hospitality`)** — `public/hospitality-hero-video.mp4` /
-   `.webm` / `hospitality-hero-poster.jpg`, used by `HospitalityHero.tsx`.
-   An illustrated/cartoon-style hotel arrival and check-in sequence,
-   supplied by the user specifically for this page.
-   - **Corrected 18 September 2026 — supersedes every earlier note in
-     this file about a "6.5s loop" or "two clean sub-scenes
-     concatenated".** That earlier cut was too aggressive: it had used a
-     two-segment concat (0–4.3s + 6.0–8.2s) that dropped a perfectly good
-     middle transition (an elevator-lobby signage scene) purely to make
-     the loop shorter, which the user explicitly did not want. The fix
-     was to go back to the **true original source** (15.041667s,
-     560×560, in the user's Downloads folder — never stored in this
-     repo) and take one straight trim, inspected frame-by-frame at
-     0.1s granularity to find the exact point the footage turns bad. The
-     scene stays fully clean through 8.6s; the first crossfade/ghosting
-     artifact into the broken "floating document swirl" + mismatched
-     "Informax" wordmark/tagline segment appears at 8.7s. Current files
-     are trimmed at `-t 8.6`, encoding to a verified **8.625s** final
-     duration (rounds to the nearest frame at 24fps) — a single trim,
-     no scene removed except the genuinely broken tail.
-     **Reporting figures: original source 15.04s, final web hero 8.625s,
-     removed from the end ≈ 6.42s.**
-   - A small "Informax"-branded desk-card prop still appears in-frame in
-     the room scene, in a different logo style to the real site wordmark.
-     Lower-severity than the wordmark/tagline issue (small, low visual
-     weight) and was left as a disclosed minor inconsistency rather than
-     attempting per-frame masking.
-   - Source resolution is only 560×560, upscaled by nothing (re-encoded
-     at native resolution) — it will look soft on large desktop displays.
-     A higher-resolution replacement would be a straightforward
-     same-filename swap.
-   - If re-deriving this cut again in future, always start from the true
-     original source file, never from a previously-shortened derivative
-     — re-cutting a derivative compounds the lost footage.
-3. **Digital Information (`/digital-information`)** —
-   `public/digital-information-hero-video.mp4` / `.webm` /
-   `digital-information-hero-poster.jpg`, used by
-   `DigitalInformationHero.tsx`. An illustrated tech-office scene
-   (people at desks with directory-style content on their monitors,
-   others playing table tennis/foosball in the background) supplied by
-   the user for this page on 18 September 2026. Clean footage — no
-   mismatched logos, no garbled text, nothing trimmed. It is generic
-   "creative studio" office content rather than something specifically
-   depicting the guest-information product itself; noted as a disclosed
-   thematic mismatch, not a defect, so nothing was altered.
-4. **Websites (`/websites`)** — `public/website-hero-video.mp4` / `.webm` /
-   `website-hero-poster.jpg`, used by `WebsitesHero.tsx`, added
-   18 September 2026. Illustrated footage of a professional viewing a
-   personal-brand website on a monitor, supplied by the user specifically
-   for this page. Source: 6.041667s, 784×1168 portrait, no logo collision
-   (the fake site shown isn't Informax-branded), no severe garbling (a
-   couple of minor AI-generated text typos in on-screen UI, judged too
-   trivial to be worth re-cutting). Kept at native resolution with no
-   pre-cropping — `object-fit: cover` in `VideoHero` handles the portrait
-   source across viewport shapes.
-
-All four heroes follow the same technical pattern: MP4 (H.264) + WebM
-(VP9) sources, a JPEG poster, `prefers-reduced-motion` fallback to the
-poster, and pause-on-tab-hidden. `Header.tsx`'s `TRANSPARENT_AT_TOP_ROUTES`
-set includes `/`, `/hospitality`, `/digital-information` and `/websites`
-since all four open with a full-bleed dark video hero — add any future
-full-bleed-video route here, and only here.
-
-**18 September 2026 — logo size and headline-wrapping fix.** Two more
-changes from the same pass:
-- The header/footer logo (`informax-logo-white.png`) was enlarged twice
-  now at explicit user request — currently `h-[72px] md:h-[86px]` in
-  `Header.tsx` (constant across scroll states, so no resize jump) and
-  `h-[72px]` in `Footer.tsx`. Header vertical padding was trimmed
-  slightly (`py-3`/`py-2` instead of `py-4`/`py-2.5`) to keep the header
-  bar from growing as much as the logo did. If asked to enlarge it
-  again, adjust both files together and re-check for hamburger collision
-  and mobile-drawer top offset (`pt-24` in the mobile nav panel).
-- Found and fixed a real bug, not a style change: several page H1s (and
-  `FinalCta`'s H2) had their `max-w-[Nch]` character-width cap on the
-  *wrapping element* instead of the heading itself. Since a `ch` unit is
-  computed from the font-size of the element it's applied to, capping a
-  huge (34–88px) heading's width using a `ch` value set on a small
-  default-font wrapper produced a far narrower box than intended — the
-  heading then wrapped to one or two words per line (About, Services,
-  Websites, Digital Information were the worst-affected). Fixed by
-  moving `max-w-[Nch]` onto the `<h1>`/`<h2>` directly in each case, with
-  the wrapper given a plain generous width (`max-w-3xl`/`max-w-xl`)
-  instead. If a new page's heading looks artificially stacked, check for
-  this exact pattern first — it's an easy one to reintroduce by copying
-  the old structure.
-
-**18 September 2026 — navigation restructure and Websites hero.** By
-explicit user instruction, Hospitality, Digital Information and Websites
-are now first-class top-level nav destinations, not hidden inside a
-"Services" dropdown — the user's stated reasoning was that these are
-three of Informax's most important offerings and burying them behind a
-generic menu label undersold them. Changes:
-- `src/lib/constants.ts` — `NAV_SERVICES` removed; `NAV_LINKS` flattened
-  to `Hospitality, Digital Information, Websites, Services, About,
-  Enquire`. `Services` is kept as its own destination (the full six-service
-  overview page still exists and is still useful), it just no longer
-  contains the other three as dropdown items.
-- `src/components/Header.tsx` — dropdown state/click-outside/Escape logic
-  removed entirely. Desktop nav is now a flat `<Link>` map with an
-  underline active/hover state (`aria-current="page"` driven). `Enquire`
-  is excluded from the visible nav row since the separate "Start a
-  Project" CTA already covers it. The nav breakpoint was moved from `lg:`
-  (1024px) to `xl:` (1280px) specifically because the flat six-item nav
-  collided with the enlarged logo at medium laptop widths under `lg:`;
-  under `xl:` there's a comfortable gap at every width down to 1280px,
-  confirmed by measuring actual `getBoundingClientRect()` gaps (not just
-  screenshots) at 1920/1440/1280/1279/1024px. Below `xl:`, the hamburger
-  drawer lists the same flat set of links (all three destinations visible
-  on mobile too, not just desktop) plus the "Start a Project" CTA.
-- The logo was **not** shrunk to make room — it stays at the
-  `h-[72px] md:h-[86px]` size from the prior pass. Spacing was solved by
-  the breakpoint change above, not by reducing the logo.
-- `src/components/sections/WebsitesHero.tsx` (new) + `public/website-hero-*`
-  assets (new) — see item 4 in the hero-films list above.
-- If asked to add a further nav destination in future, check actual
-  measured gaps at 1280px before assuming it fits — that's the tightest
-  width the flat nav has to work at.
+**Verification note for agents:** the browser preview tool throttles
+animation when the tab is not in the foreground, so Framer entrances can look
+blank for several seconds in `next dev`. Use `npm run build && npx next start`
+and front the tab before judging animation. Wide (>1280px) emulated viewports
+are cropped by the pane, so check them with geometry (`getBoundingClientRect`)
+as well as screenshots.
 
 ## 11. House style for copy
 

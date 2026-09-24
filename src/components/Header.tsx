@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS, PRIMARY_CTA } from "@/lib/constants";
 
 // Routes whose hero is a full-bleed dark video that a transparent header
 // can sit over. Every other page's hero is on a light background, so the
@@ -14,7 +14,10 @@ import { NAV_LINKS } from "@/lib/constants";
 // its own full-bleed dark video hero.
 const TRANSPARENT_AT_TOP_ROUTES = new Set([
   "/",
+  "/informax-cloud",
+  "/how-it-works",
   "/hospitality",
+  "/touch-points",
   "/digital-information",
   "/websites",
 ]);
@@ -62,7 +65,7 @@ export default function Header() {
             />
           </Link>
 
-          <nav className="hidden xl:flex items-center gap-7" aria-label="Primary">
+          <nav className="hidden xl:flex items-center gap-6 2xl:gap-8" aria-label="Primary">
             {primaryLinks.map((link) => {
               const active = pathname === link.href;
               return (
@@ -87,7 +90,7 @@ export default function Header() {
               href="/enquire"
               className="hidden md:inline-flex items-center gap-2 border-b border-white/40 pb-1 text-[13.5px] font-medium text-white transition-colors duration-300 hover:border-white"
             >
-              Start a Project
+              {PRIMARY_CTA}
             </Link>
             <button
               type="button"
@@ -153,7 +156,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className="mt-6 inline-flex w-fit items-center gap-2 border-b border-white pb-1 text-[15px] font-medium text-white"
               >
-                Start a Project
+                {PRIMARY_CTA}
               </Link>
             </motion.nav>
           </>

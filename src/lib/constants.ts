@@ -1,21 +1,28 @@
 export const SITE_URL = "https://informax.co.uk";
 export const CONTACT_EMAIL = "info@informax.co.uk";
 
+export const PRIMARY_CTA = "Talk to Informax";
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Informax Cloud", href: "/informax-cloud" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "Hospitality", href: "/hospitality" },
-  { label: "Digital Information", href: "/digital-information" },
-  { label: "Websites", href: "/websites" },
+  { label: "Touch Points", href: "/touch-points" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },
 ] as const;
 
-export const FOOTER_SERVICE_LINKS = [
-  { label: "Services Overview", href: "/services" },
-  { label: "Websites", href: "/websites" },
-  { label: "Digital Brochures", href: "/digital-information#brochures" },
-  { label: "Digital Directories", href: "/digital-information#directories" },
+export const FOOTER_PRODUCT_LINKS = [
+  { label: "Informax Cloud", href: "/informax-cloud" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Touch Points", href: "/touch-points" },
   { label: "Hospitality", href: "/hospitality" },
+] as const;
+
+export const FOOTER_ALSO_LINKS = [
+  { label: "Websites", href: "/websites" },
+  { label: "Digital Brochures & Directories", href: "/digital-information" },
 ] as const;
 
 export const FOOTER_COMPANY_LINKS = [
@@ -31,13 +38,12 @@ export const FOOTER_LEGAL_LINKS = [
 ] as const;
 
 export const ENQUIRY_INTERESTS = [
-  "Website",
-  "Digital Brochure",
-  "Digital Pamphlet",
-  "Digital Directory",
-  "Hospitality",
-  "Bespoke Project",
-  "Multiple Services",
+  "Informax Cloud",
+  "Touch Points",
+  "A demonstration",
+  "Guest Directory",
+  "Meetings & Events",
+  "Spa & Wellness",
+  "Restaurants",
   "Not Sure Yet",
 ] as const;
-

@@ -6,31 +6,31 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Enquire",
   description:
-    "Tell us what you're looking to create and we'll work out the best way to bring it to life, whether that's a website, a brochure, a directory or something bespoke.",
+    "Talk to Informax about Informax Cloud and Touch Points for your hotel, or request a demonstration.",
   alternates: { canonical: "/enquire" },
 };
 
 const SIDE_POINTS = [
   {
     icon: Sparkles,
-    title: "Designed around you",
-    desc: "Every project is built entirely around your business and brand, not a template.",
+    title: "Built around your hotel",
+    desc: "Spaces, Touch Points and content set up around how your property actually runs.",
   },
   {
     icon: ClipboardCheck,
-    title: "Honest quotes",
-    desc: "Every project is scoped and quoted around what it actually needs.",
+    title: "Clear, honest proposals",
+    desc: "Scoped around the Spaces and Touch Points you actually need.",
   },
   {
     icon: Layers,
-    title: "Any kind of project",
-    desc: "Brochures, pamphlets, directories, hospitality and bespoke work, all welcome.",
+    title: "Start small, grow",
+    desc: "Begin with the Space that matters most and add more when you are ready.",
   },
 ];
 
 const PROCESS = [
-  { step: "01", title: "Tell us", desc: "Share a few details about your business and what you're looking to create." },
-  { step: "02", title: "We shape it", desc: "We work out the right approach and put together a clear, honest proposal." },
+  { step: "01", title: "Tell us", desc: "Share a few details about your hotel and what you would like to connect." },
+  { step: "02", title: "See it working", desc: "We show you Informax Cloud, and shape a proposal around your property." },
   { step: "03", title: "You decide", desc: "No pressure. Take the proposal away and come back whenever you're ready." },
 ];
 
@@ -43,7 +43,7 @@ export default function EnquirePage() {
             Enquire
           </span>
           <h1 className="font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
-            Let&rsquo;s build something.
+            Bring Informax to your hotel.
           </h1>
         </div>
 
@@ -52,8 +52,8 @@ export default function EnquirePage() {
             <div>
               <p className="mb-8 max-w-[42ch] text-[15.5px] leading-relaxed text-ink-mute">
                 Every Informax enquiry starts with a conversation, not a
-                sales pitch. We want to understand what you&rsquo;re trying
-                to achieve before we suggest anything.
+                sales pitch. We want to understand your property before we
+                suggest anything, and we are happy to run a demonstration.
               </p>
               <ul className="flex flex-col gap-6">
                 {SIDE_POINTS.map((point) => (

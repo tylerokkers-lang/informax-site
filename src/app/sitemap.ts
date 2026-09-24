@@ -4,12 +4,14 @@ import { SITE_URL } from "@/lib/constants";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/services",
-    "/websites",
-    "/digital-information",
+    "/informax-cloud",
+    "/how-it-works",
     "/hospitality",
+    "/touch-points",
     "/about",
     "/enquire",
+    "/websites",
+    "/digital-information",
     "/privacy-policy",
     "/terms-and-conditions",
     "/cookie-policy",
@@ -17,12 +19,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const priority: Record<string, number> = {
     "": 1,
+    "/informax-cloud": 0.95,
+    "/how-it-works": 0.85,
+    "/hospitality": 0.85,
+    "/touch-points": 0.85,
     "/enquire": 0.9,
-    "/services": 0.85,
-    "/websites": 0.85,
-    "/digital-information": 0.75,
-    "/hospitality": 0.75,
     "/about": 0.6,
+    "/websites": 0.5,
+    "/digital-information": 0.5,
   };
 
   return routes.map((route) => ({

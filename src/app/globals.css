@@ -37,6 +37,9 @@
   --rust: #d93636;
   --moss: #1f9d6b;
 
+  --glow: #f3d29c;
+  --glow-deep: #d9a45b;
+
   --line: rgba(20, 20, 28, 0.1);
   --line-soft: rgba(20, 20, 28, 0.06);
   --line-dark: rgba(255, 255, 255, 0.12);
@@ -67,6 +70,9 @@
   --color-coral: var(--coral);
   --color-coral-deep: var(--coral-deep);
   --color-coral-light: var(--coral-light);
+
+  --color-glow: var(--glow);
+  --color-glow-deep: var(--glow-deep);
 
   --color-rust: var(--rust);
   --color-moss: var(--moss);
@@ -179,6 +185,26 @@ svg {
 }
 .animate-orbit { animation: orbit-spin 60s linear infinite; }
 
+@keyframes tp-pulse {
+  0% { transform: scale(0.5); opacity: 0.55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.animate-tp-pulse { animation: tp-pulse 3.4s var(--ease-premium) infinite; }
+
+@keyframes dot-in {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes riser-travel {
+  from { stroke-dashoffset: 260; }
+  to { stroke-dashoffset: 0; }
+}
+.animate-riser {
+  stroke-dasharray: 18 242;
+  animation: riser-travel 5.5s linear infinite;
+}
+
 @keyframes ticker-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -192,6 +218,8 @@ svg {
   .animate-pulse-ring,
   .animate-ripple,
   .animate-orbit,
+  .animate-tp-pulse,
+  .animate-riser,
   .animate-ticker {
     animation: none !important;
   }

@@ -4,7 +4,8 @@ import {
   CONTACT_EMAIL,
   FOOTER_COMPANY_LINKS,
   FOOTER_LEGAL_LINKS,
-  FOOTER_SERVICE_LINKS,
+  FOOTER_ALSO_LINKS,
+  FOOTER_PRODUCT_LINKS,
 } from "@/lib/constants";
 
 export default function Footer() {
@@ -23,9 +24,8 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
-              A digital design and development studio. We build websites,
-              digital brochures, directories and bespoke digital experiences
-              for businesses, including a specialist hospitality practice.
+              Informax Cloud connects the information guests need with the
+              places they are, throughout your hotel. Built in hospitality.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a
@@ -73,7 +73,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <FooterCol title="Services" links={FOOTER_SERVICE_LINKS} />
+          <FooterCol title="Informax" links={FOOTER_PRODUCT_LINKS} />
           <FooterCol title="Company" links={FOOTER_COMPANY_LINKS} />
 
           <div>
@@ -86,6 +86,18 @@ export default function Footer() {
             >
               {CONTACT_EMAIL}
             </a>
+            <h5 className="mb-4 mt-9 text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute">
+              Also from Informax
+            </h5>
+            <ul className="flex flex-col gap-3">
+              {FOOTER_ALSO_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-cream-mute transition-colors hover:text-brass-light">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

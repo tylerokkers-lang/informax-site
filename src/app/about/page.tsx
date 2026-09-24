@@ -5,7 +5,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Informax began in hospitality and builds digital guest directories for hotels, alongside websites and digital information for businesses more broadly.",
+    "Informax was born from nearly a decade of hospitality experience. Today it builds Informax Cloud, connecting digital information with physical spaces throughout a hotel.",
   alternates: { canonical: "/about" },
 };
 
@@ -135,8 +135,8 @@ export default function AboutPage() {
       </section>
 
       <FinalCta
-        title={<>Have something to build?</>}
-        description="Tell us about your property or business and what you're trying to create."
+        title={<>Bring Informax to your hotel.</>}
+        description="Tell us about your property and what you would like to connect."
       />
     </>
   );

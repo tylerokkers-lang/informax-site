@@ -17,7 +17,7 @@ const FLOW = [
     n: "01",
     icon: QrCode,
     title: "Scan",
-    desc: "A QR code, NFC tag or direct link. No app to find or install first.",
+    desc: "A Touch Point or a direct link. No app to find or install first.",
   },
   {
     n: "02",

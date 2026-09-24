@@ -3,7 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { SITE_URL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -20,41 +20,40 @@ const inter = Inter({
   display: "swap",
 });
 
+const DEFAULT_TITLE = "Informax Cloud | Connected Spaces and Touch Points for Hotels";
+const DEFAULT_DESCRIPTION =
+  "Informax Cloud gives every part of your hotel a permanent digital Space. Connect Touch Points throughout the property and change what guests see from anywhere.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Informax | Website Design, Digital Brochures & Directories",
+    default: DEFAULT_TITLE,
     template: "%s | Informax",
   },
-  description:
-    "Informax designs and builds custom websites, digital brochures, digital directories and bespoke digital experiences for businesses, plus a specialist hospitality practice.",
-  keywords: [
-    "website design",
-    "website development",
-    "custom websites",
-    "business website design",
-    "digital brochures",
-    "digital directories",
-    "digital guest directories",
-    "hospitality websites",
-    "hospitality technology",
-    "custom digital experiences",
-  ],
+  description: DEFAULT_DESCRIPTION,
   authors: [{ name: "Informax" }],
   openGraph: {
     type: "website",
     url: SITE_URL,
     siteName: "Informax",
-    title: "Informax | Website Design, Digital Brochures & Directories",
-    description:
-      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Informax | Website Design, Digital Brochures & Directories",
-    description:
-      "Digital experiences, designed around your business: websites, digital brochures, directories and bespoke digital projects.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
   },
+};
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Informax",
+  url: SITE_URL,
+  email: CONTACT_EMAIL,
+  description:
+    "Informax builds Informax Cloud, a hospitality content platform that connects digital information with physical locations throughout a hotel.",
 };
 
 export default function RootLayout({
@@ -75,6 +74,10 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+        />
         <Header />
         <main id="main-content" className="flex-1">
           {children}
