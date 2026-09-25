@@ -115,6 +115,30 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   made up. Never use real customers (Fairmont, test hotels, staff names).
   Everything lives in `src/components/product/data.ts`.
 
+### Changes, 25 September 2026 (fourth pass)
+
+- **Header:** nav is Home, Informax Cloud, How It Works, Digital Experiences,
+  About, Talk to Informax (`/enquire`). The button on the right is **Log in to
+  Informax Cloud** (`CLOUD_LOGIN_URL` = https://informax.cloud/login in
+  `constants.ts`). The mobile drawer lists the same links, plus the login.
+- **Removed:** the "Every Touch Point, in one place" list and both "Update
+  once. Change everywhere." sections (`ManyTouchPointsFilm` deleted).
+- **How It Works hero** uses a still image (`public/images/earth-horizon.jpg`,
+  only 768 px wide; replace it with a larger version for sharper results) via
+  `PageHero`'s new `image` prop.
+- **Hero films, three different files:** `home-hero.*` (Earth, homepage),
+  `cloud-hero.*` (clouds from above, Informax Cloud hero), `meet-cloud.*`
+  (blue and pink clouds, homepage "Meet Informax Cloud" band). All are 1920 px
+  wide, Lanczos-upscaled with light sharpening, two-pass encoded (WebM
+  2.4–3.6 MB). The sources are only 1104 px (Earth, clouds) and 736 px
+  (blue/pink), so true HD needs higher-resolution originals.
+- **Closing CTA** shows the real Informax Cloud logo
+  (`public/product/informax-cloud-logo.png`, byte-identical to
+  informax.cloud/brand/informax-logo.png).
+- **Phone films** scroll to real anchors (`panel`, `entry`, `current`), so
+  choosing a file or typing an address, Publish, and the updated content are
+  always on screen.
+
 ### Changes, 25 September 2026 (third pass)
 
 - **Hospitality is now Digital Experiences** at `/digital-experiences`
@@ -133,8 +157,7 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
 - **Demo Space addresses are readable** (`go.informax.cloud/maisonaurelia/spa`)
   at the user's request. The real app uses `/s/<10-character code>`, so this
   is a deliberate marketing simplification.
-- `public/video/cloud-hero.*` is now the blue and pink clouds film (6 s,
-  forward/back loop, upscaled from 736 px, ~0.9 MB).
+- The blue and pink clouds film moved to `meet-cloud.*` (see fourth pass).
 - The enquiry page is redesigned as a dark two-column page with a grouped
   form. `EnquireForm` logic, API fields and the honeypot are unchanged.
 

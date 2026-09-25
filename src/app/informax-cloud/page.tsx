@@ -10,11 +10,8 @@ import { PermanentAddress } from "@/components/cloud/ProductPanels";
 import AppFilm from "@/components/product/AppFilm";
 import PhoneFilm from "@/components/product/PhoneFilm";
 import SpacesShowcase from "@/components/product/SpacesShowcase";
-import { TouchPointRows } from "@/components/product/ui";
-import { SPA, SPA_TOUCH_POINTS } from "@/components/product/data";
 import {
   ActivityFilm,
-  ManyTouchPointsFilm,
   PermanentUrlFilm,
   TouchScanFilm,
   VersionsFilm,
@@ -163,36 +160,7 @@ export default function InformaxCloudPage() {
         <ContentFormats />
       </Section>
 
-      {/* Touch Points */}
       <Section tone="dark">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <Reveal blur>
-            <Kicker dark>Touch Points</Kicker>
-            <Display dark>
-              Every Touch Point, <Soft dark>in one place.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              See every Touch Point connected to a Space, how guests use it and
-              whether it is active. Each one opens the Space&rsquo;s current
-              content.
-            </Lede>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div
-              className="ixp relative max-h-[520px] select-none overflow-hidden rounded-[28px] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_30px_70px_-30px_rgba(2,6,14,0.6)] sm:p-8"
-              role="img"
-              aria-label={`The Touch Points connected to the ${SPA.name} Space, with how many interactions each has had.`}
-            >
-              <div aria-hidden>
-                <TouchPointRows rows={SPA_TOUCH_POINTS.slice(0, 6)} total={SPA.touchPoints} hero />
-              </div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ix-navy-900 to-transparent" />
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section tone="dark" divider>
         <Head>
           <Reveal blur>
             <Kicker dark>Informax Touch and Informax Scan</Kicker>
@@ -259,19 +227,6 @@ export default function InformaxCloudPage() {
             <PhoneFilm variant="update" space="directory" captions="light" />
           </Reveal>
         </div>
-      </Section>
-
-      {/* One Space, many Touch Points */}
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>One Space, many Touch Points</Kicker>
-            <Display dark>
-              Update once. <Soft dark>Change everywhere.</Soft>
-            </Display>
-          </Reveal>
-        </Head>
-        <ManyTouchPointsFilm tone="dark" />
       </Section>
 
       <CloudCta />

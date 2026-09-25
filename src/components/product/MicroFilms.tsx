@@ -15,7 +15,7 @@ import {
   VersionRows,
 } from "./ui";
 import { fmt, useCountUp, useFilm, useTyper } from "./film";
-import { DIRECTORY, SPA, SPACE_URL, SPA_ACTIVITY, SPA_PREVIOUS, TOP_TOUCH_POINTS, type VersionRowData } from "./data";
+import { SPA, SPACE_URL, SPA_ACTIVITY, SPA_PREVIOUS, TOP_TOUCH_POINTS, type VersionRowData } from "./data";
 
 /**
  * Small product moments. Each one teaches a single real Informax Cloud
@@ -106,82 +106,6 @@ export function ChangeContentFilm({ tone = "light" }: { tone?: "dark" | "light" 
         />
       </Mini>
       <Caption tone={tone}>The same real steps a hotel takes: choose, publish, done.</Caption>
-    </div>
-  );
-}
-
-/* ---------------------- 3. One Space, many Touch Points --------------------- */
-
-const N = 20;
-const WAVE = Array.from({ length: N * N }, (_, k) => {
-  const r = Math.floor(k / N);
-  const c = k % N;
-  return Math.round(Math.hypot(r - (N - 1) / 2, c - (N - 1) / 2) * 46);
-});
-const MANY_STAGES = [1900, 7600] as const;
-
-export function ManyTouchPointsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const { ref, active, reduce } = useGate();
-  const { stage } = useFilm({ stages: MANY_STAGES, total: 10200, active });
-  const updated = reduce ? true : stage === 1;
-  const count = useCountUp(400, updated && !reduce, 1400);
-  const shown = reduce ? 400 : updated ? count : 0;
-
-  return (
-    <div ref={ref} role="img" aria-label="One Guest Directory Space connected to 400 bedroom Touch Points. Changing the Space once updates all 400.">
-      <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
-        <Mini>
-          <div className="ixp-card flex flex-col p-6">
-            <h3 className="text-[1.375rem] leading-snug">{DIRECTORY.name}</h3>
-            <div className="mt-2">
-              <Badge>Live</Badge>
-            </div>
-            <div className="mt-6 flex items-center gap-3.5">
-              <ContentKindTile kind="pdf" size={40} />
-              <div className="min-w-0">
-                <p className="text-[13px] text-ix-dim">Current content · PDF</p>
-                <p key={updated ? "b" : "a"} className="ixp-enter-fade truncate text-[15px] text-ix-cream">
-                  {updated ? DIRECTORY.nextPdf : DIRECTORY.pdf}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center gap-3.5 rounded-[20px] bg-white/[0.035] p-4">
-            <InteractionTile kind="scan" size={44} />
-            <div className="min-w-0 flex-1">
-              <p className="text-[16px] font-medium text-ix-cream">Guest Rooms</p>
-              <p className="mt-0.5 flex flex-wrap items-center gap-x-3 text-[13px] text-ix-dim">
-                <span>Informax Scan</span>
-                <span className="ixp-tabular">400 deployed</span>
-              </p>
-            </div>
-          </div>
-          <p className="mt-3 px-1 text-[13px] text-ix-dim">Connected to {DIRECTORY.name}</p>
-        </Mini>
-
-        <div>
-          <div className="mb-4 flex justify-between text-[10px] uppercase tracking-[0.2em] text-cream-mute">
-            <span className={tone === "dark" ? NOTE_DARK : NOTE_LIGHT}>Room 101</span>
-            <span className={tone === "dark" ? NOTE_DARK : NOTE_LIGHT}>Room 400</span>
-          </div>
-          <div className="grid gap-[3px] sm:gap-1" style={{ gridTemplateColumns: `repeat(${N}, minmax(0, 1fr))` }} aria-hidden>
-            {WAVE.map((delay, k) => (
-              <span
-                key={k}
-                className={`aspect-square rounded-[3px] transition-colors duration-500 ${updated ? "bg-[#0693e3]" : tone === "dark" ? "bg-white/[0.16]" : "bg-ink/15"}`}
-                style={{ transitionDelay: reduce ? "0ms" : `${delay}ms` }}
-              />
-            ))}
-          </div>
-          <div className={`mt-5 font-serif-display text-[40px] leading-none tabular-nums ${tone === "dark" ? "text-white" : "text-ink"}`}>
-            {updated ? fmt(shown) : "400"}
-            <span className={tone === "dark" ? "text-cream-mute" : "text-ink-mute"}>{updated ? " / 400" : ""}</span>
-          </div>
-          <p className={`mt-2 text-[14px] ${tone === "dark" ? NOTE_DARK : NOTE_LIGHT}`}>
-            {updated ? "Touch Points now showing the new directory" : "Touch Points connected to one Space"}
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

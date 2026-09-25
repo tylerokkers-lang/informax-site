@@ -14,7 +14,7 @@ import MeetCloud from "@/components/story/MeetCloud";
 import AppFilm from "@/components/product/AppFilm";
 import PhoneFilm from "@/components/product/PhoneFilm";
 import SpacesShowcase from "@/components/product/SpacesShowcase";
-import { ActivityFilm, ManyTouchPointsFilm, PermanentUrlFilm, TouchScanFilm } from "@/components/product/MicroFilms";
+import { ActivityFilm, PermanentUrlFilm, TouchScanFilm } from "@/components/product/MicroFilms";
 
 export const metadata: Metadata = {
   title: { absolute: "Informax | Hotel Information Management and Guest Experience Technology" },
@@ -199,23 +199,6 @@ export default function Home() {
             <li key={p}>{p}</li>
           ))}
         </ul>
-      </Section>
-
-      {/* 9. One Space, many Touch Points */}
-      <Section tone="dark" divider>
-        <Head>
-          <Reveal blur>
-            <Kicker dark>One Space, many Touch Points</Kicker>
-            <Display dark>
-              Update once. <Soft dark>Change everywhere.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              One Guest Directory Space. Four hundred Guest Room Touch Points.
-              One change in Informax Cloud, and every room follows.
-            </Lede>
-          </Reveal>
-        </Head>
-        <ManyTouchPointsFilm tone="dark" />
       </Section>
 
       {/* 10. PDF or website */}

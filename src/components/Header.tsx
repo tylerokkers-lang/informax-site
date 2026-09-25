@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { NAV_LINKS, PRIMARY_CTA } from "@/lib/constants";
+import { CLOUD_LOGIN_URL, NAV_LINKS } from "@/lib/constants";
 
 // Routes whose hero is a full-bleed dark video that a transparent header
 // can sit over. Every other page's hero is on a light background, so the
@@ -27,7 +27,7 @@ export default function Header() {
   const canBeTransparent = TRANSPARENT_AT_TOP_ROUTES.has(pathname);
   const [scrolled, setScrolled] = useState(!canBeTransparent);
   const [open, setOpen] = useState(false);
-  const primaryLinks = NAV_LINKS.filter((l) => l.label !== "Enquire");
+  const primaryLinks = NAV_LINKS;
 
   useEffect(() => {
     const onScroll = () =>
@@ -86,12 +86,12 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-5">
-            <Link
-              href="/enquire"
-              className="hidden md:inline-flex items-center gap-2 border-b border-white/40 pb-1 text-[13.5px] font-medium text-white transition-colors duration-300 hover:border-white"
+            <a
+              href={CLOUD_LOGIN_URL}
+              className="hidden md:inline-flex items-center gap-2 whitespace-nowrap border-b border-white/40 pb-1 text-[13.5px] font-medium text-white transition-colors duration-300 hover:border-white"
             >
-              {PRIMARY_CTA}
-            </Link>
+              Log in to Informax Cloud
+            </a>
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -151,13 +151,12 @@ export default function Header() {
                   </Link>
                 );
               })}
-              <Link
-                href="/enquire"
-                onClick={() => setOpen(false)}
+              <a
+                href={CLOUD_LOGIN_URL}
                 className="mt-6 inline-flex w-fit items-center gap-2 border-b border-white pb-1 text-[15px] font-medium text-white"
               >
-                {PRIMARY_CTA}
-              </Link>
+                Log in to Informax Cloud
+              </a>
             </motion.nav>
           </>
         )}

@@ -4,9 +4,9 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
 
-const MP4 = "/video/cloud-hero.mp4";
-const WEBM = "/video/cloud-hero.webm";
-const POSTER = "/video/cloud-hero-poster.jpg";
+const MP4 = "/video/meet-cloud.mp4";
+const WEBM = "/video/meet-cloud.webm";
+const POSTER = "/video/meet-cloud-poster.jpg";
 
 /**
  * The product launch moment. A full-bleed film band that only starts

@@ -15,6 +15,7 @@ export default function PageHero({
   primary,
   secondary,
   visual,
+  image,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -22,6 +23,8 @@ export default function PageHero({
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
   visual?: ReactNode;
+  /** Full-bleed background photograph behind the hero. */
+  image?: string;
 }) {
   const reduce = useReducedMotion();
   const enter = (delay: number, blur = false) => ({
@@ -31,11 +34,23 @@ export default function PageHero({
   });
 
   return (
-    <section className="relative overflow-hidden bg-charcoal-950 pb-20 pt-[150px] text-cream md:pb-28 md:pt-[190px]">
-      <div className="pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px] rounded-full bg-brass/15 blur-[130px]" />
+    <section
+      className={`relative overflow-hidden bg-charcoal-950 text-cream ${
+        image ? "flex min-h-[88svh] items-end pb-20 pt-[150px] md:pb-28" : "pb-20 pt-[150px] md:pb-28 md:pt-[190px]"
+      }`}
+    >
+      {image && (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={image} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover object-[70%_30%]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(200deg,rgba(6,6,10,0.1)_20%,rgba(6,6,10,0.6)_60%,rgba(6,6,10,0.92)_100%)]" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[rgba(6,6,10,0.6)] to-transparent" />
+        </>
+      )}
+      {!image && <div className="pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px] rounded-full bg-brass/15 blur-[130px]" />}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-glow-deep/[0.07] to-transparent" />
       <div
-        className={`relative mx-auto grid max-w-8xl items-center gap-14 px-6 md:px-10 ${
+        className={`relative mx-auto grid w-full max-w-8xl items-center gap-14 px-6 md:px-10 ${
           visual ? "grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20" : ""
         }`}
       >

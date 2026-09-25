@@ -286,7 +286,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
   return (
     <Collapse open={s.open}>
       <div className="pt-6">
-        <div className="@container rounded-[20px] bg-white/[0.04] p-5 sm:p-6">
+        <div data-anchor="panel" className="@container rounded-[20px] bg-white/[0.04] p-5 sm:p-6">
           <h4 className="text-[17px] font-medium tracking-normal">What should guests see?</h4>
           <div className="mt-4 grid gap-3 @md:grid-cols-2">
             <ChoiceTile
@@ -313,7 +313,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
                   <p className="mt-1.5 text-[15px] text-ix-muted">Your Space URL and connected Touch Points stay the same.</p>
                 </div>
               ) : s.staged ? (
-                <div className="ixp-enter-fade">
+                <div data-anchor="entry" className="ixp-enter-fade">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <p className="min-w-0 break-words text-sm text-ix-cream">{s.staged.name}</p>
                     <p className="text-xs text-ix-dim">{s.staged.size}</p>
@@ -329,7 +329,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
                   </div>
                 </div>
               ) : (
-                <div data-cur="dropzone" className="flex flex-col items-center justify-center rounded-[20px] bg-white/[0.04] px-5 py-8 text-center">
+                <div data-cur="dropzone" data-anchor="entry" className="flex flex-col items-center justify-center rounded-[20px] bg-white/[0.04] px-5 py-8 text-center">
                   <p className="text-sm text-ix-cream">Drag your PDF here</p>
                   <p className="mt-1 text-xs text-ix-dim">or</p>
                   <Btn variant="secondary" className="mt-3" cur="choose-file">
@@ -349,7 +349,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
                   <p className="mt-1.5 text-[15px] text-ix-muted">Your Space URL and connected Touch Points stay the same.</p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div data-anchor="entry" className="space-y-4">
                   <div>
                     <span className="ixp-label mb-2 block">Website address</span>
                     <div data-cur="input" className={cx("ixp-input flex items-center", s.inputFocus && "is-focus")}>

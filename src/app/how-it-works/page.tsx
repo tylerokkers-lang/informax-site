@@ -48,6 +48,7 @@ export default function HowItWorksPage() {
     <>
       <PageHero
         eyebrow="How it works"
+        image="/images/earth-horizon.jpg"
         title={<>Installed once.<br /><span className="italic text-glow">Changed whenever.</span></>}
         lede="Create a Space, connect Touch Points and update what guests see from Informax Cloud. The physical Touch Point stays in place."
         primary={{ label: "Talk to Informax", href: "/enquire" }}

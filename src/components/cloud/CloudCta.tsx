@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
@@ -19,8 +20,15 @@ export default function CloudCta({
           <h2 className="mx-auto max-w-[18ch] font-serif-display text-[clamp(38px,6.4vw,84px)] font-medium leading-[1] tracking-[-0.02em] text-white">
             {lead} <span className="italic text-glow">{line}</span>
           </h2>
-          <div className="mt-8 text-[11px] font-semibold uppercase tracking-[0.32em] text-brass-light">
-            Informax Cloud
+          <div className="relative mx-auto mt-14 flex w-fit justify-center">
+            <span aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0693e3]/25 blur-[70px]" />
+            <Image
+              src="/product/informax-cloud-logo.png"
+              alt="Informax Cloud"
+              width={900}
+              height={276}
+              className="relative h-[64px] w-auto md:h-[84px]"
+            />
           </div>
           <Link
             href="/enquire"
