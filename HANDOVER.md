@@ -12,9 +12,8 @@ historical where they conflict).
 
 ## 0. Current positioning (25 September 2026 redesign) — read this first
 
-**Not yet approved or deployed at the time of writing.** The user asked for
-the redesign to be reviewed before anything goes live. Check `git log` /
-production before assuming it shipped.
+**Live on informax.co.uk since 25 September 2026** (pushed at commit
+`4a38359`, deployed automatically by Vercel).
 
 Informax is now positioned as a **hospitality technology platform**, and
 **Informax Cloud** is the hero product. The old "digital guest directory
