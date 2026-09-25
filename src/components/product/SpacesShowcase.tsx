@@ -1,11 +1,12 @@
-import { NewSpaceButton, SpaceCard } from "./ui";
+import { Fragment } from "react";
+import { Badge, ContentKindTile, NewSpaceButton, SpaceCard } from "./ui";
 import { HOTEL, SPACE_CARDS } from "./data";
 
 /**
- * A hotel's Spaces as the real app shows them: Space cards with status,
- * current content, Touch Point count and permanent URL. Static, and wide
- * enough on desktop to read as the product; on phones the cards scroll
- * sideways at real size instead of shrinking.
+ * A hotel's Spaces as the real app shows them. Desktop and tablet: the
+ * app's Space cards in a grid. Phones: every Space at once as compact rows
+ * (name, status, what guests see, Touch Points, address) so the whole idea
+ * is visible without swiping.
  */
 export default function SpacesShowcase() {
   return (
@@ -14,24 +15,55 @@ export default function SpacesShowcase() {
       role="img"
       aria-label={`Informax Cloud Spaces for ${HOTEL.name}: ${SPACE_CARDS.map((c) => c.name).join(", ")}. Each has its own permanent address.`}
     >
-      <div className="px-5 pb-6 pt-7 sm:px-8 sm:pt-9 lg:px-10">
-        <div className="mb-7 flex flex-wrap items-end justify-between gap-4" aria-hidden>
+      <div className="px-4 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-9 lg:px-10" aria-hidden>
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4 px-1 sm:mb-7 sm:px-0">
           <div>
-            <p className="ixp-label mb-2">{HOTEL.name}</p>
-            <h2 className="text-[2rem] leading-[1.1] sm:text-[2.4rem]">Spaces</h2>
+            <p className="ixp-label mb-1.5">{HOTEL.name}</p>
+            <h2 className="text-[1.75rem] leading-[1.1] sm:text-[2.4rem]">Spaces</h2>
           </div>
           <span className="hidden sm:inline-flex">
             <NewSpaceButton />
           </span>
         </div>
-        <div
-          className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-3"
-          aria-hidden
-        >
+
+        {/* Phones: all six, compact */}
+        <ul className="space-y-2.5 sm:hidden">
           {SPACE_CARDS.map((c) => (
-            <div key={c.id} className="w-[84%] shrink-0 snap-start sm:w-auto">
-              <SpaceCard space={c} />
-            </div>
+            <li key={c.id} className="ixp-card p-4">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="text-[1.0625rem] leading-snug">{c.name}</h3>
+                <span className="ixp-tabular shrink-0 text-[12px] text-ix-dim">{c.touchPoints} Touch Points</span>
+              </div>
+              <div className="mt-1.5">
+                <Badge>Live</Badge>
+              </div>
+              <div className="mt-3 flex items-center gap-3">
+                <ContentKindTile kind={c.kind} size={32} />
+                <p className="min-w-0 flex-1 text-[13.5px] leading-snug text-ix-cream">
+                  {c.file.split("/").map((part, i, all) => (
+                    <Fragment key={i}>
+                      {part}
+                      {i < all.length - 1 && (
+                        <>
+                          /<wbr />
+                        </>
+                      )}
+                    </Fragment>
+                  ))}
+                </p>
+              </div>
+              <code className="mt-2.5 block font-mono text-[12px] leading-snug text-ix-dim">
+                go.informax.cloud/maisonaurelia/<wbr />
+                {c.code}
+              </code>
+            </li>
+          ))}
+        </ul>
+
+        {/* Tablet and desktop: the app's Space cards */}
+        <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+          {SPACE_CARDS.map((c) => (
+            <SpaceCard key={c.id} space={c} />
           ))}
         </div>
       </div>
