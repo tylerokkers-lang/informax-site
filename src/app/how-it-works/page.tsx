@@ -6,7 +6,7 @@ import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import HowSteps from "@/components/cloud/HowSteps";
 import TouchPointStays from "@/components/cloud/TouchPointStays";
-import CloudDemo from "@/components/cloud/CloudDemo";
+import { ChangeContentFilm, PermanentUrlFilm } from "@/components/product/MicroFilms";
 import CloudCta from "@/components/cloud/CloudCta";
 
 export const metadata: Metadata = {
@@ -83,7 +83,10 @@ export default function HowItWorksPage() {
             </Lede>
           </Reveal>
         </Head>
-        <CloudDemo />
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
+          <ChangeContentFilm />
+          <PermanentUrlFilm />
+        </div>
       </Section>
 
       <Section>

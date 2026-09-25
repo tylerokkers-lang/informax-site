@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { SITE_URL } from "@/lib/constants";
-import { SPACES } from "@/lib/spaces";
 import PageHero from "@/components/cloud/PageHero";
-import CloudChrome from "@/components/cloud/CloudChrome";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import SpacesGrid from "@/components/cloud/SpacesGrid";
 import ContentFormats from "@/components/cloud/ContentFormats";
-import CloudDemo from "@/components/cloud/CloudDemo";
-import OneSpaceManyTouchPoints from "@/components/cloud/OneSpaceManyTouchPoints";
-import ActivityPanel from "@/components/cloud/ActivityPanel";
 import CloudCta from "@/components/cloud/CloudCta";
-import { PermanentAddress, VersionHistory, Devices } from "@/components/cloud/ProductPanels";
+import { PermanentAddress } from "@/components/cloud/ProductPanels";
+import AppFilm from "@/components/product/AppFilm";
+import PhoneFilm from "@/components/product/PhoneFilm";
+import { ActivityFilm, ManyTouchPointsFilm, PermanentUrlFilm, VersionsFilm } from "@/components/product/MicroFilms";
 
 export const metadata: Metadata = {
   title: "Informax Cloud: Hotel Content Management for Every Space",
@@ -39,22 +37,6 @@ const jsonLd = {
   publisher: { "@type": "Organization", name: "Informax", url: SITE_URL },
 };
 
-function HeroVisual() {
-  return (
-    <CloudChrome>
-      <div className="grid grid-cols-2 gap-px bg-white/10 p-px">
-        {SPACES.slice(0, 4).map((sp) => (
-          <div key={sp.id} className="bg-charcoal-900 p-5">
-            <sp.icon size={16} className="mb-12 text-brass-light" />
-            <div className="text-[13px] font-medium text-white">{sp.name}</div>
-            <div className="mt-1 text-[11px] text-cream-mute">{sp.touchPoints} Touch Points</div>
-          </div>
-        ))}
-      </div>
-    </CloudChrome>
-  );
-}
-
 export default function InformaxCloudPage() {
   return (
     <>
@@ -66,7 +48,7 @@ export default function InformaxCloudPage() {
         lede="Create a Space for each part of your hotel. Give it a permanent address, connect Touch Points and change what guests see whenever you like."
         primary={{ label: "Talk to Informax", href: "/enquire" }}
         secondary={{ label: "See how it works", href: "/how-it-works" }}
-        visual={<HeroVisual />}
+        visual={<PermanentUrlFilm tone="dark" caption="One permanent address. Change what is behind it." />}
       />
 
       <Section>
@@ -134,7 +116,7 @@ export default function InformaxCloudPage() {
             </Lede>
           </Reveal>
         </Head>
-        <CloudDemo />
+        <AppFilm captions="dark" />
       </Section>
 
       <Section tone="dark" divider>
@@ -146,7 +128,7 @@ export default function InformaxCloudPage() {
             </Display>
           </Reveal>
         </Head>
-        <OneSpaceManyTouchPoints />
+        <ManyTouchPointsFilm tone="dark" />
       </Section>
 
       <Section>
@@ -182,31 +164,44 @@ export default function InformaxCloudPage() {
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
-            <ActivityPanel />
+            <ActivityFilm tone="light" />
           </Reveal>
         </div>
       </Section>
 
       <Section tone="dark">
-        <div className="grid items-center gap-14 grid-cols-1 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <Reveal>
-            <VersionHistory />
+            <VersionsFilm tone="dark" />
           </Reveal>
           <Reveal blur delay={0.1}>
-            <Kicker dark>Version history</Kicker>
+            <Kicker dark>Previous Versions</Kicker>
             <Display dark>
               Changed your mind? <Soft dark>Go back.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Every published version stays within reach. Restore an earlier
-              one in moments, without touching a single Touch Point.
+              Every published version stays within reach, PDFs and websites
+              together. Restore an earlier one in a single step, without
+              touching a single Touch Point.
             </Lede>
-            <div className="mt-12">
-              <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">
-                Manage from anywhere
-              </div>
-              <Devices />
-            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section tone="dark" divider>
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-24">
+          <Reveal blur>
+            <Kicker dark>From anywhere</Kicker>
+            <Display dark>
+              Update it from <Soft dark>your phone.</Soft>
+            </Display>
+            <Lede dark className="mt-8">
+              Open the Space, choose Change Content, publish. Menus change on a
+              Tuesday afternoon; guests see the new one straight away.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <PhoneFilm variant="update" captions="dark" />
           </Reveal>
         </div>
       </Section>

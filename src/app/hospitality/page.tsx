@@ -8,6 +8,7 @@ import SpacesGrid from "@/components/cloud/SpacesGrid";
 import HotelScene from "@/components/cloud/HotelScene";
 import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
 import CloudCta from "@/components/cloud/CloudCta";
+import PhoneFilm from "@/components/product/PhoneFilm";
 
 export const metadata: Metadata = {
   title: "Hospitality: Guest Information That Keeps Up With Your Hotel",
@@ -78,6 +79,25 @@ export default function HospitalityPage() {
           </Reveal>
         </Head>
         <SpacesGrid dark />
+      </Section>
+
+      <Section>
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-24">
+          <Reveal blur>
+            <Kicker>Update anywhere</Kicker>
+            <Display>
+              Menus change on a Tuesday. <Soft>So does the Spa list.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Your team opens the Space on a phone, changes the content and
+              publishes. Every Touch Point around the hotel shows the new
+              version, and nothing has to be printed, swapped or reinstalled.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <PhoneFilm variant="update" captions="light" />
+          </Reveal>
+        </div>
       </Section>
 
       <Section tone="alt">

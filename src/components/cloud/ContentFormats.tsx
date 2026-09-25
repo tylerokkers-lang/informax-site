@@ -1,22 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FileText, Globe } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
+import { ChoiceTile } from "@/components/product/ui";
+import { DocumentIcon, LockIcon, WebsiteIcon } from "@/components/product/icons";
 
 const FORMATS = [
-  {
-    id: "pdf",
-    icon: FileText,
-    name: "PDF",
-    line: "Upload menus, directories, floor plans, guides and more.",
-  },
-  {
-    id: "web",
-    icon: Globe,
-    name: "Website",
-    line: "Connect an existing page from your Hotel website.",
-  },
+  { id: "pdf", title: "Upload a PDF", detail: "A guide, menu or document", Icon: DocumentIcon },
+  { id: "web", title: "Use a website", detail: "A page on your own site", Icon: WebsiteIcon },
 ] as const;
 
 function PdfPreview() {
@@ -74,34 +65,32 @@ export default function ContentFormats() {
 
   return (
     <div ref={ref} className="grid items-center gap-12 grid-cols-1 lg:grid-cols-[1fr_1fr] lg:gap-20">
-      <div className="grid gap-4">
-        {FORMATS.map((f) => {
-          const on = f.id === mode;
-          return (
+      <div className="ixp rounded-[28px] p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_30px_70px_-30px_rgba(2,6,14,0.6)] sm:p-7">
+        <h4 className="text-[17px] font-medium tracking-normal">What should guests see?</h4>
+        <div className="mt-4 grid gap-3">
+          {FORMATS.map((f) => (
             <button
               key={f.id}
               type="button"
-              aria-pressed={on}
+              aria-pressed={f.id === mode}
               onClick={() => {
                 setManual(true);
                 setMode(f.id);
               }}
-              className={`flex items-start gap-5 border p-6 text-left transition-colors duration-500 ${
-                on ? "border-ink bg-panel" : "border-line bg-transparent hover:border-ink/40"
-              }`}
+              className="block w-full text-left"
             >
-              <span className={`flex h-11 w-11 shrink-0 items-center justify-center border ${on ? "border-ink text-ink" : "border-line text-ink-mute"}`}>
-                <f.icon size={19} />
-              </span>
-              <span>
-                <span className="block font-serif-display text-[26px] leading-none text-ink">{f.name}</span>
-                <span className="mt-3 block max-w-[34ch] text-[15px] leading-relaxed text-ink-mute">{f.line}</span>
-              </span>
+              <ChoiceTile
+                selected={f.id === mode}
+                icon={<f.Icon size={22} />}
+                title={f.title}
+                detail={f.detail}
+              />
             </button>
-          );
-        })}
-        <p className="pt-2 text-[14px] text-ink-mute">
-          Change between them whenever you want. Nothing at the Touch Point changes.
+          ))}
+        </div>
+        <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
+          <LockIcon size={14} />
+          Your Space URL and connected Touch Points stay the same.
         </p>
       </div>
 

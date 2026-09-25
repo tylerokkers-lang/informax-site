@@ -74,6 +74,20 @@
   --color-glow: var(--glow);
   --color-glow-deep: var(--glow-deep);
 
+  --color-ix-navy-950: #060a12;
+  --color-ix-navy-900: #0b1524;
+  --color-ix-navy-850: #0d1c30;
+  --color-ix-navy-800: #0f213a;
+  --color-ix-navy-700: #16304f;
+  --color-ix-brand: #0693e3;
+  --color-ix-bright: #8ed1fc;
+  --color-ix-cream: #eaf2fb;
+  --color-ix-muted: #a4adc0;
+  --color-ix-dim: #7a849c;
+  --color-ix-pos: #34d399;
+  --color-ix-neg: #f87171;
+  --color-ix-warn: #fbbf24;
+
   --color-rust: var(--rust);
   --color-moss: var(--moss);
 
@@ -225,5 +239,106 @@ svg {
   }
   html {
     scroll-behavior: auto;
+  }
+}
+
+
+/* -------------------------------------------------------------------------
+   Informax Cloud app recreation (marketing film components)
+
+   Values mirror the production app's tailwind.config.ts and globals.css
+   (navy surfaces, #0693e3 brand blue, system UI fonts, 12 / 20 / 28px radii,
+   borderless soft surfaces, four button styles). Scoped under .ixp so the
+   marketing site's own identity is untouched. Recreated, not imported: no
+   app code, auth or data is shared.
+   ------------------------------------------------------------------------- */
+
+.ixp {
+  --ixp-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.625;
+  color: #eaf2fb;
+  background-color: #0b1524;
+  background-image:
+    radial-gradient(1100px 620px at 10% -12%, rgba(6, 147, 227, 0.09), transparent 62%),
+    radial-gradient(800px 460px at 96% -4%, rgba(142, 209, 252, 0.045), transparent 58%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  letter-spacing: normal;
+}
+.ixp h1, .ixp h2, .ixp h3, .ixp h4, .ixp .ixp-display {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display",
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.022em;
+}
+.ixp * { box-sizing: border-box; }
+
+.ixp-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px -12px rgba(2, 6, 14, 0.55);
+  transition: transform 280ms var(--ixp-ease), box-shadow 280ms var(--ixp-ease), background-color 280ms var(--ixp-ease);
+}
+.ixp-card.is-hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 40px -16px rgba(2, 6, 14, 0.75);
+}
+.ixp-label { font-size: 13px; font-weight: 500; color: #7a849c; }
+
+.ixp-btn {
+  display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px;
+  border-radius: 12px; padding: 8px 16px; font-size: 14px; font-weight: 500; line-height: 1.4;
+  white-space: nowrap; user-select: none;
+  transition: transform 160ms var(--ixp-ease), background-color 160ms var(--ixp-ease), color 160ms var(--ixp-ease), opacity 160ms var(--ixp-ease);
+}
+.ixp-btn.is-press { transform: scale(0.97); }
+.ixp-btn-primary { background: #0693e3; color: #fff; }
+.ixp-btn-primary.is-hover { background: #1aa0ec; }
+.ixp-btn-secondary { background: rgba(255, 255, 255, 0.07); color: #eaf2fb; }
+.ixp-btn-secondary.is-hover { background: rgba(255, 255, 255, 0.12); }
+.ixp-btn-quiet { padding: 8px 10px; color: #8ed1fc; background: transparent; }
+.ixp-btn-quiet.is-hover { background: rgba(255, 255, 255, 0.06); color: #fff; }
+.ixp-btn[disabled], .ixp-btn.is-disabled { opacity: 0.5; }
+
+.ixp-input {
+  min-height: 44px; width: 100%; border-radius: 12px; background: rgba(255, 255, 255, 0.05);
+  padding: 10px 14px; font-size: 15px; color: #eaf2fb;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transition: box-shadow 160ms var(--ixp-ease), background-color 160ms var(--ixp-ease);
+}
+.ixp-input.is-focus {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(6, 147, 227, 0.9), 0 0 0 3px rgba(6, 147, 227, 0.25);
+}
+
+.ixp-collapse {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows 280ms var(--ixp-ease), opacity 280ms var(--ixp-ease);
+}
+.ixp-collapse[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
+.ixp-collapse > * { overflow: hidden; min-height: 0; }
+
+@keyframes ixp-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ixp-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ixp-scale-in { from { opacity: 0; transform: scale(0.98) translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes ixp-ring { 0% { box-shadow: 0 0 0 0 rgba(6, 147, 227, 0.45); } 100% { box-shadow: 0 0 0 14px rgba(6, 147, 227, 0); } }
+@keyframes ixp-wave { 0% { transform: scale(0.55); opacity: 0.55; } 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes ixp-scan { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateY(100%); opacity: 0; } }
+@keyframes ixp-click { 0% { transform: scale(0.4); opacity: 0.55; } 100% { transform: scale(1.6); opacity: 0; } }
+.ixp-enter { animation: ixp-fade-up 420ms var(--ixp-ease) backwards; }
+.ixp-enter-fade { animation: ixp-fade-in 320ms var(--ixp-ease) backwards; }
+.ixp-enter-scale { animation: ixp-scale-in 320ms var(--ixp-ease) backwards; }
+.ixp-ring { animation: ixp-ring 1400ms var(--ixp-ease) 1; }
+.ixp-tabular { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ixp *, .ixp *::before, .ixp *::after {
+    animation-duration: 0.01ms !important; animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0ms !important;
   }
 }

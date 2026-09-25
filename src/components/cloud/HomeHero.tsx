@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import HotelScene from "./HotelScene";
+import HeroSpaceChip from "@/components/product/HeroSpaceChip";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -28,6 +29,9 @@ export default function HomeHero() {
         <div className="relative mx-auto h-full max-w-[1500px]">
           <div className="absolute inset-y-0 right-0 w-full xl:w-[58%]">
             <HotelScene className="h-full w-full" />
+          </div>
+          <div className="absolute bottom-[7%] right-[1%] hidden xl:block">
+            <HeroSpaceChip />
           </div>
         </div>
       </motion.div>

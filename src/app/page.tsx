@@ -8,11 +8,15 @@ import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import SpacesGrid from "@/components/cloud/SpacesGrid";
 import HowSteps from "@/components/cloud/HowSteps";
 import TouchPointStays from "@/components/cloud/TouchPointStays";
-import CloudDemo from "@/components/cloud/CloudDemo";
-import TouchAndScan from "@/components/cloud/TouchAndScan";
-import OneSpaceManyTouchPoints from "@/components/cloud/OneSpaceManyTouchPoints";
+import AppFilm from "@/components/product/AppFilm";
+import {
+  ActivityFilm,
+  ChangeContentFilm,
+  ManyTouchPointsFilm,
+  PermanentUrlFilm,
+  TouchScanFilm,
+} from "@/components/product/MicroFilms";
 import ContentFormats from "@/components/cloud/ContentFormats";
-import ActivityPanel from "@/components/cloud/ActivityPanel";
 import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
 import CloudCta from "@/components/cloud/CloudCta";
 
@@ -93,6 +97,22 @@ export default function Home() {
           </Reveal>
         </Head>
         <SpacesGrid />
+        <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal blur>
+            <Kicker>Permanent address</Kicker>
+            <h3 className="font-serif-display text-[clamp(28px,3.6vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
+              Every Space has one address that <Soft>never changes.</Soft>
+            </h3>
+            <Lede className="mt-6">
+              Change the PDF. Connect a website. Rename the Space. The address
+              stays exactly the same, so the Touch Points connected to it never
+              need replacing.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <PermanentUrlFilm />
+          </Reveal>
+        </div>
       </Section>
 
       <Section tone="dark">
@@ -105,6 +125,21 @@ export default function Home() {
           </Reveal>
         </Head>
         <HowSteps dark />
+        <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal blur>
+            <Kicker dark>Change Content</Kicker>
+            <h3 className="font-serif-display text-[clamp(28px,3.6vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-white">
+              One clear way to change <Soft dark>what guests see.</Soft>
+            </h3>
+            <Lede dark className="mt-6">
+              Upload a PDF or use a page from your own website, then publish.
+              Your team does it in moments, from wherever they are.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ChangeContentFilm tone="dark" />
+          </Reveal>
+        </div>
       </Section>
 
       <Section tone="dark" divider>
@@ -135,7 +170,7 @@ export default function Home() {
           </Reveal>
         </Head>
         <Reveal>
-          <CloudDemo />
+          <AppFilm captions="light" />
         </Reveal>
       </Section>
 
@@ -154,7 +189,7 @@ export default function Home() {
           </Reveal>
         </Head>
         <Reveal>
-          <TouchAndScan />
+          <TouchScanFilm tone="dark" />
         </Reveal>
         <div className="mt-10">
           <BtnPrimary href="/touch-points" tone="dark">
@@ -177,7 +212,7 @@ export default function Home() {
             </Lede>
           </Reveal>
         </Head>
-        <OneSpaceManyTouchPoints />
+        <ManyTouchPointsFilm tone="dark" />
       </Section>
 
       <Section>
@@ -213,7 +248,7 @@ export default function Home() {
             </ol>
           </Reveal>
           <Reveal delay={0.1}>
-            <ActivityPanel />
+            <ActivityFilm tone="light" />
           </Reveal>
         </div>
       </Section>

@@ -4,11 +4,10 @@ import PageHero from "@/components/cloud/PageHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import TouchPoint from "@/components/cloud/TouchPoint";
-import TouchAndScan from "@/components/cloud/TouchAndScan";
 import Placements from "@/components/cloud/Placements";
 import TouchPointStays from "@/components/cloud/TouchPointStays";
-import OneSpaceManyTouchPoints from "@/components/cloud/OneSpaceManyTouchPoints";
 import CloudCta from "@/components/cloud/CloudCta";
+import { ManyTouchPointsFilm, TouchScanFilm } from "@/components/product/MicroFilms";
 
 export const metadata: Metadata = {
   title: "Informax Touch Points: Put Hotel Information Where Guests Are",
@@ -51,7 +50,7 @@ export default function TouchPointsPage() {
             </Lede>
           </Reveal>
         </Head>
-        <TouchAndScan />
+        <TouchScanFilm tone="dark" />
       </Section>
 
       <Section tone="dark" divider>
@@ -110,7 +109,7 @@ export default function TouchPointsPage() {
             </Display>
           </Reveal>
         </Head>
-        <OneSpaceManyTouchPoints />
+        <ManyTouchPointsFilm tone="dark" />
       </Section>
 
       <CloudCta />

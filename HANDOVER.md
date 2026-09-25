@@ -49,15 +49,13 @@ for the user. Primary CTA everywhere is `PRIMARY_CTA` in `src/lib/constants.ts`
 for it earlier.
 
 Where things live:
-- `src/components/cloud/*` — the whole product story. `HomeHero` +
-  `HotelScene` (SVG hotel cross-section, warm rooms = physical, indigo arc =
-  Cloud, risers = connections); `CloudDemo` (scripted Space > change content
-  > publish > "N Touch Points updated"); `TouchPointStays`;
-  `OneSpaceManyTouchPoints` (400 rooms, wave update); `ContentFormats`;
-  `ActivityPanel` (illustrative data, labelled as such); `TouchAndScan`;
-  `Placements`; `SpacesGrid`; `HowSteps`; `PageHero`; `CloudCta`;
-  `TouchPoint` (the physical product drawn in CSS); `CloudChrome` (shared
-  Informax Cloud window frame so every mockup reads as one product).
+- `src/components/cloud/*` — the page-level story: `HomeHero` + `HotelScene`
+  (SVG hotel cross-section, warm rooms = physical, indigo arc = Cloud, risers
+  = connections), `TouchPointStays`, `ContentFormats`, `SpacesGrid`,
+  `HowSteps`, `PageHero`, `CloudCta`, `TouchPoint` (the physical product drawn
+  in CSS), plus small helpers.
+- `src/components/product/*` — **animated recreations of the real Informax
+  Cloud app** (see "Product films" below).
 - `src/lib/spaces.ts` — Space data and Touch Point placements. Edit copy here.
 - Motion: `Reveal` gained a `blur` prop. Every animated component honours
   `prefers-reduced-motion` (Framer via `useReducedMotion`, CSS via the media
@@ -65,6 +63,54 @@ Where things live:
   dependencies were added.
 - Design tokens: new warm `--glow` / `--glow-deep` (physical hotel light) sit
   beside the existing indigo `--brass*` family (digital / Cloud).
+
+
+### Product films (25 September 2026)
+
+The marketing site shows **recreations of the real Informax Cloud app**, not
+generic dashboards. The real app lives in `../informax-analytics` (Next 15,
+Supabase, deployed at informax.cloud) and is the source of truth for wording,
+layout and behaviour. The film components are recreated presentational code:
+**nothing is imported from the app and no auth, data or business logic is
+shared.** If the app's UI changes, update the films to match.
+
+Where the app was read from (read-only): `tailwind.config.ts` + `globals.css`
+(tokens), `components/ui/*` (icons, sheet, motion), `components/content/*`
+(Current Content, Change Content, versions), `components/admin/*` (Space
+detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
+(Hotel Admin shell), `lib/product-language.ts` and
+`docs/design/terminology-map.md` (wording).
+
+- Tokens are copied under a `.ixp` wrapper in `globals.css` (navy `#0b1524`,
+  brand blue `#0693e3`, system UI fonts, 12/20/28px radii, borderless soft
+  surfaces, four button styles). Marketing keeps its own identity outside it.
+- `AppFilm` — the ~19 s main film (Hotel workspace, Spaces, Spa, Change
+  Content, Use a website, Publish, unchanged URL and Touch Points, Activity,
+  Previous Versions). At `min-[1120px]` it is the desktop app frame (scaled to
+  fit, never below ~95%); below that it is `PhoneFilm` (unscaled, real-size
+  text).
+- `PhoneFilm` — the real Hotel Admin dashboard on a phone; `variant="main"`
+  starts at Your Spaces, `variant="update"` starts inside the Space.
+- `MicroFilms` — `PermanentUrlFilm`, `ChangeContentFilm`,
+  `ManyTouchPointsFilm`, `TouchScanFilm`, `ActivityFilm`, `VersionsFilm`.
+  `HeroSpaceChip` is the static card in the home hero. `ContentFormats`
+  (`components/cloud`) uses the app's real Change Content tiles.
+- Engine (`film.tsx`): timed marks drive React state, CSS does the movement;
+  no animation library. Films run only while in view (IntersectionObserver via
+  framer's `useInView`), clear all timers when off screen, and restart when
+  they return. Reduced motion shows a static final frame with no pointer.
+- **Rules:** every label, button and message must exist in the real app.
+  Do not invent features. Known deliberate exceptions, both outside the app
+  frame: the "Changed / Unchanged" caption strip and the "12 Touch Points
+  updated" annotation are marketing layers (the app itself confirms with
+  "Guests now see <address>"). Figures are illustrative.
+- The main film uses the Informax-administrator Hotel workspace (Overview /
+  Spaces / Touch Points / Activity / People). A hotel's own dashboard is
+  Overview / Spaces / Activity / Account and its Space page has no Touch
+  Points list. Both are real; do not present the admin-only Touch Points list
+  as something a hotel user sees without checking.
+- "Fairmont Windsor Park" and the sample Space code `k3m9x7q2ab` are
+  illustrative. Confirm the hotel has agreed to appear before this goes public.
 
 Assets and decisions to know about:
 - **No photography or footage exists for the new hero.** The homepage hero
@@ -373,7 +419,8 @@ resend.com/emails for individual send/delivery status.
 |---|---|
 | `src/lib/constants.ts` | Nav, footer, `PRIMARY_CTA`, enquiry interests, contact email, site URL |
 | `src/lib/spaces.ts` | Space and placement data used across the product pages |
-| `src/components/cloud/*` | The product story components (see §0) |
+| `src/components/cloud/*` | Page-level story components (see §0) |
+| `src/components/product/*` | Recreated Informax Cloud app films (see "Product films" in §0) |
 | `src/app/globals.css` | Design tokens and motion primitives (`tp-pulse`, `riser-travel`, `dot-in`) |
 | `src/app/layout.tsx` | Default metadata, Organization JSON-LD |
 | `src/app/informax-cloud/page.tsx` | SoftwareApplication JSON-LD (no price or offers published) |
