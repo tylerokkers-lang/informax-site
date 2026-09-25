@@ -71,7 +71,7 @@ export default function CloudEntrance({
   const className =
     variant === "header"
       ? "group hidden md:inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-ix-brand pl-3 pr-4 py-2 text-[13.5px] font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.14)_inset,0_8px_24px_-10px_rgba(6,147,227,0.8)] transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#0aa0f5] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.22)_inset,0_10px_30px_-10px_rgba(6,147,227,0.95)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ix-bright"
-      : "group mt-8 inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-ix-brand px-4 py-3.5 text-[14.5px] font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.14)_inset] transition-colors duration-200 active:bg-[#0aa0f5] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ix-bright";
+      : "group mt-8 inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-ix-brand px-3 py-3.5 text-[13px] font-semibold min-[360px]:gap-2 min-[360px]:px-4 min-[360px]:text-[14.5px] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.14)_inset] transition-colors duration-200 active:bg-[#0aa0f5] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ix-bright";
 
   return (
     <>
@@ -83,11 +83,13 @@ export default function CloudEntrance({
         onClick={onClick}
         className={className}
       >
-        <CloudMark size={variant === "header" ? 17 : 19} />
+        <CloudMark size={variant === "header" ? 17 : 19} className="shrink-0" />
         Log in to Informax Cloud
         <span
           aria-hidden
-          className="transition-transform duration-200 group-hover:translate-x-0.5"
+          className={`transition-transform duration-200 group-hover:translate-x-0.5 ${
+            variant === "drawer" ? "hidden min-[360px]:inline" : ""
+          }`}
         >
           →
         </span>
