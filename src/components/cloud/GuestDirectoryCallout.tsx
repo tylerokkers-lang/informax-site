@@ -10,19 +10,18 @@ export default function GuestDirectoryCallout() {
       <Reveal>
         <Kicker>One Space among many</Kicker>
         <Display>
-          And yes, your entire <Soft>Guest Directory</Soft> can be a Space too.
+          Your entire <Soft>Guest Directory</Soft> can be a Space too.
         </Display>
         <Lede className="mt-8">
-          Hotels can still create a beautifully designed digital Guest
-          Directory and connect it throughout the property. But Informax
-          Cloud goes much further.
+          A beautifully designed Guest Directory, connected to every room.
+          One use of Informax Cloud among many.
         </Lede>
       </Reveal>
 
       <Reveal delay={0.1} className="mx-auto w-[260px]">
         <div className="rounded-[34px] border-[6px] border-charcoal-950 bg-paper-alt p-4 shadow-[0_30px_70px_rgba(15,15,24,0.22)]">
           <div className="mb-4 mt-1 text-center text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-mute">
-            The Grand Hotel
+            Maison Aurelia
           </div>
           <div className="font-serif-display text-[24px] leading-tight text-ink">Guest Directory</div>
           <div className="mt-5 bg-panel">

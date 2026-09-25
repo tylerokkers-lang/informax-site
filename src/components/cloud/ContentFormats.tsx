@@ -13,7 +13,7 @@ const FORMATS = [
 function PdfPreview() {
   return (
     <div className="mx-auto w-[210px] bg-white p-5 shadow-[0_24px_60px_rgba(15,15,24,0.18)]">
-      <div className="text-[8px] font-semibold uppercase tracking-[0.2em] text-brass-deep">The Grand Hotel</div>
+      <div className="text-[8px] font-semibold uppercase tracking-[0.2em] text-brass-deep">Maison Aurelia</div>
       <div className="mt-3 font-serif-display text-[22px] leading-tight text-ink">Dinner Menu</div>
       <div className="mt-5 space-y-2">
         {[92, 70, 84, 60, 76, 52].map((w, i) => (
@@ -33,18 +33,19 @@ function WebPreview() {
           <i className="h-1.5 w-1.5 rounded-full bg-ink/15" />
           <i className="h-1.5 w-1.5 rounded-full bg-ink/15" />
         </span>
-        <span className="flex-1 truncate bg-paper-alt px-2 py-0.5 text-[9px] text-ink-mute">hotel.com/dining/reserve</span>
+        <span className="flex-1 truncate bg-paper-alt px-2 py-0.5 text-[9px] text-ink-mute">maisonaurelia.com/dining/menu</span>
       </div>
       <div className="p-5">
-        <div className="font-serif-display text-[22px] leading-tight text-ink">Reserve a table</div>
-        <div className="mt-4 grid grid-cols-3 gap-1.5">
-          {["19:00", "19:30", "20:00"].map((t) => (
-            <div key={t} className="border border-line py-1.5 text-center text-[10px] text-ink-mute">
-              {t}
+        <div className="font-serif-display text-[22px] leading-tight text-ink">Dinner Menu</div>
+        <div className="mt-4 space-y-2.5">
+          {[["Burrata, heritage tomato", "18"], ["Lake perch, brown butter", "32"], ["Risotto al limone", "26"]].map(([dish, price]) => (
+            <div key={dish} className="flex justify-between gap-3 border-b border-line pb-2 text-[10px] text-ink-soft">
+              <span>{dish}</span>
+              <span className="text-ink-mute">{price}</span>
             </div>
           ))}
         </div>
-        <div className="mt-4 bg-ink py-2 text-center text-[10px] font-semibold text-white">Book now</div>
+        <div className="mt-4 bg-ink py-2 text-center text-[10px] font-semibold text-white">Reserve a table</div>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export default function WebsitesHero() {
       eyebrow="Informax — Websites"
       headline="A website that actually looks like it's yours."
       description="Custom-designed and built around your business, not a generic template. Part of the same studio behind your guest directory."
-      primaryLabel="Start a project"
+      primaryLabel="Talk to Informax"
       primaryHref="/enquire"
       secondaryLabel="See how we work"
       secondaryHref="#how-we-work"

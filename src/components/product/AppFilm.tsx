@@ -291,9 +291,9 @@ function DesktopFilm({ captions }: { captions: "dark" | "light" }) {
 export function Captions({ published, tone }: { published: boolean; tone: "dark" | "light" }) {
   const dark = tone === "dark";
   const rows = [
-    { label: "Content", from: SPA.pdf, to: SPA.web, changed: true },
-    { label: "Space URL", from: SPACE_URL, to: SPACE_URL, changed: false },
-    { label: "Touch Points", from: "12 connected", to: "12 connected", changed: false },
+    { label: "Current Content", from: SPA.pdf, to: SPA.web, badge: "Changed", changed: true },
+    { label: "Permanent Space URL", from: SPACE_URL, to: SPACE_URL, badge: "Unchanged", changed: false },
+    { label: "Touch Points", from: `${SPA.touchPoints} deployed`, to: `${SPA.touchPoints} updated`, badge: "Still in place", changed: false },
   ];
   return (
     <ul className="mx-auto mt-6 grid max-w-[1080px] gap-3 sm:grid-cols-3" aria-label="What changed and what did not">
@@ -307,12 +307,12 @@ export function Captions({ published, tone }: { published: boolean; tone: "dark"
           <div className="flex items-center justify-between gap-3">
             <span className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${dark ? "text-cream-mute" : "text-ink-mute"}`}>{r.label}</span>
             <span
-              className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.12em] transition-opacity duration-500 ${
+              className={`flex items-center gap-1 whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.12em] transition-opacity duration-500 ${
                 published ? "opacity-100" : "opacity-0"
               } ${r.changed ? "text-ix-brand" : dark ? "text-ix-pos" : "text-emerald-700"}`}
             >
               {!r.changed && <Check size={12} />}
-              {r.changed ? "Changed" : "Unchanged"}
+              {r.badge}
             </span>
           </div>
           <div className={`mt-1.5 truncate font-mono text-[12.5px] ${dark ? "text-white" : "text-ink"}`}>{published ? r.to : r.from}</div>

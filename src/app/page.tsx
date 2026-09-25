@@ -1,112 +1,149 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import { BtnPrimary } from "@/components/ui";
-import HomeHero from "@/components/cloud/HomeHero";
+import VideoHero from "@/components/sections/VideoHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
-import SpacesGrid from "@/components/cloud/SpacesGrid";
-import HowSteps from "@/components/cloud/HowSteps";
 import TouchPointStays from "@/components/cloud/TouchPointStays";
-import AppFilm from "@/components/product/AppFilm";
-import {
-  ActivityFilm,
-  ChangeContentFilm,
-  ManyTouchPointsFilm,
-  PermanentUrlFilm,
-  TouchScanFilm,
-} from "@/components/product/MicroFilms";
 import ContentFormats from "@/components/cloud/ContentFormats";
 import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
 import CloudCta from "@/components/cloud/CloudCta";
+import InfoMoments from "@/components/story/InfoMoments";
+import PrintedHistory from "@/components/story/PrintedHistory";
+import MeetCloud from "@/components/story/MeetCloud";
+import AppFilm from "@/components/product/AppFilm";
+import PhoneFilm from "@/components/product/PhoneFilm";
+import SpacesShowcase from "@/components/product/SpacesShowcase";
+import { ActivityFilm, ManyTouchPointsFilm, PermanentUrlFilm, TouchScanFilm } from "@/components/product/MicroFilms";
 
 export const metadata: Metadata = {
-  title: { absolute: "Informax Cloud | Connected Spaces and Touch Points for Hotels" },
+  title: { absolute: "Informax | Hotel Information Management and Guest Experience Technology" },
   description:
-    "Informax Cloud gives every part of your hotel a permanent digital Space. Connect Touch Points throughout the property and change what guests see from anywhere, without replacing a thing.",
+    "Control what guests see. Informax gives hotels one place to manage the essential information behind every part of the property, and change it from anywhere without replacing a thing.",
   alternates: { canonical: "/" },
 };
 
-const CAPABILITIES = [
-  {
-    title: "Spaces",
-    body: "A permanent digital destination for every real part of your hotel.",
-  },
-  {
-    title: "PDF or website",
-    body: "Serve what already exists. Change it whenever you like.",
-  },
-  {
-    title: "Touch Points",
-    body: "Connect them throughout the property. Install once.",
-  },
-  {
-    title: "Activity",
-    body: "See which Spaces guests use, and how they arrive.",
-  },
-];
+const CHANGES = ["Printed menus become outdated.", "Links change.", "Schedules change.", "Offers change.", "Web pages move.", "Staff replace signs."];
 
-const QUESTIONS = [
-  "Which Spaces receive the most interaction?",
-  "Which Touch Points are being used?",
-  "When are guests interacting?",
-  "How are guests accessing information?",
-];
+const PLACES = ["Spa", "Bedroom", "Lift lobby", "Restaurant", "Gym", "Meeting rooms", "Reception"];
 
 export default function Home() {
   return (
     <>
-      <HomeHero />
+      <VideoHero
+        videoMp4="/video/home-hero.mp4"
+        videoWebm="/video/home-hero.webm"
+        poster="/video/home-hero-poster.jpg"
+        eyebrow="Built for Hotels"
+        headline="Control what guests see."
+        subline="Essential information. Exactly where it belongs."
+        description="Hotels depend on information every moment of the day. Informax gives you control over how it reaches your guests."
+        primaryLabel="Discover Informax"
+        primaryHref="#information"
+        secondaryLabel="See how it works"
+        secondaryHref="/how-it-works"
+      />
 
-      <Section>
+      {/* 2. Why information matters */}
+      <Section id="information">
         <Head>
           <Reveal blur>
-            <Kicker>What Informax Cloud is</Kicker>
+            <Kicker>Why information matters</Kicker>
             <Display>
-              A digital layer for the <Soft>physical hotel.</Soft>
+              Information is part of <Soft>the experience.</Soft>
+            </Display>
+          </Reveal>
+        </Head>
+        <InfoMoments />
+        <Reveal className="mt-14 max-w-[40ch]">
+          <p className="font-serif-display text-[clamp(22px,2.6vw,32px)] leading-[1.25] text-ink">
+            Each is small. <Soft>Together, they shape how effortlessly a guest moves through the Hotel.</Soft>
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* 3. The problem */}
+      <Section tone="alt">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-24">
+          <Reveal blur>
+            <Kicker>The quiet problem</Kicker>
+            <Display>
+              Information changes. <Soft>Physical spaces do not.</Soft>
             </Display>
             <Lede className="mt-8">
-              Informax Cloud connects the information your hotel already has
-              with the places guests actually are. Your team decides what each
-              part of the property shows, and changes it from anywhere.
+              What a guest needs today may be different tomorrow. Traditionally,
+              changing the information means changing the physical material too.
+            </Lede>
+            <ul className="mt-10 grid max-w-md grid-cols-2 gap-x-8 gap-y-3 text-[15px] text-ink-mute">
+              {CHANGES.map((c) => (
+                <li key={c} className="border-t border-line pt-3">
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 font-serif-display text-[clamp(24px,2.8vw,34px)] text-ink">
+              Informax separates <Soft>the two.</Soft>
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <PrintedHistory />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* 4. The concept */}
+      <Section tone="dark">
+        <Head>
+          <Reveal blur>
+            <Kicker dark>The idea</Kicker>
+            <Display dark>
+              One permanent connection. <Soft dark>Anything behind it can change.</Soft>
+            </Display>
+            <Lede dark className="mt-8">
+              A physical Informax Touch Point stays in place. Your Hotel controls
+              what guests see behind it.
             </Lede>
           </Reveal>
         </Head>
-        <RevealStagger className="grid gap-x-10 gap-y-2 sm:grid-cols-2 lg:grid-cols-4">
-          {CAPABILITIES.map((c, i) => (
-            <RevealStaggerItem key={c.title} className="border-t border-line py-8">
-              <span className="mb-8 block font-serif-display text-[15px] italic text-brass-deep">0{i + 1}</span>
-              <h3 className="font-serif-display text-[26px] leading-none text-ink">{c.title}</h3>
-              <p className="mt-4 max-w-[26ch] text-[15px] leading-relaxed text-ink-mute">{c.body}</p>
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
+        <TouchPointStays />
+        <p className="mt-14 font-serif-display text-[clamp(24px,2.8vw,34px)] text-white">
+          Change the content. <Soft dark>Keep the connection.</Soft>
+        </p>
       </Section>
 
-      <Section divider>
+      {/* 5. The product */}
+      <MeetCloud>
+        <AppFilm captions="dark" />
+      </MeetCloud>
+
+      {/* 6. Spaces */}
+      <Section>
         <Head>
           <Reveal blur>
             <Kicker>Spaces</Kicker>
             <Display>
-              Your hotel already has spaces. Now give them a <Soft>digital layer.</Soft>
+              Give every part of your Hotel <Soft>a Space.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Space is a permanent digital destination for a real part of
-              the hotel. The hotel decides what guests see when they open it.
+              A Space is the permanent digital destination for a real part of
+              your Hotel. Spa, Restaurants, Gym, Meetings, Guest Rooms, the Guest
+              Directory: each one is a Space.
             </Lede>
           </Reveal>
         </Head>
-        <SpacesGrid />
-        <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <Reveal>
+          <SpacesShowcase />
+        </Reveal>
+        <div className="mt-24 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal blur>
             <Kicker>Permanent address</Kicker>
             <h3 className="font-serif-display text-[clamp(28px,3.6vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
-              Every Space has one address that <Soft>never changes.</Soft>
+              Each Space has one Informax address. <Soft>It never changes.</Soft>
             </h3>
             <Lede className="mt-6">
-              Change the PDF. Connect a website. Rename the Space. The address
-              stays exactly the same, so the Touch Points connected to it never
-              need replacing.
+              Your Hotel decides what the Space serves. The address, and every
+              Touch Point connected to it, stays exactly as it is.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
@@ -115,137 +152,108 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>How it works</Kicker>
-            <Display dark>
-              Simple to set up. <Soft dark>Simple to change.</Soft>
-            </Display>
-          </Reveal>
-        </Head>
-        <HowSteps dark />
-        <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <Reveal blur>
-            <Kicker dark>Change Content</Kicker>
-            <h3 className="font-serif-display text-[clamp(28px,3.6vw,46px)] font-medium leading-[1.05] tracking-[-0.02em] text-white">
-              One clear way to change <Soft dark>what guests see.</Soft>
-            </h3>
-            <Lede dark className="mt-6">
-              Upload a PDF or use a page from your own website, then publish.
-              Your team does it in moments, from wherever they are.
-            </Lede>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ChangeContentFilm tone="dark" />
-          </Reveal>
-        </div>
-      </Section>
-
-      <Section tone="dark" divider>
-        <Head>
-          <Reveal blur>
-            <Kicker dark>The idea behind it all</Kicker>
-            <Display dark>
-              The Touch Point stays. <Soft dark>Everything behind it can change.</Soft>
-            </Display>
-          </Reveal>
-        </Head>
-        <TouchPointStays />
-      </Section>
-
+      {/* 7. Update anytime */}
       <Section tone="alt">
-        <Head>
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <Reveal blur>
-            <Kicker>Informax Cloud</Kicker>
+            <Kicker>Update anytime</Kicker>
             <Display>
               Change it from <Soft>anywhere.</Soft>
             </Display>
             <Lede className="mt-8">
-              Your hotel never stands still. Menus change. Offers change.
-              Schedules change. Informax Cloud lets your team update what
-              guests see in seconds, without touching the Touch Points around
-              your property.
+              Your team can update a Space from a phone, a tablet or a desktop,
+              wherever they are.
             </Lede>
+            <ul className="mt-10 max-w-sm">
+              {["No reprinting.", "No replacing physical Touch Points.", "No changing the permanent connection."].map((l) => (
+                <li key={l} className="border-t border-line py-4 font-serif-display text-[21px] text-ink">
+                  {l}
+                </li>
+              ))}
+            </ul>
           </Reveal>
-        </Head>
-        <Reveal>
-          <AppFilm captions="light" />
-        </Reveal>
+          <Reveal delay={0.1}>
+            <PhoneFilm variant="update" space="spa" captions="light" />
+          </Reveal>
+        </div>
       </Section>
 
+      {/* 8. Touch Points */}
       <Section tone="dark">
         <Head>
           <Reveal blur>
             <Kicker dark>Touch Points</Kicker>
             <Display dark>
-              Put information where it <Soft dark>matters.</Soft>
+              Put information where <Soft dark>guests need it.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              A guest arrives at the Spa. Instead of searching the hotel
-              website or calling Reception, they use the Touch Point beside
-              them. The Spa Space opens instantly.
+              Touch Points connect guests to Spaces. They do not own the content.
+              The Space does.
             </Lede>
           </Reveal>
         </Head>
         <Reveal>
           <TouchScanFilm tone="dark" />
         </Reveal>
-        <div className="mt-10">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
+          <ul className="flex flex-wrap gap-x-7 gap-y-2 text-[14px] text-cream-mute">
+            {PLACES.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
           <BtnPrimary href="/touch-points" tone="dark">
             Explore Touch Points
           </BtnPrimary>
         </div>
       </Section>
 
+      {/* 9. One Space, many Touch Points */}
       <Section tone="dark" divider>
         <Head>
           <Reveal blur>
             <Kicker dark>One Space, many Touch Points</Kicker>
             <Display dark>
-              One change. <Soft dark>Every Touch Point.</Soft>
+              Update once. <Soft dark>Change everywhere.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Four hundred bedrooms, one Guest Directory Space. The hotel
-              looks after one piece of content, not four hundred. Change it
-              once and every room follows.
+              One Guest Directory Space. Four hundred Guest Room Touch Points.
+              One change in Informax Cloud, and every room follows.
             </Lede>
           </Reveal>
         </Head>
         <ManyTouchPointsFilm tone="dark" />
       </Section>
 
+      {/* 10. PDF or website */}
       <Section>
         <Head>
           <Reveal blur>
             <Kicker>Your content</Kicker>
             <Display>
-              Your content. <Soft>Your way.</Soft>
+              Your content. <Soft>Your choice.</Soft>
             </Display>
             <Lede className="mt-8">
-              Informax does not ask you to recreate what already exists.
-              Upload a PDF or connect a page from your hotel website.
+              Upload a menu, brochure, guide, floor plan or directory as a PDF,
+              or connect a page your Hotel already has. Switch whenever you
+              want. The permanent Space stays the same.
             </Lede>
           </Reveal>
         </Head>
         <ContentFormats />
       </Section>
 
+      {/* 11. Activity */}
       <Section tone="alt">
-        <div className="grid items-center gap-14 grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <Reveal blur>
             <Kicker>Activity</Kicker>
             <Display>
-              See what guests <Soft>use.</Soft>
+              See what <Soft>guests use.</Soft>
             </Display>
-            <ol className="mt-10 max-w-md">
-              {QUESTIONS.map((q, i) => (
-                <li key={q} className="flex gap-5 border-t border-line py-4 text-[15.5px] text-ink">
-                  <span className="font-serif-display italic text-brass-deep">0{i + 1}</span>
-                  {q}
-                </li>
-              ))}
-            </ol>
+            <Lede className="mt-8">
+              Which Spaces guests open, which Touch Points they use, and whether
+              they arrived with Informax Touch, Informax Scan or directly.
+            </Lede>
           </Reveal>
           <Reveal delay={0.1}>
             <ActivityFilm tone="light" />
@@ -253,11 +261,15 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* 12. Guest Directory */}
       <Section>
         <GuestDirectoryCallout />
-        <div className="mt-12">
-          <Link href="/hospitality" className="text-[15px] font-medium text-ink-mute underline-offset-4 transition-colors hover:text-ink hover:underline">
-            How hotels use Informax
+        <div className="mt-10">
+          <Link
+            href="/informax-cloud"
+            className="text-[15px] font-medium text-ink-mute underline-offset-4 transition-colors hover:text-ink hover:underline"
+          >
+            Explore Informax Cloud
           </Link>
         </div>
       </Section>

@@ -28,7 +28,7 @@ export const SPACES: Space[] = [
     holds: ["Treatments", "Booking", "Opening hours", "Offers"],
     touchPoints: 12,
     pdf: "Spa Treatments.pdf",
-    site: "hotel.com/spa/book",
+    site: "maisonaurelia.com/spa/book",
   },
   {
     id: "restaurants",
@@ -37,7 +37,7 @@ export const SPACES: Space[] = [
     holds: ["Menus", "Bookings", "Opening hours", "Specials"],
     touchPoints: 8,
     pdf: "Dinner Menu.pdf",
-    site: "hotel.com/dining/reserve",
+    site: "maisonaurelia.com/dining/menu",
   },
   {
     id: "gym",
@@ -46,7 +46,7 @@ export const SPACES: Space[] = [
     holds: ["Class timetable", "Facilities", "Wellness information"],
     touchPoints: 5,
     pdf: "Class Timetable.pdf",
-    site: "hotel.com/wellness/classes",
+    site: "maisonaurelia.com/wellness/classes",
   },
   {
     id: "meetings",
@@ -55,16 +55,16 @@ export const SPACES: Space[] = [
     holds: ["Floor plans", "Room layouts", "Menus", "Event information"],
     touchPoints: 9,
     pdf: "Meeting Rooms.pdf",
-    site: "hotel.com/meetings/enquire",
+    site: "maisonaurelia.com/events/floorplans",
   },
   {
     id: "bedrooms",
-    name: "Bedrooms",
+    name: "Guest Rooms",
     icon: BedDouble,
     holds: ["Guest information", "Hotel services", "Room service", "Local information"],
     touchPoints: 400,
-    pdf: "Room Guide.pdf",
-    site: "hotel.com/stay",
+    pdf: "In-Room Dining.pdf",
+    site: "maisonaurelia.com/stay",
   },
   {
     id: "directory",
@@ -72,8 +72,8 @@ export const SPACES: Space[] = [
     icon: BookOpen,
     holds: ["Full hotel directory", "Services", "FAQs", "Facilities"],
     touchPoints: 400,
-    pdf: "Guest Directory.pdf",
-    site: "hotel.com/guest-directory",
+    pdf: "GuestDirectory.pdf",
+    site: "maisonaurelia.com/guest-directory",
   },
 ];
 
@@ -85,7 +85,7 @@ export const DEMO_SPACES = ["spa", "restaurants", "gym", "meetings", "directory"
 export const PLACEMENTS = [
   { name: "Spa reception", space: "Spa", scene: "desk" },
   { name: "Lift lobby", space: "Guest Directory", scene: "lift" },
-  { name: "Bedroom", space: "Bedrooms", scene: "bed" },
+  { name: "Bedroom", space: "Guest Directory", scene: "bed" },
   { name: "Gym entrance", space: "Gym", scene: "wall" },
   { name: "Restaurant table", space: "Restaurants", scene: "table" },
   { name: "Conference corridor", space: "Meetings & Events", scene: "wall" },

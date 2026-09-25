@@ -109,8 +109,30 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   Overview / Spaces / Activity / Account and its Space page has no Touch
   Points list. Both are real; do not present the admin-only Touch Points list
   as something a hotel user sees without checking.
-- "Fairmont Windsor Park" and the sample Space code `k3m9x7q2ab` are
-  illustrative. Confirm the hotel has agreed to appear before this goes public.
+- All demo data is fictional: the hotel is **Maison Aurelia** (Lake Como),
+  links use `maisonaurelia.com/...` and match their Space (spa/book,
+  dining/menu, wellness/classes, events/floorplans), and Space codes are
+  made up. Never use real customers (Fairmont, test hotels, staff names).
+  Everything lives in `src/components/product/data.ts`.
+
+### Homepage story and hero films (25 September 2026, second pass)
+
+The homepage now establishes why controlled information matters before it
+sells software: hero ("Control what guests see.") > information is part of
+the experience > information changes, physical spaces do not > one
+permanent connection > **Meet Informax Cloud** (product reveal, clouds film
+band + main app film) > Spaces > change it from anywhere > Touch Points >
+one Space, many Touch Points > PDF or website > Activity > Guest Directory >
+"Take control of what your guests see."
+
+Hero films, supplied by the user and re-encoded in `public/video/`:
+- `home-hero.*` (Earth with light trails, 8.5 s crossfade loop, ~0.9 MB):
+  homepage hero.
+- `cloud-hero.*` (clouds from above, 12 s forward/back loop, ~1.7 MB):
+  Informax Cloud hero (with `dim={0.42}` because the footage is bright) and
+  the homepage "Meet Informax Cloud" band, which only fetches the video when
+  it nears the viewport. Replace either by dropping new files with the same
+  names. Reduced motion shows the poster only.
 
 Assets and decisions to know about:
 - **No photography or footage exists for the new hero.** The homepage hero

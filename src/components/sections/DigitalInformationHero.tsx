@@ -21,7 +21,7 @@ export default function DigitalInformationHero() {
       eyebrow="Informax — Digital Information"
       headline="Documents your guests actually want to open."
       description="Brochures, pamphlets and directories, designed to be scanned, opened and explored in seconds, not downloaded and forgotten."
-      primaryLabel="Start a project"
+      primaryLabel="Talk to Informax"
       primaryHref="/enquire"
       secondaryLabel="See how it works"
       secondaryHref="#flow"

@@ -8,7 +8,7 @@ import TouchPoint from "./TouchPoint";
 const STATES = [
   { when: "Today", kind: "pdf", title: "Spa Treatments", note: "PDF" },
   { when: "Tomorrow", kind: "pdf", title: "Seasonal Offer", note: "PDF" },
-  { when: "Next month", kind: "web", title: "hotel.com/spa/book", note: "Website" },
+  { when: "Next month", kind: "web", title: "maisonaurelia.com/spa/book", note: "Website" },
 ] as const;
 
 /**

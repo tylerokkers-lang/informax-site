@@ -82,7 +82,7 @@ export default function HospitalityPage() {
       </Section>
 
       <Section>
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-24">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
           <Reveal blur>
             <Kicker>Update anywhere</Kicker>
             <Display>

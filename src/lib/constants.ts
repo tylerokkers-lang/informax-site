@@ -4,7 +4,6 @@ export const CONTACT_EMAIL = "info@informax.co.uk";
 export const PRIMARY_CTA = "Talk to Informax";
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "How It Works", href: "/how-it-works" },
   { label: "Hospitality", href: "/hospitality" },

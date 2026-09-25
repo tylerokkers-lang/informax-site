@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
@@ -12,13 +12,17 @@ export interface VideoHeroProps {
   videoWebm: string;
   poster: string;
   eyebrow: string;
-  headline: string;
+  headline: ReactNode;
+  /** Quiet second line under the headline. */
+  subline?: ReactNode;
   description: string;
   primaryLabel: string;
   primaryHref: string;
   secondaryLabel: string;
   secondaryHref: string;
   showScrollCue?: boolean;
+  /** Extra even darkening for bright footage, 0 to 1. */
+  dim?: number;
 }
 
 /**
@@ -35,12 +39,14 @@ export default function VideoHero({
   poster,
   eyebrow,
   headline,
+  subline,
   description,
   primaryLabel,
   primaryHref,
   secondaryLabel,
   secondaryHref,
   showScrollCue = true,
+  dim = 0,
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [loaded, setLoaded] = useState(false);
@@ -93,6 +99,8 @@ export default function VideoHero({
         />
       </div>
 
+      {dim > 0 && <div className="pointer-events-none absolute inset-0" style={{ background: `rgba(6,6,10,${dim})` }} />}
+
       {/* Controlled scrim — darkest low-left where type sits, near-clear top-right so the film reads */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -104,7 +112,7 @@ export default function VideoHero({
       <div
         className="absolute inset-x-0 top-0 h-40 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(6,6,10,0.5), transparent)",
+          background: "linear-gradient(to bottom, rgba(6,6,10,0.7), transparent)",
         }}
       />
 
@@ -125,10 +133,21 @@ export default function VideoHero({
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: EASE, delay: 0.32 }}
-            className="max-w-[16ch] font-serif-display font-medium text-[clamp(38px,7vw,88px)] leading-[0.98] tracking-[-0.01em] text-white"
+            className="max-w-[16ch] text-balance font-serif-display font-medium text-[clamp(38px,7vw,88px)] leading-[0.98] tracking-[-0.01em] text-white"
           >
             {headline}
           </motion.h1>
+
+          {subline && (
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: EASE, delay: 0.45 }}
+              className="mt-5 font-serif-display text-[clamp(22px,2.6vw,34px)] italic leading-[1.2] text-glow"
+            >
+              {subline}
+            </motion.p>
+          )}
 
           <motion.p
             initial={{ opacity: 0, y: 18 }}

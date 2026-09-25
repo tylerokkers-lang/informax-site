@@ -135,7 +135,7 @@ export default function AboutPage() {
       </section>
 
       <FinalCta
-        title={<>Bring Informax to your hotel.</>}
+        title={<>Take control of what your guests see.</>}
         description="Tell us about your property and what you would like to connect."
       />
     </>

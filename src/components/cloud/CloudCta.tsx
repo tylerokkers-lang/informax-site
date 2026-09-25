@@ -5,8 +5,8 @@ import { PRIMARY_CTA } from "@/lib/constants";
 
 /** Closing statement. One action only. */
 export default function CloudCta({
-  lead = "Your hotel is already full of information.",
-  line = "Put it where guests need it.",
+  lead = "Take control of",
+  line = "what your guests see.",
 }: {
   lead?: string;
   line?: string;

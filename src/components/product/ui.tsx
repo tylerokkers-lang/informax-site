@@ -160,9 +160,9 @@ export function SpaceCard({
         <Badge>Live</Badge>
       </div>
       <div className="mt-6 flex items-center gap-3.5">
-        <ContentKindTile kind="pdf" size={40} />
+        <ContentKindTile kind={space.kind} size={40} />
         <div className="min-w-0">
-          <p className="text-[13px] text-ix-dim">Current content · PDF</p>
+          <p className="text-[13px] text-ix-dim">Current content · {space.kind === "website" ? "Website" : "PDF"}</p>
           <p className="truncate text-[15px] text-ix-cream">{space.file}</p>
         </div>
       </div>
@@ -274,6 +274,10 @@ export interface ChangePanelState {
   publishedAddress: string | null;
   hoverPublish?: boolean;
   pressPublish?: boolean;
+  /** A chosen PDF awaiting Publish. */
+  staged?: { name: string; size: string } | null;
+  /** The PDF flow has published. */
+  pdfPublished?: boolean;
 }
 
 /** The real "What should guests see?" panel with its two flows underneath. */
@@ -282,9 +286,9 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
   return (
     <Collapse open={s.open}>
       <div className="pt-6">
-        <div className="rounded-[20px] bg-white/[0.04] p-5 sm:p-6">
+        <div className="@container rounded-[20px] bg-white/[0.04] p-5 sm:p-6">
           <h4 className="text-[17px] font-medium tracking-normal">What should guests see?</h4>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="mt-4 grid gap-3 @md:grid-cols-2">
             <ChoiceTile
               cur="tile-pdf"
               selected={s.choice === "pdf"}
@@ -303,14 +307,37 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
 
           <Collapse open={s.choice === "pdf"}>
             <div className="pt-5">
-              <div className="flex flex-col items-center justify-center rounded-[20px] bg-white/[0.04] px-5 py-8 text-center">
-                <p className="text-sm text-ix-cream">Drag your PDF here</p>
-                <p className="mt-1 text-xs text-ix-dim">or</p>
-                <Btn variant="secondary" className="mt-3">
-                  Choose file
-                </Btn>
-                <p className="mt-4 text-xs text-ix-dim">PDF, up to 25 MB</p>
-              </div>
+              {s.pdfPublished ? (
+                <div className="ixp-enter-scale">
+                  <p className="text-[17px] font-medium text-white">Guests now see your new PDF</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space URL and connected Touch Points stay the same.</p>
+                </div>
+              ) : s.staged ? (
+                <div className="ixp-enter-fade">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <p className="min-w-0 break-words text-sm text-ix-cream">{s.staged.name}</p>
+                    <p className="text-xs text-ix-dim">{s.staged.size}</p>
+                  </div>
+                  <Btn variant="secondary" className="mt-3 w-full">
+                    Open preview
+                  </Btn>
+                  <p className="mt-4 text-sm text-ix-muted">When you publish, guests will see this version straight away.</p>
+                  <div className="mt-4 flex flex-wrap gap-2.5">
+                    <Btn cur="publish" variant="primary" disabled={s.publishing} hover={s.hoverPublish} press={s.pressPublish}>
+                      {s.publishing ? "Publishing…" : "Publish"}
+                    </Btn>
+                  </div>
+                </div>
+              ) : (
+                <div data-cur="dropzone" className="flex flex-col items-center justify-center rounded-[20px] bg-white/[0.04] px-5 py-8 text-center">
+                  <p className="text-sm text-ix-cream">Drag your PDF here</p>
+                  <p className="mt-1 text-xs text-ix-dim">or</p>
+                  <Btn variant="secondary" className="mt-3" cur="choose-file">
+                    Choose file
+                  </Btn>
+                  <p className="mt-4 text-xs text-ix-dim">PDF, up to 25 MB</p>
+                </div>
+              )}
             </div>
           </Collapse>
 
@@ -332,7 +359,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
                           {s.inputFocus && <span className="ml-px inline-block h-[1.1em] w-px translate-y-[3px] bg-ix-bright" />}
                         </span>
                       ) : (
-                        <span className="text-ix-dim">https://hotel.com/spa</span>
+                        <span className="text-ix-dim">https://maisonaurelia.com/spa</span>
                       )}
                     </div>
                   </div>

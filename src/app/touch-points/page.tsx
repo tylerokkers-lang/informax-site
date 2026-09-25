@@ -58,7 +58,7 @@ export default function TouchPointsPage() {
           <Reveal blur>
             <Kicker dark>Placement</Kicker>
             <Display dark>
-              Put information where it <Soft dark>matters.</Soft>
+              Put information where <Soft dark>guests need it.</Soft>
             </Display>
             <Lede dark className="mt-8">
               Touch Points sit naturally in the places guests already are.

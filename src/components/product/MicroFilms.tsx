@@ -15,7 +15,7 @@ import {
   VersionRows,
 } from "./ui";
 import { fmt, useCountUp, useFilm, useTyper } from "./film";
-import { SPA, SPACE_URL, SPA_ACTIVITY, SPA_PREVIOUS, type VersionRowData } from "./data";
+import { DIRECTORY, SPA, SPACE_URL, SPA_ACTIVITY, SPA_PREVIOUS, TOP_TOUCH_POINTS, type VersionRowData } from "./data";
 
 /**
  * Small product moments. Each one teaches a single real Informax Cloud
@@ -132,7 +132,7 @@ export function ManyTouchPointsFilm({ tone = "dark" }: { tone?: "dark" | "light"
       <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
         <Mini>
           <div className="ixp-card flex flex-col p-6">
-            <h3 className="text-[1.375rem] leading-snug">Guest Directory</h3>
+            <h3 className="text-[1.375rem] leading-snug">{DIRECTORY.name}</h3>
             <div className="mt-2">
               <Badge>Live</Badge>
             </div>
@@ -141,12 +141,22 @@ export function ManyTouchPointsFilm({ tone = "dark" }: { tone?: "dark" | "light"
               <div className="min-w-0">
                 <p className="text-[13px] text-ix-dim">Current content · PDF</p>
                 <p key={updated ? "b" : "a"} className="ixp-enter-fade truncate text-[15px] text-ix-cream">
-                  {updated ? "Guest Directory Winter.pdf" : "Guest Directory.pdf"}
+                  {updated ? DIRECTORY.nextPdf : DIRECTORY.pdf}
                 </p>
               </div>
             </div>
-            <p className="ixp-tabular mt-5 text-[13px] text-ix-dim">400 Touch Points connected</p>
           </div>
+          <div className="mt-4 flex items-center gap-3.5 rounded-[20px] bg-white/[0.035] p-4">
+            <InteractionTile kind="scan" size={44} />
+            <div className="min-w-0 flex-1">
+              <p className="text-[16px] font-medium text-ix-cream">Guest Rooms</p>
+              <p className="mt-0.5 flex flex-wrap items-center gap-x-3 text-[13px] text-ix-dim">
+                <span>Informax Scan</span>
+                <span className="ixp-tabular">400 deployed</span>
+              </p>
+            </div>
+          </div>
+          <p className="mt-3 px-1 text-[13px] text-ix-dim">Connected to {DIRECTORY.name}</p>
         </Mini>
 
         <div>
@@ -182,7 +192,7 @@ function PhoneScreen({ open }: { open: boolean }) {
   return (
     <div className="relative h-full w-full overflow-hidden rounded-[15px] bg-[#0c0f16]">
       <div className={`absolute inset-0 bg-white p-2.5 transition-opacity duration-700 ${open ? "opacity-100" : "opacity-0"}`}>
-        <div className="text-[5px] font-semibold uppercase tracking-[0.2em] text-[#5643e0]">The Grand Hotel</div>
+        <div className="text-[5px] font-semibold uppercase tracking-[0.2em] text-[#5643e0]">Maison Aurelia</div>
         <div className="mt-2 font-serif-display text-[12px] leading-tight text-[#14141c]">Spa Treatments</div>
         <div className="mt-3 space-y-1.5">
           {[92, 70, 84, 58, 76].map((w, i) => (
@@ -316,6 +326,33 @@ export function ActivityFilm({ tone = "light" }: { tone?: "dark" | "light" }) {
           scan={reduce ? fmt(SPA_ACTIVITY.scan) : fmt(scan)}
           direct={reduce ? fmt(SPA_ACTIVITY.direct) : fmt(direct)}
         />
+        <section className="mt-8">
+          <h3 className="mb-3 text-[1.0625rem] font-medium tracking-normal">Touch Points</h3>
+          <ul className="divide-y divide-white/[0.06]">
+            {TOP_TOUCH_POINTS.map((tp) => {
+              const top = TOP_TOUCH_POINTS[0].interactions;
+              return (
+                <li key={tp.location} className="py-3.5">
+                  <div className="flex items-center gap-3.5">
+                    <InteractionTile kind={tp.source} size={36} />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <p className="text-[15px] font-medium text-ix-cream">{tp.location}</p>
+                        <p className="ixp-tabular text-[15px] text-ix-cream">{fmt(tp.interactions)}</p>
+                      </div>
+                      <div className="mt-2 h-[3px] overflow-hidden rounded-full bg-white/[0.06]">
+                        <div
+                          className="h-full origin-left rounded-full bg-[#3aa6ee] transition-transform duration-[1200ms]"
+                          style={{ width: `${(tp.interactions / top) * 100}%`, transform: grown ? "scaleX(1)" : "scaleX(0)" }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
         <section className="ixp-card mt-7 p-5 sm:p-6">
           <h3 className="text-[1.0625rem] font-medium tracking-normal">How guests arrive</h3>
           <div className="mt-5 flex h-2.5 w-full gap-[2px] overflow-hidden rounded-full">
@@ -337,7 +374,7 @@ export function ActivityFilm({ tone = "light" }: { tone?: "dark" | "light" }) {
           </ul>
         </section>
       </Mini>
-      <Caption tone={tone}>Illustrative figures. Activity counts interactions only.</Caption>
+      <Caption tone={tone}>Product demonstration. Fictional hotel and figures.</Caption>
     </div>
   );
 }
