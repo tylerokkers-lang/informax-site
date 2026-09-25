@@ -249,7 +249,7 @@ function MethodPanel({ kind, tone }: { kind: "touch" | "scan"; tone: "dark" | "l
           <>
             <div className="absolute left-[calc(50%+34px)] top-1/2 -translate-y-1/2">
               <div className="relative">
-                <TouchPoint label="Spa" size="md" />
+                <TouchPoint label="Spa" mode="scan" size="md" />
                 <div className={`pointer-events-none absolute -inset-3 transition-opacity duration-500 ${near && !open ? "opacity-100" : "opacity-0"}`}>
                   {["left-0 top-0 border-l-2 border-t-2 rounded-tl-[14px]", "right-0 top-0 border-r-2 border-t-2 rounded-tr-[14px]", "left-0 bottom-0 border-b-2 border-l-2 rounded-bl-[14px]", "right-0 bottom-0 border-b-2 border-r-2 rounded-br-[14px]"].map((c) => (
                     <span key={c} className={`absolute h-5 w-5 border-[#8ed1fc] ${c}`} />

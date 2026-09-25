@@ -39,14 +39,14 @@ export default function EnquireForm() {
     const next: FieldErrors = {};
     if (!values.name.trim()) next.name = "Please enter your name.";
     if (!values.company.trim())
-      next.company = "Please enter your company name.";
+      next.company = "Please enter your hotel or company name.";
     if (!values.email.trim()) {
       next.email = "Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
       next.email = "Please enter a valid email address.";
     }
     if (!values.message.trim())
-      next.message = "Tell us a little about what you're looking to create.";
+      next.message = "Tell us a little about your property.";
     return next;
   }
 
@@ -97,19 +97,17 @@ export default function EnquireForm() {
 
   if (status === "success") {
     return (
-      <div
-        role="status"
-        className="flex flex-col items-center text-center gap-4 py-10"
-      >
+      <div role="status" className="flex flex-col items-start gap-5 py-6">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(31,157,107,0.12)]">
           <CheckCircle2 size={28} className="text-moss" />
         </div>
-        <h3 className="font-serif-display text-2xl font-medium text-ink">
-          Thank you, that&rsquo;s on its way.
+        <h3 className="font-serif-display text-[34px] font-medium leading-tight text-ink">
+          Thank you. We&rsquo;ll be in touch.
         </h3>
-        <p className="text-ink-mute text-[15px] max-w-md leading-relaxed">
-          We&rsquo;ve received your enquiry and will be in touch shortly to
-          talk through the best way to bring your project to life.
+        <p className="max-w-md text-[16px] leading-relaxed text-ink-mute">
+          Your enquiry has reached the Informax team. We reply within one
+          business day to arrange a conversation and, if you&rsquo;d like, a
+          demonstration of Informax Cloud.
         </p>
       </div>
     );
@@ -118,7 +116,7 @@ export default function EnquireForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       {status === "error" && errorMessage && (
-        <div className="form-status show error mb-7 flex items-start gap-3.5 border border-[rgba(217,54,54,0.3)] bg-[rgba(217,54,54,0.08)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a12020]">
+        <div className="mb-8 flex items-start gap-3.5 rounded-[14px] border border-[rgba(217,54,54,0.25)] bg-[rgba(217,54,54,0.06)] px-5 py-4 text-[14.5px] leading-relaxed text-[#a12020]">
           <AlertCircle size={20} className="mt-0.5 shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -127,148 +125,100 @@ export default function EnquireForm() {
       {/* Honeypot: hidden from real visitors, catches basic bots */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <label htmlFor="website">Website</label>
-        <input
-          type="text"
-          id="website"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-        />
+        <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5">
-        <Field label="Name" required error={errors.name} htmlFor="name">
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            value={values.name}
-            onChange={(e) => update("name", e.target.value)}
-            aria-invalid={Boolean(errors.name)}
-            className={inputClass(Boolean(errors.name))}
-          />
-        </Field>
+      <Group n="01" title="What would you like to explore?">
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4" role="group" aria-label="What would you like to explore?">
+          {ENQUIRY_INTERESTS.map((option) => {
+            const checked = interests.includes(option);
+            return (
+              <label
+                key={option}
+                className={`flex min-h-[52px] cursor-pointer items-center justify-center rounded-[12px] border px-3 py-2.5 text-center text-[13.5px] font-medium leading-snug transition-colors duration-300 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brass-deep ${
+                  checked ? "border-ink bg-ink text-white" : "border-line bg-panel text-ink-soft hover:border-ink-mute"
+                }`}
+              >
+                <input type="checkbox" checked={checked} onChange={() => toggleInterest(option)} className="sr-only" />
+                {option}
+              </label>
+            );
+          })}
+        </div>
+      </Group>
 
-        <Field label="Company" required error={errors.company} htmlFor="company">
-          <input
-            id="company"
-            name="company"
-            type="text"
-            autoComplete="organization"
-            value={values.company}
-            onChange={(e) => update("company", e.target.value)}
-            aria-invalid={Boolean(errors.company)}
-            className={inputClass(Boolean(errors.company))}
-          />
-        </Field>
+      <Group n="02" title="About you">
+        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
+          <Field label="Name" required error={errors.name} htmlFor="name">
+            <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={(e) => update("name", e.target.value)} aria-invalid={Boolean(errors.name)} className={inputClass(Boolean(errors.name))} />
+          </Field>
+          <Field label="Hotel or company" required error={errors.company} htmlFor="company">
+            <input id="company" name="company" type="text" autoComplete="organization" value={values.company} onChange={(e) => update("company", e.target.value)} aria-invalid={Boolean(errors.company)} className={inputClass(Boolean(errors.company))} />
+          </Field>
+          <Field label="Role" htmlFor="jobTitle">
+            <input id="jobTitle" name="jobTitle" type="text" autoComplete="organization-title" placeholder="General Manager" value={values.jobTitle} onChange={(e) => update("jobTitle", e.target.value)} className={inputClass(false)} />
+          </Field>
+          <Field label="Email" required error={errors.email} htmlFor="email">
+            <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={(e) => update("email", e.target.value)} aria-invalid={Boolean(errors.email)} className={inputClass(Boolean(errors.email))} />
+          </Field>
+          <Field label="Phone" htmlFor="phone" full>
+            <input id="phone" name="phone" type="tel" autoComplete="tel" value={values.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass(false)} />
+          </Field>
+        </div>
+      </Group>
 
-        <Field label="Job Title" htmlFor="jobTitle">
-          <input
-            id="jobTitle"
-            name="jobTitle"
-            type="text"
-            autoComplete="organization-title"
-            value={values.jobTitle}
-            onChange={(e) => update("jobTitle", e.target.value)}
-            className={inputClass(false)}
-          />
-        </Field>
-
-        <Field label="Email" required error={errors.email} htmlFor="email">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={values.email}
-            onChange={(e) => update("email", e.target.value)}
-            aria-invalid={Boolean(errors.email)}
-            className={inputClass(Boolean(errors.email))}
-          />
-        </Field>
-
-        <Field label="Phone" htmlFor="phone">
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            value={values.phone}
-            onChange={(e) => update("phone", e.target.value)}
-            className={inputClass(false)}
-          />
-        </Field>
-
-        <Field label="What are you interested in?" htmlFor="interests" full>
-          <div className="flex flex-wrap gap-2.5">
-            {ENQUIRY_INTERESTS.map((option) => {
-              const checked = interests.includes(option);
-              return (
-                <label
-                  key={option}
-                  className={`cursor-pointer border px-4 py-2.5 text-[13.5px] font-medium transition-colors duration-300 has-[:focus-visible]:outline has-[:focus-visible]:outline-1 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-brass-deep ${
-                    checked
-                      ? "border-ink bg-ink text-white"
-                      : "border-line text-ink-soft hover:border-ink-mute"
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => toggleInterest(option)}
-                    className="sr-only"
-                  />
-                  {option}
-                </label>
-              );
-            })}
-          </div>
-        </Field>
-
-        <Field label="Message" required error={errors.message} htmlFor="message" full>
+      <Group n="03" title="Your property">
+        <Field label="Tell us a little about it" required error={errors.message} htmlFor="message" full>
           <textarea
             id="message"
             name="message"
             rows={5}
-            placeholder="Tell us what you're looking to create..."
+            placeholder="Number of rooms, the areas you'd like to connect, and anything you'd like us to know."
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             aria-invalid={Boolean(errors.message)}
-            className={`${inputClass(Boolean(errors.message))} resize-y min-h-[110px]`}
+            className={`${inputClass(Boolean(errors.message))} min-h-[140px] resize-y`}
           />
         </Field>
+      </Group>
+
+      <div className="mt-2 flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-[36ch] text-[12.5px] leading-relaxed text-ink-mute">
+          We&rsquo;ll only use your details to reply to this enquiry. See our{" "}
+          <a href="/privacy-policy" className="underline underline-offset-2">
+            Privacy Policy
+          </a>
+          .
+        </p>
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-ink px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-brass-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass-deep disabled:opacity-60"
+        >
+          {status === "submitting" && <Loader2 size={16} className="animate-spin" />}
+          {status === "submitting" ? "Sending…" : "Talk to Informax"}
+        </button>
       </div>
-
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="mt-4 inline-flex w-full items-center justify-center gap-2.5 bg-ink px-7 py-4 text-[14.5px] font-semibold tracking-[0.01em] text-white transition-colors duration-300 hover:bg-brass-deep disabled:opacity-60"
-      >
-        {status === "submitting" && (
-          <Loader2 size={16} className="animate-spin" />
-        )}
-        {status === "submitting" ? "Sending..." : "Start the Conversation"}
-      </button>
-
-      <p className="mt-4 text-[12.5px] text-ink-mute leading-relaxed">
-        By submitting this form you agree to be contacted about your
-        project. We&rsquo;ll never share your details. See our{" "}
-        <a href="/privacy-policy" className="underline underline-offset-2">
-          Privacy Policy
-        </a>
-        .
-      </p>
     </form>
   );
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full border-0 border-b bg-transparent px-0 py-3 text-[15px] text-ink transition-colors duration-300 focus:outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brass-deep ${
-    hasError
-      ? "border-rust"
-      : "border-line focus:border-ink"
+  return `w-full rounded-[12px] border bg-panel px-4 py-3.5 text-[15px] text-ink placeholder:text-ink-mute/70 transition-[border-color,box-shadow] duration-300 focus:outline-none focus-visible:border-ink focus-visible:shadow-[0_0_0_3px_rgba(86,67,224,0.18)] ${
+    hasError ? "border-rust" : "border-line hover:border-ink/30"
   }`;
+}
+
+function Group({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
+  return (
+    <fieldset className="mb-10">
+      <legend className="mb-5 flex items-baseline gap-3">
+        <span className="font-serif-display text-[14px] italic text-brass-deep">{n}</span>
+        <span className="font-serif-display text-[24px] leading-tight text-ink">{title}</span>
+      </legend>
+      {children}
+    </fieldset>
+  );
 }
 
 function Field({
@@ -287,11 +237,8 @@ function Field({
   full?: boolean;
 }) {
   return (
-    <div className={`mb-[22px] ${full ? "sm:col-span-2" : ""}`}>
-      <label
-        htmlFor={htmlFor}
-        className="block text-[13px] font-semibold text-ink mb-2"
-      >
+    <div className={`mb-4 ${full ? "sm:col-span-2" : ""}`}>
+      <label htmlFor={htmlFor} className="mb-2 block text-[13px] font-medium text-ink-soft">
         {label} {required && <span className="text-brass-deep">*</span>}
       </label>
       {children}

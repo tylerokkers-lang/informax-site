@@ -11,8 +11,8 @@ export const HOTEL = {
   domain: "maisonaurelia.com",
 } as const;
 
-/** A permanent Space address. Format is <origin>/s/<10-character code>. */
-export const SPACE_URL = "go.informax.cloud/s/k3m9x7q2ab";
+/** A permanent Space address, readable and named after the hotel and the Space. */
+export const SPACE_URL = "go.informax.cloud/maisonaurelia/spa";
 
 export const SPA = {
   name: "Spa",
@@ -24,7 +24,7 @@ export const SPA = {
 
 export const DIRECTORY = {
   name: "Guest Directory",
-  url: "go.informax.cloud/s/h7t2c9wq4d",
+  url: "go.informax.cloud/maisonaurelia/guest-directory",
   pdf: "GuestDirectory.pdf",
   nextPdf: "GuestDirectory-Winter.pdf",
   nextSize: "3.4 MB",
@@ -42,12 +42,12 @@ export interface SpaceCardData {
 }
 
 export const SPACE_CARDS: SpaceCardData[] = [
-  { id: "spa", name: "Spa", kind: "pdf", file: "Spa Treatments.pdf", touchPoints: 12, interactions: 1248, code: "k3m9x7q2ab" },
-  { id: "restaurants", name: "Restaurants", kind: "website", file: "maisonaurelia.com/dining/menu", touchPoints: 18, interactions: 2106, code: "r8d4n2vq7c" },
-  { id: "gym", name: "Gym", kind: "website", file: "maisonaurelia.com/wellness/classes", touchPoints: 5, interactions: 426, code: "e4m7x9d2tb" },
-  { id: "meetings", name: "Meetings & Events", kind: "website", file: "maisonaurelia.com/events/floorplans", touchPoints: 9, interactions: 782, code: "p5r8v2nk3z" },
-  { id: "directory", name: "Guest Directory", kind: "pdf", file: "GuestDirectory.pdf", touchPoints: 400, interactions: 6412, code: "h7t2c9wq4d" },
-  { id: "rooms", name: "Guest Rooms", kind: "pdf", file: "In-Room Dining.pdf", touchPoints: 400, interactions: 3380, code: "w2k6s9mf5h" },
+  { id: "spa", name: "Spa", kind: "pdf", file: "Spa Treatments.pdf", touchPoints: 12, interactions: 1248, code: "spa" },
+  { id: "restaurants", name: "Restaurants", kind: "website", file: "maisonaurelia.com/dining/menu", touchPoints: 18, interactions: 2106, code: "restaurants" },
+  { id: "gym", name: "Gym", kind: "website", file: "maisonaurelia.com/wellness/classes", touchPoints: 5, interactions: 426, code: "gym" },
+  { id: "meetings", name: "Meetings & Events", kind: "website", file: "maisonaurelia.com/events/floorplans", touchPoints: 9, interactions: 782, code: "events" },
+  { id: "directory", name: "Guest Directory", kind: "pdf", file: "GuestDirectory.pdf", touchPoints: 400, interactions: 6412, code: "guest-directory" },
+  { id: "rooms", name: "Guest Rooms", kind: "pdf", file: "In-Room Dining.pdf", touchPoints: 400, interactions: 3380, code: "guest-rooms" },
 ];
 
 export interface TouchPointRowData {

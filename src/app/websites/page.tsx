@@ -81,7 +81,7 @@ export default function WebsitesPage() {
                 that&rsquo;s the site guests find you through, or the
                 directory they use once they&rsquo;ve arrived.
               </p>
-              <BtnGhost href="/hospitality" arrow>
+              <BtnGhost href="/digital-experiences" arrow>
                 See our hospitality practice
               </BtnGhost>
             </Reveal>

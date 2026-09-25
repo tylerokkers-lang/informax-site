@@ -170,7 +170,7 @@ export function SpaceCard({
         {space.touchPoints} Touch Points · {space.interactions.toLocaleString("en-GB")} interactions this month
       </p>
       <div className="mt-5 flex items-center justify-between gap-3">
-        <code className="min-w-0 break-all font-mono text-[12px] leading-snug text-ix-dim">go.informax.cloud/s/{space.code}</code>
+        <code className="min-w-0 break-all font-mono text-[12px] leading-snug text-ix-dim">go.informax.cloud/maisonaurelia/{space.code}</code>
         <span className="-mr-2 shrink-0 px-2.5 text-[13px] font-medium text-ix-bright">Copy URL</span>
       </div>
     </div>
@@ -485,6 +485,7 @@ export function ActivitySummary({
 }) {
   const rows = [
     {
+      id: "touch",
       icon: <TouchIcon size={16} />,
       label: fullNames ? (
         <>
@@ -497,6 +498,7 @@ export function ActivitySummary({
       value: touch,
     },
     {
+      id: "scan",
       icon: <ScanIcon size={16} />,
       label: fullNames ? (
         <>
@@ -508,7 +510,7 @@ export function ActivitySummary({
       ),
       value: scan,
     },
-    { icon: <DirectIcon size={16} />, label: "Direct", value: direct },
+    { id: "direct", icon: <DirectIcon size={16} />, label: "Direct", value: direct },
   ];
   return (
     <div>
@@ -518,7 +520,7 @@ export function ActivitySummary({
       <p className="mt-2 text-[15px] text-ix-muted">Interactions this month</p>
       <dl className="mt-6 grid grid-cols-3 gap-3">
         {rows.map((row) => (
-          <div key={row.value}>
+          <div key={row.id}>
             <dt className="flex items-center gap-1.5 text-[13px] text-ix-dim">
               {row.icon}
               {row.label}

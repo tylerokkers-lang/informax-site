@@ -115,6 +115,29 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   made up. Never use real customers (Fairmont, test hotels, staff names).
   Everything lives in `src/components/product/data.ts`.
 
+### Changes, 25 September 2026 (third pass)
+
+- **Hospitality is now Digital Experiences** at `/digital-experiences`
+  (`/hospitality` 308-redirects there). It promotes Informax-designed digital
+  guest directories and guest information and the benefits of "ease of
+  information". The guest-facing directory mockup is
+  `src/components/story/DirectoryShowcase.tsx`.
+- **The Touch Points page is gone.** `/touch-points` 308-redirects to
+  `/informax-cloud`, and it is out of the nav, footer and sitemap. Touch Points
+  are still explained on the homepage and product page.
+- **Primary nav:** Informax Cloud, How It Works, Digital Experiences, About,
+  plus "Talk to Informax".
+- **Touch Point object** (`cloud/TouchPoint.tsx`) has two modes: `touch`
+  reads "Touch your phone here"; `scan` shows only a real QR code
+  (`cloud/qr-path.ts`, which points to https://informax.co.uk).
+- **Demo Space addresses are readable** (`go.informax.cloud/maisonaurelia/spa`)
+  at the user's request. The real app uses `/s/<10-character code>`, so this
+  is a deliberate marketing simplification.
+- `public/video/cloud-hero.*` is now the blue and pink clouds film (6 s,
+  forward/back loop, upscaled from 736 px, ~0.9 MB).
+- The enquiry page is redesigned as a dark two-column page with a grouped
+  form. `EnquireForm` logic, API fields and the honeypot are unchanged.
+
 ### Homepage story and hero films (25 September 2026, second pass)
 
 The homepage now establishes why controlled information matters before it

@@ -1,116 +1,67 @@
 import type { Metadata } from "next";
-import { ClipboardCheck, Clock, Layers, Mail, Sparkles } from "lucide-react";
+import { Clock, Mail } from "lucide-react";
 import EnquireForm from "@/components/EnquireForm";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Enquire",
+  title: "Talk to Informax",
   description:
-    "Talk to Informax about Informax Cloud and Touch Points for your hotel, or request a demonstration.",
+    "Talk to Informax about Informax Cloud, digital guest directories and Touch Points for your hotel, or arrange a demonstration.",
   alternates: { canonical: "/enquire" },
 };
 
-const SIDE_POINTS = [
-  {
-    icon: Sparkles,
-    title: "Built around your hotel",
-    desc: "Spaces, Touch Points and content set up around how your property actually runs.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Clear, honest proposals",
-    desc: "Scoped around the Spaces and Touch Points you actually need.",
-  },
-  {
-    icon: Layers,
-    title: "Start small, grow",
-    desc: "Begin with the Space that matters most and add more when you are ready.",
-  },
-];
-
-const PROCESS = [
-  { step: "01", title: "Tell us", desc: "Share a few details about your hotel and what you would like to connect." },
-  { step: "02", title: "See it working", desc: "We show you Informax Cloud, and shape a proposal around your property." },
-  { step: "03", title: "You decide", desc: "No pressure. Take the proposal away and come back whenever you're ready." },
+const NEXT = [
+  { n: "01", title: "A conversation", body: "We learn how your property runs and what guests ask for most." },
+  { n: "02", title: "A demonstration", body: "We show you Informax Cloud with Spaces shaped around your hotel." },
+  { n: "03", title: "A clear proposal", body: "Scoped to the Spaces and Touch Points you actually need." },
 ];
 
 export default function EnquirePage() {
   return (
-    <section className="bg-paper pt-[140px] pb-24 md:pt-[180px] md:pb-32">
-      <div className="mx-auto max-w-8xl px-6 md:px-10">
-        <div className="mb-16 max-w-[20ch] md:mb-20">
-          <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
-            Enquire
-          </span>
-          <h1 className="font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.4vw,58px)] text-ink">
-            Bring Informax to your hotel.
+    <section className="relative overflow-hidden bg-charcoal-950 pb-24 pt-[150px] text-cream md:pb-32 md:pt-[190px]">
+      <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-brass/20 blur-[140px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[420px] w-[420px] rounded-full bg-glow-deep/10 blur-[140px]" />
+
+      <div className="relative mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:px-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div className="lg:sticky lg:top-[140px] lg:self-start">
+          <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/65">
+            <span className="h-px w-8 bg-white/40" />
+            Talk to Informax
+          </p>
+          <h1 className="max-w-[13ch] text-balance font-serif-display text-[clamp(42px,6vw,76px)] font-medium leading-[0.98] tracking-[-0.02em] text-white">
+            Let&rsquo;s talk about <span className="italic text-glow">your hotel.</span>
           </h1>
-        </div>
+          <p className="mt-7 max-w-[42ch] text-[17px] leading-relaxed text-white/72">
+            Tell us a little about your property. We&rsquo;ll come back with a
+            conversation, not a sales pitch.
+          </p>
 
-        <div className="grid grid-cols-1 gap-16 border-t border-line pt-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 lg:pt-16">
-          <div className="flex flex-col gap-12 lg:sticky lg:top-[140px] lg:self-start">
-            <div>
-              <p className="mb-8 max-w-[42ch] text-[15.5px] leading-relaxed text-ink-mute">
-                Every Informax enquiry starts with a conversation, not a
-                sales pitch. We want to understand your property before we
-                suggest anything, and we are happy to run a demonstration.
-              </p>
-              <ul className="flex flex-col gap-6">
-                {SIDE_POINTS.map((point) => (
-                  <li key={point.title} className="flex items-start gap-4">
-                    <point.icon size={18} className="mt-0.5 shrink-0 text-brass-deep" />
-                    <div>
-                      <div className="mb-0.5 text-[14.5px] font-semibold text-ink">
-                        {point.title}
-                      </div>
-                      <p className="text-[14px] leading-relaxed text-ink-mute">
-                        {point.desc}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <ol className="mt-12 border-t border-white/10">
+            {NEXT.map((s) => (
+              <li key={s.n} className="grid grid-cols-[44px_1fr] gap-2 border-b border-white/10 py-5">
+                <span className="font-serif-display text-[15px] italic text-brass-light">{s.n}</span>
+                <div>
+                  <div className="text-[16px] font-medium text-white">{s.title}</div>
+                  <p className="mt-1 max-w-[38ch] text-[14.5px] leading-relaxed text-cream-mute">{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-            <div className="border-t border-line pt-8">
-              <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
-                How It Works
-              </span>
-              <div className="flex flex-col gap-6">
-                {PROCESS.map((item) => (
-                  <div key={item.step} className="flex items-start gap-4">
-                    <span className="font-serif-display text-[14px] italic text-brass-deep">
-                      {item.step}
-                    </span>
-                    <div>
-                      <div className="mb-0.5 text-[14.5px] font-semibold text-ink">
-                        {item.title}
-                      </div>
-                      <p className="max-w-[32ch] text-[14px] leading-relaxed text-ink-mute">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 border-t border-line pt-8 text-[14px] text-ink-mute">
-              <Clock size={16} className="shrink-0 text-brass-deep" />
+          <div className="mt-10 space-y-3 text-[14.5px] text-cream-mute">
+            <p className="flex items-center gap-3">
+              <Clock size={16} className="shrink-0 text-brass-light" />
               We reply within one business day.
-            </div>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="-mt-6 flex items-center gap-3 text-[14px] text-ink-mute transition-colors hover:text-brass-deep"
-            >
-              <Mail size={16} className="shrink-0 text-brass-deep" />
-              Prefer email? {CONTACT_EMAIL}
+            </p>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-3 transition-colors hover:text-white">
+              <Mail size={16} className="shrink-0 text-brass-light" />
+              {CONTACT_EMAIL}
             </a>
           </div>
+        </div>
 
-          <div className="border-t border-line pt-14 lg:border-t-0 lg:pt-0">
-            <EnquireForm />
-          </div>
+        <div className="rounded-[28px] bg-paper p-6 text-ink shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] sm:p-10 lg:p-12">
+          <EnquireForm />
         </div>
       </div>
     </section>

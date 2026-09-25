@@ -6,8 +6,7 @@ export const PRIMARY_CTA = "Talk to Informax";
 export const NAV_LINKS = [
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Hospitality", href: "/hospitality" },
-  { label: "Touch Points", href: "/touch-points" },
+  { label: "Digital Experiences", href: "/digital-experiences" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },
 ] as const;
@@ -15,8 +14,7 @@ export const NAV_LINKS = [
 export const FOOTER_PRODUCT_LINKS = [
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Touch Points", href: "/touch-points" },
-  { label: "Hospitality", href: "/hospitality" },
+  { label: "Digital Experiences", href: "/digital-experiences" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [
@@ -38,11 +36,11 @@ export const FOOTER_LEGAL_LINKS = [
 
 export const ENQUIRY_INTERESTS = [
   "Informax Cloud",
-  "Touch Points",
-  "A demonstration",
   "Guest Directory",
-  "Meetings & Events",
+  "Digital Experiences",
+  "A demonstration",
   "Spa & Wellness",
   "Restaurants",
-  "Not Sure Yet",
+  "Meetings & Events",
+  "Not sure yet",
 ] as const;

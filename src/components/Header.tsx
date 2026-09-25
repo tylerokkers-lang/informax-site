@@ -16,8 +16,8 @@ const TRANSPARENT_AT_TOP_ROUTES = new Set([
   "/",
   "/informax-cloud",
   "/how-it-works",
-  "/hospitality",
-  "/touch-points",
+  "/digital-experiences",
+  "/enquire",
   "/digital-information",
   "/websites",
 ]);

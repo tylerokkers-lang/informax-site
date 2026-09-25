@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { BtnPrimary } from "@/components/ui";
 import VideoHero from "@/components/sections/VideoHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
@@ -195,16 +194,11 @@ export default function Home() {
         <Reveal>
           <TouchScanFilm tone="dark" />
         </Reveal>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
-          <ul className="flex flex-wrap gap-x-7 gap-y-2 text-[14px] text-cream-mute">
-            {PLACES.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-          <BtnPrimary href="/touch-points" tone="dark">
-            Explore Touch Points
-          </BtnPrimary>
-        </div>
+        <ul className="mt-12 flex flex-wrap gap-x-7 gap-y-2 text-[14px] text-cream-mute">
+          {PLACES.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
       </Section>
 
       {/* 9. One Space, many Touch Points */}

@@ -172,7 +172,7 @@ export default function DigitalInformationPage() {
               <p className="mt-8 max-w-[48ch] text-[14px] leading-relaxed text-ink-mute">
                 Looking for a hospitality guest directory specifically?{" "}
                 <a
-                  href="/hospitality"
+                  href="/digital-experiences"
                   className="font-medium text-brass-deep underline underline-offset-2"
                 >
                   See our dedicated hospitality practice
