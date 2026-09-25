@@ -171,7 +171,7 @@ export function SpaceCard({
       </p>
       <div className="mt-5 flex items-center justify-between gap-3">
         <code className="min-w-0 truncate font-mono text-[12px] leading-snug text-ix-dim">go.informax.cloud/maisonaurelia/{space.code}</code>
-        <span className="-mr-2 shrink-0 px-2.5 text-[13px] font-medium text-ix-bright">Copy URL</span>
+        <span className="-mr-2 shrink-0 px-2.5 text-[13px] font-medium text-ix-bright">Copy link</span>
       </div>
     </div>
   );
@@ -185,7 +185,7 @@ export function PermanentSpaceUrl({
   note = "Always shows this Space's current content. It never changes — not when you rename the Space, change or restore its content, or archive and restore it.",
 }: {
   url: string;
-  /** One soft pulse, used to draw the eye to the fact that the URL has not moved. */
+  /** One soft pulse, used to draw the eye to the fact that the link has not moved. */
   ring?: boolean;
   compact?: boolean;
   note?: string | null;
@@ -310,7 +310,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
               {s.pdfPublished ? (
                 <div className="ixp-enter-scale">
                   <p className="text-[17px] font-medium text-white">Guests now see your new PDF</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space URL and connected Touch Points stay the same.</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space link and connected Touch Points stay the same.</p>
                 </div>
               ) : s.staged ? (
                 <div data-anchor="entry" className="ixp-enter-fade">
@@ -346,7 +346,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
               {s.publishedAddress ? (
                 <div className="ixp-enter-scale">
                   <p className="text-[17px] font-medium text-white">Guests now see {s.publishedAddress}</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space URL and connected Touch Points stay the same.</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space link and connected Touch Points stay the same.</p>
                 </div>
               ) : (
                 <div data-anchor="entry" className="space-y-4">
@@ -382,7 +382,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
 
           <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
             <LockIcon size={14} />
-            Your Space URL and connected Touch Points stay the same.
+            Your Space link and connected Touch Points stay the same.
           </p>
         </div>
       </div>
@@ -572,7 +572,7 @@ export function ConfirmSheetView({ hoverConfirm }: { hoverConfirm?: boolean }) {
     <div className="ixp-enter-scale w-[min(100%,420px)] rounded-[28px] bg-ix-navy-850 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.07),0_24px_60px_-20px_rgba(2,6,14,0.85)]">
       <h2 className="text-[1.375rem] leading-snug">Go back to this version?</h2>
       <p className="mt-2.5 text-[15px] leading-relaxed text-ix-muted">
-        Guests will see it straight away. Your Space URL and connected Touch Points stay the same, and your current
+        Guests will see it straight away. Your Space link and connected Touch Points stay the same, and your current
         version stays in the history.
       </p>
       <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">

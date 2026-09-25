@@ -330,7 +330,7 @@ function TouchPointsUpdated({ on, count, tone }: { on: boolean; count: number; t
         ))}
       </div>
       <p className={`mt-4 text-[13px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>
-        Same Space URL. Same Touch Points. Nothing was reprinted or reinstalled.
+        Same Space link. Same Touch Points. Nothing was reprinted or reinstalled.
       </p>
     </div>
   );

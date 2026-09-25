@@ -67,6 +67,11 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${fraunces.variable} ${inter.variable}`}
     >
+      <head>
+        {/* Cheap head start for the Informax Cloud sign-in; the full
+            connection is warmed only when someone points at the link. */}
+        <link rel="dns-prefetch" href="https://informax.cloud" />
+      </head>
       <body className="bg-paper text-ink-soft antialiased flex flex-col min-h-screen">
         <a
           href="#main-content"

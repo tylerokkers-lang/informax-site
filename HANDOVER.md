@@ -461,6 +461,17 @@ resend.com/emails for individual send/delivery status.
 1. **Decide when to retire WordPress** — owner: user. Nothing gets
    cancelled automatically.
 2. Optional: redundant Vercel A records (see §6).
+3. **Website → Informax Cloud hand-off (26 September 2026) — built locally,
+   not deployed, awaiting approval.** The header's "Log in to Informax
+   Cloud" is now a Cloud-blue pill with the Cloud mark
+   (`src/components/CloudEntrance.tsx`, desktop and mobile drawer). Hover
+   or focus preconnects to informax.cloud; a click navigates immediately
+   (plain link, never delayed) and shows a full-screen Informax Cloud
+   hand-off, cleared on Back. `<link rel="dns-prefetch">` in the root
+   layout. Product films and copy now say "Space link" / "Copy link"
+   instead of "Space URL" / "Copy URL". Ships with the Informax Cloud
+   performance branch `perf/london-navigation` (informax-analytics repo,
+   Vercel preview only so far).
 
 ## 9. Every route
 

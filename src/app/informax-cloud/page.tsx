@@ -135,7 +135,7 @@ export default function InformaxCloudPage() {
               Open the Space. <Soft dark>Change it. Publish.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              The content changes. The permanent Space URL and every connected
+              The content changes. The permanent Space link and every connected
               Touch Point stay exactly as they are.
             </Lede>
           </Reveal>

@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { CLOUD_LOGIN_URL, NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/constants";
+import CloudEntrance from "@/components/CloudEntrance";
 
 // Routes whose hero is a full-bleed dark video that a transparent header
 // can sit over. Every other page's hero is on a light background, so the
@@ -86,12 +87,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-5">
-            <a
-              href={CLOUD_LOGIN_URL}
-              className="hidden md:inline-flex items-center gap-2 whitespace-nowrap border-b border-white/40 pb-1 text-[13.5px] font-medium text-white transition-colors duration-300 hover:border-white"
-            >
-              Log in to Informax Cloud
-            </a>
+            <CloudEntrance variant="header" />
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -151,12 +147,7 @@ export default function Header() {
                   </Link>
                 );
               })}
-              <a
-                href={CLOUD_LOGIN_URL}
-                className="mt-6 inline-flex w-fit items-center gap-2 border-b border-white pb-1 text-[15px] font-medium text-white"
-              >
-                Log in to Informax Cloud
-              </a>
+              <CloudEntrance variant="drawer" />
             </motion.nav>
           </>
         )}

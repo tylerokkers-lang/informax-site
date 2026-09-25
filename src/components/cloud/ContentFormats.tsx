@@ -91,7 +91,7 @@ export default function ContentFormats() {
         </div>
         <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
           <LockIcon size={14} />
-          Your Space URL and connected Touch Points stay the same.
+          Your Space link and connected Touch Points stay the same.
         </p>
       </div>
 

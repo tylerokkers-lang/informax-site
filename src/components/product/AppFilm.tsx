@@ -27,7 +27,7 @@ import PhoneFilm from "./PhoneFilm";
 /**
  * The main Informax Cloud film, built from recreated app UI (not a screen
  * recording). Story: Hotel workspace, Spaces, Spa, Change Content, Use a
- * website, Publish, then the permanent Space URL and Touch Points staying
+ * website, Publish, then the permanent Space link and Touch Points staying
  * exactly as they were, Activity and Previous Versions.
  */
 
@@ -127,7 +127,7 @@ function DesktopFilm({ captions }: { captions: "dark" | "light" }) {
     [scale],
   );
 
-  // Reduced motion: a static frame that shows the URL and the changed content together.
+  // Reduced motion: a static frame that shows the link and the changed content together.
   useEffect(() => {
     if (!reduce) return;
     const box = scrollRef.current;
@@ -166,7 +166,7 @@ function DesktopFilm({ captions }: { captions: "dark" | "light" }) {
   const previous = published ? SPA_PREVIOUS : SPA_PREVIOUS.slice(1);
 
   return (
-    <div ref={wrap} role="img" aria-label="Animated recreation of Informax Cloud: opening the Spa Space, choosing Change Content, switching from a PDF to a website and publishing, while the permanent Space URL and the twelve connected Touch Points stay exactly the same.">
+    <div ref={wrap} role="img" aria-label="Animated recreation of Informax Cloud: opening the Spa Space, choosing Change Content, switching from a PDF to a website and publishing, while the permanent Space link and the twelve connected Touch Points stay exactly the same.">
       <div ref={fitRef} className="w-full">
         <div className="relative mx-auto" style={{ width: W * (scale ?? 1), height: H * (scale ?? 1) }}>
           <div
@@ -292,7 +292,7 @@ export function Captions({ published, tone }: { published: boolean; tone: "dark"
   const dark = tone === "dark";
   const rows = [
     { label: "Current Content", from: SPA.pdf, to: SPA.web, badge: "Changed", changed: true },
-    { label: "Permanent Space URL", from: SPACE_URL, to: SPACE_URL, badge: "Unchanged", changed: false },
+    { label: "Permanent Space link", from: SPACE_URL, to: SPACE_URL, badge: "Unchanged", changed: false },
     { label: "Touch Points", from: `${SPA.touchPoints} deployed`, to: `${SPA.touchPoints} updated`, badge: "Still in place", changed: false },
   ];
   return (

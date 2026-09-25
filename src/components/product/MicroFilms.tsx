@@ -92,7 +92,7 @@ export function ChangeContentFilm({ tone = "light" }: { tone?: "dark" | "light" 
   const address = reduce || s >= 4 ? SPA.web : typed;
 
   return (
-    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, enter the website address and publish. The Space URL and connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, enter the website address and publish. The Space link and connected Touch Points stay the same.">
       <Mini>
         <ChangePanel
           s={{
@@ -318,7 +318,7 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const after: VersionRowData[] = [{ kind: "website", headline: SPA.web, published: "25 Sept 2026, 10:41" }, SPA_PREVIOUS[1]];
 
   return (
-    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space URL and connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space link and connected Touch Points stay the same.">
       <Mini className="relative overflow-hidden">
         <PermanentSpaceUrl compact note={null} url={SPACE_URL} ring={restored && !reduce} />
         <div className="mt-5">
@@ -337,7 +337,7 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
           </div>
         )}
       </Mini>
-      <Caption tone={tone}>Restore an earlier version in one step. The Space URL and Touch Points never change.</Caption>
+      <Caption tone={tone}>Restore an earlier version in one step. The Space link and Touch Points never change.</Caption>
     </div>
   );
 }
