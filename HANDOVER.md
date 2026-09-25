@@ -132,9 +132,8 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   wide, Lanczos-upscaled with light sharpening, two-pass encoded (WebM
   2.4–3.6 MB). The sources are only 1104 px (Earth, clouds) and 736 px
   (blue/pink), so true HD needs higher-resolution originals.
-- **Closing CTA** shows the real Informax Cloud logo
-  (`public/product/informax-cloud-logo.png`, byte-identical to
-  informax.cloud/brand/informax-logo.png).
+- **Closing CTA** is just the headline and "Talk to Informax". The logo was
+  tried and removed at the user's request.
 - **Phone films** scroll to real anchors (`panel`, `entry`, `current`), so
   choosing a file or typing an address, Publish, and the updated content are
   always on screen.
