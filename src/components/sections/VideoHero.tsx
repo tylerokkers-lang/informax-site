@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+/** Entrance timing for one line of hero copy (see .ix-hero-rise). */
+const rise = (y: number, duration: number, delay: number) =>
+  ({ "--rise-y": `${y}px`, "--rise-dur": `${duration}s`, "--rise-delay": `${delay}s` }) as CSSProperties;
 
 export interface VideoHeroProps {
   videoMp4: string;
@@ -49,31 +51,45 @@ export default function VideoHero({
   dim = 0,
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [loaded, setLoaded] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video || reduceMotion) return;
 
+    // The film is in the server HTML, so the browser starts loading and
+    // autoplaying it before React hydrates. Events that fired before this
+    // effect ran are gone, so read the element's current state first
+    // rather than waiting for an event that may already have happened.
+    const onPlaying = () => setPlaying(true);
+    if (!video.paused && video.readyState >= 3) onPlaying();
+    else {
+      video.addEventListener("playing", onPlaying, { once: true });
+      if (video.paused) video.play().catch(() => {});
+    }
+
     const onVisibility = () => {
       if (document.hidden) video.pause();
       else video.play().catch(() => {});
     };
     document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
+    return () => {
+      video.removeEventListener("playing", onPlaying);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, [reduceMotion]);
 
   return (
     <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-charcoal-950 text-cream">
-      {/* Film */}
+      {/* Film. The poster is the film's own first frame and sits on top,
+          at the same scale, until the film is actually playing — then it
+          fades away over identical pixels, so there is no jump or dip. */}
       <div className="absolute inset-0">
         {!reduceMotion && (
           <video
             ref={videoRef}
-            className={`h-full w-full object-cover transition-opacity duration-[1200ms] ease-out ${
-              loaded ? "opacity-100" : "opacity-0"
-            }`}
+            className="h-full w-full object-cover"
             style={{ transform: "scale(1.02)" }}
             autoPlay
             muted
@@ -81,7 +97,6 @@ export default function VideoHero({
             playsInline
             preload="auto"
             poster={poster}
-            onCanPlay={() => setLoaded(true)}
             aria-hidden="true"
           >
             <source src={videoWebm} type="video/webm" />
@@ -93,8 +108,10 @@ export default function VideoHero({
           src={poster}
           alt=""
           aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            reduceMotion || loaded ? (reduceMotion ? "opacity-100" : "opacity-0") : "opacity-100"
+          fetchPriority="high"
+          style={{ transform: "scale(1.02)" }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-out ${
+            playing && !reduceMotion ? "opacity-0" : "opacity-100"
           }`}
         />
       </div>
@@ -119,50 +136,40 @@ export default function VideoHero({
       {/* Content */}
       <div className="relative z-[2] flex h-full flex-col">
         <div className="mx-auto flex w-full max-w-8xl flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-20">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-            className="mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/70"
+          <p
+            style={rise(14, 0.8, 0.2)}
+            className="ix-hero-rise mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/70"
           >
             <span className="h-px w-8 bg-white/50" />
             {eyebrow}
-          </motion.p>
+          </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: EASE, delay: 0.32 }}
-            className="max-w-[16ch] text-balance font-serif-display font-medium text-[clamp(38px,7vw,88px)] leading-[0.98] tracking-[-0.01em] text-white"
+          <h1
+            style={rise(24, 1, 0.32)}
+            className="ix-hero-rise max-w-[16ch] text-balance font-serif-display font-medium text-[clamp(38px,7vw,88px)] leading-[0.98] tracking-[-0.01em] text-white"
           >
             {headline}
-          </motion.h1>
+          </h1>
 
           {subline && (
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: EASE, delay: 0.45 }}
-              className="mt-5 font-serif-display text-[clamp(22px,2.6vw,34px)] italic leading-[1.2] text-glow"
+            <p
+              style={rise(18, 1, 0.45)}
+              className="ix-hero-rise mt-5 font-serif-display text-[clamp(22px,2.6vw,34px)] italic leading-[1.2] text-glow"
             >
               {subline}
-            </motion.p>
+            </p>
           )}
 
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.5 }}
-            className="mt-7 max-w-[46ch] text-[17px] leading-relaxed text-white/75 md:text-[18px]"
+          <p
+            style={rise(18, 0.9, 0.5)}
+            className="ix-hero-rise mt-7 max-w-[46ch] text-[17px] leading-relaxed text-white/75 md:text-[18px]"
           >
             {description}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: EASE, delay: 0.66 }}
-            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+          <div
+            style={rise(14, 0.9, 0.66)}
+            className="ix-hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
           >
             <Link
               href={primaryHref}
@@ -180,19 +187,17 @@ export default function VideoHero({
             >
               {secondaryLabel}
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {showScrollCue && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.1 }}
-            className="hidden items-center gap-3 self-center pb-8 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/50 md:flex"
+          <div
+            style={rise(0, 1, 1.1)}
+            className="ix-hero-rise hidden items-center gap-3 self-center pb-8 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/50 md:flex"
           >
             Scroll
             <ArrowDown size={13} className="animate-bounce" />
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

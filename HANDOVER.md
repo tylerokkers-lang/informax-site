@@ -114,6 +114,26 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   made up. Never use real customers (Fairmont, test hotels, staff names).
   Everything lives in `src/components/product/data.ts`.
 
+### Cloud entrance logo + hero playback (26 September 2026) — branch `website/cloud-logo-hero`, preview only, awaiting approval
+
+- Hand-off screen shows the official INFORMAX CLOUD logo (Informax Cloud's
+  own `public/brand/informax-logo.png`, copied unchanged to
+  `public/brand/informax-cloud-logo.png`; displayed as a lossless WebP
+  resize, `informax-cloud-logo-800.webp`). No text, no drawn icon. Fade in
+  140 ms, logo 0.97 → 1 over 420 ms, faint Cloud-blue glow. Logo is
+  preloaded after page load (idle) and on hover/focus/touch.
+- Header entrance: quiet outlined pill, white Informax mark cropped
+  exactly from the official Cloud logo (`informax-cloud-mark-72.png`).
+  Mobile menu: "INFORMAX CLOUD / Log in" block, fits 320px.
+- Hero (`VideoHero.tsx`): posters are now the films' exact first frames;
+  playback is detected from the element's state after hydration (the old
+  `onCanPlay` often fired before React attached it, leaving the still
+  poster on top of a playing film for a whole loop); poster and film share
+  the same 1.02 scale; hero copy animates with CSS so it paints before
+  JavaScript. `/video/*` and `/brand/*` cache for a day +
+  stale-while-revalidate (next.config.ts) — **rename a media file when
+  replacing it.**
+
 ### Informax Cloud entrance (26 September 2026, live)
 
 - The header's "Log in to Informax Cloud" is a Cloud-blue pill with the

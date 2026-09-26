@@ -345,10 +345,29 @@ svg {
 
 /* Website → Informax Cloud hand-off. Shown while the browser is already
    navigating; it never holds the navigation back. */
-.ix-handoff { animation: ix-handoff-in 160ms cubic-bezier(0.16, 1, 0.3, 1) both; }
-.ix-handoff-mark { animation: ix-handoff-mark 220ms cubic-bezier(0.16, 1, 0.3, 1) 40ms both; }
+.ix-handoff { animation: ix-handoff-in 140ms ease-out both; }
+.ix-handoff-logo { animation: ix-handoff-logo 420ms cubic-bezier(0.16, 1, 0.3, 1) 30ms both; }
+/* A faint Cloud-blue light behind the logo. */
+.ix-handoff-glow {
+  background: radial-gradient(ellipse 42% 30% at 50% 50%, rgba(6, 147, 227, 0.14), transparent 70%);
+  animation: ix-handoff-in 600ms ease-out 60ms both;
+}
 @keyframes ix-handoff-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes ix-handoff-mark { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@keyframes ix-handoff-logo { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .ix-handoff, .ix-handoff-mark { animation: none; }
+  .ix-handoff, .ix-handoff-logo, .ix-handoff-glow { animation: none; }
+}
+
+/* Hero copy entrance. Pure CSS so the headline is painted with the first
+   frame of HTML instead of waiting for JavaScript to hydrate. Same timings
+   as before (see rise() in VideoHero.tsx). */
+.ix-hero-rise {
+  animation: ix-hero-rise var(--rise-dur, 1s) cubic-bezier(0.16, 1, 0.3, 1) var(--rise-delay, 0s) both;
+}
+@keyframes ix-hero-rise {
+  from { opacity: 0; transform: translateY(var(--rise-y, 18px)); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ix-hero-rise { animation: none; }
 }
