@@ -6,7 +6,8 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 25 September 2026 (Informax Cloud repositioning and full site
+Last updated: 26 September 2026 (Cloud entrance logo + hero playback fix
+live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
@@ -114,7 +115,18 @@ detail, Spaces cards, Touch Points, Space URL), `components/dashboard/*`
   made up. Never use real customers (Fairmont, test hotels, staff names).
   Everything lives in `src/components/product/data.ts`.
 
-### Cloud entrance logo + hero playback (26 September 2026) — branch `website/cloud-logo-hero`, preview only, awaiting approval
+### Cloud entrance logo + hero playback (26 September 2026, live — complete)
+
+- **Live:** commit `0b00b6a` (fast-forward of `main` from `b478bb8`),
+  production deployment `dpl_5VHSJskhAEnqPMenhAUCiFSfqVqQ`
+  (informax-site-qq0qd3xeh-informax.vercel.app), verified on
+  informax.co.uk 26 September 2026.
+- **Rollback target:** previous production deployment
+  `dpl_5r2bRPzD7YACSGTb3oSXHQwBCgEY`
+  (informax-site-qo0gm6xjw-informax.vercel.app, commit `b478bb8`) —
+  promote it with `npx vercel promote <url>` or revert `0b00b6a` on `main`.
+- This work is finished. Smaller mobile film variants and any further
+  media optimisation are separate future work, not part of it.
 
 - Hand-off screen shows the official INFORMAX CLOUD logo (Informax Cloud's
   own `public/brand/informax-logo.png`, copied unchanged to
