@@ -72,9 +72,6 @@ export function EmLight({ children }: { children: ReactNode }) {
   return <em className="not-italic italic text-brass-light">{children}</em>;
 }
 
-const baseBtn =
-  "group inline-flex items-center gap-2.5 border-b pb-1 text-[15px] font-medium tracking-[0.01em] whitespace-nowrap transition-colors duration-300";
-
 function BtnArrow() {
   return (
     <ArrowUpRight
@@ -100,11 +97,9 @@ export function BtnPrimary({
   return (
     <Link
       href={href}
-      className={`${baseBtn} ${
-        tone === "dark"
-          ? "border-white/50 text-white hover:border-white"
-          : "border-ink text-ink hover:border-brass-deep hover:text-brass-deep"
-      } ${className}`}
+      // Informax Cloud's primary button on every tone.
+      data-tone={tone}
+      className={`ix-btn ix-btn-primary group ${className}`}
     >
       {children}
       {arrow && <BtnArrow />}
@@ -128,10 +123,8 @@ export function BtnGhost({
   return (
     <Link
       href={href}
-      className={`${baseBtn} ${
-        tone === "dark"
-          ? "border-white/25 text-white/65 hover:border-white/70 hover:text-white"
-          : "border-line text-ink-mute hover:border-ink hover:text-ink"
+      className={`ix-link group ${
+        tone === "dark" ? "text-white/70 hover:text-white" : "text-ink-mute hover:text-ink"
       } ${className}`}
     >
       {children}

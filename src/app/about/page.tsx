@@ -33,7 +33,7 @@ export default function AboutPage() {
       <section className="bg-paper pt-[140px] pb-20 md:pt-[180px] md:pb-28">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Reveal className="max-w-3xl">
-            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+            <span className="mb-4 block text-[15px] font-semibold text-brass-deep">
               About Informax
             </span>
             <h1 className="max-w-[20ch] font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.6vw,62px)] text-ink">
@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <div className="grid grid-cols-1 gap-10 border-t border-line pt-14 md:grid-cols-12 md:pt-16">
             <Reveal className="md:col-span-4">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+              <span className="text-[15px] font-semibold text-brass-deep">
                 Our Story
               </span>
             </Reveal>
@@ -105,7 +105,7 @@ export default function AboutPage() {
       <section className="bg-charcoal-950 py-24 text-cream md:py-32">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Reveal className="mb-16 max-w-xl md:mb-20">
-            <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-brass-light">
+            <span className="mb-4 block text-[15px] font-semibold text-brass-light">
               What We Believe
             </span>
             <h2 className="font-serif-display font-medium leading-[1.12] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-white">

@@ -11,6 +11,30 @@ live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
+## 0a. Design system and homepage story (27 September 2026) — branch `website/cloud-aesthetic`, preview only until approved
+
+- **The website now uses Informax Cloud's visual language.** Informax Cloud
+  (informax-analytics) is the reference and was not changed. Tokens in
+  `globals.css`: the Cloud's system faces (SF Pro / Segoe UI Variable — no
+  web fonts; Fraunces and Inter were removed), Cloud navy for dark sections
+  (`--charcoal-*` now hold navy), Cloud blue as the accent (`--brass*` now
+  hold #0693e3 / #0470b0 / #8ed1fc), 1180px container, Cloud easing.
+  `.font-serif-display` is the display face at semibold, tight tracking,
+  upright. Buttons: `.ix-btn ix-btn-primary` / `ix-btn-secondary(-dark)` /
+  `.ix-link`, matching the app. Headline accents are a quieter grey
+  (`Soft`), never italics or gold; eyebrows are sentence case in Cloud blue.
+  The warm `--glow` colour is kept only inside hotel/Touch Point drawings.
+- **Homepage story (no product demos):** hero → why information matters →
+  the problem → how Informax works → throughout the Hotel (environments) →
+  benefits → our approach → **Meet Informax Cloud** (final section, existing
+  meet-cloud film, "Discover Informax Cloud" → `/informax-cloud`).
+- **`/informax-cloud` holds every product demonstration:** Spaces, Current
+  Content, Change Content film, PDF or website, Previous Versions, Touch
+  Points list (`TouchPointsShowcase`), Informax Touch/Scan, Activity, Hotel
+  workspace + People & access (`WorkspaceShowcase`), remote update, Guest
+  Directory. Demo wording follows the real app; data is fictional
+  (Maison Aurelia).
+
 ## 0. Current positioning (25 September 2026 redesign) — read this first
 
 **Live on informax.co.uk since 25 September 2026** (pushed at commit

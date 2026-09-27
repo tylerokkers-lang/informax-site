@@ -7,9 +7,12 @@ import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import ContentFormats from "@/components/cloud/ContentFormats";
 import CloudCta from "@/components/cloud/CloudCta";
 import { PermanentAddress } from "@/components/cloud/ProductPanels";
+import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
 import AppFilm from "@/components/product/AppFilm";
 import PhoneFilm from "@/components/product/PhoneFilm";
 import SpacesShowcase from "@/components/product/SpacesShowcase";
+import TouchPointsShowcase from "@/components/product/TouchPointsShowcase";
+import WorkspaceShowcase from "@/components/product/WorkspaceShowcase";
 import {
   ActivityFilm,
   PermanentUrlFilm,
@@ -30,7 +33,7 @@ const CONTROLS = [
   { title: "Touch Points", body: "Every physical Touch Point, connected to its Space." },
   { title: "Activity", body: "Interactions by Space, by Touch Point and by method." },
   { title: "Previous Versions", body: "Every published version, one step from restored." },
-  { title: "From anywhere", body: "Phone, tablet or desktop. Nothing to install." },
+  { title: "People & access", body: "Your team, each with their own sign-in." },
 ];
 
 const jsonLd = {
@@ -94,8 +97,8 @@ export default function InformaxCloudPage() {
               Every part of your Hotel, <Soft>as a Space.</Soft>
             </Display>
             <Lede className="mt-8">
-              Each Space shows its status, what guests currently see, how many
-              Touch Points it has and its permanent address.
+              Spa, Restaurants, Gym, Meetings &amp; Events, Guest Rooms. Each Space shows its status, what guests
+              currently see, how many Touch Points it has and its permanent address.
             </Lede>
           </Reveal>
         </Head>
@@ -113,8 +116,7 @@ export default function InformaxCloudPage() {
               One permanent address. <Soft>Change what is behind it.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Space&rsquo;s address never changes, so the Touch Points connected
-              to it never need replacing.
+              A Space&rsquo;s address never changes, so the Touch Points connected to it never need replacing.
             </Lede>
             <div className="mt-10">
               <PermanentAddress />
@@ -135,8 +137,8 @@ export default function InformaxCloudPage() {
               Open the Space. <Soft dark>Change it. Publish.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              The content changes. The permanent Space link and every connected
-              Touch Point stay exactly as they are.
+              The content changes. The permanent Space link and every connected Touch Point stay exactly as they
+              are.
             </Lede>
           </Reveal>
         </Head>
@@ -152,43 +154,12 @@ export default function InformaxCloudPage() {
               Your content. <Soft>Your choice.</Soft>
             </Display>
             <Lede className="mt-8">
-              Upload menus, brochures, guides, floor plans or directories, or
-              connect a page your Hotel already has. Switch whenever you want.
+              Upload menus, brochures, guides, floor plans or directories, or connect a page your Hotel already
+              has. Switch whenever you want.
             </Lede>
           </Reveal>
         </Head>
         <ContentFormats />
-      </Section>
-
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>Informax Touch and Informax Scan</Kicker>
-            <Display dark>
-              Two ways in. <Soft dark>Both immediate.</Soft>
-            </Display>
-          </Reveal>
-        </Head>
-        <TouchScanFilm tone="dark" />
-      </Section>
-
-      {/* Activity */}
-      <Section tone="alt">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <Reveal blur>
-            <Kicker>Activity</Kicker>
-            <Display>
-              See what <Soft>guests use.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Interactions by Space and by Touch Point, and how guests arrive:
-              Informax Touch, Informax Scan or Direct.
-            </Lede>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ActivityFilm tone="light" />
-          </Reveal>
-        </div>
       </Section>
 
       {/* Previous versions */}
@@ -203,11 +174,85 @@ export default function InformaxCloudPage() {
               Changed your mind? <Soft dark>Go back.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              PDFs and websites together, newest first. Restore an earlier
-              version in one step without touching a single Touch Point.
+              PDFs and websites together, newest first. Restore an earlier version in one step without touching a
+              single Touch Point.
             </Lede>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Touch Point management */}
+      <Section tone="alt">
+        <Head>
+          <Reveal blur>
+            <Kicker>Touch Points</Kicker>
+            <Display>
+              Every Touch Point, <Soft>in one list.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Where each one is, which Space it opens, how many are deployed and how often guests use it. What a
+              Touch Point opens is managed here, never by replacing the Touch Point itself.
+            </Lede>
+          </Reveal>
+        </Head>
+        <Reveal>
+          <TouchPointsShowcase />
+        </Reveal>
+      </Section>
+
+      {/* Guest-facing: Touch and Scan */}
+      <Section tone="dark">
+        <Head>
+          <Reveal blur>
+            <Kicker dark>Informax Touch and Informax Scan</Kicker>
+            <Display dark>
+              Two ways in. <Soft dark>Both immediate.</Soft>
+            </Display>
+            <Lede dark className="mt-8">
+              Guests tap or scan with their own phone. Nothing to download, and they see the Space&rsquo;s current
+              content straight away.
+            </Lede>
+          </Reveal>
+        </Head>
+        <TouchScanFilm tone="dark" />
+      </Section>
+
+      {/* Activity */}
+      <Section>
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <Reveal blur>
+            <Kicker>Activity</Kicker>
+            <Display>
+              See what <Soft>guests use.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Interactions by Space and by Touch Point, and how guests arrive: Informax Touch, Informax Scan or
+              Direct.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ActivityFilm tone="light" />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Hotel workspace and people */}
+      <Section tone="dark">
+        <Head>
+          <Reveal blur>
+            <Kicker dark>Your Hotel</Kicker>
+            <Display dark>
+              One workspace. <Soft dark>Everyone on the same page.</Soft>
+            </Display>
+            <Lede dark className="mt-8">
+              Your Hotel&rsquo;s Spaces, Touch Points, Activity and people in one place. Everyone with access has
+              their own sign-in, and you can see exactly who that is.
+            </Lede>
+          </Reveal>
+        </Head>
+        <Reveal>
+          <WorkspaceShowcase />
+        </Reveal>
       </Section>
 
       {/* Remote management */}
@@ -219,14 +264,19 @@ export default function InformaxCloudPage() {
               Update it from <Soft>your phone.</Soft>
             </Display>
             <Lede className="mt-8">
-              A new Guest Directory for the winter season, published from a
-              phone. Every Guest Room shows it straight away.
+              A new Guest Directory for the winter season, published from a phone. Every Guest Room shows it
+              straight away.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
             <PhoneFilm variant="update" space="directory" captions="light" />
           </Reveal>
         </div>
+      </Section>
+
+      {/* Guest Directory */}
+      <Section tone="alt">
+        <GuestDirectoryCallout />
       </Section>
 
       <CloudCta />

@@ -52,13 +52,13 @@ export default function HotelScene({ className = "" }: { className?: string }) {
           <stop offset="1" stopColor="#d9a45b" stopOpacity="0.06" />
         </linearGradient>
         <linearGradient id="hs-arc" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#8a7cff" stopOpacity="0" />
-          <stop offset="0.5" stopColor="#8a7cff" stopOpacity="1" />
-          <stop offset="1" stopColor="#8a7cff" stopOpacity="0" />
+          <stop offset="0" stopColor="#8ed1fc" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#8ed1fc" stopOpacity="1" />
+          <stop offset="1" stopColor="#8ed1fc" stopOpacity="0" />
         </linearGradient>
         <radialGradient id="hs-cloud" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#5643e0" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#5643e0" stopOpacity="0" />
+          <stop offset="0" stopColor="#0693e3" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#0693e3" stopOpacity="0" />
         </radialGradient>
         <filter id="hs-blur" x="-20%" y="-50%" width="140%" height="200%">
           <feGaussianBlur stdDeviation="6" />
@@ -115,7 +115,7 @@ export default function HotelScene({ className = "" }: { className?: string }) {
           <g key={c}>
             <motion.path
               d={d}
-              stroke="#8a7cff"
+              stroke="#8ed1fc"
               strokeOpacity="0.45"
               strokeWidth="1"
               fill="none"

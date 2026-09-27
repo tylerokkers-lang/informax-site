@@ -57,9 +57,8 @@ export default function PageHero({
         <div>
           <motion.p
             {...enter(0.1)}
-            className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/65"
+            className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]"
           >
-            <span className="h-px w-8 bg-white/40" />
             {eyebrow}
           </motion.p>
           <motion.h1

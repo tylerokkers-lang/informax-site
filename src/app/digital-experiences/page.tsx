@@ -47,7 +47,7 @@ export default function DigitalExperiencesPage() {
           <>
             Ease of information.
             <br />
-            <span className="italic text-glow">Designed for your guests.</span>
+            <span className="text-cream-mute">Designed for your guests.</span>
           </>
         }
         lede="Informax designs digital guest directories and guest information that feel like part of your hotel: beautifully presented, easy to find and always current."

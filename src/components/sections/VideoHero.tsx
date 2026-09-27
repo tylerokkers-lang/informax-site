@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 /** Entrance timing for one line of hero copy (see .ix-hero-rise). */
 const rise = (y: number, duration: number, delay: number) =>
@@ -126,6 +126,8 @@ export default function VideoHero({
             "linear-gradient(200deg, rgba(6,6,10,0) 40%, rgba(6,6,10,0.55) 68%, rgba(6,6,10,0.88) 100%)",
         }}
       />
+      {/* Phones: the copy fills most of the frame, so it gets a little more ground to stand on. */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(6,10,18,0.78)_0%,rgba(6,10,18,0.45)_55%,rgba(6,10,18,0)_85%)] md:hidden" />
       <div
         className="absolute inset-x-0 top-0 h-40 pointer-events-none"
         style={{
@@ -138,15 +140,14 @@ export default function VideoHero({
         <div className="mx-auto flex w-full max-w-8xl flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-20">
           <p
             style={rise(14, 0.8, 0.2)}
-            className="ix-hero-rise mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/70"
+            className="ix-hero-rise mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]"
           >
-            <span className="h-px w-8 bg-white/50" />
             {eyebrow}
           </p>
 
           <h1
             style={rise(24, 1, 0.32)}
-            className="ix-hero-rise max-w-[16ch] text-balance font-serif-display font-medium text-[clamp(38px,7vw,88px)] leading-[0.98] tracking-[-0.01em] text-white"
+            className="ix-hero-rise max-w-[15ch] text-balance font-serif-display text-[clamp(40px,7.4vw,96px)] leading-[1] text-white"
           >
             {headline}
           </h1>
@@ -154,7 +155,7 @@ export default function VideoHero({
           {subline && (
             <p
               style={rise(18, 1, 0.45)}
-              className="ix-hero-rise mt-5 font-serif-display text-[clamp(22px,2.6vw,34px)] italic leading-[1.2] text-glow"
+              className="ix-hero-rise mt-4 font-serif-display text-[clamp(21px,2.5vw,32px)] leading-[1.2] text-white/60"
             >
               {subline}
             </p>
@@ -162,29 +163,20 @@ export default function VideoHero({
 
           <p
             style={rise(18, 0.9, 0.5)}
-            className="ix-hero-rise mt-7 max-w-[46ch] text-[17px] leading-relaxed text-white/75 md:text-[18px]"
+            className="ix-hero-rise mt-7 max-w-[44ch] text-pretty text-[17px] leading-[1.6] text-white/75 md:text-[19px]"
           >
             {description}
           </p>
 
           <div
             style={rise(14, 0.9, 0.66)}
-            className="ix-hero-rise mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+            className="ix-hero-rise mt-10 flex flex-wrap items-center gap-x-7 gap-y-3"
           >
-            <Link
-              href={primaryHref}
-              className="group inline-flex items-center gap-2.5 border-b border-white/40 pb-1 text-[15px] font-medium text-white transition-colors duration-300 hover:border-white"
-            >
+            <Link href={primaryHref} className="ix-btn ix-btn-primary group">
               {primaryLabel}
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
+              <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
-            <Link
-              href={secondaryHref}
-              className="text-[15px] font-medium text-white/60 transition-colors duration-300 hover:text-white"
-            >
+            <Link href={secondaryHref} className="ix-link text-white/70 hover:text-white">
               {secondaryLabel}
             </Link>
           </div>

@@ -24,12 +24,11 @@ export default function EnquirePage() {
 
       <div className="relative mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:px-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-[140px] lg:self-start">
-          <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/65">
-            <span className="h-px w-8 bg-white/40" />
+          <p className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]">
             Talk to Informax
           </p>
           <h1 className="max-w-[13ch] text-balance font-serif-display text-[clamp(42px,6vw,76px)] font-medium leading-[0.98] tracking-[-0.02em] text-white">
-            Let&rsquo;s talk about <span className="italic text-glow">your hotel.</span>
+            Let&rsquo;s talk about <span className="text-cream-mute">your hotel.</span>
           </h1>
           <p className="mt-7 max-w-[42ch] text-[17px] leading-relaxed text-white/72">
             Tell us a little about your property. We&rsquo;ll come back with a

@@ -204,7 +204,7 @@ export default function EnquireForm() {
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-[12px] border bg-panel px-4 py-3.5 text-[15px] text-ink placeholder:text-ink-mute/70 transition-[border-color,box-shadow] duration-300 focus:outline-none focus-visible:border-ink focus-visible:shadow-[0_0_0_3px_rgba(86,67,224,0.18)] ${
+  return `w-full rounded-[12px] border bg-panel px-4 py-3.5 text-[15px] text-ink placeholder:text-ink-mute/70 transition-[border-color,box-shadow] duration-300 focus:outline-none focus-visible:border-ink focus-visible:shadow-[0_0_0_3px_rgba(6, 147, 227,0.18)] ${
     hasError ? "border-rust" : "border-line hover:border-ink/30"
   }`;
 }

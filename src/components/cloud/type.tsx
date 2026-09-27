@@ -1,10 +1,16 @@
 import type { ReactNode } from "react";
 
+/**
+ * Marketing type, drawn from Informax Cloud: SF-style display type at
+ * semibold with tight tracking, a two-tone headline (the second phrase in
+ * a quieter grey rather than italics), and a small Cloud-blue eyebrow.
+ */
+
 export function Kicker({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return (
     <span
-      className={`mb-5 block text-[11px] font-semibold uppercase tracking-[0.28em] ${
-        dark ? "text-brass-light" : "text-ink-mute"
+      className={`mb-4 block text-[14px] font-semibold tracking-[-0.005em] md:text-[15px] ${
+        dark ? "text-brass-light" : "text-brass-deep"
       }`}
     >
       {children}
@@ -25,7 +31,7 @@ export function Display({
 }) {
   return (
     <Tag
-      className={`font-serif-display text-balance font-medium leading-[1.02] tracking-[-0.02em] text-[clamp(36px,5.4vw,68px)] ${
+      className={`font-serif-display text-balance leading-[1.06] text-[clamp(34px,5vw,62px)] ${
         dark ? "text-white" : "text-ink"
       } ${className}`}
     >
@@ -34,8 +40,9 @@ export function Display({
   );
 }
 
+/** The quieter second phrase of a two-tone headline. */
 export function Soft({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
-  return <span className={`italic ${dark ? "text-glow" : "text-brass-deep"}`}>{children}</span>;
+  return <span className={dark ? "text-cream-mute" : "text-ink-mute"}>{children}</span>;
 }
 
 export function Lede({
@@ -49,7 +56,7 @@ export function Lede({
 }) {
   return (
     <p
-      className={`max-w-[46ch] text-pretty text-[17px] leading-relaxed md:text-[18px] ${
+      className={`max-w-[46ch] text-pretty text-[17px] leading-[1.6] md:text-[19px] ${
         dark ? "text-cream-mute" : "text-ink-mute"
       } ${className}`}
     >

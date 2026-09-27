@@ -116,7 +116,7 @@ function PhoneScreen({ open }: { open: boolean }) {
   return (
     <div className="relative h-full w-full overflow-hidden rounded-[15px] bg-[#0c0f16]">
       <div className={`absolute inset-0 bg-white p-2.5 transition-opacity duration-700 ${open ? "opacity-100" : "opacity-0"}`}>
-        <div className="text-[5px] font-semibold uppercase tracking-[0.2em] text-[#5643e0]">Maison Aurelia</div>
+        <div className="text-[5px] font-semibold uppercase tracking-[0.2em] text-[#0693e3]">Maison Aurelia</div>
         <div className="mt-2 font-serif-display text-[12px] leading-tight text-[#14141c]">Spa Treatments</div>
         <div className="mt-3 space-y-1.5">
           {[92, 70, 84, 58, 76].map((w, i) => (

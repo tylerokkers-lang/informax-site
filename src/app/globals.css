@@ -1,34 +1,34 @@
 @import "tailwindcss";
 
 /*
- * Informax brand system — "Studio" identity: white/near-black neutrals with
- * an indigo + coral accent pair. Deliberately distinct from both the old
- * cream/brass hospitality look and from an executive-consultancy palette —
- * reads as a creative digital studio, not a heritage or corporate brand.
- * Token names below (--brass*) are kept for a minimal-diff swap across
- * components; treat them as the "primary accent" family — they hold indigo
- * values now, not literal brass. --coral* is a new secondary accent family.
+ * Informax brand system — aligned with Informax Cloud (the reference).
+ * Same type (the platform's own SF-style system faces, no web fonts), the
+ * same navy surfaces, the same Cloud blue accent, radii, shadows and
+ * easing. Light sections stay light (Apple-like #fbfbfd / #f5f6f9) so the
+ * marketing story can breathe; dark sections are the Cloud's navy.
+ * Token names (--charcoal*, --brass*) are kept for a minimal diff:
+ * charcoal = Cloud navy, brass = Cloud blue.
  */
 :root {
   --paper: #fbfbfd;
-  --paper-alt: #f1f1f6;
+  --paper-alt: #f4f6f9;
   --panel: #ffffff;
 
-  --charcoal-950: #0a0a10;
-  --charcoal-900: #0f0f18;
-  --charcoal-850: #15151f;
-  --charcoal-800: #1b1b28;
-  --charcoal-700: #262638;
+  --charcoal-950: #060a12;
+  --charcoal-900: #0b1524;
+  --charcoal-850: #0d1c30;
+  --charcoal-800: #0f213a;
+  --charcoal-700: #16304f;
 
-  --ink: #14141c;
-  --ink-soft: #45455a;
-  --ink-mute: #83839a;
-  --cream: #f1f1f7;
-  --cream-mute: #b3b3c7;
+  --ink: #0b1524;
+  --ink-soft: #3d4a5c;
+  --ink-mute: #677285;
+  --cream: #eaf2fb;
+  --cream-mute: #a4adc0;
 
-  --brass: #5643e0;
-  --brass-deep: #3c2eb0;
-  --brass-light: #8a7cff;
+  --brass: #0693e3;
+  --brass-deep: #0470b0;
+  --brass-light: #8ed1fc;
 
   --coral: #ff6b4e;
   --coral-deep: #e14e33;
@@ -40,10 +40,10 @@
   --glow: #f3d29c;
   --glow-deep: #d9a45b;
 
-  --line: rgba(20, 20, 28, 0.1);
-  --line-soft: rgba(20, 20, 28, 0.06);
-  --line-dark: rgba(255, 255, 255, 0.12);
-  --line-dark-soft: rgba(255, 255, 255, 0.07);
+  --line: rgba(11, 21, 36, 0.1);
+  --line-soft: rgba(11, 21, 36, 0.06);
+  --line-dark: rgba(255, 255, 255, 0.1);
+  --line-dark-soft: rgba(255, 255, 255, 0.06);
 }
 
 @theme inline {
@@ -96,10 +96,16 @@
   --color-line-dark: var(--line-dark);
   --color-line-dark-soft: var(--line-dark-soft);
 
-  --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* The Informax Cloud faces: SF on Apple devices, Segoe UI Variable on
+     Windows. --font-serif is kept as a name only; it is the display face. */
+  --font-serif: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  --container-8xl: 1200px;
+  --container-8xl: 1180px;
+
+  --radius-ix-sm: 12px;
+  --radius-ix-md: 20px;
+  --radius-ix-lg: 28px;
 
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -139,8 +145,17 @@ svg {
   display: none;
 }
 
+/* Display type, as in Informax Cloud: semibold, tight tracking, upright.
+   Unlayered on purpose so it wins over per-element weight utilities and
+   every headline on the site shares one voice. */
 .font-serif-display {
   font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+.font-serif-display.italic,
+.font-serif-display .italic {
+  font-style: normal;
 }
 
 /* -------------------------------------------------------------------------
@@ -149,8 +164,8 @@ svg {
 
 .bg-grid-fade {
   background-image:
-    linear-gradient(rgba(86, 67, 224, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(86, 67, 224, 0.09) 1px, transparent 1px);
+    linear-gradient(rgba(6, 147, 227, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 147, 227, 0.08) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -158,8 +173,8 @@ svg {
 
 .bg-grid-fade-dark {
   background-image:
-    linear-gradient(rgba(138, 124, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(138, 124, 255, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(142, 209, 252, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(142, 209, 252, 0.07) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
@@ -182,8 +197,8 @@ svg {
 .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
 
 @keyframes pulse-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(138, 124, 255, 0); border-color: var(--line-dark); }
-  50% { box-shadow: 0 0 0 6px rgba(138, 124, 255, 0.1); border-color: rgba(138, 124, 255, 0.4); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(142, 209, 252, 0); border-color: var(--line-dark); }
+  50% { box-shadow: 0 0 0 6px rgba(142, 209, 252, 0.1); border-color: rgba(142, 209, 252, 0.4); }
 }
 .animate-pulse-ring { animation: pulse-ring 2.6s ease-in-out infinite; }
 
@@ -370,4 +385,71 @@ svg {
 }
 @media (prefers-reduced-motion: reduce) {
   .ix-hero-rise { animation: none; }
+}
+
+/* -------------------------------------------------------------------------
+   Buttons — the Informax Cloud set (same radius, colour, motion), sized up
+   slightly for marketing. Primary is Cloud blue; secondary is a quiet
+   surface that reads on light or dark.
+   ------------------------------------------------------------------------- */
+@layer components {
+  .ix-btn {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 12px;
+    padding: 0 1.375rem;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    user-select: none;
+    transition: transform 160ms var(--ease-premium), background-color 160ms var(--ease-premium),
+      color 160ms var(--ease-premium), box-shadow 160ms var(--ease-premium);
+  }
+  .ix-btn:active {
+    transform: scale(0.97);
+  }
+  .ix-btn:focus-visible {
+    outline: 2px solid #8ed1fc;
+    outline-offset: 3px;
+  }
+  .ix-btn-primary {
+    background: #0693e3;
+    color: #fff;
+  }
+  .ix-btn-primary:hover {
+    background: #1aa0ec;
+  }
+  .ix-btn-secondary {
+    background: rgba(11, 21, 36, 0.06);
+    color: var(--ink);
+  }
+  .ix-btn-secondary:hover {
+    background: rgba(11, 21, 36, 0.1);
+  }
+  .ix-btn-secondary-dark {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  .ix-btn-secondary-dark:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  /* A plain text link with an arrow, for the quieter second action. */
+  .ix-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 15px;
+    font-weight: 600;
+    transition: color 160ms var(--ease-premium);
+  }
+  .ix-link:focus-visible {
+    outline: 2px solid #8ed1fc;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }

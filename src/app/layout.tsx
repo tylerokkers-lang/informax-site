@@ -1,24 +1,8 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 const DEFAULT_TITLE = "Informax Cloud | Connected Spaces and Touch Points for Hotels";
 const DEFAULT_DESCRIPTION =
@@ -65,7 +49,6 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${fraunces.variable} ${inter.variable}`}
     >
       <head>
         {/* Cheap head start for the Informax Cloud sign-in; the full

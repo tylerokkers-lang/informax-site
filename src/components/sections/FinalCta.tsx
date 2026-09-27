@@ -27,7 +27,7 @@ export default function FinalCta({
       <div className="mx-auto max-w-8xl px-6 md:px-10">
         <Reveal className="border-t border-line pt-14 md:pt-16">
           {eyebrow && (
-            <span className="mb-6 block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+            <span className="mb-4 block text-[15px] font-semibold text-brass-deep">
               {eyebrow}
             </span>
           )}

@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useInView, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 
 const MP4 = "/video/meet-cloud.mp4";
@@ -9,10 +11,12 @@ const WEBM = "/video/meet-cloud.webm";
 const POSTER = "/video/meet-cloud-poster.jpg";
 
 /**
- * The product launch moment. A full-bleed film band that only starts
- * loading when it is about to be seen, then the product itself underneath.
+ * The homepage's closing reveal: the existing Informax Cloud film band,
+ * an introduction (not the product tour) and one clear next step to
+ * /informax-cloud. The film only starts loading when it is about to be
+ * seen, and only plays while on screen.
  */
-export default function MeetCloud({ children }: { children: ReactNode }) {
+export default function MeetCloud() {
   const band = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const visible = useInView(band, { amount: 0.1 });
@@ -46,7 +50,7 @@ export default function MeetCloud({ children }: { children: ReactNode }) {
 
   return (
     <section id="informax-cloud" className="relative scroll-mt-20 bg-charcoal-950 text-cream">
-      <div ref={band} className="relative flex min-h-[78svh] items-end overflow-hidden">
+      <div ref={band} className="relative flex min-h-[92svh] items-end overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={POSTER} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
         {load && (
@@ -59,29 +63,36 @@ export default function MeetCloud({ children }: { children: ReactNode }) {
             preload="auto"
             poster={POSTER}
             onCanPlay={() => setReady(true)}
+            onPlaying={() => setReady(true)}
             aria-hidden
           >
             <source src={WEBM} type="video/webm" />
             <source src={MP4} type="video/mp4" />
           </video>
         )}
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,16,0.7)_0%,rgba(10,10,16,0.45)_40%,rgba(10,10,16,0.94)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.55)_0%,rgba(6,10,18,0.35)_38%,rgba(6,10,18,0.92)_100%)]" />
         <div className="relative mx-auto w-full max-w-8xl px-6 pb-20 pt-40 md:px-10 md:pb-28">
           <Reveal blur>
-            <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/70">
-              <span className="h-px w-8 bg-white/50" />
-              Introducing
-            </p>
-            <h2 className="font-serif-display text-[clamp(52px,9vw,128px)] font-medium leading-[0.92] tracking-[-0.03em] text-white">
-              Meet Informax <span className="italic text-glow">Cloud.</span>
+            <p className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]">Meet Informax Cloud</p>
+            <h2 className="max-w-[16ch] font-serif-display text-[clamp(40px,7vw,92px)] leading-[1.02] text-white">
+              One place to control what your guests see.
             </h2>
-            <p className="mt-8 max-w-[40ch] text-[18px] leading-relaxed text-white/80 md:text-[20px]">
-              One place to control what guests see, across every Space in your Hotel.
+            <p className="mt-7 max-w-[44ch] text-pretty text-[17px] leading-[1.6] text-white/75 md:text-[20px]">
+              Informax Cloud is where your Hotel manages the information behind every Informax Touch Point.
+              Update it once, from anywhere, and every guest sees the current version.
             </p>
+            <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <Link href="/informax-cloud" className="ix-btn ix-btn-primary group">
+                Discover Informax Cloud
+                <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+              <Link href="/enquire" className="ix-link text-white/70 hover:text-white">
+                Talk to Informax
+              </Link>
+            </div>
           </Reveal>
         </div>
       </div>
-      <div className="mx-auto max-w-8xl px-6 pb-24 pt-6 md:px-10 md:pb-36">{children}</div>
     </section>
   );
 }

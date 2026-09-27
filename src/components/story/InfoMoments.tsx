@@ -39,7 +39,7 @@ export default function InfoMoments() {
               className="grid grid-cols-1 gap-1 border-b border-line py-6 md:grid-cols-[220px_1fr] md:items-baseline md:gap-10 md:py-8"
             >
               <span
-                className={`text-[11px] font-semibold uppercase tracking-[0.28em] transition-colors duration-700 ${
+                className={`text-[14px] font-semibold transition-colors duration-700 ${
                   on ? "text-brass-deep" : "text-ink-mute/70"
                 }`}
               >
