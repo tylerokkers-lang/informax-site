@@ -11,16 +11,16 @@ import {
   CurrentContentCard,
   Logo,
   MenuIcon,
-  PermanentSpaceUrl,
+  SpaceConnection,
   VersionRows,
 } from "./ui";
 import { Cursor, useFilm, useMeasure, useTyper, type CursorEvent, type FilmAction } from "./film";
-import { DIRECTORY, HOTEL, SPA, SPACE_URL, SPA_PREVIOUS, type VersionRowData } from "./data";
+import { DIRECTORY, HOTEL, SPA, SPA_PREVIOUS, type VersionRowData } from "./data";
 
 /**
  * Informax Cloud on a phone: the Hotel Admin dashboard, single column,
  * real wording, never scaled. Two stories:
- *   spa        Spa Treatments.pdf → Use a website → maisonaurelia.com/spa/book
+ *   spa        Spa Treatments.pdf → Use a website → Spa booking page
  *   directory  GuestDirectory.pdf → Upload a PDF → GuestDirectory-Winter.pdf
  * The count beside the phone ("12 / 400 Touch Points updated") is a
  * marketing annotation outside the app frame.
@@ -163,7 +163,7 @@ export default function PhoneFilm({
   const panelOpen = reached(S.openPanel);
 
   const name = isPdf ? DIRECTORY.name : SPA.name;
-  const url = isPdf ? DIRECTORY.url : SPACE_URL;
+  const touchPoints = isPdf ? DIRECTORY.touchPoints : SPA.touchPoints;
   const count = isPdf ? DIRECTORY.touchPoints : SPA.touchPoints;
   const before = isPdf ? { kind: "pdf" as const, headline: DIRECTORY.pdf, updated: "14 Aug 2026" } : { kind: "pdf" as const, headline: SPA.pdf, updated: "2 Sept 2026" };
   const after = isPdf ? { kind: "pdf" as const, headline: DIRECTORY.nextPdf, updated: "25 Sept 2026" } : { kind: "website" as const, headline: SPA.web, updated: "25 Sept 2026" };
@@ -251,7 +251,7 @@ export default function PhoneFilm({
                         Live
                       </div>
                       <div className="mt-7">
-                        <PermanentSpaceUrl compact url={url} note={null} ring={published && !reduce} />
+                        <SpaceConnection compact touchPoints={touchPoints} note={null} ring={published && !reduce} />
                       </div>
                     </div>
 
@@ -330,7 +330,7 @@ function TouchPointsUpdated({ on, count, tone }: { on: boolean; count: number; t
         ))}
       </div>
       <p className={`mt-4 text-[13px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>
-        Same Space link. Same Touch Points. Nothing was reprinted or reinstalled.
+        Same Space. Same Touch Points. Nothing was reprinted or reinstalled.
       </p>
     </div>
   );

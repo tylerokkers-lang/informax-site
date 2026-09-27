@@ -8,7 +8,7 @@ import TouchPoint from "./TouchPoint";
 const STATES = [
   { when: "Today", kind: "pdf", title: "Spa Treatments", note: "PDF" },
   { when: "Tomorrow", kind: "pdf", title: "Seasonal Offer", note: "PDF" },
-  { when: "Next month", kind: "web", title: "maisonaurelia.com/spa/book", note: "Website" },
+  { when: "Next month", kind: "web", title: "Spa booking page", note: "Website" },
 ] as const;
 
 /**
@@ -32,11 +32,11 @@ export default function TouchPointStays() {
 
   return (
     <div ref={ref} className="grid items-center gap-12 grid-cols-1 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-      <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-b from-[#1b1a22] to-[#101016] py-14">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(243,210,156,0.16),transparent_62%)]" />
+      <div className="relative flex min-h-[340px] items-center justify-center overflow-hidden rounded-[28px] bg-gradient-to-b from-[#181c24] to-[#0e1117] py-14 shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(223,227,234,0.12),transparent_62%)]" />
         <div className="relative flex flex-col items-center">
           <TouchPoint label="Spa" size="lg" active />
-          <div className="mt-8 flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-cream-mute">
+          <div className="mt-8 flex items-center gap-2 text-[13px] font-medium text-cream-mute">
             <span className="h-1.5 w-1.5 rounded-full bg-glow" />
             Installed once. Unchanged.
           </div>

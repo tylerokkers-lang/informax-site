@@ -169,23 +169,22 @@ export function SpaceCard({
       <p className="ixp-tabular mt-5 text-[13px] text-ix-dim">
         {space.touchPoints} Touch Points · {space.interactions.toLocaleString("en-GB")} interactions this month
       </p>
-      <div className="mt-5 flex items-center justify-between gap-3">
-        <code className="min-w-0 truncate font-mono text-[12px] leading-snug text-ix-dim">go.informax.cloud/maisonaurelia/{space.code}</code>
-        <span className="-mr-2 shrink-0 px-2.5 text-[13px] font-medium text-ix-bright">Copy link</span>
-      </div>
     </div>
   );
 }
 
-/** "Your permanent Space": the address never changes. */
-export function PermanentSpaceUrl({
-  url,
+/**
+ * The Space's connected Touch Points: they stay exactly where they are
+ * whatever the Space shows. (The site never shows web addresses.)
+ */
+export function SpaceConnection({
+  touchPoints,
   ring,
   compact,
-  note = "Always shows this Space's current content. It never changes — not when you rename the Space, change or restore its content, or archive and restore it.",
+  note = "Change what this Space shows as often as you like. Every connected Touch Point stays exactly where it is.",
 }: {
-  url: string;
-  /** One soft pulse, used to draw the eye to the fact that the link has not moved. */
+  touchPoints: number;
+  /** One soft pulse, used to draw the eye to the fact that nothing moved. */
   ring?: boolean;
   compact?: boolean;
   note?: string | null;
@@ -195,21 +194,15 @@ export function PermanentSpaceUrl({
       className={cx("rounded-[20px] bg-white/[0.05] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_8px_24px_-12px_rgba(2,6,14,0.55)]", compact ? "p-5" : "p-5 sm:p-6", ring && "ixp-ring")}
       data-cur="url"
     >
-      <p className="ixp-label">Your permanent Space</p>
-      <code
-        className={cx(
-          "ixp-display mt-2.5 block select-all break-all leading-snug tracking-[-0.01em] text-white",
-          compact ? "text-[1.0625rem]" : "text-[1.125rem] sm:text-[1.3125rem]",
-        )}
-      >
-        {url}
-      </code>
-      <div className="mt-5 flex flex-wrap items-center gap-2.5">
-        <Btn variant="primary">Copy</Btn>
-        <Btn variant="secondary">
-          Open
-          <OpenIcon size={16} />
-        </Btn>
+      <p className="ixp-label">Connected Touch Points</p>
+      <div className="mt-2.5 flex items-center gap-3">
+        <InteractionTile kind="touch" size={compact ? 36 : 40} />
+        <p className={cx("ixp-display ixp-tabular leading-snug tracking-[-0.01em] text-white", compact ? "text-[1.0625rem]" : "text-[1.125rem] sm:text-[1.3125rem]")}>
+          {touchPoints.toLocaleString("en-GB")} Touch Points
+        </p>
+        <span className="ml-auto">
+          <Badge>Unchanged</Badge>
+        </span>
       </div>
       {note && <p className="mt-4 max-w-xl text-[13px] leading-relaxed text-ix-dim">{note}</p>}
     </div>
@@ -310,7 +303,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
               {s.pdfPublished ? (
                 <div className="ixp-enter-scale">
                   <p className="text-[17px] font-medium text-white">Guests now see your new PDF</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space link and connected Touch Points stay the same.</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Touch Points stay the same.</p>
                 </div>
               ) : s.staged ? (
                 <div data-anchor="entry" className="ixp-enter-fade">
@@ -345,13 +338,13 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
             <div className="pt-5">
               {s.publishedAddress ? (
                 <div className="ixp-enter-scale">
-                  <p className="text-[17px] font-medium text-white">Guests now see {s.publishedAddress}</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space link and connected Touch Points stay the same.</p>
+                  <p className="text-[17px] font-medium text-white">Guests now see the {s.publishedAddress}</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Touch Points stay the same.</p>
                 </div>
               ) : (
                 <div data-anchor="entry" className="space-y-4">
                   <div>
-                    <span className="ixp-label mb-2 block">Website address</span>
+                    <span className="ixp-label mb-2 block">Page on your website</span>
                     <div data-cur="input" className={cx("ixp-input flex items-center", s.inputFocus && "is-focus")}>
                       {s.address ? (
                         <span className="text-ix-cream">
@@ -359,7 +352,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
                           {s.inputFocus && <span className="ml-px inline-block h-[1.1em] w-px translate-y-[3px] bg-ix-bright" />}
                         </span>
                       ) : (
-                        <span className="text-ix-dim">https://maisonaurelia.com/spa</span>
+                        <span className="text-ix-dim">Choose a page</span>
                       )}
                     </div>
                   </div>
@@ -382,7 +375,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
 
           <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
             <LockIcon size={14} />
-            Your Space link and connected Touch Points stay the same.
+            Your Space and connected Touch Points stay the same.
           </p>
         </div>
       </div>

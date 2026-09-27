@@ -5,7 +5,7 @@ import { HOTEL, SPACE_CARDS } from "./data";
 /**
  * A hotel's Spaces as the real app shows them. Desktop and tablet: the
  * app's Space cards in a grid. Phones: every Space at once as compact rows
- * (name, status, what guests see, Touch Points, address) so the whole idea
+ * (name, status, what guests see, Touch Points) so the whole idea
  * is visible without swiping.
  */
 export default function SpacesShowcase() {
@@ -13,7 +13,7 @@ export default function SpacesShowcase() {
     <div
       className="ixp select-none overflow-hidden rounded-[28px] shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_40px_90px_-30px_rgba(2,6,14,0.6)]"
       role="img"
-      aria-label={`Informax Cloud Spaces for ${HOTEL.name}: ${SPACE_CARDS.map((c) => c.name).join(", ")}. Each has its own permanent address.`}
+      aria-label={`Informax Cloud Spaces for ${HOTEL.name}: ${SPACE_CARDS.map((c) => c.name).join(", ")}. Each connects to its own Touch Points.`}
     >
       <div className="px-4 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-9 lg:px-10" aria-hidden>
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4 px-1 sm:mb-7 sm:px-0">
@@ -52,10 +52,6 @@ export default function SpacesShowcase() {
                   ))}
                 </p>
               </div>
-              <code className="mt-2.5 block font-mono text-[12px] leading-snug text-ix-dim">
-                go.informax.cloud/maisonaurelia/<wbr />
-                {c.code}
-              </code>
             </li>
           ))}
         </ul>

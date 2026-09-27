@@ -28,6 +28,15 @@ historical where they conflict).
   `.ix-link`, matching the app. Headline accents are a quieter grey
   (`Soft`), never italics or gold; eyebrows are sentence case in Cloud blue.
   The warm `--glow` colour is kept only inside hotel/Touch Point drawings.
+- **No web addresses anywhere (27 September 2026, owner's request):** the
+  site never shows a URL, web address, "Space link" or "Copy link". Demos
+  show websites by page name ("Spa booking page"); the old "Your permanent
+  Space" card is now `SpaceConnection` ("Connected Touch Points · Unchanged");
+  the product point is "one permanent connection", not an address.
+- **Touch Point accent is platinum** (`--glow` #dfe3ea / `--glow-deep`
+  #9aa3b2) — deliberately not blue (Cloud) or gold. One token to change.
+- **Nav order:** Home, Informax Cloud, Digital Experiences, How It Works,
+  About, Talk to Informax (footer follows the same order).
 - **Homepage story (no product demos):** hero → why information matters →
   the problem → how Informax works → throughout the Hotel (environments) →
   benefits → our approach → **Meet Informax Cloud** (final section, existing

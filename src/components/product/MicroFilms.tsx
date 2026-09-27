@@ -11,11 +11,11 @@ import {
   ConfirmSheetView,
   CurrentContentCard,
   InteractionTile,
-  PermanentSpaceUrl,
+  SpaceConnection,
   VersionRows,
 } from "./ui";
 import { fmt, useCountUp, useFilm, useTyper } from "./film";
-import { SPA, SPACE_URL, SPA_ACTIVITY, SPA_PREVIOUS, TOP_TOUCH_POINTS, type VersionRowData } from "./data";
+import { SPA, SPA_ACTIVITY, SPA_PREVIOUS, TOP_TOUCH_POINTS, type VersionRowData } from "./data";
 
 /**
  * Small product moments. Each one teaches a single real Informax Cloud
@@ -47,23 +47,23 @@ function useGate(amount = 0.4) {
 const Caption = ({ children, tone }: { children: ReactNode; tone: "dark" | "light" }) =>
   children ? <p className={`mt-5 text-[14px] ${tone === "dark" ? NOTE_DARK : NOTE_LIGHT}`}>{children}</p> : null;
 
-/* ----------------------- 1. One permanent Space address ---------------------- */
+/* ------------------------ 1. One permanent connection ------------------------ */
 
 const URL_STAGES = [2800, 7000] as const;
 
-export function PermanentUrlFilm({ tone = "light", caption = "One permanent address. Change what is behind it whenever you like." }: { tone?: "dark" | "light"; caption?: string }) {
+export function PermanentUrlFilm({ tone = "light", caption = "One permanent connection. Change what guests see whenever you like." }: { tone?: "dark" | "light"; caption?: string }) {
   const { ref, active, reduce } = useGate();
   const { stage } = useFilm({ stages: URL_STAGES, total: 11500, active });
   const website = reduce ? true : stage === 1;
 
   return (
-    <div ref={ref} role="img" aria-label={`The Spa Space keeps the address ${SPACE_URL} while its content changes from ${SPA.pdf} to ${SPA.web}.`}>
+    <div ref={ref} role="img" aria-label={`The Spa Space keeps its ${SPA.touchPoints} Touch Points while its content changes from ${SPA.pdf} to the ${SPA.web}.`}>
       <Mini>
         <div className="mb-5 flex items-center justify-between">
           <h3 className="text-[1.375rem] leading-snug">{SPA.name}</h3>
           <Badge>Live</Badge>
         </div>
-        <PermanentSpaceUrl compact note={null} url={SPACE_URL} />
+        <SpaceConnection compact note={null} touchPoints={SPA.touchPoints} />
         <div className="mt-4 rounded-[20px] bg-white/[0.035] p-5">
           <p className="ixp-label">Guests currently see</p>
           <div key={website ? "web" : "pdf"} className="ixp-enter-fade mt-3 flex items-center gap-4">
@@ -92,7 +92,7 @@ export function ChangeContentFilm({ tone = "light" }: { tone?: "dark" | "light" 
   const address = reduce || s >= 4 ? SPA.web : typed;
 
   return (
-    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, enter the website address and publish. The Space link and connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, choose a page on your website and publish. The Space and its connected Touch Points stay the same.">
       <Mini>
         <ChangePanel
           s={{
@@ -318,9 +318,9 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const after: VersionRowData[] = [{ kind: "website", headline: SPA.web, published: "25 Sept 2026, 10:41" }, SPA_PREVIOUS[1]];
 
   return (
-    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space link and connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space and its connected Touch Points stay the same.">
       <Mini className="relative overflow-hidden">
-        <PermanentSpaceUrl compact note={null} url={SPACE_URL} ring={restored && !reduce} />
+        <SpaceConnection compact note={null} touchPoints={SPA.touchPoints} ring={restored && !reduce} />
         <div className="mt-5">
           <CurrentContentCard
             kind={restored ? "pdf" : "website"}
@@ -337,7 +337,7 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
           </div>
         )}
       </Mini>
-      <Caption tone={tone}>Restore an earlier version in one step. The Space link and Touch Points never change.</Caption>
+      <Caption tone={tone}>Restore an earlier version in one step. The Space and its Touch Points never change.</Caption>
     </div>
   );
 }

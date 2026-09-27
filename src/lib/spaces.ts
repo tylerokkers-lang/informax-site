@@ -28,7 +28,7 @@ export const SPACES: Space[] = [
     holds: ["Treatments", "Booking", "Opening hours", "Offers"],
     touchPoints: 12,
     pdf: "Spa Treatments.pdf",
-    site: "maisonaurelia.com/spa/book",
+    site: "Spa booking page",
   },
   {
     id: "restaurants",
@@ -37,7 +37,7 @@ export const SPACES: Space[] = [
     holds: ["Menus", "Bookings", "Opening hours", "Specials"],
     touchPoints: 8,
     pdf: "Dinner Menu.pdf",
-    site: "maisonaurelia.com/dining/menu",
+    site: "Dining menu page",
   },
   {
     id: "gym",
@@ -46,7 +46,7 @@ export const SPACES: Space[] = [
     holds: ["Class timetable", "Facilities", "Wellness information"],
     touchPoints: 5,
     pdf: "Class Timetable.pdf",
-    site: "maisonaurelia.com/wellness/classes",
+    site: "Class timetable page",
   },
   {
     id: "meetings",
@@ -55,7 +55,7 @@ export const SPACES: Space[] = [
     holds: ["Floor plans", "Room layouts", "Menus", "Event information"],
     touchPoints: 9,
     pdf: "Meeting Rooms.pdf",
-    site: "maisonaurelia.com/events/floorplans",
+    site: "Event floor plans page",
   },
   {
     id: "bedrooms",
@@ -64,7 +64,7 @@ export const SPACES: Space[] = [
     holds: ["Guest information", "Hotel services", "Room service", "Local information"],
     touchPoints: 400,
     pdf: "In-Room Dining.pdf",
-    site: "maisonaurelia.com/stay",
+    site: "Your stay page",
   },
   {
     id: "directory",
@@ -73,7 +73,7 @@ export const SPACES: Space[] = [
     holds: ["Full hotel directory", "Services", "FAQs", "Facilities"],
     touchPoints: 400,
     pdf: "GuestDirectory.pdf",
-    site: "maisonaurelia.com/guest-directory",
+    site: "Guest directory page",
   },
 ];
 

@@ -67,11 +67,6 @@ export default function TouchPointsShowcase() {
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-0.5">
-                {r.kind === "touch" && (
-                  <span className="hidden md:block">
-                    <span className="ixp-btn ixp-btn-quiet text-[13px]">Copy link</span>
-                  </span>
-                )}
                 <span className="flex h-9 w-9 items-center justify-center rounded-full text-ix-muted">
                   <MoreIcon size={18} />
                 </span>

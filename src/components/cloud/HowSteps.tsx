@@ -43,7 +43,7 @@ function Visual({ i, dark }: { i: number; dark: boolean }) {
   }
   return (
     <div className={`inline-flex items-center gap-3 border px-4 py-2.5 text-[12px] ${dark ? "border-white/15 text-cream" : "border-line text-ink-soft"}`}>
-      maisonaurelia.com/spa/book
+      Spa booking page
       <span className="bg-brass px-3 py-1 font-semibold text-white">Publish</span>
     </div>
   );

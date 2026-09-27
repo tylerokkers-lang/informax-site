@@ -35,7 +35,7 @@ const FAQ = [
   },
   {
     q: "Can we go back to something we published earlier?",
-    a: "Yes. Informax Cloud keeps your version history, so an earlier version can be restored without changing the Space address or any Touch Point.",
+    a: "Yes. Informax Cloud keeps your version history, so an earlier version can be restored without changing the Space or any Touch Point.",
   },
   {
     q: "Where can our team make changes?",

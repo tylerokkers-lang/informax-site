@@ -3,10 +3,10 @@ import { HOTEL } from "./data";
 
 /** People with access to the Hotel, as the People & access card shows them. Illustrative. */
 const PEOPLE = [
-  { email: `general.manager@${HOTEL.domain}`, status: "Active" as const },
-  { email: `frontoffice@${HOTEL.domain}`, status: "Active" as const },
-  { email: `spa@${HOTEL.domain}`, status: "Active" as const },
-  { email: `events@${HOTEL.domain}`, status: "Invitation pending" as const },
+  { email: "Sofia Marchetti · General Manager", status: "Active" as const },
+  { email: "Luca Bernardi · Front Office", status: "Active" as const },
+  { email: "Elena Conti · Spa", status: "Active" as const },
+  { email: "Marco Ricci · Events", status: "Invitation pending" as const },
 ];
 
 /**

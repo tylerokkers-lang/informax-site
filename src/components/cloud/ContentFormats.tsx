@@ -33,7 +33,7 @@ function WebPreview() {
           <i className="h-1.5 w-1.5 rounded-full bg-ink/15" />
           <i className="h-1.5 w-1.5 rounded-full bg-ink/15" />
         </span>
-        <span className="flex-1 truncate bg-paper-alt px-2 py-0.5 text-[9px] text-ink-mute">maisonaurelia.com/dining/menu</span>
+        <span className="h-3 flex-1 rounded-sm bg-paper-alt" aria-hidden />
       </div>
       <div className="p-5">
         <div className="font-serif-display text-[22px] leading-tight text-ink">Dinner Menu</div>
@@ -91,7 +91,7 @@ export default function ContentFormats() {
         </div>
         <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
           <LockIcon size={14} />
-          Your Space link and connected Touch Points stay the same.
+          Your Space and connected Touch Points stay the same.
         </p>
       </div>
 

@@ -1,5 +1,5 @@
 /**
- * Illustrative data for the product films. Every hotel, Space, address and
+ * Illustrative data for the product films. Every hotel, Space, page and
  * figure here is fictional. Illustrative data is fine; illustrative
  * functionality is not, so every label, button and message shown inside an
  * app frame exists in the real Informax Cloud app.
@@ -8,23 +8,18 @@
 export const HOTEL = {
   name: "Maison Aurelia",
   place: "Lake Como, Italy",
-  domain: "maisonaurelia.com",
 } as const;
-
-/** A permanent Space address, readable and named after the hotel and the Space. */
-export const SPACE_URL = "go.informax.cloud/maisonaurelia/spa";
 
 export const SPA = {
   name: "Spa",
-  url: SPACE_URL,
   pdf: "Spa Treatments.pdf",
-  web: "maisonaurelia.com/spa/book",
+  /** A page on the Hotel's own website, shown by its name — never as a web address. */
+  web: "Spa booking page",
   touchPoints: 12,
 } as const;
 
 export const DIRECTORY = {
   name: "Guest Directory",
-  url: "go.informax.cloud/maisonaurelia/guest-directory",
   pdf: "GuestDirectory.pdf",
   nextPdf: "GuestDirectory-Winter.pdf",
   nextSize: "3.4 MB",
@@ -43,9 +38,9 @@ export interface SpaceCardData {
 
 export const SPACE_CARDS: SpaceCardData[] = [
   { id: "spa", name: "Spa", kind: "pdf", file: "Spa Treatments.pdf", touchPoints: 12, interactions: 1248, code: "spa" },
-  { id: "restaurants", name: "Restaurants", kind: "website", file: "maisonaurelia.com/dining/menu", touchPoints: 18, interactions: 2106, code: "restaurants" },
-  { id: "gym", name: "Gym", kind: "website", file: "maisonaurelia.com/wellness/classes", touchPoints: 5, interactions: 426, code: "gym" },
-  { id: "meetings", name: "Meetings & Events", kind: "website", file: "maisonaurelia.com/events/floorplans", touchPoints: 9, interactions: 782, code: "events" },
+  { id: "restaurants", name: "Restaurants", kind: "website", file: "Dining menu page", touchPoints: 18, interactions: 2106, code: "restaurants" },
+  { id: "gym", name: "Gym", kind: "website", file: "Class timetable page", touchPoints: 5, interactions: 426, code: "gym" },
+  { id: "meetings", name: "Meetings & Events", kind: "website", file: "Event floor plans page", touchPoints: 9, interactions: 782, code: "events" },
   { id: "directory", name: "Guest Directory", kind: "pdf", file: "GuestDirectory.pdf", touchPoints: 400, interactions: 6412, code: "guest-directory" },
   { id: "rooms", name: "Guest Rooms", kind: "pdf", file: "In-Room Dining.pdf", touchPoints: 400, interactions: 3380, code: "guest-rooms" },
 ];

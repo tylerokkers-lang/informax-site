@@ -37,8 +37,10 @@
   --rust: #d93636;
   --moss: #1f9d6b;
 
-  --glow: #f3d29c;
-  --glow-deep: #d9a45b;
+  /* Touch Point accent: platinum — the physical product's finish. Not blue
+     (that is Informax Cloud) and not gold. One place to change it. */
+  --glow: #dfe3ea;
+  --glow-deep: #9aa3b2;
 
   --line: rgba(11, 21, 36, 0.1);
   --line-soft: rgba(11, 21, 36, 0.06);

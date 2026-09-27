@@ -6,7 +6,7 @@ import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import ContentFormats from "@/components/cloud/ContentFormats";
 import CloudCta from "@/components/cloud/CloudCta";
-import { PermanentAddress } from "@/components/cloud/ProductPanels";
+import { PermanentConnection } from "@/components/cloud/ProductPanels";
 import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
 import AppFilm from "@/components/product/AppFilm";
 import PhoneFilm from "@/components/product/PhoneFilm";
@@ -23,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Informax Cloud: Hotel Content Management for Every Space",
   description:
-    "Informax Cloud is the control centre for guest information across your hotel. Give every Space a permanent address, serve a PDF or a website, connect Touch Points and change it all from anywhere.",
+    "Informax Cloud is the control centre for guest information across your hotel. Give every part of your hotel a Space, serve a PDF or a website, connect Touch Points and change it all from anywhere.",
   alternates: { canonical: "/informax-cloud" },
 };
 
@@ -98,7 +98,7 @@ export default function InformaxCloudPage() {
             </Display>
             <Lede className="mt-8">
               Spa, Restaurants, Gym, Meetings &amp; Events, Guest Rooms. Each Space shows its status, what guests
-              currently see, how many Touch Points it has and its permanent address.
+              currently see and how many Touch Points are connected to it.
             </Lede>
           </Reveal>
         </Head>
@@ -113,13 +113,13 @@ export default function InformaxCloudPage() {
           <Reveal blur>
             <Kicker>Current Content</Kicker>
             <Display>
-              One permanent address. <Soft>Change what is behind it.</Soft>
+              One permanent connection. <Soft>Change what is behind it.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Space&rsquo;s address never changes, so the Touch Points connected to it never need replacing.
+              A Touch Point stays connected to its Space, so whatever the Space shows, the Touch Point never needs replacing.
             </Lede>
             <div className="mt-10">
-              <PermanentAddress />
+              <PermanentConnection />
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -137,8 +137,7 @@ export default function InformaxCloudPage() {
               Open the Space. <Soft dark>Change it. Publish.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              The content changes. The permanent Space link and every connected Touch Point stay exactly as they
-              are.
+              The content changes. The Space and every connected Touch Point stay exactly as they are.
             </Lede>
           </Reveal>
         </Head>

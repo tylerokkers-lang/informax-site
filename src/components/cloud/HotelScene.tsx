@@ -48,8 +48,8 @@ export default function HotelScene({ className = "" }: { className?: string }) {
     >
       <defs>
         <linearGradient id="hs-room" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#f3d29c" stopOpacity="0.5" />
-          <stop offset="1" stopColor="#d9a45b" stopOpacity="0.06" />
+          <stop offset="0" stopColor="#dfe3ea" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#9aa3b2" stopOpacity="0.06" />
         </linearGradient>
         <linearGradient id="hs-arc" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#8ed1fc" stopOpacity="0" />
