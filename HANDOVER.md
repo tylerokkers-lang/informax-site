@@ -22,8 +22,14 @@ historical where they conflict).
   regenerate or alter them.
 - Open items (see §0 "Flags" in the bible): real Touch Point product photos
   and face artwork, vector logos, end-card typeface, and a "The Aurelia
-  London" demo workspace for the screen recordings. The app has no
-  Space-reordering feature, so the film doesn't show one.
+  London" demo hotel for the screen recordings.
+- §0A of the bible audits every feature the advert shows as LIVE / PLANNED /
+  INTERNAL, checked read-only against `informax-analytics` at `e3f3c92`.
+  **Space reordering (with a persisted order) is a confirmed product
+  requirement but is not in the app yet.** It isn't filmed until it's live.
+  The Touch Points list is Informax-admin only (`/admin`), so the advert
+  records only the Hotel Admin dashboard (`/dashboard`). No Informax Cloud UI
+  may be AI-generated or recreated.
 
 ## 0a. Design system and homepage story (27 September 2026) — branch `website/cloud-aesthetic`, preview only until approved
 

@@ -1,7 +1,7 @@
 # Informax Cloud — "Every Detail"
 
 **45-second YouTube advertisement · Production bible**
-Version 1.0 · 27 September 2026
+Version 1.1 · 27 September 2026 · **Direction approved.** This version is final for production planning. Filming of Informax Cloud screens may begin only once every ⚠ item in §0A is cleared.
 Fictional property: **The Aurelia London**
 
 Locked brand assets for this film are in [`brand-assets/`](brand-assets/):
@@ -21,6 +21,7 @@ Both logos are white. The end card must use a dark background (Informax Cloud na
 |---|---|---|
 | 1 | Final 45-second creative concept | §1 |
 | 2 | Voice-over script with timestamps | §2 |
+| — | Feature audit: LIVE / PLANNED / INTERNAL, and what to verify before filming | **§0A** |
 | 3 | Second-by-second storyboard | §3 |
 | 4 | Every individual shot | §4 |
 | 5 | Camera direction for every shot | §4 ("Camera" column), §11 |
@@ -63,12 +64,73 @@ The brief is strong. Seven changes make it a film rather than a feature list:
 | # | Issue | Recommendation |
 |---|---|---|
 | F1 | **YouTube skippable ads can be skipped after 5 seconds.** The 45-second film is deliberately quiet and doesn't name the brand until 0:22. | Run the 45s as a skippable in-stream ad against **tightly targeted** hospitality audiences, and use it on the website, LinkedIn and in sales meetings. Use the **15s cut** (§16) for broad pre-roll. If the 45s will run to broad audiences, test **Hook B** (§17), which puts the payoff first. |
-| F2 | **The brief asks to show "Reordering Spaces".** I couldn't find a reorder feature in the real app. The site's product films and its app references show none. | Leave it out unless the app genuinely supports it. Brand accuracy overrides creativity. Shot S13 is written so that it works without a reorder. |
-| F3 | **"Viewing Touch Points"**: according to `HANDOVER.md`, the Touch Points list is visible in the **Informax-administrator workspace** and **not** on a hotel's own dashboard. | James is presented as the *hotel's* manager, so leave the Touch Points list out. The optional shot S19-alt shows it only if you decide to film James as an Informax account manager, or confirm that hotel users can see it. |
+| F2 | **Space reordering.** 🟡 **PLANNED / REQUIRED.** A confirmed product requirement: hotel and client admins must be able to reorder their Spaces, and the chosen order must persist. It is **not in the current build**: no Space ordering exists in the app source (see §0A). | **Confirmed product requirement: awaiting implementation, verify before filming.** The reorder is not shown until it is live on production. S13 works without it. Once it is live, record **P3-R** and cut in **S13-R** (§4, §12). |
+| F3 | **Touch Points list.** 🔒 **INTERNAL / SUPER ADMIN.** The list lives only in the Informax administration area (`/admin/hotels/[id]/touch-points`). The Hotel Admin dashboard (Overview · Spaces · Activity · Account) has no Touch Points screen. | **Not shown.** James is the hotel's manager and never appears in an Informax administration screen. *Physical* Touch Points appear throughout the film. The hotel-side proof that Touch Points are unaffected is the real confirmation on screen in S19: "Your Space link and connected Touch Points stay the same." |
 | F4 | **Hotel name.** The brief says *The Aurelia London*. The website's product demos use *Maison Aurelia* (Lake Como). | This bible uses **The Aurelia London**, as briefed. A demo workspace with this name must be created in Informax Cloud for the screen recordings (§12). |
 | F5 | **Physical Touch Point design.** I don't have product photography or dimensions for the real Informax Touch Point. | AI plates generate a **blank, provisional** plaque. The real face artwork is composited in post. **Please supply product photos and the face artwork** (see §12, A3–A5). Until then, the provisional form follows the website's drawing: a dark graphite rounded square. |
 | F6 | **End-card typeface.** Informax Cloud uses system fonts (SF Pro / Segoe UI Variable). Apple's SF Pro licence is restricted to mock-ups of Apple-platform UI, so it may not cover advertising. | Confirm the licensed brand typeface for supers. If none is confirmed, Inter (open licence) is the closest safe substitute. |
 | F7 | **The Informax logo is only 640 px wide.** That is too small for 4K macro shots of the Touch Point face. | **Please supply vector masters (SVG/PDF/EPS) of both logos** (A1, A2). The Informax Cloud PNG, at 1498 px, is fine for the end card at 4K. |
+
+---
+
+## 0A. Feature audit: LIVE / PLANNED / INTERNAL
+
+**Rule: the advert never invents Informax Cloud functionality.** Every feature the film shows or implies falls into one of three categories:
+
+| Status | Meaning | What the advert may do |
+|---|---|---|
+| ✅ **LIVE** | Verified in the current application and safe to demonstrate | Show it, **only** through genuine recordings of the Hotel Admin dashboard |
+| 🟡 **PLANNED / REQUIRED** | Part of the confirmed product specification, but not verified as live | Never show it working, and never imply it in the VO or supers, until it is live on production and recorded |
+| 🔒 **INTERNAL / SUPER ADMIN** | For Informax administrators, not hotel users | Never show it on James's screen, and never imply hotel administrators have access |
+
+**How this was verified:** I read the Informax Cloud source (`informax-analytics`, `main`, commit `e3f3c92`, 26 September 2026), without changing it. Source code is strong evidence, but it isn't the production application. **Each ✅ item is fully confirmed only when it is captured on production.** The screen recordings in §12 are that confirmation. If a capture doesn't match what's described here, the shot comes out; the UI is never recreated.
+
+### Audit
+
+| Feature | Status | Evidence in the app | In the advert |
+|---|---|---|---|
+| **Your Spaces** list (Hotel Admin) | ✅ LIVE | `/dashboard/content`, page title "Your Spaces" | S12, S13 (P2, P3) |
+| Open a Space → **Current Content** | ✅ LIVE | `/dashboard/content/[id]`, "Current Content" | S14 (P4) |
+| **Change Content → Upload a PDF → Drag your PDF here → Publish** | ✅ LIVE | `pdf-publish-form.tsx`, `change-content.tsx` | S17, S18 (P7, P8) |
+| Confirmation **"Guests now see your new PDF"** plus **"Your Space link and connected Touch Points stay the same."** | ✅ LIVE | `pdf-publish-form.tsx` | S19 (P9). The app's own words carry the film's thesis. |
+| **Use a website** instead of a PDF | ✅ LIVE | `web-link-form.tsx` | Not shown (not needed at 45s) |
+| **Previous Versions**, with Restore | ✅ LIVE | `hotel-version-history`, `version-list.tsx` | S15 (P5). Shown as a list only; Restore isn't demonstrated. |
+| **Activity**: Interactions (last 30 days), Touch and Scan counts, chart, **"Where guests use Informax Touch"** | ✅ LIVE, aggregate only | `/dashboard/tracking` | S16 (P6). VO8 corrected to match (see below). |
+| **Guest experience**: Touch Point → Space opens in the phone's browser in Informax's PDF viewer, with no app | ✅ LIVE | `/go/[code]` → `/guest/content/[id]` (`GuestPdfViewer`) | S10, S21 (P1, P10), VO5 "No app required." |
+| The Space's link and Touch Points are unchanged when content changes | ✅ LIVE | Publish confirmation copy, permanent Space link | VO11, hero-frame device (S08 = S20) |
+| **Space reordering with a persisted order** | 🟡 **PLANNED / REQUIRED** | **Not in the build.** Spaces have no order field. The only `sort_order` in the schema belongs to analytics `page_sections`. | **Not shown.** S13-R and P3-R are prepared for when it's live. |
+| **Touch Points list** / management | 🔒 INTERNAL / SUPER ADMIN | `/admin/hotels/[id]/touch-points` only | **Not shown.** S19-alt from v1.0 has been removed. |
+| **Creating / allocating Spaces** | 🔒 INTERNAL / SUPER ADMIN | Hotel Spaces page: "A Space is allocated by Informax, not created here" | Not shown. **Copy never says hotels create Spaces.** Informax sets up the demo hotel's Spaces before filming, off camera. |
+| Archive / restore a whole Space, People, Clients, Subscriptions, Audit | 🔒 INTERNAL / SUPER ADMIN | `/admin/*` | Not shown |
+| **Scan** section on the Space page (downloadable Scan images) | ✅ LIVE, but **kept out of frame** | `SpaceScanSection` | Frame or crop P4 so no Scan code is visible. The brand rule is to never market Informax as QR codes. The word "Scan" in Activity is genuine product language and may stay. |
+| Website product films (`AppFilm`, `PhoneFilm`, `MicroFilms`) | ⛔ Recreations, not the app | `informax-site/src/components/product/*` | **Never used as advert footage**, not even as a stand-in |
+| Marketing overlays such as "12 Touch Points updated" (from the website) | ⛔ Not in the app | Website only | **Never** placed in the advert |
+
+### VO and super audit
+
+| Line | Claim | Status |
+|---|---|---|
+| VO5 "One touch. It opens on their phone. No app required." | The guest opens content in the browser | ✅ LIVE |
+| VO6 "Behind every Touch Point: Informax Cloud." | Touch Points connect to Spaces managed in Cloud | ✅ LIVE |
+| VO7 "Your Spaces. Your content. Always under your control." | Hotel manages content and versions | ✅ LIVE ("Your Spaces" is the app's own page title) |
+| **VO8 (corrected)** "And see exactly **where guests use it.**" | Activity › "Where guests use Informax Touch" | ✅ LIVE. v1.0 said "what guests use most", which implied a ranking the app doesn't show. The word count is unchanged at 7. |
+| VO9 "Replace a document. Press publish." | Change Content → Publish | ✅ LIVE |
+| VO10 "Instantly, it's everywhere." | New content is served straight after publishing | ⚠ **Verify (V3).** Fallback line: "Moments later, it's everywhere." |
+| VO11 "The Touch Points stay. The information moves." | Touch Points unchanged | ✅ LIVE (it matches the app's confirmation copy) |
+| "Informax Touch" super | Product name used in the app ("Where guests use Informax Touch") | ✅ LIVE |
+
+### ⚠ Verify before filming
+
+| # | Check | Owner | If it fails |
+|---|---|---|---|
+| **V1** | **Space reordering** is implemented and the order persists after a reload and a new sign-in, on production | Product | S13-R stays out. The film is complete without it. |
+| **V2** | Every ✅ item above behaves as described **on production**, signed in as a **Hotel Admin** user of the demo hotel at `/dashboard`. Never record from `/admin`. | Production | Drop the shot. Never recreate it. |
+| **V3** | **"Instantly"**: publish, then touch the real Touch Point with a phone that has already opened the old PDF. The new PDF must appear straight away, not an old copy from the browser cache. Test on iPhone and Android. | Product | Use the fallback VO10, "Moments later, it's everywhere." |
+| **V4** | The demo hotel user can **Change Content** and **Publish**. The source doesn't restrict this by hotel role, but confirm the account on production. | Production | Use an account that can |
+| **V5** | Activity shows **"Where guests use Informax Touch"**. It only appears when more than one location has taps, so seed at least 3 fictional locations. | Informax admin | S16 holds on the Interactions figure only |
+| **V6** | The demo hotel **"The Aurelia London"** with its Spaces (Spa, Gym, Meetings & Events, Dining, Guest Directory), connected Touch Points, 2–3 prior Spa versions, and fictional Activity data | Informax admin (off camera) | — |
+| **V7** | The guest PDF viewer's appearance, so the phone-screen plates match it (see §1, Phone) | Production | — |
+| **V8** | Physical Touch Point design and face artwork (F5, A3–A5) | Client | Touch Point shots can't be finalised |
 
 ---
 
@@ -79,7 +141,7 @@ The brief is strong. Seven changes make it a film rather than a feature list:
 
 On a quiet autumn afternoon at The Aurelia London, everything a guest might need is beautifully printed: spa treatments, class times, floor plans, menus. But the season has turned, and the print hasn't.
 
-Eleanor, a guest, walks to the spa and touches her phone to a small, elegant Informax Touch Point. The spa's treatments open instantly on her phone, with no app. Behind that Touch Point is Informax Cloud, where James, the hotel's Guest Experience Manager, keeps every Space in order: current content, previous versions, and a clear view of what guests use.
+Eleanor, a guest, walks to the spa and touches her phone to a small, elegant Informax Touch Point. The spa's treatments open instantly on her phone, with no app. Behind that Touch Point is Informax Cloud, where James, the hotel's Guest Experience Manager, looks after every Space: current content, previous versions, and a clear view of where guests use it.
 
 James replaces *Spa Treatments.pdf* with *Autumn Spa Treatments.pdf* and presses **Publish**. In one elegant rush of cuts, the same Touch Point in the same frame now opens the autumn menu, and so do the Touch Points by the pool, at reception and throughout the hotel: spa, gym, meetings, dining. Nothing physical moved. Only the information did.
 
@@ -99,8 +161,8 @@ The film settles into deep navy and the Informax Cloud logo appears: *Every deta
 | **Spa therapist** | Woman, thirties, hair in a low bun, oatmeal wrap tunic, no text on the uniform. |
 | **Front-of-house staff** | Navy suits matching James. |
 | **Second guest (S22)** | Man, sixties, silver hair, white waffle hotel robe. |
-| **Phone** | Slim modern smartphone, matte graphite frame, thin even bezels, no visible logos. **The screen is always a plain, evenly lit light-grey field in generated footage**, replaced in post. |
-| **Laptop** | Slim silver-grey laptop, no logo. The screen is a plain, evenly lit light-grey field, replaced in post. |
+| **Phone** | Slim modern smartphone, matte graphite frame, thin even bezels, no visible logos. **In generated footage the screen is always blank and content-free**, lit to the tone of the real guest PDF viewer (record P1 first, V7), with clear screen edges for planar tracking. The genuine recording is composited in post. **AI never draws any interface.** |
+| **Laptop** | Slim silver-grey laptop, no logo. The screen is a **plain, evenly lit deep-navy field** (Informax Cloud is a dark, navy interface), with clear screen edges for tracking. The genuine recording is composited in post. |
 | **Touch Point (provisional, see F5)** | A flat square tile of roughly 9 cm with generously rounded corners, a dark graphite body with a subtle vertical gradient, a fine light edge highlight and a matte finish. **The face is completely blank in generated footage.** Face artwork is composited in post: the Informax logo, the Informax Touch mark, the Space name and "Touch your phone here". |
 | **Camera language** | Slow, controlled moves: dolly, slider or gimbal, never handheld shake. Full-frame look, 35–100 mm. Shallow depth of field on details. No whip-pans, speed ramps on people, drones or lens-flare streaks. |
 
@@ -122,7 +184,7 @@ The film settles into deep navy and the Informax Cloud logo appears: *Every deta
 | VO5 | 0:17.9 | 0:21.7 | One touch. [beat] It opens on their phone. [beat] No app required. | 10 |
 | VO6 | 0:22.3 | 0:24.3 | Behind every Touch Point: [beat] Informax Cloud. | 6 |
 | VO7 | 0:24.6 | 0:27.9 | Your Spaces. [beat] Your content. [beat] Always under your control. | 8 |
-| VO8 | 0:28.1 | 0:30.4 | And see exactly what guests use most. | 7 |
+| VO8 | 0:28.1 | 0:30.4 | And see exactly where guests use it. | 7 |
 | VO9 | 0:30.8 | 0:32.7 | Replace a document. [beat] Press publish. | 5 |
 | — | 0:32.8 | — | *(Publish click: music high point)* | — |
 | VO10 | 0:33.4 | 0:34.9 | Instantly, [beat] it's everywhere. | 3 |
@@ -168,7 +230,7 @@ The film settles into deep navy and the Informax Cloud logo appears: *Every deta
 | 26 | S14 | Current Content | — | — | — |
 | 27 | S15 | Previous Versions | "Always under your control." | — | UI tick |
 | 28 | S16 | Activity | "And see exactly…" | — | Strings rise |
-| 29 | S16 | Activity | "…what guests use most." | — | — |
+| 29 | S16 | Activity: "Where guests use Informax Touch" | "…where guests use it." | — | — |
 | 30 | S16→S17 | Change Content | — | — | Build begins |
 | 31 | S17 | *Autumn Spa Treatments.pdf* lands | "Replace a document." | — | File-drop whoosh, very soft |
 | 32 | S18 | Cursor on Publish, fingertip | "Press publish." | — | A 3-frame silence, then **CLICK plus a low impact at 0:32.8** |
@@ -216,13 +278,15 @@ Each entry gives the shot, its timecode, the camera direction, the action, the o
 
 ### ACT 3 — INFORMAX CLOUD (0:22.0–0:30.6)
 
+Every interface shot in Acts 3 and 4 is a **genuine recording of a ✅ LIVE feature from the Hotel Admin dashboard** (§0A). AI provides only the room, the devices and the hands.
+
 | Shot | TC | Source | Picture | Camera | On-screen text | Transition out |
 |---|---|---|---|---|---|---|
-| **S12** | 0:22.0–0:24.0 | COMP | James at a writing desk in a quiet panelled office overlooking a courtyard. The laptop is open. The screen is composited with **Your Spaces** (P2). | 50 mm over-the-shoulder, a slow 10° arc to reveal the screen. | — | Cut to screen |
-| **S13** | 0:24.0–0:25.6 | UI | Screen fill: **Your Spaces** showing *Spa, Gym, Meetings & Events, Dining, Guest Directory*. The cursor moves to Spa (no reorder, see F2). **P3.** | Device comp: UI at about 85% of the frame, 4° perspective, the laptop bezel at frame left, faint warm room reflection. Virtual 3% drift. | — | Cut on click |
+| **S12** | 0:22.0–0:24.0 | COMP | James at a writing desk in a quiet panelled office overlooking a courtyard. The laptop is open. The screen is composited with **Your Spaces** (P2), recorded from the **Hotel Admin dashboard**. | 50 mm over-the-shoulder, a slow 10° arc to reveal the screen. | — | Cut to screen |
+| **S13** | 0:24.0–0:25.6 | UI | Screen fill: **Your Spaces** showing *Spa, Gym, Meetings & Events, Dining, Guest Directory*. The cursor moves to Spa and clicks. No reordering (🟡 F2). **P3.** | Device comp: UI at about 85% of the frame, 4° perspective, the laptop bezel at frame left, faint warm room reflection. Virtual 3% drift. | — | Cut on click |
 | **S14** | 0:25.6–0:26.9 | UI | The Spa Space opens. **Current Content** shows *Spa Treatments.pdf*. **P4.** | Same device comp, gentle punch-in toward Current Content. | — | Cut |
 | **S15** | 0:26.9–0:28.0 | UI | **Previous Versions** panel for Spa. **P5.** | Same device comp. | — | Cut |
-| **S16** | 0:28.0–0:30.6 | UI | **Activity** view with the aggregate interaction figures for the Spaces. **P6.** Aggregate only: no individual guest data, ever. | Same device comp, slow 4% drift. | — | Cut |
+| **S16** | 0:28.0–0:30.6 | UI | **Activity**: the Interactions figure (last 30 days), then a drift down to **"Where guests use Informax Touch"**. **P6.** Aggregate only: no individual guest data, ever. | Same device comp, slow 4% drift. | — | Cut |
 
 ### ACT 4 — THE POWER OF ONE UPDATE (0:30.6–0:37.0)
 
@@ -230,12 +294,12 @@ Each entry gives the shot, its timecode, the camera direction, the action, the o
 |---|---|---|---|---|---|---|
 | **S17** | 0:30.6–0:31.8 | UI | Spa → **Change Content** → *Drag your PDF here*. *Autumn Spa Treatments.pdf* replaces *Spa Treatments.pdf*. **P7.** | Device comp, tighter (about 120%) on the file names. | — | Cut |
 | **S18** | 0:31.8–0:32.8 | UI + AI | The cursor settles on **Publish** (P8). Cut 6 frames before the click to an AI macro of James's fingertip pressing the trackpad (S18b), then back to the button press. | UI comp, then 100 mm macro, then UI. | — | **Hard cut on the click (0:32.8), on the music hit** |
-| **S19** | 0:32.8–0:33.4 | UI | The app confirms: **"Guests now see your new PDF"**. **P9.** | UI comp, static. | — | Cut on beat |
+| **S19** | 0:32.8–0:33.4 | UI | The app confirms: **"Guests now see your new PDF"** and **"Your Space link and connected Touch Points stay the same."** **P9.** | UI comp, static. | — | Cut on beat |
 | **S20** | 0:33.4–0:34.1 | COMP | **HERO FRAME, reused from S08.** Identical composition and identical Touch Point. Eleanor's hand and phone enter again. | Identical plate. Do not reframe. | — | Cut on beat |
 | **S21** | 0:34.1–0:34.8 | UI | Eleanor's phone, over the shoulder: *Autumn Spa Treatments* opens. **P10.** | Same framing as S10, to show the before and after. | — | Cut on beat |
 | **S22** | 0:34.8–0:35.7 | COMP | The relaxation-pool doorway, with a second Touch Point on a stone pillar. The second guest in a white robe touches his phone to it. His screen brightens but is not readable. | 50 mm, locked off. | — | Cut on beat |
 | **S23** | 0:35.7–0:37.0 | AI | Wide view of spa reception. Eleanor reads calmly; the therapist is beside her. The S08 Touch Point sits exactly where it was. | 35 mm, locked off, symmetrical. | — | Cut |
-| **S19-alt** *(optional, F3)* | replaces S19 | UI | Touch Points list showing the Spa Touch Points still connected and unchanged. **P11.** | UI comp. | — | — |
+| **S13-R** *(🟡 PLANNED, only once V1 passes)* | replaces the second half of S13 | UI | **Your Spaces**: James moves **Dining** above **Gym** and the new order holds. **P3-R.** | Same device comp as S13 | — | Cut on release |
 
 ### ACT 5 — SCALE (0:37.0–0:40.4)
 
@@ -350,7 +414,7 @@ Mix the sound design under the music, except at the touch and the click. The mos
    - **REF-LOBBY**, **REF-SPA**, **REF-CORRIDOR**, **REF-OFFICE**, **REF-POOL**, **REF-GYM**, **REF-MEETING**, **REF-DINING**: location stills in the continuity-bible light
    - **REF-TOUCHPOINT**: the blank provisional plaque (replace it with real product photos as soon as they're supplied)
 2. **Generate video image-to-video** from approved keyframes, with the character and location references attached (Veo 3, Runway Gen-4 References, Kling 2.x or Sora 2). Generate each shot at **5–8 s** so you have handles, at 24 fps and the highest resolution available, then upscale to UHD with a temporal upscaler (Topaz or similar).
-3. **Put no text or logos in any generation.** Screens are plain light grey, Touch Point faces are blank, and printed cards are blank. Everything readable is composited in post.
+3. **Put no text, logos or interface in any generation.** Screens are blank and trackable: the laptop is a deep-navy field and the phone is matched to the guest viewer (V7). Touch Point faces are blank. Printed cards are blank. Everything readable is composited in post. **AI must never generate, imitate or "approximate" an Informax Cloud screen or either logo.** If a model draws UI or a logo into a plate, reject the plate.
 4. **Append the STYLE BLOCK and NEGATIVE BLOCK below to every prompt.**
 
 **STYLE BLOCK (append to every prompt):**
@@ -362,7 +426,7 @@ Mix the sound design under the music, except at the touch and the click. The mos
 **CHARACTER TOKENS (paste in wherever the character appears):**
 - **[ELEANOR]**: *a woman in her late thirties with shoulder-length dark brown hair tucked behind her left ear, warm olive complexion and minimal make-up, wearing a cream ribbed roll-neck jumper, camel wide-leg trousers and a slim gold watch on her left wrist*
 - **[JAMES]**: *a man in his mid-forties with short salt-and-pepper hair, clean-shaven, wearing a navy tailored suit, white open-collar shirt and a small plain brass lapel pin*
-- **[PHONE]**: *a slim modern smartphone with a matte graphite frame and thin even bezels, no visible logos, its screen showing a plain evenly lit light-grey field with no content*
+- **[PHONE]**: *a slim modern smartphone with a matte graphite frame and thin even bezels, no visible logos, its screen blank and evenly lit, with no content, icons or text*
 - **[TOUCHPOINT]**: *a small flat square tile about 9 cm across with generously rounded corners, dark graphite body with a subtle vertical gradient and a fine light edge highlight, matte finish, its face completely blank and smooth*
 
 ### Per-shot prompts
@@ -394,16 +458,16 @@ Mix the sound design under the music, except at the touch and the click. The mos
 > *Generate **two** passes from the same seed and keyframe: one clean plate with no hand (for S23 continuity and the S20 reuse), and one with the hand. **The camera must not move**: S20 must match S08 frame for frame.*
 
 **S09 — Touch macro** (5 s · refs: REF-TOUCHPOINT · COMP: face artwork and screen)
-> Extreme macro close-up, focus plane exactly on the point where the edge of [PHONE] rests against the blank face of [TOUCHPOINT] on pale marble. Very shallow depth of field. The phone's screen at the top of frame gradually brightens from dim to evenly lit light grey. Warm rim light from low sun. A very slow 2% push-in. No light effect on the tile itself. [STYLE BLOCK] [NEGATIVE BLOCK]
+> Extreme macro close-up, focus plane exactly on the point where the edge of [PHONE] rests against the blank face of [TOUCHPOINT] on pale marble. Very shallow depth of field. The phone's screen at the top of frame gradually brightens from dim to an evenly lit, blank, content-free field. Warm rim light from low sun. A very slow 2% push-in. No light effect on the tile itself. [STYLE BLOCK] [NEGATIVE BLOCK]
 
 **S10 / S21 — Over-shoulder phone** (5 s · refs: REF-ELEANOR · COMP: P1 / P10)
-> Over-the-shoulder shot from behind [ELEANOR]'s right shoulder, looking down at [PHONE] held comfortably in her right hand at chest height. The screen is evenly lit light grey and fills the frame's centre-right, slightly angled toward camera. Soft background of the spa reception with warm bokeh. The camera pushes in very slowly by about 5%. Her thumb rests at the side of the phone and does not cover the screen. [STYLE BLOCK] [NEGATIVE BLOCK]
+> Over-the-shoulder shot from behind [ELEANOR]'s right shoulder, looking down at [PHONE] held comfortably in her right hand at chest height. The screen is blank, evenly lit and content-free, and fills the frame's centre-right, slightly angled toward camera. Soft background of the spa reception with warm bokeh. The camera pushes in very slowly by about 5%. Her thumb rests at the side of the phone and does not cover the screen. [STYLE BLOCK] [NEGATIVE BLOCK]
 
 **S11 — Eleanor's smile** (5 s · refs: REF-ELEANOR)
 > Close-up of [ELEANOR]'s face, three-quarter angle, soft light from her phone below mixing with warm window light. She reads for a moment, then a small, genuine, easy smile appears, and she looks up and off-camera left as someone approaches to greet her. The camera pushes in slowly. Natural, understated, not posed. [STYLE BLOCK] [NEGATIVE BLOCK]
 
 **S12 — James at the laptop** (6 s · refs: REF-JAMES, REF-OFFICE · COMP: P2)
-> Over-the-shoulder shot behind [JAMES] seated at an antique walnut writing desk in a quiet oak-panelled office. A slim silver laptop with no logo is open in front of him, its screen a plain evenly lit light grey. Through a tall sash window beyond, a courtyard with autumn trees glows in low sun. A brass desk lamp, a leather notebook and a cup of tea on a saucer. The camera arcs slowly about 10 degrees from behind his shoulder to reveal more of the screen. He sits calmly, one hand resting near the trackpad. [STYLE BLOCK] [NEGATIVE BLOCK]
+> Over-the-shoulder shot behind [JAMES] seated at an antique walnut writing desk in a quiet oak-panelled office. A slim silver laptop with no logo is open in front of him, its screen a plain, evenly lit, deep-navy field with no content, icons or text. Through a tall sash window beyond, a courtyard with autumn trees glows in low sun. A brass desk lamp, a leather notebook and a cup of tea on a saucer. The camera arcs slowly about 10 degrees from behind his shoulder to reveal more of the screen. He sits calmly, one hand resting near the trackpad. [STYLE BLOCK] [NEGATIVE BLOCK]
 
 **S18b — Fingertip on trackpad** (4 s · refs: REF-JAMES)
 > Macro close-up of [JAMES]'s index finger, white shirt cuff and navy suit sleeve visible, pressing down gently and decisively on a laptop trackpad. Warm side light, shallow depth of field, the laptop's brushed aluminium surface catching the light. [STYLE BLOCK] [NEGATIVE BLOCK]
@@ -444,9 +508,14 @@ Mix the sound design under the music, except at the touch and the click. The mos
 
 ### Screen recordings
 
-Record in a **demo workspace named "The Aurelia London"** in Informax Cloud, containing the Spaces *Spa, Gym, Meetings & Events, Dining, Guest Directory*. Use fictional content only, with no real customers or staff names.
+Record in a **demo hotel named "The Aurelia London"** in Informax Cloud, containing the Spaces *Spa, Gym, Meetings & Events, Dining, Guest Directory*. Use fictional content only, with no real customers or staff names.
 
-**Capture spec (all desktop recordings):** a 1920 × 1080 browser window at 2× (3840 × 2160 output), 60 fps, lossless or ProRes. Chrome with no extensions, no bookmarks bar and the chrome hidden. Clean, slow, deliberate cursor moves with a 1-second hold before every click. Use the same light or dark appearance for every take. Record each action **three times**.
+- **An Informax Super Admin sets up the demo hotel off camera** (V6): allocating the Spaces, connecting the Touch Points, publishing 2–3 earlier Spa versions and seeding Activity. None of that setup is filmed.
+- **Record everything signed in as a Hotel Admin user at `/dashboard`.** Never record the `/admin` area (🔒).
+- **Record only ✅ LIVE features** (§0A). The website's product films are recreations and are **never** a source.
+- Informax Cloud is a dark, navy interface, so no appearance setting needs changing.
+
+**Capture spec (all desktop recordings):** a 1920 × 1080 browser window at 2× (3840 × 2160 output), 60 fps, lossless or ProRes. Chrome with no extensions, no bookmarks bar and the chrome hidden. Clean, slow, deliberate cursor moves with a 1-second hold before every click. Record each action **three times**.
 **Phone recordings:** a real phone at native resolution, 60 fps, Do Not Disturb on, and a clean status bar (full battery, 9:41).
 
 | ID | Shot | What to record |
@@ -454,14 +523,14 @@ Record in a **demo workspace named "The Aurelia London"** in Informax Cloud, con
 | **P1** | S10 | **Guest side, phone:** touch a real Touch Point connected to the *Spa* Space, and record the *Spa Treatments* PDF opening in the phone browser, from the first frame until the page is legible. Scroll gently for 2 s. |
 | **P2** | S12 | Desktop: the hotel dashboard landing on **Your Spaces**. Hold for 4 s. |
 | **P3** | S13 | **Your Spaces** with the five Spaces visible. The cursor glides to **Spa** and clicks. |
-| **P4** | S14 | The Spa Space opens, showing **Current Content**: *Spa Treatments.pdf*. Hold for 3 s. |
+| **P3-R** | S13-R | 🟡 **Only once V1 passes:** in **Your Spaces**, drag **Dining** above **Gym**, then reload to show the order persists. Use the reload take only as proof; it isn't cut into the film. |
+| **P4** | S14 | The Spa Space opens, showing **Current Content**: *Spa Treatments.pdf*. Hold for 3 s. **Keep the Scan section out of frame.** |
 | **P5** | S15 | Spa → **Previous Versions** with 2–3 prior versions listed. Hold for 3 s. |
-| **P6** | S16 | **Activity**, with a populated aggregate view across Spaces (fictional or seeded figures). Hold for 4 s. |
+| **P6** | S16 | **Activity**, seeded with fictional figures and at least 3 Touch locations, so that **"Where guests use Informax Touch"** appears (V5). Hold on Interactions, then scroll slowly to the locations list. |
 | **P7** | S17 | Spa → **Change Content** → **Upload a PDF** → drag *Autumn Spa Treatments.pdf* onto *Drag your PDF here*. **Name the files exactly:** `Spa Treatments.pdf` (current) and `Autumn Spa Treatments.pdf` (new). |
 | **P8** | S18 | The cursor moves to **Publish**, holds for 1 s, then clicks. |
-| **P9** | S19 | The confirmation **"Guests now see your new PDF"**. Hold for 3 s. |
+| **P9** | S19 | The confirmation **"Guests now see your new PDF"** / **"Your Space link and connected Touch Points stay the same."** Hold for 3 s. |
 | **P10** | S21 | **Guest side, phone:** after publishing, touch the **same** Touch Point and record *Autumn Spa Treatments* opening. Match P1's framing and scroll. |
-| **P11** | S19-alt | *(Optional, see F3.)* The Touch Points list showing the Spa's Touch Points. |
 | **P12** | — | Designed PDFs for **Spa Treatments** (Summer) and **Autumn Spa Treatments**, fictional but beautiful, because they will be seen on screen. They also provide the typography for the printed card in S02/S06. |
 
 ---
@@ -476,15 +545,16 @@ Record in a **demo workspace named "The Aurelia London"** in Informax Cloud, con
 4. **Track layout:** V1 plates · V2 UI comps · V3 Touch Point face comps · V4 supers · V5 end card. A1 VO · A2–A3 music stems · A4–A7 SFX · A8 room tones.
 5. **Screen replacement (S10, S12, S21, and the phone in S22):** Mocha planar track the screen. Corner-pin the real recording, add a 2–4% screen-glass reflection taken from the plate, match the black level and white point to the plate, add a subtle bloom of 3–5 px, **apply 180° motion blur** to match the camera, and put grain over the whole composite. Fingers stay on top via a roto matte.
 6. **Touch Point faces (S08, S09, S20, S22–S27):** track the blank face and composite the supplied face artwork (A4) with the **Informax logo (A2) at its original proportions**. Match lighting with a gradient and edge-highlight pass, not a glow. The artwork must stay perfectly legible, undistorted and never cropped.
-7. **UI device compositions (S13–S17, S19):** place the recording inside a laptop-screen composition built from the S12 plate's screen (the bezel edge visible on one side, a 4° perspective, and the warm office bokeh reflected at about 5%). You may **crop and punch in up to 125%** on the 2× captures. **Never retime or alter the UI itself**, except for trimming dead time between actions. The cursor may be smoothed.
-8. **Printed-material composites (S02–S06):** typeset the fictional hotel print (card, timetable, plan, menu). Hotel typography only. No Informax branding on hotel print.
-9. **Cut style:** cut on motion and on the VO words (2–4 frames ahead of each word in the S02–S05 list). Use straight cuts everywhere except the S09→S10 match cut, the S11→S12 graphic match, and the S27→S28 dissolve. **No whip-pans, glitches, light leaks, zoom transitions or speed ramps.**
-10. **The hero-frame rule:** S08 and S20 must come from **the same plate at the same position and scale**. Check with a difference-blend. Only the hand and the phone screen may differ.
-11. **Grade:** create one show LUT from the approved REF stills and apply it to everything. Do a shot-match pass so that skin, brass and marble match across shots. UI shots keep the app's true colour; do not warm the interface.
-12. **Supers:** the brand typeface (A6), with fades of 4 frames in and out, all inside title-safe (90%), and nothing in the bottom-right 20% × 20% of the frame (YouTube's skip button).
-13. **End card:** build it at 3840 × 2160 in After Effects using the end-card layout in §4 (Act 6). **Import the logo PNG or vector unaltered and set its scale proportionally only.** No effects other than opacity and uniform scale.
-14. **Mix:** VO is the anchor. Dip the music by 3–4 dB under the VO and bring it back up in the gaps. Integrated loudness **−14 LUFS**, true peak **−1 dBTP**.
-15. **QC:** check the logos at 100% on the end card, check every UI word against the real app, confirm no hands are malformed, run a difference-check on the hero frame, confirm the lip sync on the Publish click, and check the captions.
+7. **Interface integrity:** every Informax Cloud screen comes from a genuine recording (§12) of a ✅ LIVE feature. Do not recreate, redraw, mock up, AI-generate or re-typeset any UI element. Don't add any overlay inside the UI frame (no counters, callouts or "12 Touch Points updated"). Don't use the website's product films. You may crop, punch in, trim pauses and smooth the cursor; nothing else.
+8. **UI device compositions (S13–S17, S19):** place the recording inside a laptop-screen composition built from the S12 plate's screen (the bezel edge visible on one side, a 4° perspective, and the warm office bokeh reflected at about 5%). You may **crop and punch in up to 125%** on the 2× captures. **Never retime or alter the UI itself**, except for trimming dead time between actions. The cursor may be smoothed.
+9. **Printed-material composites (S02–S06):** typeset the fictional hotel print (card, timetable, plan, menu). Hotel typography only. No Informax branding on hotel print.
+10. **Cut style:** cut on motion and on the VO words (2–4 frames ahead of each word in the S02–S05 list). Use straight cuts everywhere except the S09→S10 match cut, the S11→S12 graphic match, and the S27→S28 dissolve. **No whip-pans, glitches, light leaks, zoom transitions or speed ramps.**
+11. **The hero-frame rule:** S08 and S20 must come from **the same plate at the same position and scale**. Check with a difference-blend. Only the hand and the phone screen may differ.
+12. **Grade:** create one show LUT from the approved REF stills and apply it to everything. Do a shot-match pass so that skin, brass and marble match across shots. UI shots keep the app's true colour; do not warm the interface.
+13. **Supers:** the brand typeface (A6), with fades of 4 frames in and out, all inside title-safe (90%), and nothing in the bottom-right 20% × 20% of the frame (YouTube's skip button).
+14. **End card:** build it at 3840 × 2160 in After Effects using the end-card layout in §4 (Act 6). **Import the logo PNG or vector unaltered and set its scale proportionally only.** No effects other than opacity and uniform scale.
+15. **Mix:** VO is the anchor. Dip the music by 3–4 dB under the VO and bring it back up in the gaps. Integrated loudness **−14 LUFS**, true peak **−1 dBTP**.
+16. **QC:** check the logos at 100% on the end card, check every UI word against the real app, confirm no hands are malformed, run a difference-check on the hero frame, confirm the lip sync on the Publish click, and check the captions.
 
 ---
 
@@ -634,8 +704,10 @@ It is human and immediately relatable. The concierge is gracious, not failing.
 ## Asset and production checklist
 
 - [ ] F1–F7 decided
+- [ ] **§0A cleared: V1–V8 verified.** Space reordering (V1) is filmed only if it's live on production.
+- [ ] Every interface shot traced to a ✅ LIVE feature and a genuine recording; nothing from `/admin`; no Scan codes in frame
 - [ ] A1/A2 vectors, A3 Touch Point photos, A4 face artwork, A5 Touch mark, A6 typeface, A7 pronunciation
-- [ ] Demo workspace "The Aurelia London" created in Informax Cloud; P1–P12 recorded
+- [ ] Demo hotel "The Aurelia London" set up by an Informax admin (V6); P1–P10 and P12 recorded as a Hotel Admin (P3-R only if V1 passes)
 - [ ] REF stills approved (characters, locations, Touch Point)
 - [ ] AI plates generated, reviewed for hands and faces, upscaled
 - [ ] VO recorded (45 / 30 / 15 plus alternate closing lines)
