@@ -6,10 +6,27 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 26 September 2026 (Cloud entrance logo + hero playback fix
-live; before that the 25 September Informax Cloud repositioning and full site
-redesign — see §0 first; §1 and the old hero/nav notes below it are
-historical where they conflict).
+Last updated: 27 September 2026 (added the §0-pre "Next-gen Informax Cloud
+visual prototype" note below; nothing about the live site changed — see §0
+for that, still current).
+
+## 0-pre. Next-gen Informax Cloud visual prototype (27 September 2026) — scratch only, not live
+
+A visual prototype of a **future** Informax Cloud direction lives at
+`scratchpad/v5/` in this repo: a single static `index.html` (no build step,
+nothing imported from the real app or from this site) exploring **Rooms &
+Areas, Codes, shared content with per-room overrides, hotel branding,
+analytics and a Super Admin hotel list**. It reuses this repo's real design
+tokens (read from `bb6184d`'s `globals.css`/`cloud/*`, not guessed) on a
+warm `#f6f5f2` canvas, per the brief. See `scratchpad/v5/README.md` for the
+full rundown and `scratchpad/v5/shots/compare-v5.png` for a one-image board.
+There was no earlier `scratchpad/v4/` to continue from, so this is the first
+round. **Nothing else changed**: the live site, `WorkspaceShowcase.tsx`, the
+`website/no-addresses-touchpoint-colour` branch, the local `357bb57`
+handover commit, and `informax-analytics` were all left untouched — the
+analytics app was only cloned read-only (outside this repo) to check its
+current terminology (`docs/design/terminology-map.md`) before naming things
+in the prototype.
 
 ## 0a. Design system and homepage story (27 September 2026) — live
 

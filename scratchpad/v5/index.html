@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informax Cloud v5</title>
+<meta name="description" content="Visual prototype of the next-generation Informax Cloud: Rooms & Areas, Codes, shared content with room overrides, branding, analytics and Super Admin.">
+<style>
+/* Tokens: taken from informax-site @ bb6184d (src/app/globals.css).
+   Only departure: the app canvas is warm #f6f5f2 (brief), not the site's #fbfbfd. */
+:root{
+  --canvas:#f6f5f2; --panel:#fff; --panel-sunk:#efede8;
+  --navy-950:#060a12; --navy-900:#0b1524; --navy-850:#0d1c30; --navy-800:#0f213a; --navy-700:#16304f;
+  --ink:#0b1524; --ink-soft:#3d4a5c; --ink-mute:#677285; --ink-faint:#8b94a3;
+  --cream:#eaf2fb; --cream-mute:#a4adc0; --dim:#7a849c;
+  --blue:#0693e3; --blue-hover:#1aa0ec; --blue-deep:#0470b0; --blue-light:#8ed1fc; --blue-wash:rgba(6,147,227,.08);
+  --coral:#ff6b4e; --coral-deep:#e14e33; --coral-wash:rgba(255,107,78,.1);
+  --moss:#1f9d6b; --moss-wash:rgba(31,157,107,.1);
+  --line:rgba(11,21,36,.1); --line-soft:rgba(11,21,36,.06);
+  --line-dark:rgba(255,255,255,.1); --line-dark-soft:rgba(255,255,255,.06);
+  --r-sm:12px; --r-md:20px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI Variable Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --text:ui-sans-serif,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI Variable Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --shadow-card:0 1px 2px rgba(11,21,36,.04),0 8px 24px -16px rgba(11,21,36,.18);
+  --shadow-lift:0 2px 4px rgba(11,21,36,.05),0 18px 40px -20px rgba(11,21,36,.28);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--canvas);color:var(--ink-soft);font-family:var(--text);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--blue-light);color:var(--navy-950)}
+.tab{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+/* ---------- Shell ---------- */
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.rail{position:sticky;top:0;height:100vh;background:var(--navy-950);color:var(--cream-mute);display:flex;flex-direction:column;padding:20px 14px 16px;overflow-y:auto;
+  background-image:radial-gradient(420px 300px at 0% 0%,rgba(6,147,227,.12),transparent 70%)}
+.rail-logo{display:flex;align-items:center;padding:4px 10px 18px}
+.rail-logo img{height:34px;width:auto}
+.hotel-switch{display:flex;align-items:center;gap:10px;margin:0 2px 18px;padding:10px;border-radius:var(--r-sm);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--line-dark-soft);text-align:left;width:calc(100% - 4px);transition:background .2s var(--ease)}
+.hotel-switch:hover{background:rgba(255,255,255,.08)}
+.hotel-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font:600 13px/1 var(--display);color:#fff;background:linear-gradient(145deg,#2a3d5c,#16304f);flex:none;letter-spacing:.02em}
+.hotel-switch b{display:block;color:#fff;font-weight:600;font-size:14px;line-height:1.2}
+.hotel-switch small{display:block;font-size:12px;color:var(--dim)}
+.rail-group{font-size:11.5px;font-weight:600;color:var(--dim);padding:14px 12px 6px;letter-spacing:.01em}
+.nav a{display:flex;align-items:center;gap:11px;padding:8px 12px;border-radius:10px;font-size:14px;font-weight:500;color:var(--cream-mute);transition:background .2s var(--ease),color .2s var(--ease)}
+.nav a svg{opacity:.75;flex:none}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.nav a[aria-current=page]{color:#fff;background:rgba(6,147,227,.16)}
+.nav a[aria-current=page] svg{opacity:1;color:var(--blue-light)}
+.nav .count{margin-left:auto;font-size:12px;color:var(--dim)}
+.nav .flag{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--coral);color:#fff;font-size:11.5px;font-weight:600;display:grid;place-items:center}
+.rail-foot{margin-top:auto;padding-top:16px;border-top:1px solid var(--line-dark-soft)}
+.role{display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:12px}
+.role button{flex:1;padding:6px 8px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--cream-mute);transition:background .2s var(--ease),color .2s}
+.role button[aria-pressed=true]{background:rgba(255,255,255,.1);color:#fff}
+.me{display:flex;align-items:center;gap:10px;padding:4px 8px}
+.avatar{width:30px;height:30px;border-radius:50%;background:#2a3d5c;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.me b{display:block;color:#fff;font-size:13px;font-weight:600;line-height:1.2}
+.me small{font-size:12px;color:var(--dim)}
+
+.main{min-width:0}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;height:64px;padding:0 40px;background:rgba(246,245,242,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.crumbs{font-size:13.5px;color:var(--ink-mute);display:flex;gap:8px;align-items:center;min-width:0;white-space:nowrap;overflow:hidden}
+.crumbs b{color:var(--ink);font-weight:600}
+.crumbs a:hover{color:var(--ink)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border-radius:var(--r-sm);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-faint);font-size:14px}
+.search kbd{margin-left:auto;font:500 11.5px var(--text);padding:2px 6px;border-radius:6px;background:var(--panel-sunk);color:var(--ink-mute)}
+.icon-btn{width:38px;height:38px;border-radius:var(--r-sm);display:grid;place-items:center;color:var(--ink-soft);position:relative;transition:background .2s}
+.icon-btn:hover{background:rgba(11,21,36,.06)}
+.icon-btn .dot{position:absolute;top:9px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 2px var(--canvas)}
+.m-only{display:none}
+
+.view{padding:32px 40px 96px;max-width:1280px;animation:rise .5s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- Type ---------- */
+.eyebrow{display:block;font-size:13.5px;font-weight:600;color:var(--blue-deep);letter-spacing:-.005em;margin-bottom:8px}
+.eyebrow.on-dark{color:var(--blue-light)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.022em;color:var(--ink);margin:0}
+.h-page{font-size:34px;line-height:1.1}
+.h-sec{font-size:19px;line-height:1.25;letter-spacing:-.015em}
+.soft{color:var(--ink-mute)}
+.lede{font-size:16px;color:var(--ink-mute);margin:8px 0 0;max-width:60ch}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 14px}
+.muted{color:var(--ink-mute)} .faint{color:var(--ink-faint)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--r-sm);font-size:15px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;user-select:none;transition:transform .16s var(--ease),background-color .16s var(--ease),box-shadow .16s var(--ease),color .16s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-hover)}
+.btn-secondary{background:rgba(11,21,36,.06);color:var(--ink)}
+.btn-secondary:hover{background:rgba(11,21,36,.1)}
+.btn-dark{background:rgba(255,255,255,.1);color:#fff}
+.btn-dark:hover{background:rgba(255,255,255,.16)}
+.btn-sm{min-height:36px;padding:0 14px;font-size:14px;border-radius:10px}
+.btn svg.arrow{transition:transform .2s var(--ease)}
+.btn:hover svg.arrow,.link:hover svg.arrow,.row-link:hover svg.arrow,.card-link:hover svg.arrow{transform:translateX(3px)}
+.link{display:inline-flex;align-items:center;gap:5px;font-size:14px;font-weight:600;color:var(--blue-deep);transition:color .16s}
+.link:hover{color:var(--ink)}
+.link.on-dark{color:var(--blue-light)} .link.on-dark:hover{color:#fff}
+
+/* ---------- Surfaces ---------- */
+.card{background:var(--panel);border-radius:var(--r-sm);box-shadow:var(--shadow-card);transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+.card-pad{padding:22px 24px}
+.card-link:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.hair{border:0;border-top:1px solid var(--line-soft);margin:0}
+.grid{display:grid;gap:16px}
+.g-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g-main{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr)}
+.stack>*+*{margin-top:16px}
+.mt-32{margin-top:32px}.mt-24{margin-top:24px}.mt-16{margin-top:16px}
+
+/* Status: always icon/dot + words */
+.status{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink-soft);white-space:nowrap}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);flex:none}
+.status.live i{background:var(--moss);box-shadow:0 0 0 3px var(--moss-wash)}
+.status.attn{color:var(--coral-deep)} .status.attn i{background:var(--coral);box-shadow:0 0 0 3px var(--coral-wash)}
+.status.paused i{background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink-faint)}
+.status.draft i{background:var(--blue-light)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:7px;font-size:12.5px;font-weight:500;background:var(--panel-sunk);color:var(--ink-soft);white-space:nowrap}
+.chip.blue{background:var(--blue-wash);color:var(--blue-deep)}
+.chip.coral{background:var(--coral-wash);color:var(--coral-deep)}
+
+/* ---------- Overview hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:var(--r-md);background:var(--navy-950);color:var(--cream);padding:40px 44px 36px;min-height:300px;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:url(assets/earth-horizon.jpg) 70% 30%/cover no-repeat;opacity:.85;transform:scale(1.04);animation:drift 24s var(--ease) both}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,10,18,.96) 0%,rgba(6,10,18,.82) 42%,rgba(6,10,18,.25) 100%)}
+@keyframes drift{from{transform:scale(1.1) translateX(1.5%)}to{transform:scale(1.04)}}
+.hero h1{color:#fff;font-size:44px;line-height:1.04;max-width:15ch}
+.hero h1 .soft{color:var(--cream-mute)}
+.hero p{color:var(--cream-mute);font-size:16.5px;max-width:44ch;margin:14px 0 26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-health{position:absolute;right:28px;bottom:26px;display:flex;gap:26px;padding:14px 20px;border-radius:var(--r-sm);background:rgba(6,10,18,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px var(--line-dark)}
+.hero-health div{font-size:12.5px;color:var(--cream-mute)}
+.hero-health b{display:block;font:600 22px/1.15 var(--display);color:#fff;letter-spacing:-.02em}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;margin-right:7px;position:relative;top:-1px}
+.pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:#34d399;animation:pulse 2.4s var(--ease) infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(3);opacity:0}}
+
+.stat .label{font-size:13px;font-weight:500;color:var(--ink-mute)}
+.stat .value{font:600 32px/1.1 var(--display);letter-spacing:-.025em;color:var(--ink);margin-top:6px}
+.stat .delta{font-size:13px;margin-top:6px;color:var(--ink-mute)}
+.stat .delta b{color:var(--moss);font-weight:600}
+.stat.attn .value{color:var(--coral-deep)}
+
+/* Lists */
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line-soft)}
+.list li:first-child{border-top:0}
+.ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--panel-sunk);color:var(--ink-soft);flex:none}
+.ico.coral{background:var(--coral-wash);color:var(--coral-deep)}
+.ico.blue{background:var(--blue-wash);color:var(--blue-deep)}
+.ico.moss{background:var(--moss-wash);color:var(--moss)}
+.list .t{font-weight:600;color:var(--ink);font-size:14.5px;line-height:1.3}
+.list .s{font-size:13px;color:var(--ink-mute)}
+.list .grow{flex:1;min-width:0}
+.row-link{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;color:var(--blue-deep);white-space:nowrap}
+
+/* ---------- Tables (operational, calm) ---------- */
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.seg{display:inline-flex;padding:3px;border-radius:11px;background:rgba(11,21,36,.05)}
+.seg button{height:32px;padding:0 13px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-mute);transition:background .2s var(--ease),color .2s}
+.seg button[aria-pressed=true]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,21,36,.08)}
+.field{height:38px;padding:0 12px;border-radius:10px;background:var(--panel);border:0;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;color:var(--ink);transition:box-shadow .16s}
+.field:focus{outline:0;box-shadow:inset 0 0 0 1px var(--blue),0 0 0 3px rgba(6,147,227,.18)}
+.table-wrap{background:var(--panel);border-radius:var(--r-sm);box-shadow:var(--shadow-card);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12.5px;font-weight:600;color:var(--ink-mute);padding:12px 16px;border-bottom:1px solid var(--line);background:#fcfbf9;white-space:nowrap}
+td{padding:13px 16px;border-bottom:1px solid var(--line-soft);vertical-align:middle;color:var(--ink-soft)}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr.clickable{cursor:pointer}
+tbody tr.clickable:hover{background:#faf9f6}
+tbody tr.clickable:hover .row-arrow{opacity:1;transform:translateX(0)}
+.row-arrow{opacity:0;transform:translateX(-4px);transition:all .2s var(--ease);color:var(--blue)}
+td .name{font-weight:600;color:var(--ink)}
+td .sub{font-size:12.5px;color:var(--ink-mute)}
+.num{text-align:right}
+.table-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:13px;color:var(--ink-mute);border-top:1px solid var(--line-soft)}
+
+/* ---------- Room detail ---------- */
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:4px 0 24px;overflow-x:auto;scrollbar-width:none}
+.tabs button{position:relative;padding:10px 0 12px;font-size:14px;font-weight:500;color:var(--ink-mute);white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--ink)}
+.tabs button[aria-selected=true]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;border-radius:2px;background:var(--blue)}
+.block{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 20px;border-top:1px solid var(--line-soft)}
+.block:first-child{border-top:0}
+.block.override{background:linear-gradient(90deg,rgba(6,147,227,.05),transparent 60%);box-shadow:inset 3px 0 0 var(--blue)}
+.src{font-size:12.5px;color:var(--ink-mute);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.toggle{display:inline-flex;padding:3px;border-radius:10px;background:rgba(11,21,36,.05)}
+.toggle button{height:30px;padding:0 11px;border-radius:8px;font-size:13px;font-weight:500;color:var(--ink-mute);transition:all .2s var(--ease)}
+.toggle button[aria-pressed=true]{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(11,21,36,.08)}
+.toggle button.ov[aria-pressed=true]{color:var(--blue-deep)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:14px;margin:0}
+.kv dt{color:var(--ink-mute)} .kv dd{margin:0;color:var(--ink);font-weight:500;text-align:right}
+
+/* Guest preview (phone) */
+.phone{width:264px;margin:0 auto;border-radius:38px;padding:10px;background:#0b0f16;box-shadow:0 30px 60px -30px rgba(11,21,36,.5),inset 0 0 0 1px rgba(255,255,255,.08)}
+.screen{border-radius:30px;overflow:hidden;background:var(--g-bg,#faf8f4);height:520px;position:relative;color:var(--g-ink,#1d1a16);font-family:var(--g-font,var(--text))}
+.g-hero{height:190px;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.45)),var(--g-img,linear-gradient(135deg,#6b7f8e,#2c3b47));background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:18px;color:#fff}
+.g-hero small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.g-hero b{font-family:var(--g-display,var(--display));font-weight:500;font-size:22px;line-height:1.1;letter-spacing:-.01em}
+.g-body{padding:14px}
+.g-item{display:flex;align-items:center;justify-content:space-between;padding:12px 2px;border-bottom:1px solid rgba(0,0,0,.07);font-size:13px}
+.g-item span:last-child{color:var(--g-accent,#9b7b4f)}
+.g-cta{margin-top:14px;height:40px;border-radius:10px;background:var(--g-accent,#9b7b4f);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.g-tag{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;background:rgba(6,147,227,.92);color:#fff;white-space:nowrap}
+
+/* Branding */
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:44px;height:44px;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);position:relative;transition:transform .2s var(--ease)}
+.swatch:hover{transform:translateY(-2px)}
+.swatch[aria-pressed=true]::after{content:"";position:absolute;inset:-4px;border-radius:15px;box-shadow:0 0 0 2px var(--blue)}
+.font-opt{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 16px;border-radius:var(--r-sm);box-shadow:inset 0 0 0 1px var(--line);text-align:left;transition:box-shadow .2s}
+.font-opt[aria-pressed=true]{box-shadow:inset 0 0 0 1.5px var(--blue);background:rgba(6,147,227,.03)}
+.font-opt b{font-size:20px;font-weight:500;color:var(--ink)}
+.logo-drop{display:flex;align-items:center;gap:16px;padding:18px;border-radius:var(--r-sm);border:1.5px dashed var(--line);background:#fcfbf9}
+.logo-drop .lg{width:120px;height:56px;border-radius:10px;background:#1d1a16;color:#f2e6d0;display:grid;place-items:center;font:500 15px/1 Georgia,serif;letter-spacing:.18em}
+
+/* Chart */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart .grid-line{stroke:var(--line-soft)}
+.chart .axis{font-size:11.5px;fill:var(--ink-faint)}
+.tip{position:absolute;pointer-events:none;background:var(--navy-900);color:#fff;border-radius:10px;padding:8px 11px;font-size:12.5px;line-height:1.35;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .12s;box-shadow:0 10px 24px -10px rgba(0,0,0,.4)}
+.tip b{font-size:15px;font-family:var(--display)}
+.tip span{color:var(--cream-mute)}
+.bars{display:grid;gap:12px}
+.bar-row{display:grid;grid-template-columns:150px 1fr 56px;align-items:center;gap:12px;font-size:13.5px}
+.bar-row .track{height:8px;border-radius:4px;background:var(--panel-sunk);overflow:hidden}
+.bar-row .fill{height:100%;border-radius:4px;background:var(--blue);transform-origin:left;animation:grow .9s var(--ease) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.bar-row .v{text-align:right;color:var(--ink);font-weight:600}
+
+/* Super Admin: navy banner */
+.admin-band{border-radius:var(--r-md);background:var(--navy-900);color:var(--cream-mute);padding:28px 32px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;
+  background-image:radial-gradient(700px 300px at 10% -40%,rgba(6,147,227,.22),transparent 70%)}
+.admin-band h1{color:#fff;font-size:30px}
+.admin-band .soft{color:var(--cream-mute)}
+.admin-stats{display:flex;gap:32px}
+.admin-stats b{display:block;color:#fff;font:600 24px/1.1 var(--display)}
+.admin-stats span{font-size:12.5px}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(6,10,18,.35);opacity:0;pointer-events:none;transition:opacity .3s var(--ease);z-index:60}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--panel);z-index:61;transform:translateX(100%);transition:transform .45s var(--ease);box-shadow:-30px 0 60px -30px rgba(11,21,36,.35);display:flex;flex-direction:column}
+.drawer-open .scrim{opacity:1;pointer-events:auto}
+.drawer-open .drawer{transform:none}
+.drawer header{padding:22px 24px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start}
+.drawer .body{padding:22px 24px;overflow:auto;flex:1}
+.drawer footer{padding:16px 24px;border-top:1px solid var(--line-soft);display:flex;gap:10px;justify-content:flex-end}
+.code-art{width:156px;height:156px;margin:4px auto 18px;border-radius:24px;display:grid;place-items:center;background:var(--navy-950);color:var(--blue-light);position:relative}
+.code-art::before,.code-art::after{content:"";position:absolute;inset:26px;border-radius:50%;border:1.5px solid rgba(142,209,252,.35);animation:ring 3s var(--ease) infinite}
+.code-art::after{animation-delay:1.5s}
+@keyframes ring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;background:var(--navy-900);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;display:flex;gap:10px;align-items:center;z-index:80;transition:all .35s var(--ease);box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast svg{color:#34d399}
+
+/* Bottom tab bar (mobile) */
+.tabbar{display:none}
+
+@media (max-width:1100px){
+  .g-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-main{grid-template-columns:1fr}
+  .hero-health{position:static;margin-top:28px;display:inline-flex}
+}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  .rail{display:none}
+  .m-only{display:grid}
+  .topbar{padding:0 16px;height:58px;background:rgba(6,10,18,.94);color:#fff}
+  .topbar .crumbs{color:var(--cream-mute)} .topbar .crumbs b{color:#fff}
+  .topbar .icon-btn{color:var(--cream)} .topbar .icon-btn .dot{box-shadow:0 0 0 2px var(--navy-950)}
+  .topbar .m-logo{height:24px;width:auto}
+  .search{display:none}
+  .crumbs .c-hide{display:none}
+  .view{padding:20px 16px 110px}
+  .h-page{font-size:28px}
+  .hero{padding:28px 22px;min-height:0;border-radius:16px}
+  .hero h1{font-size:32px}
+  .hero-health{gap:18px;padding:12px 14px;display:flex}
+  .hero-health b{font-size:19px}
+  .g-3,.g-2{grid-template-columns:1fr}
+  .g-4{gap:10px}
+  .card-pad{padding:18px}
+  .stat .value{font-size:26px}
+  .hide-m{display:none}
+  td,th{padding:12px}
+  .block{grid-template-columns:36px minmax(0,1fr);padding:14px 16px}
+  .block .toggle{grid-column:2}
+  .bar-row{grid-template-columns:110px 1fr 44px}
+  .admin-band{padding:22px}
+  .admin-stats{gap:20px}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;font-size:10.5px;font-weight:600;color:var(--ink-faint);border-radius:10px}
+  .tabbar a[aria-current=page]{color:var(--blue-deep)}
+  .page-head .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail" aria-label="Informax Cloud">
+    <div class="rail-logo"><img src="assets/informax-cloud-logo.png" alt="Informax Cloud"></div>
+    <div id="rail-context"></div>
+    <nav class="nav" id="nav" aria-label="Primary"></nav>
+    <div class="rail-foot">
+      <div class="role" role="group" aria-label="Prototype role">
+        <button data-role="hotel" aria-pressed="true">Hotel</button>
+        <button data-role="super" aria-pressed="false">Super Admin</button>
+      </div>
+      <div class="me"><span class="avatar" id="me-av">GC</span><div><b id="me-name">Giulia Conti</b><small id="me-role">Hotel Admin</small></div></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar" id="topbar">
+      <img class="m-only m-logo" src="assets/informax-cloud-mark-72.png" alt="Informax Cloud">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="search" role="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>Search rooms, codes, content<kbd>⌘K</kbd></div>
+      <button class="icon-btn" aria-label="Notifications, 2 need attention"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg><span class="dot"></span></button>
+      <button class="icon-btn m-only" id="m-role" aria-label="Switch role"><span class="avatar" style="width:28px;height:28px;font-size:11px">GC</span></button>
+    </header>
+    <main class="view" id="view" tabindex="-1"></main>
+  </div>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Mobile"></nav>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+<div class="toast" id="toast" role="status"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span></span></div>
+
+<script>
+/* ---------------- Icons (24px, 1.6 stroke, round caps — the Cloud set) ---------------- */
+const I = (d, s=18) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ic = {
+  overview:'<path d="M4 13.5 12 5l8 8.5"/><path d="M6.5 11v8.5h11V11"/>',
+  rooms:'<path d="M4 20V6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5V20"/><path d="M3 20h18M9.5 20v-5h5v5M8 9h2M14 9h2"/>',
+  codes:'<circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><path d="M8.3 8.3a5.2 5.2 0 0 0 0 7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4"/><path d="M5.3 5.3a9.4 9.4 0 0 0 0 13.4M18.7 5.3a9.4 9.4 0 0 1 0 13.4" opacity=".55"/>',
+  content:'<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>',
+  brand:'<path d="M12 3.5a8.5 8.5 0 1 0 0 17c1.3 0 1.9-.9 1.6-2l-.3-1a1.8 1.8 0 0 1 1.8-2.3h1.9a3.5 3.5 0 0 0 3.5-3.5c0-4.6-3.8-8.2-8.5-8.2Z"/><circle cx="7.8" cy="11" r="1" fill="currentColor"/><circle cx="10.5" cy="7.5" r="1" fill="currentColor"/><circle cx="15" cy="7.8" r="1" fill="currentColor"/>',
+  analytics:'<path d="M4 19.5h16"/><path d="M7 16v-4M12 16V7M17 16v-6.5"/>',
+  people:'<circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3.2 3.2 0 0 1 0 5.8M17.5 14a5.5 5.5 0 0 1 3 5"/>',
+  hotels:'<path d="M5 20.5V5a1.5 1.5 0 0 1 1.5-1.5h11A1.5 1.5 0 0 1 19 5v15.5"/><path d="M3 20.5h18M9 7.5h1.5M13.5 7.5H15M9 11h1.5M13.5 11H15M10.5 20.5v-4h3v4"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2M6 6l1.4 1.4M16.6 16.6 18 18M6 18l1.4-1.4M16.6 7.4 18 6"/>',
+  audit:'<path d="M7 3.5h7l4.5 4.5V19a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5Z"/><path d="M9 12h6M9 15.5h4"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  plus:'<path d="M12 5.5v13M5.5 12h13"/>',
+  alert:'<path d="M12 4 21 19.5H3z"/><path d="M12 10v4M12 17h.01"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  layers:'<path d="m12 4 8.5 4.5L12 13 3.5 8.5z"/><path d="m3.5 12.5 8.5 4.5 8.5-4.5"/>',
+  doc:'<path d="M7 3.5h6.5L18.5 8.5V19a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5Z"/><path d="M13.5 3.5v5h5"/>',
+  web:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.5 3.6 5.3 3.6 8.5S14.4 18 12 20.5C9.6 18 8.4 15.2 8.4 12S9.6 6 12 3.5Z"/>',
+  close:'<path d="M6 6l12 12M18 6 6 18"/>',
+  pen:'<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/>',
+  bed:'<path d="M3 18v-8M3 14h18v4M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11.5" r="1.8"/>',
+  spa:'<path d="M12 20c-4.5 0-7.5-3-7.5-7 3 0 5.6 1.3 7.5 3.6C13.9 14.3 16.5 13 19.5 13c0 4-3 7-7.5 7Z"/><path d="M12 16.6C10.3 13.8 10.3 8 12 4c1.7 4 1.7 9.8 0 12.6Z"/>',
+  dining:'<path d="M7 3.5v17M4.5 3.5v4.5a2.5 2.5 0 0 0 5 0V3.5M16.5 20.5v-17c-2 1-3 3.5-3 7h3"/>',
+  wifi:'<path d="M3.5 9.5a12 12 0 0 1 17 0M6.5 12.8a7.7 7.7 0 0 1 11 0M9.5 16a3.4 3.4 0 0 1 5 0"/><circle cx="12" cy="19" r=".9" fill="currentColor"/>',
+  key:'<circle cx="8" cy="15" r="3.8"/><path d="m10.8 12.3 8-8M16 7l2.5 2.5"/>',
+  sun:'<circle cx="12" cy="12" r="3.8"/><path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2M5.5 5.5l1.4 1.4M17.1 17.1l1.4 1.4M5.5 18.5l1.4-1.4M17.1 6.9l1.4-1.4"/>',
+  car:'<path d="M5 16.5V12l2-5h10l2 5v4.5"/><path d="M3.5 12h17v4.5h-17zM7 16.5v2M17 16.5v2"/>',
+  link:'<path d="M10.2 13.8a3.6 3.6 0 0 0 5.1 0l2.7-2.7a3.6 3.6 0 0 0-5.1-5.1l-.9.9"/><path d="M13.8 10.2a3.6 3.6 0 0 0-5.1 0L6 12.9A3.6 3.6 0 0 0 11.1 18l.9-.9"/>',
+};
+const arrow = (s=16) => I(ic.arrow, s).replace('<svg','<svg class="arrow"');
+
+/* ---------------- Fictional data (Maison Aurelia, Lake Como) ---------------- */
+const HOTEL = {name:'Maison Aurelia', place:'Lake Como', mark:'MA'};
+const SHARED = [
+  {id:'welcome', icon:'key', title:'Welcome & arrival', kind:'Page', used:142, overrides:4, updated:'Today, 09:12', by:'Giulia Conti'},
+  {id:'dining',  icon:'dining', title:'Dining & in-room menu', kind:'PDF', used:142, overrides:11, updated:'Yesterday', by:'Marco Bianchi'},
+  {id:'spa',     icon:'spa', title:'Spa Aurelia', kind:'Website', used:148, overrides:0, updated:'22 Sep', by:'Giulia Conti'},
+  {id:'wifi',    icon:'wifi', title:'Wi-Fi & connectivity', kind:'Page', used:148, overrides:2, updated:'18 Sep', by:'Giulia Conti'},
+  {id:'lake',    icon:'sun', title:'The lake & excursions', kind:'Page', used:136, overrides:0, updated:'15 Sep', by:'Elena Rossi'},
+  {id:'depart',  icon:'car', title:'Departure & transfers', kind:'Page', used:142, overrides:1, updated:'9 Sep', by:'Marco Bianchi'},
+];
+const ROOMS = [
+  {id:'214', name:'Room 214', label:'Lake Suite', type:'Room', floor:'2nd floor', codes:2, overrides:2, status:'live', last:'4 min ago', w:91},
+  {id:'215', name:'Room 215', label:'Garden Double', type:'Room', floor:'2nd floor', codes:1, overrides:0, status:'live', last:'1 hr ago', w:44},
+  {id:'301', name:'Room 301', label:'Villa Suite', type:'Room', floor:'3rd floor', codes:2, overrides:3, status:'live', last:'12 min ago', w:118},
+  {id:'302', name:'Room 302', label:'Lake Double', type:'Room', floor:'3rd floor', codes:1, overrides:0, status:'attn', last:'9 days ago', w:0},
+  {id:'spa', name:'Spa reception', label:'Spa Aurelia', type:'Area', floor:'Lower ground', codes:3, overrides:1, status:'live', last:'2 min ago', w:264},
+  {id:'terrace', name:'Lake terrace', label:'Restaurant', type:'Area', floor:'Ground floor', codes:6, overrides:2, status:'live', last:'Just now', w:402},
+  {id:'lobby', name:'Lobby', label:'Arrival', type:'Area', floor:'Ground floor', codes:4, overrides:0, status:'live', last:'Just now', w:356},
+  {id:'303', name:'Room 303', label:'Lake Double', type:'Room', floor:'3rd floor', codes:1, overrides:0, status:'draft', last:'Not yet live', w:0},
+  {id:'gym', name:'Fitness studio', label:'Wellness', type:'Area', floor:'Lower ground', codes:2, overrides:0, status:'paused', last:'Paused 21 Sep', w:0},
+  {id:'216', name:'Room 216', label:'Garden Double', type:'Room', floor:'2nd floor', codes:1, overrides:1, status:'live', last:'38 min ago', w:37},
+];
+const CODES = [
+  {id:'AUR-214-A', where:'Room 214', spot:'Bedside', format:'Touch', status:'live', last:'4 min ago', week:61},
+  {id:'AUR-214-B', where:'Room 214', spot:'Desk card', format:'Printed', status:'live', last:'2 hr ago', week:30},
+  {id:'AUR-TER-01', where:'Lake terrace', spot:'Table 1–12', format:'Printed', status:'live', last:'Just now', week:188},
+  {id:'AUR-SPA-01', where:'Spa reception', spot:'Reception desk', format:'Touch', status:'live', last:'2 min ago', week:142},
+  {id:'AUR-302-A', where:'Room 302', spot:'Bedside', format:'Touch', status:'attn', last:'9 days ago', week:0, note:'No interactions for 9 days'},
+  {id:'AUR-LOB-02', where:'Lobby', spot:'Concierge desk', format:'Touch', status:'live', last:'Just now', week:201},
+  {id:'AUR-GYM-01', where:'Fitness studio', spot:'Entrance', format:'Touch', status:'paused', last:'21 Sep', week:0},
+  {id:'AUR-303-A', where:'Room 303', spot:'Bedside', format:'Touch', status:'attn', last:'Never', week:0, note:'Not connected to a room'},
+];
+const HOTELS = [
+  {name:'Maison Aurelia', place:'Lake Como, IT', rooms:148, codes:212, plan:'Signature', health:'live', week:'3,482', mark:'MA'},
+  {name:'The Aldwych Rooms', place:'London, UK', rooms:96, codes:131, plan:'Signature', health:'live', week:'2,116', mark:'AR'},
+  {name:'Hotel Ondine', place:'Biarritz, FR', rooms:61, codes:88, plan:'Essential', health:'attn', week:'904', mark:'HO', note:'6 Codes silent'},
+  {name:'Kestrel House', place:'Edinburgh, UK', rooms:42, codes:57, plan:'Essential', health:'live', week:'611', mark:'KH'},
+  {name:'Casa Solaz', place:'Seville, ES', rooms:0, codes:0, plan:'Signature', health:'draft', week:'—', mark:'CS', note:'Onboarding · day 3 of 10'},
+];
+const WEEK = [2210,2380,2295,2540,2760,2690,2905,3010,2880,3120,3304,3482];
+const WEEK_LABELS = ['6 Jul','13 Jul','20 Jul','27 Jul','3 Aug','10 Aug','17 Aug','24 Aug','31 Aug','7 Sep','14 Sep','21 Sep'];
+
+/* ---------------- State & routing ---------------- */
+const state = { role:'hotel', roomFilter:'All', codeFilter:'All', brand:{accent:'#9b7b4f', bg:'#faf8f4', font:'serif'}, overrides:{} };
+const HOTEL_NAV = [
+  {group:null, items:[['overview','Overview','overview']]},
+  {group:'Property', items:[['rooms','Rooms & Areas','rooms',ROOMS.length? '148':''],['codes','Codes','codes',null,2],['content','Shared content','content']]},
+  {group:'Insight', items:[['analytics','Analytics','analytics']]},
+  {group:'Hotel', items:[['branding','Branding','brand'],['people','People','people']]},
+];
+const SUPER_NAV = [
+  {group:null, items:[['admin','Overview','overview'],['hotels','Hotels','hotels',null,1]]},
+  {group:'Platform', items:[['admin-codes','Codes','codes'],['admin-people','People','people'],['admin-audit','Audit log','audit'],['admin-settings','Settings','settings']]},
+];
+const $ = s => document.querySelector(s);
+const view = $('#view');
+
+function route(){ const h = location.hash.slice(2) || (state.role==='super'?'admin':'overview'); const [page, arg] = h.split('/'); return {page, arg}; }
+function go(path){ location.hash = '#/' + path; }
+
+function renderNav(){
+  const {page} = route();
+  const navs = state.role==='super' ? SUPER_NAV : HOTEL_NAV;
+  const current = page==='room' ? 'rooms' : page;
+  $('#nav').innerHTML = navs.map(g => (g.group?`<div class="rail-group">${g.group}</div>`:'') + g.items.map(([id,label,icon,count,flag]) =>
+    `<a href="#/${id}" ${current===id?'aria-current="page"':''}>${I(ic[icon],18)}<span>${label}</span>${flag?`<span class="flag" aria-label="${flag} need attention">${flag}</span>`:count?`<span class="count">${count}</span>`:''}</a>`).join('')).join('');
+  $('#rail-context').innerHTML = state.role==='super'
+    ? `<div class="hotel-switch" style="cursor:default"><span class="hotel-mark" style="background:linear-gradient(145deg,#0693e3,#0470b0)">IX</span><div><b>Informax</b><small>Super Admin · 5 hotels</small></div></div>`
+    : `<button class="hotel-switch" data-go="hotels-switch"><span class="hotel-mark">${HOTEL.mark}</span><div style="flex:1;min-width:0"><b>${HOTEL.name}</b><small>${HOTEL.place} · 148 rooms</small></div>${I('<path d="m8 10 4-4 4 4M8 14l4 4 4-4"/>',15)}</button>`;
+  document.querySelectorAll('.role button').forEach(b => b.setAttribute('aria-pressed', b.dataset.role===state.role));
+  $('#me-name').textContent = state.role==='super' ? 'Tom Hale' : 'Giulia Conti';
+  $('#me-av').textContent = state.role==='super' ? 'TH' : 'GC';
+  $('#me-role').textContent = state.role==='super' ? 'Informax · Super Admin' : 'Hotel Admin';
+  const tabs = state.role==='super'
+    ? [['admin','Overview','overview'],['hotels','Hotels','hotels'],['admin-codes','Codes','codes'],['admin-people','People','people']]
+    : [['overview','Overview','overview'],['rooms','Rooms','rooms'],['codes','Codes','codes'],['content','Content','content'],['analytics','Analytics','analytics']];
+  $('#tabbar').innerHTML = tabs.map(([id,l,i]) => `<a href="#/${id}" ${current===id?'aria-current="page"':''}>${I(ic[i],22)}${l}</a>`).join('');
+}
+
+function crumbs(parts){
+  $('#crumbs').innerHTML = parts.map((p,i) => i===parts.length-1 ? `<b>${p[0]}</b>` : `<a class="c-hide" href="#/${p[1]}">${p[0]}</a><span class="c-hide" aria-hidden="true">/</span>`).join('');
+}
+
+const statusEl = s => ({
+  live:'<span class="status live"><i></i>Live</span>',
+  attn:'<span class="status attn"><i></i>Needs attention</span>',
+  paused:'<span class="status paused"><i></i>Paused</span>',
+  draft:'<span class="status draft"><i></i>Not yet live</span>',
+}[s]);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------------- Screens ---------------- */
+const screens = {};
+
+screens.overview = () => {
+  crumbs([[HOTEL.name,'overview'],['Overview']]);
+  const hour = new Date().getHours();
+  const greet = hour<12?'Good morning':hour<18?'Good afternoon':'Good evening';
+  return `
+  <section class="hero" aria-label="Summary">
+    <span class="eyebrow on-dark">${greet}, Giulia</span>
+    <h1>Every room is up to date. <span class="soft">Two Codes need a look.</span></h1>
+    <p>Guests at Maison Aurelia opened your information 3,482 times this week, 12% more than last week.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#/codes">Review Codes ${arrow(17)}</a>
+      <a class="btn btn-dark" href="#/content">Update shared content</a>
+    </div>
+    <div class="hero-health" role="list">
+      <div role="listitem"><b class="tab"><span class="pulse"></span>146</b>rooms &amp; areas live</div>
+      <div role="listitem"><b class="tab">208</b>Codes working</div>
+      <div role="listitem"><b class="tab">09:12</b>last update</div>
+    </div>
+  </section>
+
+  <div class="grid g-4 mt-24">
+    ${stat('Interactions this week','3,482','<b>+12%</b> vs last week')}
+    ${stat('Rooms & Areas','148','124 rooms · 24 areas')}
+    ${stat('Room overrides','18','Across 11 rooms')}
+    ${stat('Needs attention','2','Codes · see below','attn')}
+  </div>
+
+  <div class="grid g-main mt-24">
+    <section class="card card-pad" aria-labelledby="h-trend">
+      <div class="sec-head"><div><span class="eyebrow">Analytics</span><h2 class="h-sec" id="h-trend">Guest interactions <span class="soft">· last 12 weeks</span></h2></div><a class="link" href="#/analytics">Open analytics ${arrow(15)}</a></div>
+      ${lineChart(WEEK, WEEK_LABELS, 'interactions')}
+    </section>
+    <section class="card card-pad" aria-labelledby="h-attn">
+      <div class="sec-head"><h2 class="h-sec" id="h-attn">Needs attention</h2><span class="chip coral">2 open</span></div>
+      <ul class="list">
+        ${CODES.filter(c=>c.status==='attn').map(c=>`
+        <li><span class="ico coral">${I(ic.alert,17)}</span><div class="grow"><div class="t">${c.where} · ${c.spot}</div><div class="s">${c.note}</div></div><button class="row-link" data-code="${c.id}">Review ${arrow(14)}</button></li>`).join('')}
+        <li><span class="ico moss">${I(ic.check,17)}</span><div class="grow"><div class="t">Spa Aurelia website</div><div class="s">Checked 6 min ago · reachable</div></div></li>
+      </ul>
+      <hr class="hair" style="margin:10px 0 14px">
+      <div class="sec-head" style="margin-bottom:4px"><h3 class="h-sec" style="font-size:15.5px">Recent changes</h3></div>
+      <ul class="list">
+        <li><span class="ico blue">${I(ic.layers,17)}</span><div class="grow"><div class="t">Welcome &amp; arrival</div><div class="s">Shared · reached 142 rooms · 09:12</div></div></li>
+        <li><span class="ico">${I(ic.pen,17)}</span><div class="grow"><div class="t">Room 301 · In-room menu</div><div class="s">Room override · yesterday</div></div></li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="mt-32" aria-labelledby="h-busy">
+    <div class="sec-head"><h2 class="h-sec" id="h-busy">Busiest places <span class="soft">this week</span></h2><a class="link" href="#/rooms">All rooms &amp; areas ${arrow(15)}</a></div>
+    <div class="grid g-3">
+      ${ROOMS.filter(r=>r.w).sort((a,b)=>b.w-a.w).slice(0,3).map(r=>`
+      <a class="card card-pad card-link" href="#/room/${r.id}">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span class="chip">${r.type}</span>${statusEl(r.status)}</div>
+        <h3 style="font-size:20px;margin-top:18px">${r.name}</h3><div class="muted" style="font-size:13.5px">${r.label} · ${r.floor}</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px"><div><div class="tab" style="font:600 26px/1 var(--display);color:var(--ink);letter-spacing:-.02em">${r.w}</div><div class="faint" style="font-size:12.5px;margin-top:4px">interactions</div></div><span class="link">Open ${arrow(15)}</span></div>
+      </a>`).join('')}
+    </div>
+  </section>`;
+};
+const stat = (label, value, delta, cls='') => `<div class="card card-pad stat ${cls}"><div class="label">${label}</div><div class="value tab">${value}</div><div class="delta">${delta}</div></div>`;
+
+screens.rooms = () => {
+  crumbs([[HOTEL.name,'overview'],['Rooms & Areas']]);
+  const f = state.roomFilter;
+  const rows = ROOMS.filter(r => f==='All' || (f==='Rooms'&&r.type==='Room') || (f==='Areas'&&r.type==='Area') || (f==='With overrides'&&r.overrides) || (f==='Needs attention'&&r.status==='attn'));
+  return `
+  <div class="page-head"><div><span class="eyebrow">Property</span><h1 class="h-page">Rooms &amp; Areas</h1><p class="lede">Every room and public area shows your shared content. Change a single room only where it needs to be different.</p></div>
+    <button class="btn btn-primary" data-toast="Prototype: add room or area">${I(ic.plus,17)} Add room or area</button></div>
+  <div class="toolbar">
+    <div class="seg" role="group" aria-label="Filter">${['All','Rooms','Areas','With overrides','Needs attention'].map(x=>`<button data-rf="${x}" aria-pressed="${x===f}">${x}</button>`).join('')}</div>
+    <input class="field" style="margin-left:auto;width:220px" placeholder="Find a room" aria-label="Find a room">
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Name</th><th class="hide-m">Type</th><th class="hide-m">Location</th><th>Content</th><th class="hide-m num">Codes</th><th>Status</th><th class="hide-m"></th></tr></thead>
+    <tbody>${rows.map(r=>`
+      <tr class="clickable" data-go="room/${r.id}">
+        <td><div class="name">${r.name}</div><div class="sub">${r.label}</div></td>
+        <td class="hide-m">${r.type}</td>
+        <td class="hide-m">${r.floor}</td>
+        <td>${r.overrides?`<span class="chip blue">${r.overrides} override${r.overrides>1?'s':''}</span>`:'<span class="muted" style="font-size:13.5px">Shared</span>'}</td>
+        <td class="hide-m num tab">${r.codes}</td>
+        <td>${statusEl(r.status)}</td>
+        <td class="hide-m num"><span class="row-arrow">${I(ic.arrow,16)}</span></td>
+      </tr>`).join('') || `<tr><td colspan="7" class="muted" style="text-align:center;padding:40px">Nothing matches this filter.</td></tr>`}
+    </tbody></table>
+    <div class="table-foot"><span>Showing ${rows.length} of 148</span><span>Sorted by name</span></div>
+  </div>`;
+};
+
+screens.room = (id='214') => {
+  const r = ROOMS.find(x=>x.id===id) || ROOMS[0];
+  crumbs([[HOTEL.name,'overview'],['Rooms & Areas','rooms'],[r.name]]);
+  const defaults = {214:{dining:true, welcome:true}, 301:{dining:true,welcome:true,depart:true}, spa:{wifi:true}, terrace:{dining:true,welcome:true}, 216:{dining:true}};
+  const ov = state.overrides[r.id] ??= {...(defaults[r.id]||{})};
+  const codes = CODES.filter(c=>c.where===r.name);
+  return `
+  <div class="page-head"><div><span class="eyebrow">${r.type} · ${r.floor}</span><h1 class="h-page">${r.name} <span class="soft">${r.label}</span></h1>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:10px">${statusEl(r.status)}<span class="faint" style="font-size:13px">Last interaction ${r.last}</span></div></div>
+    <div style="display:flex;gap:10px"><button class="btn btn-secondary" data-toast="Prototype: guest preview opened">Preview as guest</button></div></div>
+  <div class="tabs" role="tablist"><button role="tab" aria-selected="true">Content</button><button role="tab" aria-selected="false">Codes · ${codes.length||r.codes}</button><button role="tab" aria-selected="false">Analytics</button><button role="tab" aria-selected="false">Details</button></div>
+  <div class="grid g-main">
+    <section aria-labelledby="h-what">
+      <div class="sec-head"><div><h2 class="h-sec" id="h-what">What guests see here</h2><p class="muted" style="margin:4px 0 0;font-size:13.5px">Shared content updates this room automatically. An override applies to ${r.name} only.</p></div></div>
+      <div class="card" style="overflow:hidden" id="blocks">
+        ${SHARED.map(s=>{ const o=!!ov[s.id]; return `
+        <div class="block ${o?'override':''}">
+          <span class="ico ${o?'blue':''}">${I(ic[s.icon],18)}</span>
+          <div style="min-width:0"><div style="font-weight:600;color:var(--ink)">${o? s.title.replace('Dining & in-room menu','In-room menu · Villa edition').replace('Welcome & arrival','Welcome · '+r.label) : s.title}</div>
+            <div class="src">${o?`<span class="chip blue">Override</span> Only in ${r.name} · edited ${s.id==='dining'?'yesterday':'3 Sep'}`:`${I(ic.link,13)} From shared content · ${s.kind} · updated ${s.updated}`}</div></div>
+          <div class="toggle" role="group" aria-label="${s.title} source"><button data-ov="${r.id}|${s.id}|0" aria-pressed="${!o}">Shared</button><button class="ov" data-ov="${r.id}|${s.id}|1" aria-pressed="${o}">This room</button></div>
+        </div>`;}).join('')}
+      </div>
+    </section>
+    <aside class="stack">
+      <div class="card card-pad" style="background:linear-gradient(180deg,#fff,#fbfaf7)">
+        <span class="eyebrow">Guest preview</span>
+        <div class="phone" style="transform:scale(.92);transform-origin:top center;margin-bottom:-40px">${guestScreen(r)}</div>
+      </div>
+      <div class="card card-pad">
+        <div class="sec-head"><h2 class="h-sec" style="font-size:16px">Codes in this ${r.type.toLowerCase()}</h2><a class="link" href="#/codes">All Codes ${arrow(14)}</a></div>
+        <ul class="list">${(codes.length?codes:[{id:'AUR-'+r.id+'-A',spot:'Bedside',format:'Touch',status:r.status==='draft'?'draft':'live',last:r.last}]).map(c=>`
+          <li><span class="ico ${c.status==='attn'?'coral':''}">${I(ic.codes,17)}</span><div class="grow"><div class="t">${c.spot}</div><div class="s">${c.format} · ${c.last}</div></div>${statusEl(c.status)}</li>`).join('')}</ul>
+      </div>
+    </aside>
+  </div>`;
+};
+function guestScreen(r){
+  const b = state.brand;
+  const fonts = {serif:'Georgia,"Times New Roman",serif', sans:'var(--display)', didone:'"Didot","Bodoni 72","Playfair Display",Georgia,serif'};
+  return `<div class="screen" style="--g-accent:${b.accent};--g-bg:${b.bg};--g-display:${fonts[b.font]};--g-img:url(assets/earth-horizon.jpg)">
+    <div class="g-hero" style="background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55)),linear-gradient(135deg,#7d8f86,#34463f 60%,#1f2b27)"><div><small>Maison Aurelia</small><b>${r?`Welcome to ${r.name.replace('Room ','Room&nbsp;')}`:'Welcome'}</b></div></div>
+    <div class="g-body">
+      ${['Arrival & your stay','In-room dining','Spa Aurelia','The lake','Wi-Fi'].map(x=>`<div class="g-item"><span>${x}</span><span>›</span></div>`).join('')}
+      <div class="g-cta">Speak to reception</div>
+    </div></div>`;
+}
+
+screens.codes = () => {
+  crumbs([[HOTEL.name,'overview'],['Codes']]);
+  const f = state.codeFilter;
+  const rows = CODES.filter(c => f==='All' || (f==='Needs attention'&&c.status==='attn') || (f==='Live'&&c.status==='live') || (f==='Paused'&&c.status==='paused'));
+  return `
+  <div class="page-head"><div><span class="eyebrow">Property</span><h1 class="h-page">Codes</h1><p class="lede">The physical Codes placed around the hotel. Each one opens the content of the room or area it belongs to.</p></div>
+    <button class="btn btn-primary" data-toast="Prototype: order new Codes">${I(ic.plus,17)} Order Codes</button></div>
+  <div class="grid g-4" style="margin-bottom:22px">
+    ${stat('Total','212','Across 148 rooms & areas')}${stat('Live','208','<b>98%</b> working')}${stat('Paused','2','Fitness studio')}${stat('Needs attention','2','Room 302 · Room 303','attn')}
+  </div>
+  <div class="toolbar"><div class="seg" role="group" aria-label="Filter">${['All','Needs attention','Live','Paused'].map(x=>`<button data-cf="${x}" aria-pressed="${x===f}">${x}</button>`).join('')}</div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Code</th><th>Room or area</th><th class="hide-m">Format</th><th class="hide-m num">This week</th><th class="hide-m">Last interaction</th><th>Status</th></tr></thead>
+    <tbody>${rows.map(c=>`
+      <tr class="clickable" data-code="${c.id}">
+        <td><div class="name tab" style="font-size:13.5px">${c.id}</div><div class="sub">${c.spot}</div></td>
+        <td>${c.where}</td><td class="hide-m">${c.format}</td>
+        <td class="hide-m num tab">${c.week||'—'}</td><td class="hide-m">${c.last}</td>
+        <td>${statusEl(c.status)}${c.note?`<div class="sub hide-m" style="margin-top:2px">${c.note}</div>`:''}</td>
+      </tr>`).join('')}</tbody></table>
+    <div class="table-foot"><span>Showing ${rows.length} of 212</span><span></span></div></div>`;
+};
+
+screens.content = () => {
+  crumbs([[HOTEL.name,'overview'],['Shared content']]);
+  return `
+  <div class="page-head"><div><span class="eyebrow">Property</span><h1 class="h-page">Shared content <span class="soft">— write once, every room follows.</span></h1><p class="lede">Update it here and every room and area that uses it changes at once. Rooms with an override keep their own version.</p></div>
+    <button class="btn btn-primary" data-toast="Prototype: new shared content">${I(ic.plus,17)} New content</button></div>
+  <div class="grid g-3">${SHARED.map(s=>`
+    <article class="card card-pad card-link" style="cursor:pointer" data-toast="Prototype: open ${esc(s.title)}">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="ico blue">${I(ic[s.icon],18)}</span><span class="chip">${I(s.kind==='PDF'?ic.doc:s.kind==='Website'?ic.web:ic.layers,13)} ${s.kind}</span></div>
+      <h3 style="font-size:18px;margin-top:18px">${s.title}</h3>
+      <div class="muted" style="font-size:13.5px;margin-top:2px">Updated ${s.updated} · ${s.by}</div>
+      <hr class="hair" style="margin:18px 0 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13.5px"><span><b class="tab" style="color:var(--ink)">${s.used}</b> <span class="muted">rooms &amp; areas</span></span>${s.overrides?`<span class="chip blue">${s.overrides} override${s.overrides>1?'s':''}</span>`:'<span class="faint">No overrides</span>'}</div>
+    </article>`).join('')}
+  </div>`;
+};
+
+screens.branding = () => {
+  crumbs([[HOTEL.name,'overview'],['Branding']]);
+  const b = state.brand;
+  const accents = ['#9b7b4f','#2f5d50','#7a2e3a','#1f3a5f','#1d1a16'];
+  const bgs = ['#faf8f4','#ffffff','#f1efe9','#15171a'];
+  return `
+  <div class="page-head"><div><span class="eyebrow">Hotel</span><h1 class="h-page">Branding</h1><p class="lede">How guests see Maison Aurelia. Your brand, not ours: Informax stays in the background.</p></div>
+    <button class="btn btn-primary" data-toast="Branding published to 148 rooms & areas">Publish branding ${arrow(17)}</button></div>
+  <div class="grid g-main">
+    <div class="stack">
+      <section class="card card-pad"><h2 class="h-sec" style="font-size:16px;margin-bottom:14px">Logo</h2>
+        <div class="logo-drop"><span class="lg">AURELIA</span><div><div style="font-weight:600;color:var(--ink)">aurelia-wordmark.svg</div><div class="muted" style="font-size:13px">Shown at the top of every guest page</div></div><button class="btn btn-secondary btn-sm" style="margin-left:auto">Replace</button></div></section>
+      <section class="card card-pad"><h2 class="h-sec" style="font-size:16px;margin-bottom:14px">Accent colour</h2>
+        <div class="swatches">${accents.map(a=>`<button class="swatch" style="background:${a}" data-accent="${a}" aria-pressed="${a===b.accent}" aria-label="Accent ${a}"></button>`).join('')}</div>
+        <h2 class="h-sec" style="font-size:16px;margin:22px 0 14px">Page background</h2>
+        <div class="swatches">${bgs.map(a=>`<button class="swatch" style="background:${a}" data-bg="${a}" aria-pressed="${a===b.bg}" aria-label="Background ${a}"></button>`).join('')}</div></section>
+      <section class="card card-pad"><h2 class="h-sec" style="font-size:16px;margin-bottom:14px">Headline type</h2>
+        <div class="grid g-3">${[['serif','Classic serif','Georgia,serif'],['didone','Didone','"Didot","Bodoni 72",Georgia,serif'],['sans','Modern sans','var(--display)']].map(([k,l,f])=>`
+          <button class="font-opt" data-font="${k}" aria-pressed="${k===b.font}"><div><b style="font-family:${f}">Aa</b><div class="muted" style="font-size:12.5px">${l}</div></div></button>`).join('')}</div></section>
+    </div>
+    <aside class="card card-pad" style="position:sticky;top:84px;align-self:start"><span class="eyebrow">Live preview</span><div class="phone">${guestScreen(ROOMS[0])}</div></aside>
+  </div>`;
+};
+
+screens.analytics = () => {
+  crumbs([[HOTEL.name,'overview'],['Analytics']]);
+  const top = SHARED.map((s,i)=>({l:s.title, v:[1240,980,760,412,388,210][i]}));
+  const place = ROOMS.filter(r=>r.w).sort((a,b)=>b.w-a.w).slice(0,6);
+  return `
+  <div class="page-head"><div><span class="eyebrow">Insight</span><h1 class="h-page">Analytics</h1><p class="lede">How guests use your information. Totals only — never individual guests.</p></div>
+    <div class="seg" role="group" aria-label="Period"><button aria-pressed="false">7 days</button><button aria-pressed="false">30 days</button><button aria-pressed="true">12 weeks</button></div></div>
+  <div class="grid g-4">${stat('Interactions','3,482','<b>+12%</b> vs previous week')}${stat('Rooms & areas used','131','of 148 this week')}${stat('Busiest hour','21:00','Evening dining')}${stat('Avg. per occupied room','4.1','<b>+0.6</b> vs previous week')}</div>
+  <section class="card card-pad mt-24"><div class="sec-head"><h2 class="h-sec">Interactions per week</h2><span class="faint" style="font-size:13px">Hover for detail</span></div>${lineChart(WEEK, WEEK_LABELS,'interactions')}</section>
+  <div class="grid g-2 mt-24">
+    <section class="card card-pad"><h2 class="h-sec" style="margin-bottom:18px">Most opened content</h2><div class="bars">${bars(top)}</div></section>
+    <section class="card card-pad"><h2 class="h-sec" style="margin-bottom:18px">Busiest rooms &amp; areas</h2><div class="bars">${bars(place.map(r=>({l:r.name,v:r.w})))}</div></section>
+  </div>`;
+};
+function bars(rows){ const max=Math.max(...rows.map(r=>r.v)); return rows.map((r,i)=>`<div class="bar-row" title="${esc(r.l)}: ${r.v.toLocaleString('en-GB')}"><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-soft)">${r.l}</span><div class="track"><div class="fill" style="width:${r.v/max*100}%;animation-delay:${i*60}ms"></div></div><span class="v tab">${r.v.toLocaleString('en-GB')}</span></div>`).join(''); }
+
+function lineChart(data, labels, unit){
+  const W=720,H=220,p={l:40,r:12,t:12,b:26};
+  const max=Math.ceil(Math.max(...data)/1000)*1000, min=0;
+  const x=i=>p.l+i*(W-p.l-p.r)/(data.length-1), y=v=>p.t+(1-(v-min)/(max-min))*(H-p.t-p.b);
+  const pts=data.map((v,i)=>[x(i),y(v)]);
+  const path=pts.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+  const ticks=[0,max/2,max];
+  const id='c'+Math.random().toString(36).slice(2,7);
+  return `<div class="chart" data-chart='${JSON.stringify({data,labels,unit,W,H,pl:p.l,pr:p.r})}'>
+  <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Interactions per week, rising from ${data[0].toLocaleString('en-GB')} to ${data.at(-1).toLocaleString('en-GB')}">
+    <defs><linearGradient id="${id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0693e3" stop-opacity=".16"/><stop offset="1" stop-color="#0693e3" stop-opacity="0"/></linearGradient></defs>
+    ${ticks.map(t=>`<line class="grid-line" x1="${p.l}" x2="${W-p.r}" y1="${y(t)}" y2="${y(t)}"/><text class="axis" x="${p.l-8}" y="${y(t)+4}" text-anchor="end">${t>=1000?t/1000+'k':t}</text>`).join('')}
+    ${labels.map((l,i)=>i%2===0||i===labels.length-1?`<text class="axis" x="${x(i)}" y="${H-6}" text-anchor="middle">${l}</text>`:'').join('')}
+    <path d="${path} L ${x(data.length-1)} ${y(0)} L ${p.l} ${y(0)} Z" fill="url(#${id})"/>
+    <path d="${path}" fill="none" stroke="#0693e3" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.2s var(--ease) .1s forwards"/>
+    <circle cx="${pts.at(-1)[0]}" cy="${pts.at(-1)[1]}" r="4.5" fill="#0693e3" stroke="#fff" stroke-width="2"/>
+    <line class="xh" x1="0" x2="0" y1="${p.t}" y2="${H-p.b}" stroke="var(--ink-faint)" stroke-dasharray="3 3" opacity="0"/>
+    <circle class="xd" r="5" fill="#0693e3" stroke="#fff" stroke-width="2" opacity="0"/>
+    <rect x="${p.l}" y="0" width="${W-p.l-p.r}" height="${H}" fill="transparent" class="hit"/>
+  </svg><div class="tip"></div></div>`;
+}
+document.head.insertAdjacentHTML('beforeend','<style>@keyframes draw{to{stroke-dashoffset:0}}</style>');
+
+screens.people = () => {
+  crumbs([[HOTEL.name,'overview'],['People']]);
+  const ppl=[['Giulia Conti','Guest experience manager','Hotel Admin','Now'],['Marco Bianchi','Food & beverage','Editor','Yesterday'],['Elena Rossi','Concierge','Editor','3 days ago'],['Luca Ferri','General manager','Viewer','Last week']];
+  return `<div class="page-head"><div><span class="eyebrow">Hotel</span><h1 class="h-page">People</h1><p class="lede">Who at Maison Aurelia can update what guests see.</p></div><button class="btn btn-primary" data-toast="Prototype: invite sent">Invite someone ${arrow(17)}</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Access</th><th class="hide-m">Last active</th></tr></thead><tbody>${ppl.map(p=>`<tr><td><div style="display:flex;gap:12px;align-items:center"><span class="avatar" style="background:var(--panel-sunk);color:var(--ink-soft)">${p[0].split(' ').map(x=>x[0]).join('')}</span><div><div class="name">${p[0]}</div><div class="sub">${p[1]}</div></div></div></td><td><span class="chip ${p[2]==='Hotel Admin'?'blue':''}">${p[2]}</span></td><td class="hide-m">${p[3]}</td></tr>`).join('')}</tbody></table></div>`;
+};
+
+/* Super Admin */
+screens.admin = () => {
+  crumbs([['Informax','admin'],['Overview']]);
+  return `
+  <section class="admin-band"><div><span class="eyebrow on-dark">Super Admin</span><h1>Five hotels. <span class="soft">One needs a look.</span></h1></div>
+    <div class="admin-stats"><div><b class="tab">349</b><span>rooms live</span></div><div><b class="tab">488</b><span>Codes</span></div><div><b class="tab">7,113</b><span>interactions this week</span></div></div></section>
+  <div class="grid g-main mt-24">
+    <section><div class="sec-head"><h2 class="h-sec">Hotels</h2><a class="link" href="#/hotels">Manage hotels ${arrow(15)}</a></div>${hotelTable(true)}</section>
+    <section class="card card-pad"><h2 class="h-sec" style="margin-bottom:6px">Onboarding</h2><p class="muted" style="margin:0 0 14px;font-size:13.5px">Casa Solaz · Seville</p>
+      <ul class="list">${[['Hotel created',1],['Branding uploaded',1],['Rooms & Areas imported',1],['Shared content written',0],['Codes delivered',0],['Go live',0]].map(([t,d])=>`<li style="padding:11px 0"><span class="ico ${d?'moss':''}" style="width:28px;height:28px;border-radius:50%">${d?I(ic.check,15):''}</span><div class="grow"><div class="t" style="${d?'':'color:var(--ink-mute);font-weight:500'}">${t}</div></div></li>`).join('')}</ul>
+      <a class="btn btn-secondary btn-sm mt-16" href="#/hotels">Continue setup ${arrow(15)}</a></section>
+  </div>`;
+};
+function hotelTable(compact){
+  return `<div class="table-wrap"><table><thead><tr><th>Hotel</th><th class="hide-m">Plan</th><th class="num hide-m">Rooms</th><th class="num hide-m">Codes</th>${compact?'':'<th class="num hide-m">This week</th>'}<th>Status</th></tr></thead><tbody>${HOTELS.map(h=>`
+    <tr class="clickable" data-enter="${esc(h.name)}"><td><div style="display:flex;gap:12px;align-items:center"><span class="hotel-mark" style="width:34px;height:34px">${h.mark}</span><div><div class="name">${h.name}</div><div class="sub">${h.place}</div></div></div></td>
+    <td class="hide-m">${h.plan}</td><td class="num tab hide-m">${h.rooms||'—'}</td><td class="num tab hide-m">${h.codes||'—'}</td>${compact?'':`<td class="num tab hide-m">${h.week}</td>`}
+    <td>${statusEl(h.health).replace('Not yet live','Onboarding')}${h.note?`<div class="sub" style="margin-top:2px">${h.note}</div>`:''}</td></tr>`).join('')}</tbody></table></div>`;
+}
+screens.hotels = () => { crumbs([['Informax','admin'],['Hotels']]); return `
+  <div class="page-head"><div><span class="eyebrow">Super Admin</span><h1 class="h-page">Hotels</h1><p class="lede">Open a hotel to work inside its Cloud exactly as its team sees it.</p></div><button class="btn btn-primary" data-toast="Prototype: new hotel">${I(ic.plus,17)} Add hotel</button></div>${hotelTable(false)}`; };
+const stub = (t,e) => () => { crumbs([['Informax','admin'],[t]]); return `<div class="page-head"><div><span class="eyebrow">${e}</span><h1 class="h-page">${t}</h1><p class="lede">Not designed in this round.</p></div></div>`; };
+screens['admin-codes']=stub('Codes','Platform'); screens['admin-people']=stub('People','Platform'); screens['admin-audit']=stub('Audit log','Platform'); screens['admin-settings']=stub('Settings','Platform');
+
+/* ---------------- Drawer: Code detail ---------------- */
+function openCode(id){
+  const c = CODES.find(x=>x.id===id); if(!c) return;
+  $('#drawer').innerHTML = `
+    <header><div><span class="eyebrow">Code</span><h2 class="h-sec tab">${c.id}</h2><div style="margin-top:6px">${statusEl(c.status)}</div></div><button class="icon-btn" data-close aria-label="Close">${I(ic.close,18)}</button></header>
+    <div class="body">
+      <div class="code-art">${I(ic.codes,44)}</div>
+      ${c.note?`<div class="card" style="box-shadow:inset 0 0 0 1px rgba(255,107,78,.25);background:var(--coral-wash);padding:14px 16px;margin-bottom:18px;display:flex;gap:12px"><span style="color:var(--coral-deep)">${I(ic.alert,18)}</span><div><div style="font-weight:600;color:var(--ink)">${c.note}</div><div class="muted" style="font-size:13px">Check it is still in place, or move it to another room.</div></div></div>`:''}
+      <dl class="kv"><dt>Room or area</dt><dd>${c.where}</dd><dt>Placed at</dt><dd>${c.spot}</dd><dt>Format</dt><dd>${c.format}</dd><dt>This week</dt><dd class="tab">${c.week||'—'}</dd><dt>Last interaction</dt><dd>${c.last}</dd></dl>
+      <hr class="hair" style="margin:22px 0">
+      <p class="muted" style="font-size:13.5px;margin:0">A Code never holds content. It opens whatever ${c.where} currently shows, so moving it to another room changes what it opens — nothing to reprint.</p>
+    </div>
+    <footer><button class="btn btn-secondary" data-toast="Code paused">${c.status==='paused'?'Resume':'Pause'}</button><button class="btn btn-primary" data-toast="Prototype: move Code">Move to another room ${arrow(16)}</button></footer>`;
+  document.body.classList.add('drawer-open'); $('#drawer').setAttribute('aria-hidden','false');
+}
+function closeDrawer(){ document.body.classList.remove('drawer-open'); $('#drawer').setAttribute('aria-hidden','true'); }
+
+let toastT; function toast(msg){ const t=$('#toast'); t.querySelector('span').textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2200); }
+
+/* ---------------- Render & events ---------------- */
+function render(keepScroll){
+  const {page,arg} = route();
+  if(state.role==='hotel' && ['admin','hotels','admin-codes','admin-people','admin-audit','admin-settings'].includes(page)) state.role='super';
+  const fn = screens[page] || screens.overview;
+  view.innerHTML = fn(arg);
+  if(!keepScroll){ view.style.animation='none'; view.offsetHeight; view.style.animation=''; window.scrollTo(0,0); }
+  renderNav(); wireCharts();
+}
+function wireCharts(){
+  document.querySelectorAll('.chart').forEach(el=>{
+    const cfg=JSON.parse(el.dataset.chart), svg=el.querySelector('svg'), tip=el.querySelector('.tip'), xh=svg.querySelector('.xh'), xd=svg.querySelector('.xd');
+    const max=Math.ceil(Math.max(...cfg.data)/1000)*1000;
+    svg.querySelector('.hit').addEventListener('pointermove',e=>{
+      const r=svg.getBoundingClientRect(), sx=(e.clientX-r.left)/r.width*cfg.W;
+      const i=Math.max(0,Math.min(cfg.data.length-1,Math.round((sx-cfg.pl)/((cfg.W-cfg.pl-cfg.pr)/(cfg.data.length-1)))));
+      const x=cfg.pl+i*(cfg.W-cfg.pl-cfg.pr)/(cfg.data.length-1), y=12+(1-cfg.data[i]/max)*(cfg.H-38);
+      xh.setAttribute('x1',x);xh.setAttribute('x2',x);xh.setAttribute('opacity',1);xd.setAttribute('cx',x);xd.setAttribute('cy',y);xd.setAttribute('opacity',1);
+      tip.innerHTML=`<b class="tab">${cfg.data[i].toLocaleString('en-GB')}</b> ${cfg.unit}<br><span>Week of ${cfg.labels[i]}</span>`;
+      tip.style.left=(x/cfg.W*r.width)+'px'; tip.style.top=(y/cfg.H*r.height)+'px'; tip.style.opacity=1;
+    });
+    svg.querySelector('.hit').addEventListener('pointerleave',()=>{tip.style.opacity=0;xh.setAttribute('opacity',0);xd.setAttribute('opacity',0);});
+  });
+}
+document.addEventListener('click', e=>{
+  const t = e.target.closest('[data-rf],[data-cf],[data-ov],[data-go],[data-code],[data-toast],[data-close],[data-role],[data-accent],[data-bg],[data-font],[data-enter],#scrim,#m-role');
+  if(!t) return;
+  if(t.id==='scrim'||t.hasAttribute('data-close')) return closeDrawer();
+  if(t.id==='m-role'){ state.role = state.role==='hotel'?'super':'hotel'; return go(state.role==='super'?'admin':'overview'); }
+  if(t.dataset.role){ state.role=t.dataset.role; return go(state.role==='super'?'admin':'overview'); }
+  if(t.dataset.enter){ state.role='hotel'; toast('Now working inside '+t.dataset.enter); return go('overview'); }
+  if(t.dataset.rf){ state.roomFilter=t.dataset.rf; return render(true); }
+  if(t.dataset.cf){ state.codeFilter=t.dataset.cf; return render(true); }
+  if(t.dataset.accent){ state.brand.accent=t.dataset.accent; return render(true); }
+  if(t.dataset.bg){ state.brand.bg=t.dataset.bg; return render(true); }
+  if(t.dataset.font){ state.brand.font=t.dataset.font; return render(true); }
+  if(t.dataset.ov){ const [r,s,v]=t.dataset.ov.split('|'); state.overrides[r][s]=v==='1'; toast(v==='1'?'Override created for this room only':'Back on shared content'); return render(true); }
+  if(t.dataset.code){ return openCode(t.dataset.code); }
+  if(t.dataset.go==='hotels-switch'){ state.role='super'; return go('hotels'); }
+  if(t.dataset.go){ return go(t.dataset.go); }
+  if(t.dataset.toast){ return toast(t.dataset.toast); }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+window.addEventListener('scroll', ()=>$('#topbar').classList.toggle('scrolled', scrollY>4), {passive:true});
+window.addEventListener('hashchange', ()=>{ closeDrawer(); render(); });
+render();
+</script>
+</body>
+</html>
