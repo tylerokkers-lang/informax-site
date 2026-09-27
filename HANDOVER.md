@@ -11,6 +11,20 @@ live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
+## 0b. YouTube advert production bible (27 September 2026) — branch `claude/informax-cloud-youtube-ad-jibn6h`
+
+- `marketing/youtube-ad/PRODUCTION-BIBLE.md` is the full production plan for
+  a 45 s YouTube advert ("Every Detail"): concept, VO, storyboard, shot list,
+  AI prompts, music/sound, edit and export specs, plus 30 s and 15 s cuts. It
+  is not part of the website build.
+- `marketing/youtube-ad/brand-assets/` holds the logos the user supplied for
+  it (white Informax Cloud and Informax PNGs). They are locked masters. Never
+  regenerate or alter them.
+- Open items (see §0 "Flags" in the bible): real Touch Point product photos
+  and face artwork, vector logos, end-card typeface, and a "The Aurelia
+  London" demo workspace for the screen recordings. The app has no
+  Space-reordering feature, so the film doesn't show one.
+
 ## 0a. Design system and homepage story (27 September 2026) — branch `website/cloud-aesthetic`, preview only until approved
 
 - **The website now uses Informax Cloud's visual language.** Informax Cloud
