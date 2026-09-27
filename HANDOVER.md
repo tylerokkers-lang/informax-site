@@ -11,7 +11,11 @@ live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
-## 0a. Design system and homepage story (27 September 2026) — branch `website/cloud-aesthetic`, preview only until approved
+## 0a. Design system and homepage story (27 September 2026) — live
+
+- **Live:** commit `bb6184d` (fast-forward from `1c4438b`), production
+  deployment `dpl_AJNmCMCaZgsyE6nyBX55247oLq2K`. Rollback target:
+  `dpl_FVZcRd6pd2Gmov1sD1eJZYHSjQGL` (informax-site-9rkjv1guz-informax.vercel.app).
 
 - **The website now uses Informax Cloud's visual language.** Informax Cloud
   (informax-analytics) is the reference and was not changed. Tokens in
