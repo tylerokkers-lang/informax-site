@@ -37,9 +37,10 @@ historical where they conflict).
 - **Sharing:** `src/app/opengraph-image.jpg` / `twitter-image.jpg` (and the
   same under `informax-cloud/`), generated from the hero stills and official
   logos. No site-wide `og:url`.
-- **Social links:** `SOCIAL_LINKS` in `src/lib/constants.ts` is empty until
-  the owner supplies the official LinkedIn and Instagram addresses; the
-  footer shows inactive icons until then. Never guess them.
+- **Social links:** `SOCIAL_LINKS` in `src/lib/constants.ts`. Instagram is
+  live (instagram.com/informax_cloud, supplied by the owner 29 September
+  2026). LinkedIn is still empty and shows as an inactive icon until the
+  owner supplies it. Never guess it.
 
 ## 0a. Design system and homepage story (27 September 2026) — live
 
