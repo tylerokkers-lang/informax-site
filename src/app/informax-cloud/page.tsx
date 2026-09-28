@@ -13,25 +13,25 @@ import PhoneFilm from "@/components/product/PhoneFilm";
 import SpacesShowcase from "@/components/product/SpacesShowcase";
 import TouchPointsShowcase from "@/components/product/TouchPointsShowcase";
 import WorkspaceShowcase from "@/components/product/WorkspaceShowcase";
+import AccessPointScenes from "@/components/access/AccessPointScenes";
 import {
   ActivityFilm,
   PermanentUrlFilm,
-  TouchScanFilm,
   VersionsFilm,
 } from "@/components/product/MicroFilms";
 
 export const metadata: Metadata = {
   title: "Informax Cloud: Hotel Content Management for Every Space",
   description:
-    "Informax Cloud is the control centre for guest information across your hotel. Give every part of your hotel a Space, serve a PDF or a website, connect Touch Points and change it all from anywhere.",
+    "Informax Cloud is the control centre for guest information across your hotel. Give every part of your hotel a Space, serve a PDF or a website, connect Access Points and change it all from anywhere.",
   alternates: { canonical: "/informax-cloud" },
 };
 
 const CONTROLS = [
   { title: "Spaces", body: "A permanent destination for every real part of the Hotel." },
   { title: "Current Content", body: "A PDF or a website, chosen by the Hotel." },
-  { title: "Touch Points", body: "Every physical Touch Point, connected to its Space." },
-  { title: "Activity", body: "Interactions by Space, by Touch Point and by method." },
+  { title: "Codes", body: "Every Code, connected to its Room, Area or Space." },
+  { title: "Activity", body: "Interactions by Space, by Code and by room." },
   { title: "Previous Versions", body: "Every published version, one step from restored." },
   { title: "People & access", body: "Your team, each with their own sign-in." },
 ];
@@ -98,7 +98,7 @@ export default function InformaxCloudPage() {
             </Display>
             <Lede className="mt-8">
               Spa, Restaurants, Gym, Meetings &amp; Events, Guest Rooms. Each Space shows its status, what guests
-              currently see and how many Touch Points are connected to it.
+              currently see and how many Access Points are connected to it.
             </Lede>
           </Reveal>
         </Head>
@@ -116,7 +116,7 @@ export default function InformaxCloudPage() {
               One permanent connection. <Soft>Change what is behind it.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Touch Point stays connected to its Space, so whatever the Space shows, the Touch Point never needs replacing.
+              Each Access Point&rsquo;s Code stays connected to its Space, so whatever the Space shows, the Access Point never needs replacing.
             </Lede>
             <div className="mt-10">
               <PermanentConnection />
@@ -137,7 +137,7 @@ export default function InformaxCloudPage() {
               Open the Space. <Soft dark>Change it. Publish.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              The content changes. The Space and every connected Touch Point stay exactly as they are.
+              The content changes. The Space and every connected Access Point stay exactly as they are.
             </Lede>
           </Reveal>
         </Head>
@@ -174,23 +174,23 @@ export default function InformaxCloudPage() {
             </Display>
             <Lede dark className="mt-8">
               PDFs and websites together, newest first. Restore an earlier version in one step without touching a
-              single Touch Point.
+              single Access Point.
             </Lede>
           </Reveal>
         </div>
       </Section>
 
-      {/* Touch Point management */}
+      {/* Code management */}
       <Section tone="alt">
         <Head>
           <Reveal blur>
-            <Kicker>Touch Points</Kicker>
+            <Kicker>Codes</Kicker>
             <Display>
-              Every Touch Point, <Soft>in one list.</Soft>
+              Every Code, <Soft>in one list.</Soft>
             </Display>
             <Lede className="mt-8">
               Where each one is, which Space it opens, how many are deployed and how often guests use it. What a
-              Touch Point opens is managed here, never by replacing the Touch Point itself.
+              Code opens is managed here, never by replacing the Access Point it sits in.
             </Lede>
           </Reveal>
         </Head>
@@ -199,21 +199,21 @@ export default function InformaxCloudPage() {
         </Reveal>
       </Section>
 
-      {/* Guest-facing: Touch and Scan */}
-      <Section tone="dark">
+      {/* Guest-facing: the Access Point */}
+      <Section>
         <Head>
           <Reveal blur>
-            <Kicker dark>Informax Touch and Informax Scan</Kicker>
-            <Display dark>
-              Two ways in. <Soft dark>Both immediate.</Soft>
+            <Kicker>The Informax Access Point</Kicker>
+            <Display>
+              Where guests begin. <Soft>Always current.</Soft>
             </Display>
-            <Lede dark className="mt-8">
-              Guests tap or scan with their own phone. Nothing to download, and they see the Space&rsquo;s current
-              content straight away.
+            <Lede className="mt-8">
+              Guests use the Access Point with their own phone. Nothing to download, and they see what the Hotel
+              has chosen for that place straight away.
             </Lede>
           </Reveal>
         </Head>
-        <TouchScanFilm tone="dark" />
+        <AccessPointScenes />
       </Section>
 
       {/* Activity */}
@@ -225,8 +225,8 @@ export default function InformaxCloudPage() {
               See what <Soft>guests use.</Soft>
             </Display>
             <Lede className="mt-8">
-              Interactions by Space and by Touch Point, and how guests arrive: Informax Touch, Informax Scan or
-              Direct.
+              Interactions by Space and by Code, and whether guests arrived through a Code or
+              directly.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
@@ -244,7 +244,7 @@ export default function InformaxCloudPage() {
               One workspace. <Soft dark>Everyone on the same page.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Your Hotel&rsquo;s Spaces, Touch Points, Activity and people in one place. Everyone with access has
+              Your Hotel&rsquo;s Spaces, Codes, Activity and people in one place. Everyone with access has
               their own sign-in, and you can see exactly who that is.
             </Lede>
           </Reveal>

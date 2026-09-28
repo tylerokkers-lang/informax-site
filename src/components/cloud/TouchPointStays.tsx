@@ -12,7 +12,7 @@ const STATES = [
 ] as const;
 
 /**
- * The central idea: the physical Touch Point never changes, only the Space
+ * The central idea: the physical Access Point never changes, only the Space
  * behind it. Cycles on screen; tabs let visitors jump to a moment.
  */
 export default function TouchPointStays() {
@@ -90,7 +90,7 @@ export default function TouchPointStays() {
           </AnimatePresence>
         </div>
         <p className="mt-6 max-w-[42ch] text-[15px] leading-relaxed text-cream-mute">
-          The Touch Point in the Spa stays exactly where it is. The Hotel
+          The Access Point in the Spa stays exactly where it is. The Hotel
           changes the Spa Space in Informax Cloud, and the next guest sees
           what is current.
         </p>

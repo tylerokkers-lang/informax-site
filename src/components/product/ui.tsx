@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import {
+  AccessPointIcon,
   ActivityIcon,
   ArrowLeftIcon,
   ChevronRightIcon,
@@ -15,11 +16,9 @@ import {
   PeopleIcon,
   PlusIcon,
   ReceiptIcon,
-  ScanIcon,
   ScrollIcon,
   SettingsIcon,
   SpacesIcon,
-  TouchIcon,
   WebsiteIcon,
 } from "./icons";
 import type { SpaceCardData, TouchPointRowData, VersionRowData } from "./data";
@@ -27,7 +26,7 @@ import type { SpaceCardData, TouchPointRowData, VersionRowData } from "./data";
 /**
  * Recreated presentational pieces of Informax Cloud. Wording, hierarchy,
  * spacing and states follow the production app (Spaces, Space, Current
- * Content, Change Content, Touch Points, Activity, Previous Versions).
+ * Content, Change Content, Access Points, Activity, Previous Versions).
  * They are display-only: state such as "hover", "press" and "focus" is
  * passed in by the film that is directing them.
  */
@@ -118,12 +117,12 @@ export type Interaction = "touch" | "scan" | "direct";
 
 const TILE: Record<Interaction, string> = {
   touch: "bg-ix-brand/[0.14] text-ix-bright",
-  scan: "bg-white/[0.08] text-ix-cream",
+  scan: "bg-ix-brand/[0.14] text-ix-bright",
   direct: "bg-white/[0.06] text-ix-muted",
 };
 
 export function InteractionTile({ kind, size = 40 }: { kind: Interaction; size?: number }) {
-  const Icon = kind === "touch" ? TouchIcon : kind === "scan" ? ScanIcon : DirectIcon;
+  const Icon = kind === "direct" ? DirectIcon : AccessPointIcon;
   return (
     <span
       className={cx("inline-flex shrink-0 items-center justify-center rounded-[12px]", TILE[kind])}
@@ -167,21 +166,21 @@ export function SpaceCard({
         </div>
       </div>
       <p className="ixp-tabular mt-5 text-[13px] text-ix-dim">
-        {space.touchPoints} Touch Points · {space.interactions.toLocaleString("en-GB")} interactions this month
+        {space.touchPoints} Access Points · {space.interactions.toLocaleString("en-GB")} interactions this month
       </p>
     </div>
   );
 }
 
 /**
- * The Space's connected Touch Points: they stay exactly where they are
+ * The Space's connected Access Points: they stay exactly where they are
  * whatever the Space shows. (The site never shows web addresses.)
  */
 export function SpaceConnection({
   touchPoints,
   ring,
   compact,
-  note = "Change what this Space shows as often as you like. Every connected Touch Point stays exactly where it is.",
+  note = "Change what this Space shows as often as you like. Every connected Access Point stays exactly where it is.",
 }: {
   touchPoints: number;
   /** One soft pulse, used to draw the eye to the fact that nothing moved. */
@@ -194,11 +193,11 @@ export function SpaceConnection({
       className={cx("rounded-[20px] bg-white/[0.05] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_8px_24px_-12px_rgba(2,6,14,0.55)]", compact ? "p-5" : "p-5 sm:p-6", ring && "ixp-ring")}
       data-cur="url"
     >
-      <p className="ixp-label">Connected Touch Points</p>
+      <p className="ixp-label">Connected Access Points</p>
       <div className="mt-2.5 flex items-center gap-3">
         <InteractionTile kind="touch" size={compact ? 36 : 40} />
         <p className={cx("ixp-display ixp-tabular leading-snug tracking-[-0.01em] text-white", compact ? "text-[1.0625rem]" : "text-[1.125rem] sm:text-[1.3125rem]")}>
-          {touchPoints.toLocaleString("en-GB")} Touch Points
+          {touchPoints.toLocaleString("en-GB")} Access Points
         </p>
         <span className="ml-auto">
           <Badge>Unchanged</Badge>
@@ -303,7 +302,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
               {s.pdfPublished ? (
                 <div className="ixp-enter-scale">
                   <p className="text-[17px] font-medium text-white">Guests now see your new PDF</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Touch Points stay the same.</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Access Points stay the same.</p>
                 </div>
               ) : s.staged ? (
                 <div data-anchor="entry" className="ixp-enter-fade">
@@ -339,7 +338,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
               {s.publishedAddress ? (
                 <div className="ixp-enter-scale">
                   <p className="text-[17px] font-medium text-white">Guests now see the {s.publishedAddress}</p>
-                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Touch Points stay the same.</p>
+                  <p className="mt-1.5 text-[15px] text-ix-muted">Your Space and connected Access Points stay the same.</p>
                 </div>
               ) : (
                 <div data-anchor="entry" className="space-y-4">
@@ -375,7 +374,7 @@ export function ChangePanel({ s }: { s: ChangePanelState }) {
 
           <p className="mt-5 flex items-center gap-2 text-[13px] text-ix-dim">
             <LockIcon size={14} />
-            Your Space and connected Touch Points stay the same.
+            Your Space and connected Access Points stay the same.
           </p>
         </div>
       </div>
@@ -422,13 +421,13 @@ export function CurrentContentCard({
   );
 }
 
-/* -------------------------------- Touch Points ------------------------------ */
+/* ---------------------------------- Codes ---------------------------------- */
 
 export function TouchPointRows({ rows, total, hero }: { rows: TouchPointRowData[]; total: number; hero?: boolean }) {
   return (
     <section>
       <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h3 className="text-[1.375rem]">Touch Points</h3>
+        <h3 className="text-[1.375rem]">Codes</h3>
         <p className="text-[13px] text-ix-dim">{total} active</p>
       </div>
       <p className="mb-5 text-[15px] text-ix-dim">
@@ -443,7 +442,7 @@ export function TouchPointRows({ rows, total, hero }: { rows: TouchPointRowData[
               <div className="min-w-0 flex-1">
                 <p className="break-words text-[16px] font-medium text-ix-cream">{r.location}</p>
                 <p className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-ix-dim">
-                  <span>{r.source === "touch" ? "Informax Touch" : "Informax Scan"}</span>
+                  <span>Code</span>
                   <Badge>Active</Badge>
                   <span className="ixp-tabular">{r.interactions} interactions · all time</span>
                 </p>
@@ -473,36 +472,14 @@ export function ActivitySummary({
   touch: string;
   scan: string;
   direct: string;
-  /** Use "Informax Touch / Informax Scan" instead of the short "Touch / Scan". */
+  /** Kept for callers; the labels are "Codes" and "Direct" either way. */
   fullNames?: boolean;
 }) {
+  // Touch and Scan are one public idea: arriving through a Code.
+  const num = (v: string) => Number(v.replace(/[^0-9]/g, "")) || 0;
+  const viaAccessPoints = (num(touch) + num(scan)).toLocaleString("en-GB");
   const rows = [
-    {
-      id: "touch",
-      icon: <TouchIcon size={16} />,
-      label: fullNames ? (
-        <>
-          <span className="sm:hidden">Touch</span>
-          <span className="hidden sm:inline">Informax Touch</span>
-        </>
-      ) : (
-        "Touch"
-      ),
-      value: touch,
-    },
-    {
-      id: "scan",
-      icon: <ScanIcon size={16} />,
-      label: fullNames ? (
-        <>
-          <span className="sm:hidden">Scan</span>
-          <span className="hidden sm:inline">Informax Scan</span>
-        </>
-      ) : (
-        "Scan"
-      ),
-      value: scan,
-    },
+    { id: "ap", icon: <AccessPointIcon size={16} />, label: "Codes", value: viaAccessPoints },
     { id: "direct", icon: <DirectIcon size={16} />, label: "Direct", value: direct },
   ];
   return (
@@ -511,7 +488,7 @@ export function ActivitySummary({
         {interactions}
       </p>
       <p className="mt-2 text-[15px] text-ix-muted">Interactions this month</p>
-      <dl className="mt-6 grid grid-cols-3 gap-3">
+      <dl className="mt-6 grid grid-cols-2 gap-3">
         {rows.map((row) => (
           <div key={row.id}>
             <dt className="flex items-center gap-1.5 text-[13px] text-ix-dim">
@@ -565,7 +542,7 @@ export function ConfirmSheetView({ hoverConfirm }: { hoverConfirm?: boolean }) {
     <div className="ixp-enter-scale w-[min(100%,420px)] rounded-[28px] bg-ix-navy-850 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.07),0_24px_60px_-20px_rgba(2,6,14,0.85)]">
       <h2 className="text-[1.375rem] leading-snug">Go back to this version?</h2>
       <p className="mt-2.5 text-[15px] leading-relaxed text-ix-muted">
-        Guests will see it straight away. Your Space link and connected Touch Points stay the same, and your current
+        Guests will see it straight away. Your Space link and connected Access Points stay the same, and your current
         version stays in the history.
       </p>
       <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
@@ -584,7 +561,7 @@ const NAV = [
   { label: "Overview", icon: OverviewIcon },
   { label: "Hotels", icon: HotelIcon },
   { label: "Activity", icon: ActivityIcon },
-  { label: "Touch Points", icon: TouchIcon },
+  { label: "Codes", icon: AccessPointIcon },
   { label: "People", icon: PeopleIcon },
 ];
 const NAV2 = [
@@ -634,7 +611,7 @@ export function AppSidebar({ active = "Hotels" }: { active?: string }) {
   );
 }
 
-const TABS = ["Overview", "Spaces", "Touch Points", "Activity", "People"];
+const TABS = ["Overview", "Spaces", "Codes", "Activity", "People"];
 
 export function HotelTabs({ active, cur }: { active: string; cur?: string }) {
   return (

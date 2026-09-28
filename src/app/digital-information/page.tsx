@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MousePointerClick, QrCode, SquareCheckBig } from "lucide-react";
+import { MousePointerClick, SquareCheckBig, Smartphone } from "lucide-react";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { BtnGhost } from "@/components/ui";
 import DigitalInformationHero from "@/components/sections/DigitalInformationHero";
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 const FLOW = [
   {
     n: "01",
-    icon: QrCode,
-    title: "Scan",
-    desc: "Open it from a Touch Point with the camera. No app to find or install first.",
+    icon: Smartphone,
+    title: "Open",
+    desc: "Open it from an Access Point with their own phone. No app to find or install first.",
   },
   {
     n: "02",

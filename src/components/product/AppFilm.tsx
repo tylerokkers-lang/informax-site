@@ -27,7 +27,7 @@ import PhoneFilm from "./PhoneFilm";
 /**
  * The main Informax Cloud film, built from recreated app UI (not a screen
  * recording). Story: Hotel workspace, Spaces, Spa, Change Content, Use a
- * website, Publish, then the Space and its Touch Points staying
+ * website, Publish, then the Space and its Access Points staying
  * exactly as they were, Activity and Previous Versions.
  */
 
@@ -127,7 +127,7 @@ function DesktopFilm({ captions }: { captions: "dark" | "light" }) {
     [scale],
   );
 
-  // Reduced motion: a static frame that shows the Touch Points and the changed content together.
+  // Reduced motion: a static frame that shows the Access Points and the changed content together.
   useEffect(() => {
     if (!reduce) return;
     const box = scrollRef.current;
@@ -166,7 +166,7 @@ function DesktopFilm({ captions }: { captions: "dark" | "light" }) {
   const previous = published ? SPA_PREVIOUS : SPA_PREVIOUS.slice(1);
 
   return (
-    <div ref={wrap} role="img" aria-label="Animated recreation of Informax Cloud: opening the Spa Space, choosing Change Content, switching from a PDF to a website and publishing, while the permanent Space link and the twelve connected Touch Points stay exactly the same.">
+    <div ref={wrap} role="img" aria-label="Animated recreation of Informax Cloud: opening the Spa Space, choosing Change Content, switching from a PDF to a website and publishing, while the permanent Space link and the twelve connected Access Points stay exactly the same.">
       <div ref={fitRef} className="w-full">
         <div className="relative mx-auto" style={{ width: W * (scale ?? 1), height: H * (scale ?? 1) }}>
           <div
@@ -293,7 +293,7 @@ export function Captions({ published, tone }: { published: boolean; tone: "dark"
   const rows = [
     { label: "Current Content", from: SPA.pdf, to: SPA.web, badge: "Changed", changed: true },
     { label: "Space", from: SPA.name, to: SPA.name, badge: "Unchanged", changed: false },
-    { label: "Touch Points", from: `${SPA.touchPoints} deployed`, to: `${SPA.touchPoints} updated`, badge: "Still in place", changed: false },
+    { label: "Access Points", from: `${SPA.touchPoints} deployed`, to: `${SPA.touchPoints} updated`, badge: "Still in place", changed: false },
   ];
   return (
     <ul className="mx-auto mt-6 grid max-w-[1080px] gap-3 sm:grid-cols-3" aria-label="What changed and what did not">

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
-const DEFAULT_TITLE = "Informax Cloud | Connected Spaces and Touch Points for Hotels";
+const DEFAULT_TITLE = "Informax | Hotel Information Management with Informax Cloud";
 const DEFAULT_DESCRIPTION =
-  "Informax Cloud gives every part of your hotel a permanent digital Space. Connect Touch Points throughout the property and change what guests see from anywhere.";
+  "Informax Cloud gives every hotel room and area its own Access Point, so hotels control the guest information behind it, schedule temporary content and manage it all from one place.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -16,12 +16,15 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_DESCRIPTION,
   authors: [{ name: "Informax" }],
+  applicationName: "Informax",
   openGraph: {
     type: "website",
-    url: SITE_URL,
+    // No site-wide url: each page is shared under its own address.
     siteName: "Informax",
+    locale: "en_GB",
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
+    // The image comes from app/opengraph-image.jpg (and per-route files).
   },
   twitter: {
     card: "summary_large_image",
@@ -37,7 +40,9 @@ const organizationLd = {
   url: SITE_URL,
   email: CONTACT_EMAIL,
   description:
-    "Informax builds Informax Cloud, a hospitality content platform that connects digital information with physical locations throughout a hotel.",
+    "Informax builds Informax Cloud, hotel information management that gives every room and area its own Access Point and controls the guest information behind it.",
+  logo: `${SITE_URL}/icon.png`,
+  sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
 };
 
 export default function RootLayout({

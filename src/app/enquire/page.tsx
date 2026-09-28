@@ -6,14 +6,14 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Talk to Informax",
   description:
-    "Talk to Informax about Informax Cloud, digital guest directories and Touch Points for your hotel, or arrange a demonstration.",
+    "Talk to Informax about Informax Cloud, digital guest directories and Access Points for your hotel, or arrange a demonstration.",
   alternates: { canonical: "/enquire" },
 };
 
 const NEXT = [
   { n: "01", title: "A conversation", body: "We learn how your property runs and what guests ask for most." },
   { n: "02", title: "A demonstration", body: "We show you Informax Cloud with Spaces shaped around your hotel." },
-  { n: "03", title: "A clear proposal", body: "Scoped to the Spaces and Touch Points you actually need." },
+  { n: "03", title: "A clear proposal", body: "Scoped to the Spaces and Access Points you actually need." },
 ];
 
 export default function EnquirePage() {

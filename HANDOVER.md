@@ -11,6 +11,36 @@ live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
+## 0b. Access Point positioning (28 September 2026)
+
+- **Terminology (public site):** the physical object is the **Access Point**;
+  the machine-readable identity inside it is its **Code** (connected to a
+  Room, Area or Space). Never QR Code, Scan Code, NFC, Touch Point, Informax
+  Touch or Informax Scan in marketing copy. Cloud management demos say
+  **Codes** (list, "New Code", tabs, "Codes vs Direct"). Touch is kept in the
+  code (`kind: "touch" | "scan"`, `TouchPoint` renders an Access Point) for a
+  future Touch-enabled Access Point. Legal pages still say "NFC-enabled"
+  on purpose, pending legal review.
+- **Model:** Hotel → Spaces (shared: Spa, Restaurants, Gym, Meetings &
+  Events, Guest Information) → Rooms & Areas (precise control) → Access
+  Points / Codes → guest content. Every hotel has a **Default Landing Page**
+  that rooms return to after temporary content ends.
+- **Homepage (12 sections):** hero, one platform, the Access Point + Code,
+  Spaces, Rooms & Areas, temporary content, Access Point design, hotel-wide
+  control, analytics, audit, fits around your hotel, closing CTA. Components
+  in `src/components/access/`.
+- **Product maturity:** the site presents product direction (Rooms & Areas,
+  temporary content, bulk updates, Code colourways, audit) ahead of the live
+  app; unreleased workflows use "designed for / built for" wording. Keep it
+  that way until they ship. Drawn Codes are illustrative and captioned as
+  such; the centre mark is always Informax's.
+- **Sharing:** `src/app/opengraph-image.jpg` / `twitter-image.jpg` (and the
+  same under `informax-cloud/`), generated from the hero stills and official
+  logos. No site-wide `og:url`.
+- **Social links:** `SOCIAL_LINKS` in `src/lib/constants.ts` is empty until
+  the owner supplies the official LinkedIn and Instagram addresses; the
+  footer shows inactive icons until then. Never guess them.
+
 ## 0a. Design system and homepage story (27 September 2026) — live
 
 - **Live:** commit `bb6184d` (fast-forward from `1c4438b`), production

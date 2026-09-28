@@ -4,7 +4,7 @@ const GROUPS = [
   {
     title: "For your guests",
     items: [
-      "Nothing to download. A tap or a scan opens it.",
+      "Nothing to download. Their own phone opens it.",
       "Always the current version, never last season’s.",
       "The right information at the moment they need it.",
     ],
@@ -12,7 +12,7 @@ const GROUPS = [
   {
     title: "For your Hotel",
     items: [
-      "Update once. Every Touch Point follows.",
+      "Update once. Every Access Point follows.",
       "No reprinting, and nothing installed to replace.",
       "Your team stays in control of what guests see.",
     ],

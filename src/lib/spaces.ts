@@ -14,7 +14,7 @@ export interface Space {
   icon: LucideIcon;
   /** What guests find when they open this Space. */
   holds: string[];
-  /** Demo only: how many Touch Points connect to this Space. */
+  /** Demo only: how many Access Points connect to this Space. */
   touchPoints: number;
   pdf: string;
   site: string;

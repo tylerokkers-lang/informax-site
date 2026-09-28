@@ -10,23 +10,23 @@ import { ChangeContentFilm, PermanentUrlFilm } from "@/components/product/MicroF
 import CloudCta from "@/components/cloud/CloudCta";
 
 export const metadata: Metadata = {
-  title: "How Informax Works: Spaces, Touch Points and Informax Cloud",
+  title: "How Informax Works: Spaces, Access Points and Informax Cloud",
   description:
-    "Create a Space, connect Touch Points around your hotel and change what guests see any time from Informax Cloud. The physical Touch Point stays exactly where it is.",
+    "Create a Space, connect Access Points around your hotel and change what guests see any time from Informax Cloud. The physical Access Point stays exactly where it is.",
   alternates: { canonical: "/how-it-works" },
 };
 
 const FAQ = [
   {
     q: "Do guests need to download anything?",
-    a: "No. A guest touches or scans a Touch Point and the Space opens straight away on their phone.",
+    a: "No. A guest uses an Access Point with their own phone and the Space opens straight away.",
   },
   {
-    q: "What happens to the Touch Points when we change our content?",
-    a: "Nothing. Touch Points connect to a Space, and the Space owns the content. You change the Space in Informax Cloud and every connected Touch Point follows.",
+    q: "What happens to the Access Points when we change our content?",
+    a: "Nothing. Access Points connect to a Space, and the Space owns the content. You change the Space in Informax Cloud and every connected Access Point follows.",
   },
   {
-    q: "Can one Space have many Touch Points?",
+    q: "Can one Space have many Access Points?",
     a: "Yes. A Guest Directory Space can be connected to every bedroom. The hotel looks after one piece of content, and every room shows it.",
   },
   {
@@ -35,7 +35,7 @@ const FAQ = [
   },
   {
     q: "Can we go back to something we published earlier?",
-    a: "Yes. Informax Cloud keeps your version history, so an earlier version can be restored without changing the Space or any Touch Point.",
+    a: "Yes. Informax Cloud keeps your version history, so an earlier version can be restored without changing the Space or any Access Point.",
   },
   {
     q: "Where can our team make changes?",
@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
         eyebrow="How it works"
         image="/images/earth-horizon.jpg"
         title={<>Installed once.<br /><span className="text-cream-mute">Changed whenever.</span></>}
-        lede="Create a Space, connect Touch Points and update what guests see from Informax Cloud. The physical Touch Point stays in place."
+        lede="Create a Space, connect Access Points and update what guests see from Informax Cloud. The physical Access Point stays in place."
         primary={{ label: "Talk to Informax", href: "/enquire" }}
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
       />
@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
           <Reveal blur>
             <Kicker dark>An example</Kicker>
             <Display dark>
-              One Touch Point in the Spa. <Soft dark>Three different months.</Soft>
+              One Access Point in the Spa. <Soft dark>Three different months.</Soft>
             </Display>
           </Reveal>
         </Head>

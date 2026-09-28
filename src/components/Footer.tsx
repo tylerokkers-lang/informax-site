@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CONTACT_EMAIL,
+  SOCIAL_LINKS,
   FOOTER_COMPANY_LINKS,
   FOOTER_LEGAL_LINKS,
   FOOTER_ALSO_LINKS,
@@ -29,9 +30,13 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex gap-2.5">
               <a
-                href="#"
+                href={SOCIAL_LINKS.linkedin || undefined}
+                target={SOCIAL_LINKS.linkedin ? "_blank" : undefined}
+                rel={SOCIAL_LINKS.linkedin ? "noopener noreferrer" : undefined}
                 aria-label="Informax on LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark transition-all duration-300 hover:border-brass-light hover:text-brass-light hover:-translate-y-0.5"
+                aria-disabled={SOCIAL_LINKS.linkedin ? undefined : true}
+                title={SOCIAL_LINKS.linkedin ? undefined : "LinkedIn profile to be added"}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light aria-disabled:opacity-40 aria-disabled:hover:border-line-dark aria-disabled:hover:text-cream-mute/80"
               >
                 <svg
                   width="15"
@@ -50,9 +55,13 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href={SOCIAL_LINKS.instagram || undefined}
+                target={SOCIAL_LINKS.instagram ? "_blank" : undefined}
+                rel={SOCIAL_LINKS.instagram ? "noopener noreferrer" : undefined}
                 aria-label="Informax on Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark transition-all duration-300 hover:border-brass-light hover:text-brass-light hover:-translate-y-0.5"
+                aria-disabled={SOCIAL_LINKS.instagram ? undefined : true}
+                title={SOCIAL_LINKS.instagram ? undefined : "Instagram profile to be added"}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light aria-disabled:opacity-40 aria-disabled:hover:border-line-dark aria-disabled:hover:text-cream-mute/80"
               >
                 <svg
                   width="15"

@@ -5,7 +5,7 @@ import { RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 const PRINCIPLES = [
   {
     title: "Physical where it helps.",
-    body: "Touch Points are made to sit naturally in a Hotel and stay in place for years.",
+    body: "Access Points are made to sit naturally in a Hotel and stay in place for years.",
   },
   {
     title: "Digital where it changes.",

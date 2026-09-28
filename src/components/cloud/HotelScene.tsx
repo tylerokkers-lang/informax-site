@@ -10,7 +10,7 @@ const W = 155;
 const H = 125;
 const COLS = 4;
 
-// row (0 = top floor), col, label, warmth of the lit room, has Touch Point
+// row (0 = top floor), col, label, warmth of the lit room, has Access Point
 const CELLS: [number, number, string, number, boolean][] = [
   [0, 0, "Meetings & Events", 0.9, true],
   [0, 1, "Executive Lounge", 1, true],
@@ -32,7 +32,7 @@ const colX = (c: number) => X0 + W * c + W / 2;
 /**
  * Illustrative hotel section. Warm rooms are the physical property; the
  * indigo arc above is Informax Cloud; each column carries a fine riser of
- * light connecting every Touch Point in it to the Cloud.
+ * light connecting every Access Point in it to the Cloud.
  */
 export default function HotelScene({ className = "" }: { className?: string }) {
   const reduce = useReducedMotion();
@@ -43,7 +43,7 @@ export default function HotelScene({ className = "" }: { className?: string }) {
       viewBox="0 0 800 600"
       className={className}
       role="img"
-      aria-label="A hotel with Touch Points in the spa, restaurants, gym, meeting rooms and bedrooms, all connected to Informax Cloud"
+      aria-label="A hotel with Access Points in the spa, restaurants, gym, meeting rooms and bedrooms, all connected to Informax Cloud"
       preserveAspectRatio="xMidYMid meet"
     >
       <defs>

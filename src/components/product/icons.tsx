@@ -35,6 +35,13 @@ export const TouchIcon = (p: P) => (
     <path d="M5.3 5.3a9.4 9.4 0 0 0 0 13.4M18.7 5.3a9.4 9.4 0 0 1 0 13.4" opacity=".55" />
   </Icon>
 );
+/** The Informax Access Point: a plate with its code. The public face for Touch and Scan alike. */
+export const AccessPointIcon = (p: P) => (
+  <Icon {...p}>
+    <rect x="5" y="3" width="14" height="18" rx="3.5" />
+    <rect x="9" y="8.5" width="6" height="6" rx="1" />
+  </Icon>
+);
 export const ScanIcon = (p: P) => (
   <Icon {...p}>
     <path d="M4 8V6.5A2.5 2.5 0 0 1 6.5 4H8M16 4h1.5A2.5 2.5 0 0 1 20 6.5V8M20 16v1.5a2.5 2.5 0 0 1-2.5 2.5H16M8 20H6.5A2.5 2.5 0 0 1 4 17.5V16" />

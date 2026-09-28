@@ -57,7 +57,7 @@ export function PermanentUrlFilm({ tone = "light", caption = "One permanent conn
   const website = reduce ? true : stage === 1;
 
   return (
-    <div ref={ref} role="img" aria-label={`The Spa Space keeps its ${SPA.touchPoints} Touch Points while its content changes from ${SPA.pdf} to the ${SPA.web}.`}>
+    <div ref={ref} role="img" aria-label={`The Spa Space keeps its ${SPA.touchPoints} Access Points while its content changes from ${SPA.pdf} to the ${SPA.web}.`}>
       <Mini>
         <div className="mb-5 flex items-center justify-between">
           <h3 className="text-[1.375rem] leading-snug">{SPA.name}</h3>
@@ -92,7 +92,7 @@ export function ChangeContentFilm({ tone = "light" }: { tone?: "dark" | "light" 
   const address = reduce || s >= 4 ? SPA.web : typed;
 
   return (
-    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, choose a page on your website and publish. The Space and its connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Change Content: choose Upload a PDF or Use a website, choose a page on your website and publish. The Space and its connected Access Points stay the same.">
       <Mini>
         <ChangePanel
           s={{
@@ -110,7 +110,7 @@ export function ChangeContentFilm({ tone = "light" }: { tone?: "dark" | "light" 
   );
 }
 
-/* ------------------------- 4 + 5. Informax Touch / Scan ---------------------- */
+/* ---------- 4 + 5. Touch / Scan (kept for a future Touch-enabled Access Point) --------- */
 
 function PhoneScreen({ open }: { open: boolean }) {
   return (
@@ -221,8 +221,7 @@ export function TouchScanFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
 /* ------------------------------- 6. Activity -------------------------------- */
 
 const ARRIVE = [
-  { label: "Informax Touch", value: SPA_ACTIVITY.touch, colour: "#3aa6ee" },
-  { label: "Informax Scan", value: SPA_ACTIVITY.scan, colour: "#dbe7f6" },
+  { label: "Codes", value: SPA_ACTIVITY.touch + SPA_ACTIVITY.scan, colour: "#3aa6ee" },
   { label: "Direct", value: SPA_ACTIVITY.direct, colour: "#7a849c" },
 ];
 
@@ -239,7 +238,7 @@ export function ActivityFilm({ tone = "light" }: { tone?: "dark" | "light" }) {
   const grown = reduce || seen;
 
   return (
-    <div ref={ref} role="img" aria-label="Space Activity: 1,248 interactions this month. Informax Touch 823, Informax Scan 361, Direct 64.">
+    <div ref={ref} role="img" aria-label="Space Activity: 1,248 interactions this month. Through Codes 1,184, Direct 64.">
       <Mini>
         <p className="ixp-label mb-2">{SPA.name}</p>
         <h3 className="mb-6 text-[1.75rem] leading-[1.1]">Activity</h3>
@@ -251,7 +250,7 @@ export function ActivityFilm({ tone = "light" }: { tone?: "dark" | "light" }) {
           direct={reduce ? fmt(SPA_ACTIVITY.direct) : fmt(direct)}
         />
         <section className="mt-8">
-          <h3 className="mb-3 text-[1.0625rem] font-medium tracking-normal">Touch Points</h3>
+          <h3 className="mb-3 text-[1.0625rem] font-medium tracking-normal">Codes</h3>
           <ul className="divide-y divide-white/[0.06]">
             {TOP_TOUCH_POINTS.map((tp) => {
               const top = TOP_TOUCH_POINTS[0].interactions;
@@ -318,7 +317,7 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const after: VersionRowData[] = [{ kind: "website", headline: SPA.web, published: "25 Sept 2026, 10:41" }, SPA_PREVIOUS[1]];
 
   return (
-    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space and its connected Touch Points stay the same.">
+    <div ref={ref} role="img" aria-label="Previous Versions: go back to Spa Treatments.pdf. The Space and its connected Access Points stay the same.">
       <Mini className="relative overflow-hidden">
         <SpaceConnection compact note={null} touchPoints={SPA.touchPoints} ring={restored && !reduce} />
         <div className="mt-5">
@@ -337,7 +336,7 @@ export function VersionsFilm({ tone = "dark" }: { tone?: "dark" | "light" }) {
           </div>
         )}
       </Mini>
-      <Caption tone={tone}>Restore an earlier version in one step. The Space and its Touch Points never change.</Caption>
+      <Caption tone={tone}>Restore an earlier version in one step. The Space and its Access Points never change.</Caption>
     </div>
   );
 }

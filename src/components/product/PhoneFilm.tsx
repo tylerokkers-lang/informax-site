@@ -22,7 +22,7 @@ import { DIRECTORY, HOTEL, SPA, SPA_PREVIOUS, type VersionRowData } from "./data
  * real wording, never scaled. Two stories:
  *   spa        Spa Treatments.pdf → Use a website → Spa booking page
  *   directory  GuestDirectory.pdf → Upload a PDF → GuestDirectory-Winter.pdf
- * The count beside the phone ("12 / 400 Touch Points updated") is a
+ * The count beside the phone ("12 / 400 Access Points updated") is a
  * marketing annotation outside the app frame.
  */
 
@@ -183,8 +183,8 @@ export default function PhoneFilm({
         role="img"
         aria-label={
           isPdf
-            ? `Animated recreation of Informax Cloud on a phone: the Guest Directory Space gets a new PDF and all ${count} connected Touch Points show it.`
-            : `Animated recreation of Informax Cloud on a phone: the Spa Space switches from a PDF to ${SPA.web} and all ${count} connected Touch Points follow.`
+            ? `Animated recreation of Informax Cloud on a phone: the Guest Directory Space gets a new PDF and all ${count} connected Access Points show it.`
+            : `Animated recreation of Informax Cloud on a phone: the Spa Space switches from a PDF to ${SPA.web} and all ${count} connected Access Points follow.`
         }
         className="w-full min-w-0 max-w-[406px] shrink-0"
       >
@@ -317,7 +317,7 @@ function TouchPointsUpdated({ on, count, tone }: { on: boolean; count: number; t
       >
         {on && <Check size={24} className={`mt-1.5 shrink-0 ${dark ? "text-ix-pos" : "text-emerald-600"}`} />}
         <span>
-          {count} Touch Points {on ? "updated" : "deployed"}
+          {count} Access Points {on ? "updated" : "deployed"}
         </span>
       </div>
       <div className={`mt-5 grid gap-1.5 ${tiles > 20 ? "grid-cols-8" : "grid-cols-6"}`} aria-hidden>
@@ -330,7 +330,7 @@ function TouchPointsUpdated({ on, count, tone }: { on: boolean; count: number; t
         ))}
       </div>
       <p className={`mt-4 text-[13px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>
-        Same Space. Same Touch Points. Nothing was reprinted or reinstalled.
+        Same Space. Same Access Points. Nothing was reprinted or reinstalled.
       </p>
     </div>
   );

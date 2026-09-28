@@ -5,6 +5,17 @@ export const PRIMARY_CTA = "Talk to Informax";
 
 export const CLOUD_LOGIN_URL = "https://informax.cloud/login";
 
+/**
+ * Official Informax social profiles. OWNER TO SUPPLY: paste the full profile
+ * addresses here. Until then the footer shows the icons as inactive
+ * placeholders (never a guessed or dead link), and they are left out of the
+ * organisation's structured data.
+ */
+export const SOCIAL_LINKS = {
+  linkedin: "",
+  instagram: "",
+} as const;
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Informax Cloud", href: "/informax-cloud" },

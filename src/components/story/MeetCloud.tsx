@@ -16,7 +16,21 @@ const POSTER = "/video/meet-cloud-poster.jpg";
  * /informax-cloud. The film only starts loading when it is about to be
  * seen, and only plays while on screen.
  */
-export default function MeetCloud() {
+export default function MeetCloud({
+  eyebrow = "Meet Informax Cloud",
+  headline = "One place to control what your guests see.",
+  body = "Informax Cloud is where your Hotel manages the information behind every Informax Access Point. Update it once, from anywhere, and every guest sees the current version.",
+  primary = { label: "Discover Informax Cloud", href: "/informax-cloud" },
+  secondary = { label: "Talk to Informax", href: "/enquire" },
+  id = "informax-cloud",
+}: {
+  eyebrow?: string;
+  headline?: string;
+  body?: string;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string } | null;
+  id?: string;
+} = {}) {
   const band = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const visible = useInView(band, { amount: 0.1 });
@@ -49,7 +63,7 @@ export default function MeetCloud() {
   }, [visible, load]);
 
   return (
-    <section id="informax-cloud" className="relative scroll-mt-20 bg-charcoal-950 text-cream">
+    <section id={id} className="relative scroll-mt-20 bg-charcoal-950 text-cream">
       <div ref={band} className="relative flex min-h-[92svh] items-end overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={POSTER} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
@@ -73,22 +87,23 @@ export default function MeetCloud() {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.55)_0%,rgba(6,10,18,0.35)_38%,rgba(6,10,18,0.92)_100%)]" />
         <div className="relative mx-auto w-full max-w-8xl px-6 pb-20 pt-40 md:px-10 md:pb-28">
           <Reveal blur>
-            <p className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]">Meet Informax Cloud</p>
+            <p className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]">{eyebrow}</p>
             <h2 className="max-w-[16ch] font-serif-display text-[clamp(40px,7vw,92px)] leading-[1.02] text-white">
-              One place to control what your guests see.
+              {headline}
             </h2>
             <p className="mt-7 max-w-[44ch] text-pretty text-[17px] leading-[1.6] text-white/75 md:text-[20px]">
-              Informax Cloud is where your Hotel manages the information behind every Informax Touch Point.
-              Update it once, from anywhere, and every guest sees the current version.
+              {body}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-              <Link href="/informax-cloud" className="ix-btn ix-btn-primary group">
-                Discover Informax Cloud
+              <Link href={primary.href} className="ix-btn ix-btn-primary group">
+                {primary.label}
                 <ArrowRight size={17} className="transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
-              <Link href="/enquire" className="ix-link text-white/70 hover:text-white">
-                Talk to Informax
-              </Link>
+              {secondary && (
+                <Link href={secondary.href} className="ix-link text-white/70 hover:text-white">
+                  {secondary.label}
+                </Link>
+              )}
             </div>
           </Reveal>
         </div>

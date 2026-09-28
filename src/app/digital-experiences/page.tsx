@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const BENEFITS = [
-  { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, one touch or scan away." },
+  { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, from the Access Point in their room." },
   { title: "Fewer repeat questions", body: "Reception spends less time answering what the directory already explains." },
   { title: "Always current", body: "Change it once in Informax Cloud and every room shows the new version." },
   { title: "Unmistakably yours", body: "Designed around your brand, your tone and your property. No templates." },
@@ -34,7 +34,7 @@ const CREATE = [
 
 const STEPS = [
   { n: "01", title: "We design it", body: "Around your brand, your guests and the way your property runs." },
-  { n: "02", title: "We connect it", body: "Each experience becomes a Space in Informax Cloud, with Touch Points where guests need them." },
+  { n: "02", title: "We connect it", body: "Each experience becomes a Space in Informax Cloud, with Access Points where guests need them." },
   { n: "03", title: "It stays current", body: "Update it whenever something changes. Nothing is reprinted or replaced." },
 ];
 
@@ -96,7 +96,7 @@ export default function DigitalExperiencesPage() {
               the way a guest actually looks for things.
             </Lede>
             <ul className="mt-10 max-w-md">
-              {["Designed to match your brand", "Opens with Informax Touch or Informax Scan", "Connected to every room from one Space"].map((l) => (
+              {["Designed to match your brand", "Opens from any Informax Access Point", "Connected to every room from one Space"].map((l) => (
                 <li key={l} className="border-t border-line py-4 text-[15.5px] text-ink">
                   {l}
                 </li>

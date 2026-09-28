@@ -10,7 +10,7 @@ const STEPS = [
   },
   {
     n: "02",
-    title: "Connect Touch Points",
+    title: "Connect Access Points",
     body: "Place Informax throughout your Hotel.",
   },
   {
@@ -71,7 +71,7 @@ export default function HowSteps({ dark = false }: { dark?: boolean }) {
         ))}
       </RevealStagger>
       <p className={`mt-10 max-w-[52ch] font-serif-display text-[clamp(20px,2.2vw,26px)] leading-snug ${dark ? "text-white" : "text-ink"}`}>
-        The physical Touch Point stays in place.{" "}
+        The physical Access Point stays in place.{" "}
         <span className={dark ? "text-cream-mute" : "text-ink-mute"}>
           The experience behind it can change whenever you want.
         </span>

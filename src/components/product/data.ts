@@ -68,7 +68,7 @@ export const SPA_TOUCH_POINTS: TouchPointRowData[] = [
 
 export const SPA_ACTIVITY = { interactions: 1248, touch: 823, scan: 361, direct: 64 } as const;
 
-/** Most-used Touch Point locations across the hotel, for the Activity snippet. */
+/** Most-used Access Point locations across the hotel, for the Activity snippet. */
 export const TOP_TOUCH_POINTS: TouchPointRowData[] = [
   { location: "Guest Rooms", source: "scan", interactions: 642 },
   { location: "Spa Reception", source: "touch", interactions: 218 },
