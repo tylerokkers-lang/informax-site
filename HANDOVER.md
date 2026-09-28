@@ -65,8 +65,10 @@ historical where they conflict).
   the product point is "one permanent connection", not an address.
 - **Touch Point accent is platinum** (`--glow` #dfe3ea / `--glow-deep`
   #9aa3b2) — deliberately not blue (Cloud) or gold. One token to change.
-- **Nav order:** Home, Informax Cloud, Digital Experiences, How It Works,
-  About, Talk to Informax (footer follows the same order).
+- **Nav order:** Home, Informax Cloud, Digital Experiences, About, Talk to
+  Informax (footer follows the same order). The How It Works page was
+  removed on 28 September 2026 and `/how-it-works` 308-redirects to
+  `/informax-cloud`.
 - **Homepage story (no product demos):** hero → why information matters →
   the problem → how Informax works → throughout the Hotel (environments) →
   benefits → our approach → **Meet Informax Cloud** (final section, existing
@@ -584,7 +586,7 @@ resend.com/emails for individual send/delivery status.
 |---|---|
 | `/` | Home: Informax Cloud narrative (hero, what it is, Spaces, how it works, Touch Point stays, live Cloud demo, Touch Points, 400-room update, PDF or website, Activity, Guest Directory, CTA) |
 | `/informax-cloud` | Product page: Spaces, permanent address, content, demo, scale, the three-rule model, Activity, version history, remote management |
-| `/how-it-works` | Three-stage story, worked Spa example, demo, FAQ |
+| `/how-it-works` | **Removed 28 September 2026**; 308 → `/informax-cloud` |
 | `/hospitality` | Hotel problems mapped to Informax answers, per-department Spaces, founder credibility |
 | `/touch-points` | The physical product, Touch and Scan, placements, one Space many Touch Points |
 | `/about` | Founder story (copy supplied by the user, keep as is) |

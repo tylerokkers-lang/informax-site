@@ -47,7 +47,7 @@ export default function Home() {
       />
 
       {/* 2. The whole idea */}
-      <Section id="how-it-works">
+      <Section id="one-platform">
         <Head>
           <Reveal blur>
             <Kicker>How it works</Kicker>

@@ -63,12 +63,12 @@ export default function InformaxCloudPage() {
         description="One place to control what guests see across every Space in your Hotel."
         primaryLabel="Talk to Informax"
         primaryHref="/enquire"
-        secondaryLabel="See how it works"
-        secondaryHref="/how-it-works"
+        secondaryLabel="See the product"
+        secondaryHref="#product"
       />
 
       {/* What it controls */}
-      <Section>
+      <Section id="product">
         <Head>
           <Reveal blur>
             <Kicker>What Informax Cloud controls</Kicker>

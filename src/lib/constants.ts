@@ -20,7 +20,6 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "Digital Experiences", href: "/digital-experiences" },
-  { label: "How It Works", href: "/how-it-works" },
   { label: "About", href: "/about" },
   { label: "Talk to Informax", href: "/enquire" },
 ] as const;
@@ -28,7 +27,6 @@ export const NAV_LINKS = [
 export const FOOTER_PRODUCT_LINKS = [
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "Digital Experiences", href: "/digital-experiences" },
-  { label: "How It Works", href: "/how-it-works" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [
