@@ -9,7 +9,7 @@ const SECTIONS = [
   { icon: Sparkles, title: "Spa & Wellness", note: "Book a treatment" },
   { icon: BedDouble, title: "Your Room", note: "Housekeeping and in-room dining" },
   { icon: ConciergeBell, title: "Guest Services", note: "Boat transfers, laundry, requests" },
-  { icon: Compass, title: "Explore Lake Como", note: "Bellagio, Varenna, Villa del Balbianello" },
+  { icon: Compass, title: "Explore the area", note: "Bellagio, Varenna, Villa del Balbianello" },
 ];
 
 /**
@@ -33,7 +33,7 @@ export default function DirectoryShowcase({ tone = "light" }: { tone?: "light" |
     <div
       ref={ref}
       role="img"
-      aria-label="A Maison Aurelia digital guest directory on a phone: Dining, Spa and Wellness, Your Room, Guest Services and Explore Lake Como."
+      aria-label="A Marlowe Grand digital guest directory on a phone: Dining, Spa and Wellness, Your Room, Guest Services and Explore the area."
       className="mx-auto w-full max-w-[340px]"
     >
       <div
@@ -47,7 +47,7 @@ export default function DirectoryShowcase({ tone = "light" }: { tone?: "light" |
               <path d="M0 150 C60 120 110 132 170 118 C230 104 280 126 340 112 L340 210 L0 210 Z" fill="#2e3b46" opacity="0.55" />
               <path d="M0 168 C80 150 150 164 220 152 C270 144 310 156 340 150 L340 210 L0 210 Z" fill="#1d2731" opacity="0.7" />
             </svg>
-            <div className="absolute left-5 top-7 text-[9px] font-semibold uppercase tracking-[0.26em] text-white/85">Maison Aurelia</div>
+            <div className="absolute left-5 top-7 text-[9px] font-semibold uppercase tracking-[0.26em] text-white/85">Marlowe Grand</div>
             <div className="absolute bottom-5 left-5 right-5 text-white">
               <div className="font-serif-display text-[26px] leading-tight">Buonasera, Sofia.</div>
               <div className="mt-1 flex items-center gap-3 text-[11px] text-white/80">

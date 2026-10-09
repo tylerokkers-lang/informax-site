@@ -6,10 +6,43 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 26 September 2026 (Cloud entrance logo + hero playback fix
+Last updated: 10 October 2026 (QR / Space / live content repositioning on branch `website/qr-cloud-repositioning`, see §0b; earlier: 26 September 2026 (Cloud entrance logo + hero playback fix
 live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
+
+## 0b. QR Code to Space to Live Content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, NOT yet merged or live
+
+**This supersedes the "Touch Point / never say QR code" rules in §0 and §0a.**
+The site now matches the real Informax Cloud (informax-cloud-v2): *QR code →
+Space → live content*. Headline: "The QR code stays. Everything behind it can
+change." Use "QR code" freely; product screenshots keep the app's own words
+(Codes, Spaces). Never say NFC, proprietary hardware, Touch Point, Meetings &
+Events, analytics or scan tracking (none are shipped). Legal pages still say
+"NFC-enabled tags" (contract wording, left for legal review).
+
+- **Pages:** `/` (home story), `/informax-cloud` (real product), `/hotels`,
+  `/restaurants` (new), `/how-it-works`, `/digital-experiences` (optional
+  designed content), `/enquire`. Nav: Home, Informax Cloud, Hotels,
+  Restaurants, How It Works, About, Enquire. `PRIMARY_CTA` is "Enquire".
+- **Real screenshots:** `public/product/screens/*.webp`, indexed in
+  `src/lib/screens.ts` (generated; sizes). Captured from informax-cloud-v2
+  `/dev/preview/*` (the real views, fixture data) with Playwright. Names and
+  emails are rewritten at capture time (Marlowe Grand, Copper Table), the
+  QR codes are swapped for the site's own illustrative code, web addresses are
+  hidden, the Next dev badge is removed. Guest PDFs are demo documents made for
+  this purpose. To refresh: run informax-cloud-v2 on a spare port, re-capture,
+  **rename changed files** (media is cached), regenerate `screens.ts`.
+  The Platform (Super Admin) screen was captured but NOT used: its fixtures
+  show a suspended client and overdue payment.
+- **Components:** `src/components/real/` — `Shots` (AppShot, PhoneShot),
+  `SameCodeDemo` (auto-playing Room 324 / Table 7 demo built from the real
+  screens; pauses off screen, manual steps, reduced motion respected), `Flow`,
+  `TouchpointCard`. The old animated recreations (`components/product/*`,
+  Touch Point drawings, hotel scene, old story sections) and `lib/spaces.ts`
+  were deleted; use git history if ever needed.
+- Table 7 "normal service" admin frame uses the Restaurant Spaces screen because
+  the app has no Table 7 default-state preview scenario.
 
 ## 0a. Design system and homepage story (27 September 2026) — live
 

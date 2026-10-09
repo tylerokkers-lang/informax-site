@@ -24,8 +24,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
-              Informax Cloud connects the information guests need with the
-              places they are, throughout your hotel. Built in hospitality.
+              The platform for customisable QR codes. Manage what every room, table and Space opens with Informax Cloud.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a
@@ -101,6 +100,7 @@ export default function Footer() {
           </div>
         </div>
 
+        <p className="pt-6 text-[11px] text-cream-mute">QR Code is a registered trademark of DENSO WAVE INCORPORATED.</p>
         <div className="pt-7 flex flex-wrap items-center justify-between gap-3 text-[13px] text-cream-mute">
           <div>© {new Date().getFullYear()} Informax. All rights reserved.</div>
           <div className="flex gap-6">

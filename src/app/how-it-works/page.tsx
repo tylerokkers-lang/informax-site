@@ -4,43 +4,34 @@ import { Reveal } from "@/components/Reveal";
 import PageHero from "@/components/cloud/PageHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
-import HowSteps from "@/components/cloud/HowSteps";
-import TouchPointStays from "@/components/cloud/TouchPointStays";
-import { ChangeContentFilm, PermanentUrlFilm } from "@/components/product/MicroFilms";
 import CloudCta from "@/components/cloud/CloudCta";
+import SameCodeDemo from "@/components/real/SameCodeDemo";
+import { AppShot } from "@/components/real/Shots";
+import Flow from "@/components/real/Flow";
 
 export const metadata: Metadata = {
-  title: "How Informax Works: Spaces, Touch Points and Informax Cloud",
+  title: "How Informax Works: print once, update anytime",
   description:
-    "Create a Space, connect Touch Points around your hotel and change what guests see any time from Informax Cloud. The physical Touch Point stays exactly where it is.",
+    "Organise your business into Spaces, place a QR code in each one, and choose what it shows in Informax Cloud. Change it whenever you like. The printed code never changes.",
   alternates: { canonical: "/how-it-works" },
 };
 
+const STEPS = [
+  { n: "1", t: "Organise into Spaces", b: "Rooms, tables, the spa, the terrace. Spaces mirror the real places in your business." },
+  { n: "2", t: "Place the codes", b: "Print your own QR codes or use framed cards from Informax. Put them where people need them." },
+  { n: "3", t: "Choose what each Space shows", b: "A PDF or a website. Add temporary content with an end time when you need it." },
+  { n: "4", t: "Change it anytime", b: "Update in Informax Cloud. The next scan shows the new content. Nothing is reprinted." },
+];
+
 const FAQ = [
-  {
-    q: "Do guests need to download anything?",
-    a: "No. A guest touches or scans a Touch Point and the Space opens straight away on their phone.",
-  },
-  {
-    q: "What happens to the Touch Points when we change our content?",
-    a: "Nothing. Touch Points connect to a Space, and the Space owns the content. You change the Space in Informax Cloud and every connected Touch Point follows.",
-  },
-  {
-    q: "Can one Space have many Touch Points?",
-    a: "Yes. A Guest Directory Space can be connected to every bedroom. The hotel looks after one piece of content, and every room shows it.",
-  },
-  {
-    q: "Can we use a page from our existing website?",
-    a: "Yes. A Space can serve a PDF or a website, and you can switch between them whenever you like.",
-  },
-  {
-    q: "Can we go back to something we published earlier?",
-    a: "Yes. Informax Cloud keeps your version history, so an earlier version can be restored without changing the Space or any Touch Point.",
-  },
-  {
-    q: "Where can our team make changes?",
-    a: "From a phone, a tablet or a desktop, wherever your team happens to be.",
-  },
+  { q: "What happens when temporary content ends?", a: "Every piece of temporary content has an end time. When it passes, the Space returns to its usual content automatically." },
+  { q: "Do guests need to download anything?", a: "No. They open their phone camera and scan. There is no app and no account." },
+  { q: "Do we need special hardware?", a: "No. Any printed QR code works. You can print your own, or ask Informax about framed A5 cards." },
+  { q: "Do we need to reprint when information changes?", a: "No. The QR code stays in place. Change what its Space shows in Informax Cloud and the next scan opens the update." },
+  { q: "Can one Space have several QR codes?", a: "Yes. Every code assigned to a Space shows what that Space shows, now and in future." },
+  { q: "Can we use a page from our own website?", a: "Yes. A Space can show a PDF or a website, and you can switch between them whenever you like." },
+  { q: "Can we go back to something we published earlier?", a: "Yes. Previous versions are kept. Preview one or restore it, and the printed code is untouched." },
+  { q: "Who can make changes?", a: "Your team, from a phone, a tablet or a desktop. Each person has their own account and a role that decides what they can do." },
 ];
 
 export default function HowItWorksPage() {
@@ -49,44 +40,61 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How it works"
         image="/images/earth-horizon.jpg"
-        title={<>Installed once.<br /><span className="text-cream-mute">Changed whenever.</span></>}
-        lede="Create a Space, connect Touch Points and update what guests see from Informax Cloud. The physical Touch Point stays in place."
-        primary={{ label: "Talk to Informax", href: "/enquire" }}
+        title={<>Print once.<br /><span className="text-cream-mute">Update anytime.</span></>}
+        lede="The QR code stays where it is. What it shows is managed in Informax Cloud, one Space at a time."
+        primary={{ label: "Enquire", href: "/enquire" }}
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
       />
 
-      <Section tone="dark" className="!pt-0">
-        <HowSteps dark />
+      <Section>
+        <Head>
+          <Reveal blur>
+            <Kicker>Four steps</Kicker>
+            <Display>
+              Simple to set up. <Soft>Simple to keep current.</Soft>
+            </Display>
+          </Reveal>
+        </Head>
+        <Reveal><Flow className="mb-14" /></Reveal>
+        <div className="grid gap-10 border-t border-line pt-8 md:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.n} delay={i * 0.06}>
+              <div>
+                <span className="text-[14px] font-semibold text-brass-deep">Step {s.n}</span>
+                <h3 className="mt-2 text-xl font-semibold text-ink">{s.t}</h3>
+                <p className="mt-3 max-w-[30ch] leading-relaxed text-ink-mute">{s.b}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </Section>
 
-      <Section tone="dark" divider>
+      <Section tone="dark">
         <Head>
           <Reveal blur>
             <Kicker dark>An example</Kicker>
             <Display dark>
-              One Touch Point in the Spa. <Soft dark>Three different months.</Soft>
+              One QR code in Room 324. <Soft dark>Different information.</Soft>
             </Display>
           </Reveal>
         </Head>
-        <TouchPointStays />
+        <SameCodeDemo variant="room" />
       </Section>
 
       <Section tone="alt">
-        <Head>
+        <div className="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <Reveal blur>
             <Kicker>In Informax Cloud</Kicker>
             <Display>
               Choose. Change. <Soft>Publish.</Soft>
             </Display>
             <Lede className="mt-8">
-              Pick a Space, change what it serves and publish. It takes
-              seconds, and no one has to walk the property.
+              Open a Space, replace its content, use a website, or publish something temporary. Every code in that Space shows the update.
             </Lede>
           </Reveal>
-        </Head>
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
-          <ChangeContentFilm />
-          <PermanentUrlFilm />
+          <Reveal delay={0.1}>
+            <AppShot name="hotel-room-324" alt="A Space in Informax Cloud with Replace content, Use a website and Publish temporary content" crop={0.72} />
+          </Reveal>
         </div>
       </Section>
 
@@ -114,7 +122,7 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      <CloudCta />
+      <CloudCta lead="Bring your QR codes" line="to life." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
     </>
   );
 }
