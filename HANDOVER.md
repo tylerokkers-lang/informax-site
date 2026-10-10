@@ -44,6 +44,32 @@ Events, analytics or scan tracking (none are shipped). Legal pages still say
 - Table 7 "normal service" admin frame uses the Restaurant Spaces screen because
   the app has no Table 7 default-state preview scenario.
 
+### Analytics: PLANNED, not built (verified 10 October 2026)
+
+Checked in informax-cloud-v2 (branch `product/settings-and-navigation-polish`,
+HEAD `6217ca4`). **Live:** nothing. **In development:** nothing. **Planned
+(Stage 7 "Insights"):** an interaction recorder that stores the placement id and
+version id at scan time, outside the resolve path (ADR 0018 point 12), most
+viewed content/menus, scan counts. Evidence: no `/insights` route; no
+interaction/scan table in any migration; the public `/c/[code]` route only calls
+`resolve_public_code` and writes nothing; ADR 0018 says "No per-request
+analytics. None is recorded"; HANDOVER says "Do not start Stage 4 (... analytics
+recording)". Only placeholders exist: the `analytics.view` capability (seeded to
+admin, manager and the two support roles) and an "Insights" nav slot that no
+screen backs. V1 (`informax-analytics`) has analytics but is not the product.
+Unknown until built: who sees it, retention, any privacy limits.
+
+The site therefore carries Analytics sections labelled **"Coming soon"** with no
+dashboard, no figures and no screenshot (no `/dev/preview` scenario exists, and
+dashboards are not to be recreated for marketing): home (`#analytics`),
+`/informax-cloud`, `/hotels`, `/restaurants`, plus an honest FAQ answer. All copy
+is in `components/real/AnalyticsPanel.tsx`; the status switch is
+`src/lib/analytics-status.ts`. The owner should approve publishing a "coming
+soon" roadmap statement before merge; if not, remove the four
+`<AnalyticsPanel>` usages and the FAQ entry. Privacy wording says insights are
+about Codes and Spaces, not people, and that scans are counted, not reading time
+or sales. When analytics ships, follow the checklist in `analytics-status.ts`.
+
 ## 0a. Design system and homepage story (27 September 2026) — live
 
 - **Live:** commit `bb6184d` (fast-forward from `1c4438b`), production

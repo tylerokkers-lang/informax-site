@@ -7,6 +7,7 @@ import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import SameCodeDemo from "@/components/real/SameCodeDemo";
 import { AppShot, PhoneShot } from "@/components/real/Shots";
+import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
 import TouchpointCard from "@/components/real/TouchpointCard";
 
@@ -198,6 +199,11 @@ export default function Home() {
             </Lede>
           </Reveal>
         </div>
+      </Section>
+
+      {/* Analytics (planned: see lib/analytics-status.ts) */}
+      <Section tone="dark" id="analytics">
+        <AnalyticsPanel variant="home" dark />
       </Section>
 
       {/* Physical touchpoints */}

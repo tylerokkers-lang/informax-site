@@ -6,6 +6,7 @@ import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import SameCodeDemo from "@/components/real/SameCodeDemo";
 import { AppShot } from "@/components/real/Shots";
+import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import TouchpointCard from "@/components/real/TouchpointCard";
 
 export const metadata: Metadata = {
@@ -89,6 +90,10 @@ export default function HotelsPage() {
             <TouchpointCard />
           </Reveal>
         </div>
+      </Section>
+
+      <Section>
+        <AnalyticsPanel variant="hotel" />
       </Section>
 
       <CloudCta lead="Bring your hotel's QR codes" line="to life." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />

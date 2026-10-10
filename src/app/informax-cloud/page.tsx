@@ -6,6 +6,7 @@ import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import { AppShot, PhoneShot } from "@/components/real/Shots";
+import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
 
 export const metadata: Metadata = {
@@ -180,6 +181,11 @@ export default function InformaxCloudPage() {
             <AppShot name="hotel-code" alt="A single code in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
           </Reveal>
         </div>
+      </Section>
+
+      {/* Analytics (planned: see lib/analytics-status.ts) */}
+      <Section id="analytics">
+        <AnalyticsPanel variant="cloud" />
       </Section>
 
       {/* Guest experience */}

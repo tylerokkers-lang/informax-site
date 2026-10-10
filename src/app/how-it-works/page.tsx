@@ -31,6 +31,7 @@ const FAQ = [
   { q: "Can one Space have several QR codes?", a: "Yes. Every code assigned to a Space shows what that Space shows, now and in future." },
   { q: "Can we use a page from our own website?", a: "Yes. A Space can show a PDF or a website, and you can switch between them whenever you like." },
   { q: "Can we go back to something we published earlier?", a: "Yes. Previous versions are kept. Preview one or restore it, and the printed code is untouched." },
+  { q: "Can we see how often a code is scanned?", a: "Not yet. Analytics for Codes and Spaces is planned for Informax Cloud and is not available today. Ask us about timing." },
   { q: "Who can make changes?", a: "Your team, from a phone, a tablet or a desktop. Each person has their own account and a role that decides what they can do." },
 ];
 

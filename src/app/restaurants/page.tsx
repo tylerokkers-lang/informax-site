@@ -5,6 +5,7 @@ import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import SameCodeDemo from "@/components/real/SameCodeDemo";
+import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import { AppShot } from "@/components/real/Shots";
 
 export const metadata: Metadata = {
@@ -85,6 +86,10 @@ export default function RestaurantsPage() {
             <AppShot name="restaurant-table-7-temporary" alt="Table 7 showing the Wine Pairing Menu now, then back to the Terrace Menu" crop={0.7} offset={0.1} />
           </Reveal>
         </div>
+      </Section>
+
+      <Section>
+        <AnalyticsPanel variant="restaurant" />
       </Section>
 
       <CloudCta lead="Bring your menus" line="to life." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
