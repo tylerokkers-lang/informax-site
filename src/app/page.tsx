@@ -7,7 +7,7 @@ import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import SameCodeDemo from "@/components/real/SameCodeDemo";
 import { AppShot, PhoneShot } from "@/components/real/Shots";
-import AnalyticsPanel from "@/components/real/AnalyticsPanel";
+import { AnalyticsNote } from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
 import TouchpointCard from "@/components/real/TouchpointCard";
 
@@ -201,11 +201,6 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Analytics (planned: see lib/analytics-status.ts) */}
-      <Section tone="dark" id="analytics">
-        <AnalyticsPanel variant="home" dark />
-      </Section>
-
       {/* Physical touchpoints */}
       <Section id="touchpoints">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
@@ -257,6 +252,13 @@ export default function Home() {
           </Link>
         </div>
       </Section>
+
+      {/* Analytics: a quiet, secondary note (planned; see lib/analytics-status.ts) */}
+      <section id="analytics" className="bg-paper py-14 md:py-20">
+        <div className="mx-auto max-w-8xl border-t border-line px-6 pt-10 md:px-10 md:pt-12">
+          <AnalyticsNote />
+        </div>
+      </section>
 
       <CloudCta
         lead="Bring your QR codes"

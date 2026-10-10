@@ -59,16 +59,17 @@ admin, manager and the two support roles) and an "Insights" nav slot that no
 screen backs. V1 (`informax-analytics`) has analytics but is not the product.
 Unknown until built: who sees it, retention, any privacy limits.
 
-The site therefore carries Analytics sections labelled **"Coming soon"** with no
-dashboard, no figures and no screenshot (no `/dev/preview` scenario exists, and
-dashboards are not to be recreated for marketing): home (`#analytics`),
-`/informax-cloud`, `/hotels`, `/restaurants`, plus an honest FAQ answer. All copy
-is in `components/real/AnalyticsPanel.tsx`; the status switch is
-`src/lib/analytics-status.ts`. The owner should approve publishing a "coming
-soon" roadmap statement before merge; if not, remove the four
-`<AnalyticsPanel>` usages and the FAQ entry. Privacy wording says insights are
-about Codes and Spaces, not people, and that scans are counted, not reading time
-or sales. When analytics ships, follow the checklist in `analytics-status.ts`.
+Owner decision (10 October 2026): Analytics stays on the site as a **secondary,
+clearly "Coming soon" capability**. The homepage carries only a small quiet note
+near the bottom (`AnalyticsNote`); the full planned-capability sections are on
+`/informax-cloud`, `/hotels` and `/restaurants` (`AnalyticsPanel`), plus one FAQ
+answer on `/how-it-works`. All wording is written as a future plan ("We plan to…",
+"Planned:"): no dashboard, no screenshot, no figures, and no statement about what
+is recorded, retained, who can see it or what is private, until those are built.
+All Analytics strings and the status switch are centralised in
+`src/lib/analytics-status.ts` (+ `components/real/AnalyticsPanel.tsx`); its header
+comment is the checklist for the day Analytics ships. The Cloud-side plan is in
+informax-cloud-v2 `docs/analytics-roadmap.md`.
 
 ## 0a. Design system and homepage story (27 September 2026) — live
 
