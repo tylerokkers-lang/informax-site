@@ -16,7 +16,6 @@ import CloudEntrance from "@/components/CloudEntrance";
 const TRANSPARENT_AT_TOP_ROUTES = new Set([
   "/",
   "/informax-cloud",
-  "/how-it-works",
   "/digital-experiences",
   "/enquire",
   "/digital-information",

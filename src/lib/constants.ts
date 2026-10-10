@@ -1,6 +1,17 @@
 export const SITE_URL = "https://informax.co.uk";
 export const CONTACT_EMAIL = "info@informax.co.uk";
 
+/**
+ * Official Informax social profiles, supplied by the owner. LinkedIn is still
+ * to come: paste its full profile address here when it is available. An
+ * empty entry shows its footer icon as inactive (never a guessed or dead
+ * link) and is left out of the organisation's structured data.
+ */
+export const SOCIAL_LINKS = {
+  linkedin: "",
+  instagram: "https://www.instagram.com/informax_cloud/",
+} as const;
+
 export const PRIMARY_CTA = "Enquire";
 
 export const CLOUD_LOGIN_URL = "https://informax.cloud/login";
@@ -10,7 +21,6 @@ export const NAV_LINKS = [
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "Hotels", href: "/hotels" },
   { label: "Restaurants", href: "/restaurants" },
-  { label: "How It Works", href: "/how-it-works" },
   { label: "About", href: "/about" },
   { label: "Enquire", href: "/enquire" },
 ] as const;
@@ -19,7 +29,6 @@ export const FOOTER_PRODUCT_LINKS = [
   { label: "Informax Cloud", href: "/informax-cloud" },
   { label: "Hotels", href: "/hotels" },
   { label: "Restaurants", href: "/restaurants" },
-  { label: "How It Works", href: "/how-it-works" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [

@@ -43,8 +43,8 @@ export default function InformaxCloudPage() {
         description="Choose what people see when they scan a QR code in each room, table or area of your business. Change it whenever you like. The printed code stays."
         primaryLabel="Enquire"
         primaryHref="/enquire"
-        secondaryLabel="See how it works"
-        secondaryHref="/how-it-works"
+        secondaryLabel="Informax for hotels"
+        secondaryHref="/hotels"
       />
 
       {/* The model */}
@@ -250,7 +250,7 @@ export default function InformaxCloudPage() {
       <CloudCta
         lead="Bring your QR codes"
         line="to life."
-        secondary={{ label: "How it works", href: "/how-it-works" }}
+        secondary={{ label: "Informax for hotels", href: "/hotels" }}
       />
     </>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 const DEFAULT_TITLE = "Informax | The platform for customisable QR codes";
 const DEFAULT_DESCRIPTION =
@@ -10,6 +10,7 @@ const DEFAULT_DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: "Informax",
   title: {
     default: DEFAULT_TITLE,
     template: "%s | Informax",
@@ -18,8 +19,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Informax" }],
   openGraph: {
     type: "website",
-    url: SITE_URL,
+    // No site-wide url: each page is shared under its own address.
     siteName: "Informax",
+    locale: "en_GB",
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
   },
@@ -36,6 +38,8 @@ const organizationLd = {
   name: "Informax",
   url: SITE_URL,
   email: CONTACT_EMAIL,
+  logo: `${SITE_URL}/icon.png`,
+  sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
   description:
     "Informax builds Informax Cloud, a platform for managing what people see when they scan QR codes placed around hotels, restaurants and other physical locations.",
 };

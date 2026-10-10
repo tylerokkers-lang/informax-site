@@ -11,6 +11,23 @@ live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
+## 0c. Merge with the earlier "Access Point" work on main (10 October 2026)
+
+`main` had three commits that were never in this branch's base: an **Access
+Point** homepage and terminology (28 September), **removal of /how-it-works**
+(it 308-redirects to `/informax-cloud`), and the Instagram link (29 September).
+Resolved in the merge: the QR code / Space / live content positioning (§0b)
+**replaces** the Access Point wording and homepage (that homepage also showed
+Meetings & Events, analytics and audit visuals as if live, and its
+`components/access/*` drawings were deleted); **kept from main**: the How It
+Works removal and redirect (nav, footer and sitemap no longer list it; its FAQ
+was dropped, so the Analytics FAQ line lives only in `analytics-status.ts`
+unused), `SOCIAL_LINKS` (Instagram live, LinkedIn empty), logo and `sameAs` in
+the organisation data, per-page share addresses. The share images
+(`opengraph-image.jpg`, `twitter-image.jpg`, `informax-cloud/opengraph-image.jpg`)
+were regenerated with the new headlines. Legal pages still say "NFC-enabled".
+If the owner wants How It Works back, restore it from `git show 12a9118:src/app/how-it-works/page.tsx`.
+
 ## 0b. QR Code to Space to Live Content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, NOT yet merged or live
 
 **This supersedes the "Touch Point / never say QR code" rules in §0 and §0a.**

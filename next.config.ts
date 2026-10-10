@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       { source: "/services", destination: "/informax-cloud", permanent: true },
       { source: "/hospitality", destination: "/digital-experiences", permanent: true },
       { source: "/touch-points", destination: "/informax-cloud", permanent: true },
+      { source: "/how-it-works", destination: "/informax-cloud", permanent: true },
     ];
   },
 };
