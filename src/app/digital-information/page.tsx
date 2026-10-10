@@ -17,7 +17,7 @@ const FLOW = [
     n: "01",
     icon: QrCode,
     title: "Scan",
-    desc: "Open it from a QR code with the phone camera. No app to find or install first.",
+    desc: "Open it from a Code with the phone camera. No app to find or install first.",
   },
   {
     n: "02",

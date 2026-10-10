@@ -51,9 +51,9 @@ export const FOOTER_LEGAL_LINKS = [
 
 export const ENQUIRY_INTERESTS = [
   "Informax Cloud",
-  "QR codes for a hotel",
-  "QR codes for a restaurant",
-  "Framed QR cards",
+  "Codes for a hotel",
+  "Codes for a restaurant",
+  "Framed Code cards",
   "A demonstration",
   "Not sure yet",
 ] as const;

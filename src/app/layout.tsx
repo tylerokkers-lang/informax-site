@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
-const DEFAULT_TITLE = "Informax | The platform for customisable QR codes";
+const DEFAULT_TITLE = "Informax | Information, always up to date";
 const DEFAULT_DESCRIPTION =
-  "The QR code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan.";
+  "The Code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan a Code.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +41,7 @@ const organizationLd = {
   logo: `${SITE_URL}/icon.png`,
   sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
   description:
-    "Informax builds Informax Cloud, a platform for managing what people see when they scan QR codes placed around hotels, restaurants and other physical locations.",
+    "Informax builds Informax Cloud, a platform for managing what people see when they scan Codes placed around hotels, restaurants and other physical locations.",
 };
 
 export default function RootLayout({

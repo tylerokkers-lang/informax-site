@@ -10,9 +10,9 @@ import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
 
 export const metadata: Metadata = {
-  title: "Informax Cloud: manage what every QR code shows",
+  title: "Informax Cloud: manage what every Code shows",
   description:
-    "Organise your property into Spaces, choose what each one shows, publish temporary content that ends on its own, and keep every previous version. The QR code never changes.",
+    "Organise your property into Spaces, choose what each one shows, publish temporary content that ends on its own, and keep every previous version. The Code never changes.",
   alternates: { canonical: "/informax-cloud" },
 };
 
@@ -23,7 +23,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "One place to manage what people see when they scan QR codes placed around hotels, restaurants and other physical locations.",
+    "One place to manage what people see when they scan Codes placed around hotels, restaurants and other physical locations.",
   url: `${SITE_URL}/informax-cloud`,
   publisher: { "@type": "Organization", name: "Informax", url: SITE_URL },
 };
@@ -39,8 +39,8 @@ export default function InformaxCloudPage() {
         poster="/video/cloud-hero-poster.jpg"
         dim={0.42}
         eyebrow="Informax Cloud"
-        headline="Every QR code. One place to manage it."
-        description="Choose what people see when they scan a QR code in each room, table or area of your business. Change it whenever you like. The printed code stays."
+        headline="Every Code. One place to manage it."
+        description="Choose what people see when they scan a Code in each room, table or area of your business. Change it whenever you like. The printed Code stays."
         primaryLabel="Enquire"
         primaryHref="/enquire"
         secondaryLabel="Informax for hotels"
@@ -56,7 +56,7 @@ export default function InformaxCloudPage() {
               Codes live in Spaces. <Soft>Spaces decide what people see.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Space is a real place: a bedroom, the spa, a table on the terrace. Whatever a Space shows, every code assigned to it shows too.
+              A Space is a real place: a bedroom, the spa, a table on the terrace. Whatever a Space shows, every Code assigned to it shows too.
             </Lede>
           </Reveal>
         </Head>
@@ -105,14 +105,14 @@ export default function InformaxCloudPage() {
               Room 324, <Soft>at a glance.</Soft>
             </Display>
             <Lede className="mt-8">
-              Every Space shows what a guest sees when they scan a code there, and what you can do about it: replace the content, use a website, or publish something temporary.
+              Every Space shows what a guest sees when they scan a Code there, and what you can do about it: replace the content, use a website, or publish something temporary.
             </Lede>
             <p className="mt-6 max-w-[44ch] leading-relaxed text-ink-mute">
-              Add another code to the room later and it shows the same thing straight away.
+              Add another Code to the room later and it shows the same thing straight away.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud showing the Hotel Guest Directory to guests who scan a code in the room" crop={0.72} />
+            <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud showing the Hotel Guest Directory to guests who scan a Code in the room" crop={0.72} />
           </Reveal>
         </div>
       </Section>
@@ -166,10 +166,10 @@ export default function InformaxCloudPage() {
           <Reveal blur>
             <Kicker>Codes</Kicker>
             <Display>
-              Every code, <Soft>and where it lives.</Soft>
+              Every Code, <Soft>and where it lives.</Soft>
             </Display>
             <Lede className="mt-8">
-              Find any code by name or place, see its Space, and retire it if it is no longer used. A code keeps its place for good, however often the content changes.
+              Find any Code by name or place, see its Space, and retire it if it is no longer used. A Code keeps its place for good, however often the content changes.
             </Lede>
           </Reveal>
         </Head>
@@ -178,7 +178,7 @@ export default function InformaxCloudPage() {
             <AppShot name="hotel-codes" alt="Codes list for a hotel in Informax Cloud" crop={0.8} />
           </Reveal>
           <Reveal delay={0.08}>
-            <AppShot name="hotel-code" alt="A single code in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
+            <AppShot name="hotel-code" alt="A single Code in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
           </Reveal>
         </div>
       </Section>
@@ -240,7 +240,7 @@ export default function InformaxCloudPage() {
           </Reveal>
         </div>
         <ul className="mt-14 grid gap-x-10 gap-y-3 border-t border-line pt-8 text-[15px] text-ink-mute sm:grid-cols-2 lg:grid-cols-4">
-          <li>Search any room, table or code</li>
+          <li>Search any room, table or Code</li>
           <li>Switch between properties</li>
           <li>Light, dark or system appearance</li>
           <li>Works on a phone, tablet or desktop</li>
@@ -248,8 +248,8 @@ export default function InformaxCloudPage() {
       </Section>
 
       <CloudCta
-        lead="Bring your QR codes"
-        line="to life."
+        lead="Make every Code"
+        line="work harder."
         secondary={{ label: "Informax for hotels", href: "/hotels" }}
       />
     </>

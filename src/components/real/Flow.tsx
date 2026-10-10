@@ -1,7 +1,7 @@
-/** The product model in one line: QR code, Space, live content. */
+/** The product model in one line: Code, Space, live content. */
 export default function Flow({ className = "", dark = false }: { className?: string; dark?: boolean }) {
   const items = [
-    ["QR code", "Stays where it is"],
+    ["Code", "Stays where it is"],
     ["Space", "A real place: Room 324, Table 7"],
     ["Live content", "A PDF or a website"],
   ];

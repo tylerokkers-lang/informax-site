@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 10 October 2026 (QR / Space / live content repositioning on branch `website/qr-cloud-repositioning`, see §0b; earlier: 26 September 2026 (Cloud entrance logo + hero playback fix
+Last updated: 10 October 2026 (Code / Space / live content repositioning on branch `website/qr-cloud-repositioning`, see §0b; earlier: 26 September 2026 (Cloud entrance logo + hero playback fix
 live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
@@ -16,7 +16,7 @@ historical where they conflict).
 `main` had three commits that were never in this branch's base: an **Access
 Point** homepage and terminology (28 September), **removal of /how-it-works**
 (it 308-redirects to `/informax-cloud`), and the Instagram link (29 September).
-Resolved in the merge: the QR code / Space / live content positioning (§0b)
+Resolved in the merge: the Code / Space / live content positioning (§0b)
 **replaces** the Access Point wording and homepage (that homepage also showed
 Meetings & Events, analytics and audit visuals as if live, and its
 `components/access/*` drawings were deleted); **kept from main**: the How It
@@ -28,15 +28,34 @@ the organisation data, per-page share addresses. The share images
 were regenerated with the new headlines. Legal pages still say "NFC-enabled".
 If the owner wants How It Works back, restore it from `git show 12a9118:src/app/how-it-works/page.tsx`.
 
-## 0b. QR Code to Space to Live Content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, NOT yet merged or live
+## 0b. Codes to Spaces to live content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, PR #2, NOT yet merged or live
 
-**This supersedes the "Touch Point / never say QR code" rules in §0 and §0a.**
-The site now matches the real Informax Cloud (informax-cloud-v2): *QR code →
-Space → live content*. Headline: "The QR code stays. Everything behind it can
-change." Use "QR code" freely; product screenshots keep the app's own words
-(Codes, Spaces). Never say NFC, proprietary hardware, Touch Point, Meetings &
-Events, analytics or scan tracking (none are shipped). Legal pages still say
-"NFC-enabled tags" (contract wording, left for legal review).
+### PERMANENT BRANDING RULE (owner, 10 October 2026) — read before writing any copy
+- Say **"Code" / "Codes"**, never "QR code(s)" (and never "QR cards": say "Code cards").
+  This covers visible copy, page titles, meta descriptions, Open Graph/Twitter
+  titles, share images and their alt text, image alt text, aria labels, FAQs,
+  CTAs and form options. Technical identifiers may keep the letters (`qr-path.ts`,
+  `QR_PATH`, lucide's `QrCode` icon) but must never reach the public interface.
+- **"Spaces"** for managed content destinations; **"Informax Cloud"** for the platform.
+- Never reintroduce Touch Points, NFC, Informax Touch/Scan, or Meetings & Events as
+  product positioning. Never claim analytics, scan tracking or malware scanning as live.
+- Headlines in use: "The Code stays. Everything behind it can change." /
+  "Information, always up to date." / "One Code. Content that changes." /
+  "Make every Code work harder."
+- **Flagged for the owner:** (1) the footer line "QR Code is a registered trademark of
+  DENSO WAVE INCORPORATED." was **removed** (10 October 2026): it only credits a term the
+  site no longer uses. To restore, add `<p className="pt-6 text-[11px] text-cream-mute">QR Code
+  is a registered trademark of DENSO WAVE INCORPORATED.</p>` above the copyright row in
+  `Footer.tsx`; get legal advice if unsure. (2) The Privacy and Terms pages still say
+  "NFC-enabled tags": contract wording, held for legal review, **unchanged**. (3) The About
+  page's founder biography mentions "front office, meetings and events" as personal
+  background (owner-supplied copy, kept as is); it is not product positioning.
+- The drawn Code graphic on the site is a real, scannable Code to informax.co.uk; its
+  alt text says "Code".
+
+**This supersedes the "Touch Point" rules in §0 and §0a.** The site now matches the real
+Informax Cloud (informax-cloud-v2): *Code → Space → live content*. Product
+screenshots keep the app's own words (Codes, Spaces). Legal pages are untouched.
 
 - **Pages:** `/` (home story), `/informax-cloud` (real product), `/hotels`,
   `/restaurants` (new), `/how-it-works`, `/digital-experiences` (optional

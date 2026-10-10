@@ -12,9 +12,9 @@ import Flow from "@/components/real/Flow";
 import TouchpointCard from "@/components/real/TouchpointCard";
 
 export const metadata: Metadata = {
-  title: { absolute: "Informax | QR codes, made useful" },
+  title: { absolute: "Informax | Information, always up to date" },
   description:
-    "The QR code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan.",
+    "The Code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan a Code.",
   alternates: { canonical: "/" },
 };
 
@@ -36,12 +36,12 @@ export default function Home() {
         eyebrow="Informax Cloud"
         headline={
           <>
-            The QR code stays.
+            The Code stays.
             <br />
             Everything behind it can change.
           </>
         }
-        description="Informax Cloud gives businesses one place to manage what people see when they scan QR codes across their spaces."
+        description="Informax Cloud gives businesses one place to manage what people see when they scan Codes across their spaces."
         primaryLabel="Explore Informax Cloud"
         primaryHref="/informax-cloud"
         secondaryLabel="Enquire"
@@ -54,7 +54,7 @@ export default function Home() {
           <Reveal blur>
             <Kicker>Familiar by design</Kicker>
             <Display>
-              QR codes, <Soft>made useful.</Soft>
+              Information, <Soft>always up to date.</Soft>
             </Display>
             <Lede className="mt-8">
               The world already knows how to scan. Informax gives businesses control over what happens next.
@@ -64,8 +64,8 @@ export default function Home() {
         <div className="grid gap-10 border-t border-line pt-8 md:grid-cols-3">
           {[
             ["No app", "Guests open their phone camera and scan. Nothing to download."],
-            ["No special hardware", "Print your own codes, or use framed cards from Informax."],
-            ["No new behaviour", "Everyone already knows what a QR code is for."],
+            ["No special hardware", "Print your own Codes, or use framed cards from Informax."],
+            ["No new behaviour", "Guests already know what to do with a Code."],
           ].map(([t, b], i) => (
             <Reveal key={t} delay={i * 0.08}>
               <h3 className="text-xl font-semibold text-ink">{t}</h3>
@@ -75,13 +75,13 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Same QR, different content: Room 324 */}
+      {/* One Code, content that changes: Room 324 */}
       <Section tone="dark" id="same-code">
         <Head>
           <Reveal blur>
             <Kicker dark>Print it once. Update it anytime.</Kicker>
             <Display dark>
-              Same QR code. <Soft dark>Different content.</Soft>
+              One Code. <Soft dark>Content that changes.</Soft>
             </Display>
             <Lede dark className="mt-8">
               A hotel changes what Room 324 shows for a conference weekend. The card in the room stays exactly where it is.
@@ -97,10 +97,10 @@ export default function Home() {
           <Reveal blur>
             <Kicker>Informax Cloud</Kicker>
             <Display>
-              Every code, <Soft>in one place.</Soft>
+              Every Code, <Soft>in one place.</Soft>
             </Display>
             <Lede className="mt-8">
-              Organise your property into Spaces. Each Space decides what people see when they scan a code placed there. Change it in Informax Cloud and the next scan shows the new content.
+              Organise your property into Spaces. Each Space decides what people see when they scan a Code placed there. Change it in Informax Cloud and the next scan shows the new content.
             </Lede>
             <Link href="/informax-cloud" className="ix-link mt-10 inline-flex">
               Explore Informax Cloud →
@@ -150,7 +150,7 @@ export default function Home() {
           <Reveal blur>
             <Kicker dark>For restaurants</Kicker>
             <Display dark>
-              Table 7. <Soft dark>Two menus. One QR code.</Soft>
+              Table 7. <Soft dark>Two menus. One Code.</Soft>
             </Display>
             <Lede dark className="mt-8">
               Table 7 normally opens the Terrace Menu. For an evening, it shows the Wine Pairing Menu. When the timer ends, the Terrace Menu is back.
@@ -201,16 +201,16 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Physical touchpoints */}
-      <Section id="touchpoints">
+      {/* Framed Codes */}
+      <Section id="framed-codes">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
           <Reveal blur>
-            <Kicker>Physical touchpoints</Kicker>
+            <Kicker>Framed Codes</Kicker>
             <Display>
               No special hardware. <Soft>No app. Just scan.</Soft>
             </Display>
             <Lede className="mt-8">
-              Informax can supply premium framed QR cards for rooms and tables. Prefer your own materials? Print your codes yourself. Either way, what the code shows is managed in Informax Cloud.
+              Informax can supply premium framed Code cards for rooms and tables. Prefer your own materials? Print your Codes yourself. Either way, what a Code shows is managed in Informax Cloud.
             </Lede>
             <p className="mt-6 max-w-[46ch] leading-relaxed text-ink-mute">
               Designed and printed guest information is an optional extra. The software is the product.
@@ -234,8 +234,8 @@ export default function Home() {
         </Head>
         <div className="grid items-start gap-8 lg:grid-cols-[1fr_1fr_230px]">
           <Reveal>
-            <AppShot name="hotel-codes" alt="Codes in Informax Cloud: every code, the Space it belongs to and its status" crop={0.78} />
-            <p className="mt-4 text-[15px] text-ink-mute">Codes. Every code and where it lives.</p>
+            <AppShot name="hotel-codes" alt="Codes in Informax Cloud: every Code, the Space it belongs to and its status" crop={0.78} />
+            <p className="mt-4 text-[15px] text-ink-mute">Codes. Every Code and where it lives.</p>
           </Reveal>
           <Reveal delay={0.08}>
             <AppShot name="hotel-activity" alt="Activity in Informax Cloud: what changed and who changed it, in plain language" crop={0.78} />
@@ -261,8 +261,8 @@ export default function Home() {
       </section>
 
       <CloudCta
-        lead="Bring your QR codes"
-        line="to life."
+        lead="Make every Code"
+        line="work harder."
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
       />
     </>

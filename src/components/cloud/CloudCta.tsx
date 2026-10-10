@@ -5,7 +5,7 @@ import { PRIMARY_CTA } from "@/lib/constants";
 
 /** Closing statement. One action only. */
 export default function CloudCta({
-  lead = "Your QR codes.",
+  lead = "Your Codes.",
   line = "Under your control.",
   secondary,
 }: {
