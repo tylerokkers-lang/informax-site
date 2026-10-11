@@ -28,33 +28,41 @@ the organisation data, per-page share addresses. The share images
 were regenerated with the new headlines. Legal pages still say "NFC-enabled".
 If the owner wants How It Works back, restore it from `git show 12a9118:src/app/how-it-works/page.tsx`.
 
-## 0b. Codes to Spaces to live content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, PR #2, NOT yet merged or live
+## 0b. Access Points to Spaces to live content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, PR #2, NOT yet merged or live
 
-### PERMANENT BRANDING RULE (owner, 10 October 2026) — read before writing any copy
-- Say **"Code" / "Codes"**, never "QR code(s)" (and never "QR cards": say "Code cards").
-  This covers visible copy, page titles, meta descriptions, Open Graph/Twitter
-  titles, share images and their alt text, image alt text, aria labels, FAQs,
-  CTAs and form options. Technical identifiers may keep the letters (`qr-path.ts`,
-  `QR_PATH`, lucide's `QrCode` icon) but must never reach the public interface.
-- **"Spaces"** for managed content destinations; **"Informax Cloud"** for the platform.
-- Never reintroduce Touch Points, NFC, Informax Touch/Scan, or Meetings & Events as
-  product positioning. Never claim analytics, scan tracking or malware scanning as live.
-- Headlines in use: "The Code stays. Everything behind it can change." /
-  "Information, always up to date." / "One Code. Content that changes." /
-  "Make every Code work harder."
-- **Flagged for the owner:** (1) the footer line "QR Code is a registered trademark of
-  DENSO WAVE INCORPORATED." was **removed** (10 October 2026): it only credits a term the
-  site no longer uses. To restore, add `<p className="pt-6 text-[11px] text-cream-mute">QR Code
-  is a registered trademark of DENSO WAVE INCORPORATED.</p>` above the copyright row in
-  `Footer.tsx`; get legal advice if unsure. (2) The Privacy and Terms pages still say
-  "NFC-enabled tags": contract wording, held for legal review, **unchanged**. (3) The About
-  page's founder biography mentions "front office, meetings and events" as personal
-  background (owner-supplied copy, kept as is); it is not product positioning.
-- The drawn Code graphic on the site is a real, scannable Code to informax.co.uk; its
-  alt text says "Code".
+### PERMANENT BRANDING RULE (owner, 11 October 2026; supersedes the "Code" rule of 10 October) — read before writing any copy
+- The customer-facing word is **"Access Point" / "Access Points"**. It replaces "Codes" and
+  "QR codes" in all public copy: visible text, titles, meta descriptions, Open Graph/Twitter
+  text, share images and their alt text, image alt text, aria labels, FAQs, form options, CTAs.
+  Do not say "Code(s)" or "QR code(s)" publicly. "Scan" is fine.
+- **What an Access Point is** (always explain it for a first-time visitor; done in the homepage
+  hero, the "What is an Access Point?" section and the Informax Cloud page): the framed card
+  or plaque in a room, on a table or anywhere in a business that guests scan with their phone
+  camera. Informax Cloud manages what each one shows; the printed Access Point never changes.
+- **"Spaces"** (managed content destinations) and **"Informax Cloud"** (the platform) are unchanged.
+- Never reintroduce Touch Points, NFC, Informax Touch/Scan, or Meetings & Events as product
+  positioning. Never claim analytics, scan tracking or malware scanning as live.
+- Not renamed (by decision): routes, database fields, component and file names
+  (`qr-path.ts`, `SameCodeDemo`, `hotel-codes` screenshot file names, the `codes` anchor id),
+  and the Informax Cloud app's own features and UI.
+- **KNOWN MISMATCH:** the real Informax Cloud screenshots still show the app's own word
+  "Codes" (the Codes list, "Codes in Room 324", "Add a Code"), because the Cloud app has not
+  been renamed. Alt text describes them as Access Points. Until the Cloud UI says "Access
+  Points", re-capture the screens after it does (see §0b "Real screenshots"), or accept the
+  mismatch. Do not edit screenshots to fake the wording.
+- Headlines in use: "The Access Point stays. Everything behind it can change." /
+  "Information, always up to date." / "One Access Point. Content that changes." /
+  "Make every Access Point work harder."
+- **Flagged for the owner:** (1) the footer DENSO WAVE "QR Code" trademark credit was removed
+  (10 October): the site no longer uses the term; restore only on the owner's say-so. (2) The
+  Privacy and Terms pages still say "NFC-enabled tags": contract wording, held for legal
+  review, **unchanged**. (3) The About page founder biography mentions "front office, meetings
+  and events" as personal background (owner copy, kept).
+- The drawn graphic on the site is a real, scannable code to informax.co.uk; its alt text says
+  "Access Point".
 
 **This supersedes the "Touch Point" rules in §0 and §0a.** The site now matches the real
-Informax Cloud (informax-cloud-v2): *Code → Space → live content*. Product
+Informax Cloud (informax-cloud-v2): *Access Point → Space → live content*. Product
 screenshots keep the app's own words (Codes, Spaces). Legal pages are untouched.
 
 - **Pages:** `/` (home story), `/informax-cloud` (real product), `/hotels`,

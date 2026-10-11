@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 const DEFAULT_TITLE = "Informax | Information, always up to date";
 const DEFAULT_DESCRIPTION =
-  "The Code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan a Code.";
+  "The Access Point stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what guests see when they scan an Access Point.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +41,7 @@ const organizationLd = {
   logo: `${SITE_URL}/icon.png`,
   sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
   description:
-    "Informax builds Informax Cloud, a platform for managing what people see when they scan Codes placed around hotels, restaurants and other physical locations.",
+    "Informax builds Informax Cloud, a platform for managing what people see when they scan Access Points placed around hotels, restaurants and other physical locations.",
 };
 
 export default function RootLayout({

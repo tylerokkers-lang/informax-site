@@ -14,10 +14,10 @@ export function AnalyticsNote() {
       <p className="text-[14px] font-semibold text-brass-deep">Analytics · {ANALYTICS_LABEL}</p>
       <div>
         <h3 className="font-serif-display text-[clamp(22px,2.4vw,30px)] leading-snug text-ink">
-          Planned: see how your Codes are used.
+          Planned: see how your Access Points are used.
         </h3>
         <p className="mt-3 max-w-[56ch] text-[15.5px] leading-relaxed text-ink-mute">
-          We plan to add analytics to Informax Cloud, so the platform that manages what people see could also show how your Codes and Spaces are being used. {ANALYTICS_PLANNED_NOTE}
+          We plan to add analytics to Informax Cloud, so the platform that manages what people see could also show how your Access Points and Spaces are being used. {ANALYTICS_PLANNED_NOTE}
         </p>
       </div>
     </div>
@@ -26,11 +26,11 @@ export function AnalyticsNote() {
 
 const VARIANTS = {
   cloud: {
-    title: <>Planned: see how <Soft>your Codes are used.</Soft></>,
-    lede: "We plan to add analytics alongside Spaces and Codes, so the platform you use to change what people see could also show how often they look.",
+    title: <>Planned: see how <Soft>your Access Points are used.</Soft></>,
+    lede: "We plan to add analytics alongside Spaces and Access Points, so the platform you use to change what people see could also show how often they look.",
     cards: [
-      { icon: ScanLine, title: "Code-level activity", body: "How often each Code is used." },
-      { icon: QrCode, title: "Rooms, tables and areas", body: "Which Codes and places receive the most engagement." },
+      { icon: ScanLine, title: "Access Point activity", body: "How often each Access Point is used." },
+      { icon: QrCode, title: "Rooms, tables and areas", body: "Which Access Points and places receive the most engagement." },
       { icon: LayoutGrid, title: "Space-level reporting", body: "Activity across a Space and what is inside it." },
       { icon: TrendingUp, title: "Trends over time", body: "How engagement changes across selected periods." },
     ] as Card[],
@@ -39,7 +39,7 @@ const VARIANTS = {
     title: <>Planned: see which parts of the property <Soft>guests reach for.</Soft></>,
     lede: "We plan to let hotels compare engagement across bedrooms, public areas and guest facilities, to help inform their digital guest experience.",
     cards: [
-      { icon: BedDouble, title: "Bedrooms", body: "Whether the Codes in rooms are being used." },
+      { icon: BedDouble, title: "Bedrooms", body: "Whether the Access Points in rooms are being used." },
       { icon: LayoutGrid, title: "Public areas", body: "How Reception and the Lobby Lounge compare." },
       { icon: ScanLine, title: "Spa and Gym", body: "Activity at the facilities guests ask about." },
       { icon: TrendingUp, title: "Trends over time", body: "How engagement changes across seasons and events." },
@@ -49,7 +49,7 @@ const VARIANTS = {
     title: <>Planned: see which tables and areas <Soft>guests use.</Soft></>,
     lede: "We plan to let restaurants understand engagement across tables and dining areas, including while a temporary menu is live.",
     cards: [
-      { icon: UtensilsCrossed, title: "Tables", body: "Which tables use their Code most." },
+      { icon: UtensilsCrossed, title: "Tables", body: "Which tables use their Access Point most." },
       { icon: LayoutGrid, title: "Dining areas", body: "How the Terrace, Bar and Private Dining compare." },
       { icon: ScanLine, title: "Temporary menus", body: "Activity while a menu such as the Wine Pairing Menu is live." },
       { icon: TrendingUp, title: "Trends over time", body: "How engagement changes across services and weeks." },

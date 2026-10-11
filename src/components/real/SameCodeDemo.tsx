@@ -16,7 +16,7 @@ const DEMOS = {
     steps: [
       { title: "A normal day", caption: "Room 324 shows the Hotel Guest Directory.", admin: "hotel-room-324", phone: "guest-room-324-directory" },
       { title: "Publish temporary content", caption: "The manager picks Conference Information and chooses when it ends.", admin: "hotel-room-324-temporary", phone: "guest-room-324-directory" },
-      { title: "Same Code, new content", caption: "The next scan opens Conference Information. The card on the wall has not changed.", admin: "hotel-room-324-temporary", phone: "guest-room-324-conference" },
+      { title: "Same Access Point, new content", caption: "The next scan opens Conference Information. The card on the wall has not changed.", admin: "hotel-room-324-temporary", phone: "guest-room-324-conference" },
       { title: "Then it returns", caption: "When the time is up, Room 324 goes back to the Hotel Guest Directory. Nobody has to remember.", admin: "hotel-room-324", phone: "guest-room-324-directory" },
     ] satisfies Step[],
   },
@@ -28,7 +28,7 @@ const DEMOS = {
     steps: [
       { title: "Normal service", caption: "Table 7 shows the Terrace Menu.", admin: "restaurant-spaces", phone: "guest-table-7-terrace" },
       { title: "Publish temporary menu", caption: "The manager picks the Wine Pairing Menu and sets when it ends.", admin: "restaurant-table-7-temporary", phone: "guest-table-7-terrace" },
-      { title: "Same Code, new menu", caption: "Guests at Table 7 now see the Wine Pairing Menu. No reprinting, no new table card.", admin: "restaurant-table-7-temporary", phone: "guest-table-7-wine" },
+      { title: "Same Access Point, new menu", caption: "Guests at Table 7 now see the Wine Pairing Menu. No reprinting, no new table card.", admin: "restaurant-table-7-temporary", phone: "guest-table-7-wine" },
       { title: "Back to the Terrace Menu", caption: "At the end time, Table 7 returns to the Terrace Menu automatically.", admin: "restaurant-spaces", phone: "guest-table-7-terrace" },
     ] satisfies Step[],
   },
@@ -38,7 +38,7 @@ const STEP_MS = 4200;
 
 /**
  * Plays the real Informax Cloud screens and the real guest screen side by side
- * while the printed Code stays exactly the same. Runs while on screen,
+ * while the printed Access Point stays exactly the same. Runs while on screen,
  * pauses when a step is chosen by hand, and shows a still step with reduced motion.
  */
 export default function SameCodeDemo({ variant }: { variant: keyof typeof DEMOS }) {
@@ -70,12 +70,12 @@ export default function SameCodeDemo({ variant }: { variant: keyof typeof DEMOS 
           <div className="border-[8px] border-[#25384f] bg-[#f8f7f4] px-5 py-7 text-center shadow-2xl">
             <p className="text-[10px] tracking-[0.2em] text-ink-mute">{demo.brand}</p>
             <h3 className="mt-5 font-serif-display text-[22px] leading-tight text-ink">{demo.heading}</h3>
-            <svg viewBox={QR_VIEWBOX} className="mx-auto my-5 h-24 w-24" shapeRendering="crispEdges" role="img" aria-label="The printed Code. It stays the same in every step.">
+            <svg viewBox={QR_VIEWBOX} className="mx-auto my-5 h-24 w-24" shapeRendering="crispEdges" role="img" aria-label="The printed Access Point. It stays the same in every step.">
               <path stroke="#18283d" d={QR_PATH} />
             </svg>
             <p className="text-[11px] text-ink-mute">{demo.sub}</p>
           </div>
-          <p className="mt-4 text-center text-[13px] text-cream-mute">The printed Code. It never changes.</p>
+          <p className="mt-4 text-center text-[13px] text-cream-mute">The printed Access Point. It never changes.</p>
         </div>
 
         {/* The real Cloud screen */}

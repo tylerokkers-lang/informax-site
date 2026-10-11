@@ -1,7 +1,7 @@
-/** The product model in one line: Code, Space, live content. */
+/** The product model in one line: Access Point, Space, live content. */
 export default function Flow({ className = "", dark = false }: { className?: string; dark?: boolean }) {
   const items = [
-    ["Code", "Stays where it is"],
+    ["Access Point", "Stays where it is"],
     ["Space", "A real place: Room 324, Table 7"],
     ["Live content", "A PDF or a website"],
   ];

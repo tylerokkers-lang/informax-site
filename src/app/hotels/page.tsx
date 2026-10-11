@@ -10,9 +10,9 @@ import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import TouchpointCard from "@/components/real/TouchpointCard";
 
 export const metadata: Metadata = {
-  title: "Informax for Hotels: a Code for every part of the stay",
+  title: "Informax for Hotels: an Access Point for every part of the stay",
   description:
-    "Rooms, the spa, the gym, restaurants, bars and public areas, each with a Code you can update any time. Change what guests see without replacing a thing.",
+    "Rooms, the spa, the gym, restaurants, bars and public areas, each with an Access Point you can update any time. Change what guests see without replacing a thing.",
   alternates: { canonical: "/hotels" },
 };
 
@@ -22,7 +22,7 @@ const PLACES = [
   { place: "Gym", shows: "Class Schedule", body: "This week's classes, changed in a minute." },
   { place: "Lobby Lounge", shows: "Afternoon Tea", body: "Afternoon Tea information, in the lounge." },
   { place: "Reception", shows: "Hotel and local information", body: "Useful information, or your own website, at the desk." },
-  { place: "Public Areas", shows: "Organised by place", body: "Group Codes by the real locations in your property." },
+  { place: "Public Areas", shows: "Organised by place", body: "Group Access Points by the real locations in your property." },
 ];
 
 export default function HotelsPage() {
@@ -45,7 +45,7 @@ export default function HotelsPage() {
               Organised like <Soft>your property.</Soft>
             </Display>
             <Lede className="mt-8">
-              Bedrooms, floors and rooms. The Spa. The Gym. Restaurants and Bars. Public Areas such as Reception and the Lobby Lounge. Each is a Space that decides what its Codes show.
+              Bedrooms, floors and rooms. The Spa. The Gym. Restaurants and Bars. Public Areas such as Reception and the Lobby Lounge. Each is a Space that decides what its Access Points show.
             </Lede>
           </Reveal>
         </Head>
@@ -65,7 +65,7 @@ export default function HotelsPage() {
           <Reveal blur>
             <Kicker dark>Room 324</Kicker>
             <Display dark>
-              A conference weekend. <Soft dark>Same Code.</Soft>
+              A conference weekend. <Soft dark>Same Access Point.</Soft>
             </Display>
             <Lede dark className="mt-8">
               Normally Room 324 opens the Hotel Guest Directory. For the conference it shows Conference Information, until the end time you choose. Then it goes back by itself.
@@ -83,7 +83,7 @@ export default function HotelsPage() {
               A welcome card <Soft>worth keeping.</Soft>
             </Display>
             <Lede className="mt-8">
-              Informax can supply framed A5 Code cards for rooms and public areas. Or print the Codes yourself. No special hardware, no app, just scan.
+              Informax can supply framed A5 Access Points for rooms and public areas. Or print your own. No special hardware, no app, just scan.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
@@ -96,7 +96,7 @@ export default function HotelsPage() {
         <AnalyticsPanel variant="hotel" />
       </Section>
 
-      <CloudCta lead="Make every Code" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
+      <CloudCta lead="Make every Access Point" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
     </>
   );
 }

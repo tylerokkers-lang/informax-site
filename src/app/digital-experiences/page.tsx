@@ -11,14 +11,14 @@ import { PhoneShot } from "@/components/real/Shots";
 export const metadata: Metadata = {
   title: "Digital Experiences: designed guest information for hotels",
   description:
-    "An optional service alongside Informax Cloud. Informax designs the guest directories, menus and guides your Codes open, so they look like part of your property.",
+    "An optional service alongside Informax Cloud. Informax designs the guest directories, menus and guides your Access Points open, so they look like part of your property.",
   alternates: { canonical: "/digital-experiences" },
 };
 
 const BENEFITS = [
   { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, one touch or scan away." },
   { title: "Fewer repeat questions", body: "Reception spends less time answering what the directory already explains." },
-  { title: "Always current", body: "Change it once in Informax Cloud and every Code in that Space shows the new version." },
+  { title: "Always current", body: "Change it once in Informax Cloud and every Access Point in that Space shows the new version." },
   { title: "Unmistakably yours", body: "Designed around your brand, your tone and your property. No templates." },
   { title: "Nothing to download", body: "It opens straight away after a scan, in the phone's own browser." },
   { title: "Everything, once", body: "Dining, Spa, services and local knowledge, gathered in one place." },
@@ -33,7 +33,7 @@ const CREATE = [
 
 const STEPS = [
   { n: "01", title: "We design it", body: "Around your brand, your guests and the way your property runs." },
-  { n: "02", title: "We connect it", body: "Each experience is published to a Space in Informax Cloud, with Codes where guests need them." },
+  { n: "02", title: "We connect it", body: "Each experience is published to a Space in Informax Cloud, with Access Points where guests need them." },
   { n: "03", title: "It stays current", body: "Update it whenever something changes. Nothing is reprinted or replaced." },
 ];
 
@@ -95,7 +95,7 @@ export default function DigitalExperiencesPage() {
               the way a guest actually looks for things.
             </Lede>
             <ul className="mt-10 max-w-md">
-              {["Designed to match your brand", "Opens with a familiar scan", "Shown by every Code in its Space"].map((l) => (
+              {["Designed to match your brand", "Opens with a familiar scan", "Shown by every Access Point in its Space"].map((l) => (
                 <li key={l} className="border-t border-line py-4 text-[15.5px] text-ink">
                   {l}
                 </li>
@@ -156,15 +156,15 @@ export default function DigitalExperiencesPage() {
           <Reveal blur>
             <Kicker>Always current</Kicker>
             <Display>
-              A new season. <Soft>The same Codes.</Soft>
+              A new season. <Soft>The same Access Points.</Soft>
             </Display>
             <Lede className="mt-8">
-              Publish the winter Guest Directory in Informax Cloud. Every Code
+              Publish the winter Guest Directory in Informax Cloud. Every Access Point
               in that Space shows it from the next scan.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
-            <PhoneShot name="guest-room-324-directory" alt="A Hotel Guest Directory on a guest's phone after scanning the Code in a room" />
+            <PhoneShot name="guest-room-324-directory" alt="A Hotel Guest Directory on a guest's phone after scanning the Access Point in a room" />
           </Reveal>
         </div>
       </Section>
@@ -194,7 +194,7 @@ export default function DigitalExperiencesPage() {
         </div>
       </Section>
 
-      <CloudCta lead="Make every Code" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
+      <CloudCta lead="Make every Access Point" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
     </>
   );
 }

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const AREAS = [
-  { place: "Main Restaurant", body: "Each table is a Space with its own Code." },
+  { place: "Main Restaurant", body: "Each table is a Space with its own Access Point." },
   { place: "Terrace", body: "Table 7 on the terrace shows the Terrace Menu, then a different menu for an evening." },
   { place: "Bar", body: "A bar menu that changes with the season, or for a promotion." },
   { place: "Private Dining", body: "The Private Dining Menu, on the door card." },
@@ -42,7 +42,7 @@ export default function RestaurantsPage() {
               Terrace Menu. Wine Pairing Menu. <Soft dark>Terrace Menu.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Same printed Code. No reprinting. No replacing table cards. The manager controls it from Informax Cloud.
+              Same printed Access Point. No reprinting. No replacing table cards. The manager controls it from Informax Cloud.
             </Lede>
           </Reveal>
         </Head>
@@ -57,7 +57,7 @@ export default function RestaurantsPage() {
               Organised like <Soft>your floor.</Soft>
             </Display>
             <Lede className="mt-8">
-              Tables, the terrace, the bar and private dining are each a Space. A table can have its own Code, and the menu it shows is decided by its Space.
+              Tables, the terrace, the bar and private dining are each a Space. A table can have its own Access Point, and the menu it shows is decided by its Space.
             </Lede>
           </Reveal>
         </Head>
@@ -92,7 +92,7 @@ export default function RestaurantsPage() {
         <AnalyticsPanel variant="restaurant" />
       </Section>
 
-      <CloudCta lead="Make every Code" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
+      <CloudCta lead="Make every Access Point" line="work harder." secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }} />
     </>
   );
 }

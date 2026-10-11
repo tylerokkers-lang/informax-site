@@ -10,9 +10,9 @@ import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
 
 export const metadata: Metadata = {
-  title: "Informax Cloud: manage what every Code shows",
+  title: "Informax Cloud: manage what every Access Point shows",
   description:
-    "Organise your property into Spaces, choose what each one shows, publish temporary content that ends on its own, and keep every previous version. The Code never changes.",
+    "Organise your property into Spaces, choose what each one shows, publish temporary content that ends on its own, and keep every previous version. The Access Point never changes.",
   alternates: { canonical: "/informax-cloud" },
 };
 
@@ -23,7 +23,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "One place to manage what people see when they scan Codes placed around hotels, restaurants and other physical locations.",
+    "One place to manage what people see when they scan Access Points placed around hotels, restaurants and other physical locations.",
   url: `${SITE_URL}/informax-cloud`,
   publisher: { "@type": "Organization", name: "Informax", url: SITE_URL },
 };
@@ -34,13 +34,14 @@ export default function InformaxCloudPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <VideoHero
+        longHeadline
         videoMp4="/video/cloud-hero.mp4"
         videoWebm="/video/cloud-hero.webm"
         poster="/video/cloud-hero-poster.jpg"
         dim={0.42}
         eyebrow="Informax Cloud"
-        headline="Every Code. One place to manage it."
-        description="Choose what people see when they scan a Code in each room, table or area of your business. Change it whenever you like. The printed Code stays."
+        headline="Every Access Point. One place to manage it."
+        description="Choose what people see when they scan an Access Point in each room, table or area of your business. Change it whenever you like. The printed Access Point stays."
         primaryLabel="Enquire"
         primaryHref="/enquire"
         secondaryLabel="Informax for hotels"
@@ -53,10 +54,10 @@ export default function InformaxCloudPage() {
           <Reveal blur>
             <Kicker>How it fits together</Kicker>
             <Display>
-              Codes live in Spaces. <Soft>Spaces decide what people see.</Soft>
+              Access Points sit in Spaces. <Soft>Spaces decide what people see.</Soft>
             </Display>
             <Lede className="mt-8">
-              A Space is a real place: a bedroom, the spa, a table on the terrace. Whatever a Space shows, every Code assigned to it shows too.
+              An Access Point is the framed card or plaque guests scan with their phone. A Space is a real place: a bedroom, the spa, a table on the terrace. Whatever a Space shows, every Access Point assigned to it shows too.
             </Lede>
           </Reveal>
         </Head>
@@ -64,7 +65,7 @@ export default function InformaxCloudPage() {
           <Flow />
         </Reveal>
         <Reveal className="mt-14">
-          <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Codes, temporary content running now and what needs attention" crop={0.74} />
+          <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Access Points, temporary content running now and what needs attention" crop={0.74} />
           <p className="mt-5 max-w-[60ch] text-[15px] leading-relaxed text-ink-mute">
             Overview. See what is live, what is temporary and what needs attention, the moment you sign in.
           </p>
@@ -105,14 +106,14 @@ export default function InformaxCloudPage() {
               Room 324, <Soft>at a glance.</Soft>
             </Display>
             <Lede className="mt-8">
-              Every Space shows what a guest sees when they scan a Code there, and what you can do about it: replace the content, use a website, or publish something temporary.
+              Every Space shows what a guest sees when they scan an Access Point there, and what you can do about it: replace the content, use a website, or publish something temporary.
             </Lede>
             <p className="mt-6 max-w-[44ch] leading-relaxed text-ink-mute">
-              Add another Code to the room later and it shows the same thing straight away.
+              Add another Access Point to the room later and it shows the same thing straight away.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud showing the Hotel Guest Directory to guests who scan a Code in the room" crop={0.72} />
+            <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud showing the Hotel Guest Directory to guests who scan an Access Point in the room" crop={0.72} />
           </Reveal>
         </div>
       </Section>
@@ -160,25 +161,25 @@ export default function InformaxCloudPage() {
         </div>
       </Section>
 
-      {/* Codes */}
+      {/* Access Points */}
       <Section tone="alt" id="codes">
         <Head>
           <Reveal blur>
-            <Kicker>Codes</Kicker>
+            <Kicker>Access Points</Kicker>
             <Display>
-              Every Code, <Soft>and where it lives.</Soft>
+              Every Access Point, <Soft>and where it lives.</Soft>
             </Display>
             <Lede className="mt-8">
-              Find any Code by name or place, see its Space, and retire it if it is no longer used. A Code keeps its place for good, however often the content changes.
+              Find any Access Point by name or place, see its Space, and retire it if it is no longer used. An Access Point keeps its place for good, however often the content changes.
             </Lede>
           </Reveal>
         </Head>
         <div className="grid items-start gap-8 lg:grid-cols-2">
           <Reveal>
-            <AppShot name="hotel-codes" alt="Codes list for a hotel in Informax Cloud" crop={0.8} />
+            <AppShot name="hotel-codes" alt="The list of a hotel's Access Points in Informax Cloud" crop={0.8} />
           </Reveal>
           <Reveal delay={0.08}>
-            <AppShot name="hotel-code" alt="A single Code in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
+            <AppShot name="hotel-code" alt="A single Access Point in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
           </Reveal>
         </div>
       </Section>
@@ -240,7 +241,7 @@ export default function InformaxCloudPage() {
           </Reveal>
         </div>
         <ul className="mt-14 grid gap-x-10 gap-y-3 border-t border-line pt-8 text-[15px] text-ink-mute sm:grid-cols-2 lg:grid-cols-4">
-          <li>Search any room, table or Code</li>
+          <li>Search any room, table or Access Point</li>
           <li>Switch between properties</li>
           <li>Light, dark or system appearance</li>
           <li>Works on a phone, tablet or desktop</li>
@@ -248,7 +249,7 @@ export default function InformaxCloudPage() {
       </Section>
 
       <CloudCta
-        lead="Make every Code"
+        lead="Make every Access Point"
         line="work harder."
         secondary={{ label: "Informax for hotels", href: "/hotels" }}
       />

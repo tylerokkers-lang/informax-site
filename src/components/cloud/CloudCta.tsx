@@ -5,7 +5,7 @@ import { PRIMARY_CTA } from "@/lib/constants";
 
 /** Closing statement. One action only. */
 export default function CloudCta({
-  lead = "Your Codes.",
+  lead = "Your Access Points.",
   line = "Under your control.",
   secondary,
 }: {

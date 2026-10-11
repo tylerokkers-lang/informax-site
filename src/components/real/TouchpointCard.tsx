@@ -1,6 +1,6 @@
 import { QR_PATH, QR_VIEWBOX } from "@/components/cloud/qr-path";
 
-/** A framed A5 Code card, as Informax can supply it. Illustrative; the Code is the same on every card. */
+/** A framed A5 Access Point, as Informax can supply it. Illustrative; the printed code is the same on every card. */
 export default function TouchpointCard() {
   return (
     <div className="relative mx-auto w-full max-w-[320px]">
@@ -12,7 +12,7 @@ export default function TouchpointCard() {
           <br />
           Room 324
         </h3>
-        <svg viewBox={QR_VIEWBOX} className="mx-auto my-8 h-32 w-32" shapeRendering="crispEdges" role="img" aria-label="An illustrative Code on a framed card">
+        <svg viewBox={QR_VIEWBOX} className="mx-auto my-8 h-32 w-32" shapeRendering="crispEdges" role="img" aria-label="An illustrative Access Point on a framed card">
           <path stroke="#18283d" d={QR_PATH} />
         </svg>
         <p className="text-[13px] text-ink-mute">Scan for your guest directory</p>

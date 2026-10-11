@@ -14,7 +14,7 @@ import TouchpointCard from "@/components/real/TouchpointCard";
 export const metadata: Metadata = {
   title: { absolute: "Informax | Information, always up to date" },
   description:
-    "The Code stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what people see when they scan a Code.",
+    "The Access Point stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what guests see when they scan an Access Point.",
   alternates: { canonical: "/" },
 };
 
@@ -30,18 +30,19 @@ export default function Home() {
   return (
     <>
       <VideoHero
+        longHeadline
         videoMp4="/video/home-hero.mp4"
         videoWebm="/video/home-hero.webm"
         poster="/video/home-hero-poster.jpg"
         eyebrow="Informax Cloud"
         headline={
           <>
-            The Code stays.
+            The Access Point stays.
             <br />
             Everything behind it can change.
           </>
         }
-        description="Informax Cloud gives businesses one place to manage what people see when they scan Codes across their spaces."
+        description="An Access Point is the framed card or plaque in a room, on a table or anywhere in your business that guests scan with their phone. Informax Cloud gives you one place to manage what each one shows."
         primaryLabel="Explore Informax Cloud"
         primaryHref="/informax-cloud"
         secondaryLabel="Enquire"
@@ -52,20 +53,20 @@ export default function Home() {
       <Section id="familiar">
         <Head>
           <Reveal blur>
-            <Kicker>Familiar by design</Kicker>
+            <Kicker>What is an Access Point?</Kicker>
             <Display>
               Information, <Soft>always up to date.</Soft>
             </Display>
             <Lede className="mt-8">
-              The world already knows how to scan. Informax gives businesses control over what happens next.
+              A framed card or plaque, placed where people need information. They scan it with their phone camera and see what you have chosen. Informax gives you control over what happens next.
             </Lede>
           </Reveal>
         </Head>
         <div className="grid gap-10 border-t border-line pt-8 md:grid-cols-3">
           {[
             ["No app", "Guests open their phone camera and scan. Nothing to download."],
-            ["No special hardware", "Print your own Codes, or use framed cards from Informax."],
-            ["No new behaviour", "Guests already know what to do with a Code."],
+            ["No special hardware", "Use framed Access Points from Informax, or print your own."],
+            ["No new behaviour", "Guests already know how to scan."],
           ].map(([t, b], i) => (
             <Reveal key={t} delay={i * 0.08}>
               <h3 className="text-xl font-semibold text-ink">{t}</h3>
@@ -75,13 +76,13 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* One Code, content that changes: Room 324 */}
+      {/* One Access Point, content that changes: Room 324 */}
       <Section tone="dark" id="same-code">
         <Head>
           <Reveal blur>
             <Kicker dark>Print it once. Update it anytime.</Kicker>
             <Display dark>
-              One Code. <Soft dark>Content that changes.</Soft>
+              One Access Point. <Soft dark>Content that changes.</Soft>
             </Display>
             <Lede dark className="mt-8">
               A hotel changes what Room 324 shows for a conference weekend. The card in the room stays exactly where it is.
@@ -97,17 +98,17 @@ export default function Home() {
           <Reveal blur>
             <Kicker>Informax Cloud</Kicker>
             <Display>
-              Every Code, <Soft>in one place.</Soft>
+              Every Access Point, <Soft>in one place.</Soft>
             </Display>
             <Lede className="mt-8">
-              Organise your property into Spaces. Each Space decides what people see when they scan a Code placed there. Change it in Informax Cloud and the next scan shows the new content.
+              Organise your property into Spaces. Each Space decides what people see when they scan an Access Point placed there. Change it in Informax Cloud and the next scan shows the new content.
             </Lede>
             <Link href="/informax-cloud" className="ix-link mt-10 inline-flex">
               Explore Informax Cloud →
             </Link>
           </Reveal>
           <Reveal delay={0.1}>
-            <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Codes, temporary content running now and what needs attention" crop={0.7} />
+            <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Access Points, temporary content running now and what needs attention" crop={0.7} />
           </Reveal>
         </div>
         <Reveal className="mt-16">
@@ -150,7 +151,7 @@ export default function Home() {
           <Reveal blur>
             <Kicker dark>For restaurants</Kicker>
             <Display dark>
-              Table 7. <Soft dark>Two menus. One Code.</Soft>
+              Table 7. <Soft dark>Two menus. One Access Point.</Soft>
             </Display>
             <Lede dark className="mt-8">
               Table 7 normally opens the Terrace Menu. For an evening, it shows the Wine Pairing Menu. When the timer ends, the Terrace Menu is back.
@@ -201,16 +202,16 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Framed Codes */}
+      {/* Framed Access Points */}
       <Section id="framed-codes">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
           <Reveal blur>
-            <Kicker>Framed Codes</Kicker>
+            <Kicker>Framed Access Points</Kicker>
             <Display>
               No special hardware. <Soft>No app. Just scan.</Soft>
             </Display>
             <Lede className="mt-8">
-              Informax can supply premium framed Code cards for rooms and tables. Prefer your own materials? Print your Codes yourself. Either way, what a Code shows is managed in Informax Cloud.
+              Informax can supply premium framed Access Points for rooms and tables. Prefer your own materials? Print your own. Either way, what an Access Point shows is managed in Informax Cloud.
             </Lede>
             <p className="mt-6 max-w-[46ch] leading-relaxed text-ink-mute">
               Designed and printed guest information is an optional extra. The software is the product.
@@ -234,8 +235,8 @@ export default function Home() {
         </Head>
         <div className="grid items-start gap-8 lg:grid-cols-[1fr_1fr_230px]">
           <Reveal>
-            <AppShot name="hotel-codes" alt="Codes in Informax Cloud: every Code, the Space it belongs to and its status" crop={0.78} />
-            <p className="mt-4 text-[15px] text-ink-mute">Codes. Every Code and where it lives.</p>
+            <AppShot name="hotel-codes" alt="The Informax Cloud list of every Access Point, the Space it belongs to and its status" crop={0.78} />
+            <p className="mt-4 text-[15px] text-ink-mute">Access Points. Every one, and where it lives.</p>
           </Reveal>
           <Reveal delay={0.08}>
             <AppShot name="hotel-activity" alt="Activity in Informax Cloud: what changed and who changed it, in plain language" crop={0.78} />
@@ -261,7 +262,7 @@ export default function Home() {
       </section>
 
       <CloudCta
-        lead="Make every Code"
+        lead="Make every Access Point"
         line="work harder."
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
       />
