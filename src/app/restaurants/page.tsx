@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import PageHero from "@/components/cloud/PageHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
+import { PLANNED_BULK_NOTE } from "@/lib/product-status";
 import CloudCta from "@/components/cloud/CloudCta";
 import SameCodeDemo from "@/components/real/SameCodeDemo";
 import AnalyticsPanel from "@/components/real/AnalyticsPanel";
@@ -57,7 +58,7 @@ export default function RestaurantsPage() {
               Organised like <Soft>your floor.</Soft>
             </Display>
             <Lede className="mt-8">
-              Tables, the terrace, the bar and private dining are each a Space. A table can have its own Access Point, and the menu it shows is decided by its Space.
+              The Main Restaurant and the Terrace group your tables. Each table, the bar and private dining is a Space with its own Access Point, and the menu it shows is decided by that Space.
             </Lede>
           </Reveal>
         </Head>
@@ -69,6 +70,10 @@ export default function RestaurantsPage() {
             </Reveal>
           ))}
         </div>
+        <p className="mt-8 max-w-[62ch] text-[14.5px] leading-relaxed text-ink-mute">
+          <span className="mr-2 inline-block rounded-full bg-ink/5 px-3 py-0.5 text-[12.5px] font-semibold text-ink">Coming soon</span>
+          {PLANNED_BULK_NOTE}
+        </p>
       </Section>
 
       <Section tone="alt">

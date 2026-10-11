@@ -25,7 +25,7 @@ const BENEFITS = [
 ];
 
 const CREATE = [
-  { title: "Guest Directories", body: "The complete guide to your property, in every room." },
+  { title: "Guest Directories", body: "The complete guide to your property, ready in the room." },
   { title: "Spa & treatment menus", body: "Treatments, rituals and booking, at the Spa and in the room." },
   { title: "Restaurant & bar menus", body: "Current menus at the table, the bar and in-room dining." },
   { title: "Welcome & local guides", body: "Arrival information and the best of the area." },

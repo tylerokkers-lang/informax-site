@@ -88,6 +88,24 @@ screenshots keep the app's own words (Codes, Spaces). Legal pages are untouched.
 - Table 7 "normal service" admin frame uses the Restaurant Spaces screen because
   the app has no Table 7 default-state preview scenario.
 
+### Spaces and Access Points: what is live, what is planned (verified 11 October 2026)
+
+Checked in informax-cloud-v2 `origin/main` (7587f92; `docs/stage-2.md`, `docs/stage-3.md`, ADR 0018).
+**Live:** content (default, temporary with an expiry, version history) belongs to a *Space*;
+every Access Point in a Space shows exactly what that Space shows; a room or a table is its own
+Space, so each can differ and temporary content on one leaves the others alone; floors,
+terraces and public areas are container Spaces that only group places (no Access Points or
+content of their own). **Planned, NOT built:** (1) updating every room on a floor, or a whole
+restaurant, in one step (ADR 0018 point 13 "bulk operations later"; today each room or table is
+updated on its own); (2) giving one Access Point content that differs from its Space (an
+Access Point, called a Code in the app, owns nothing: "no Code-specific content").
+The owner's description (11 October) of "update all together by default, override individually"
+describes the intended product; the site presents (1) and (2) as "Planned / Coming soon" until
+they ship. The single source is `src/lib/product-status.ts`; the copy that reads it is the
+"One Space. Every Access Point. Complete control." section on `/informax-cloud`, plus short
+planned-notes on `/hotels` and `/restaurants`. Do not describe a Space as forcing identical
+content on rooms or tables, or a parent Space as updating its children.
+
 ### Analytics: PLANNED, not built (verified 10 October 2026)
 
 Checked in informax-cloud-v2 (branch `product/settings-and-navigation-polish`,

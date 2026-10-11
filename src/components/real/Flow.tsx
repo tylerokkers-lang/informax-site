@@ -1,9 +1,9 @@
-/** The product model in one line: Access Point, Space, live content. */
+/** The product model in one line: a Space, its Access Points, and the content they show. */
 export default function Flow({ className = "", dark = false }: { className?: string; dark?: boolean }) {
   const items = [
-    ["Access Point", "Stays where it is"],
-    ["Space", "A real place: Room 324, Table 7"],
-    ["Live content", "A PDF or a website"],
+    ["Space", "A room, a table or an area"],
+    ["Access Points", "One or more, each where guests need it"],
+    ["Content", "What the Space shows: a PDF or a website"],
   ];
   return (
     <ol className={`flex flex-col gap-3 sm:flex-row sm:items-stretch ${className}`}>

@@ -8,6 +8,7 @@ import CloudCta from "@/components/cloud/CloudCta";
 import { AppShot, PhoneShot } from "@/components/real/Shots";
 import AnalyticsPanel from "@/components/real/AnalyticsPanel";
 import Flow from "@/components/real/Flow";
+import { LIVE_SPACE_CAPABILITIES, PLANNED_SPACE_CAPABILITIES } from "@/lib/product-status";
 
 export const metadata: Metadata = {
   title: "Informax Cloud: manage what every Access Point shows",
@@ -48,26 +49,49 @@ export default function InformaxCloudPage() {
         secondaryHref="/hotels"
       />
 
-      {/* The model */}
+      {/* The model: what is live and what is planned (see lib/product-status.ts) */}
       <Section>
         <Head>
           <Reveal blur>
             <Kicker>How it fits together</Kicker>
             <Display>
-              Access Points sit in Spaces. <Soft>Spaces decide what people see.</Soft>
+              One Space. Every Access Point. <Soft>Complete control.</Soft>
             </Display>
             <Lede className="mt-8">
-              An Access Point is the framed card or plaque guests scan with their phone. A Space is a real place: a bedroom, the spa, a table on the terrace. Whatever a Space shows, every Access Point assigned to it shows too.
+              Organise your rooms, tables or areas into Spaces. Every room or table has its own Access Point and its own content, so Room 324 can show conference information while the other rooms keep the standard guest directory.
             </Lede>
           </Reveal>
         </Head>
         <Reveal>
           <Flow />
+          <p className="mt-5 max-w-[62ch] text-[15px] leading-relaxed text-ink-mute">
+            An Access Point is the framed card or plaque guests scan with their phone. A Space is a real place: a bedroom, the spa, a table on the terrace. Restaurants work the same way: Table 7 can show the Wine Pairing Menu for an evening while other tables keep the Terrace Menu.
+          </p>
         </Reveal>
+        <div className="mt-12 grid gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-16">
+          <Reveal>
+            <h3 className="text-[15px] font-semibold text-brass-deep">Available today</h3>
+            <ul className="mt-4 space-y-3 text-[15.5px] leading-relaxed text-ink">
+              {LIVE_SPACE_CAPABILITIES.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h3 className="text-[15px] font-semibold text-ink-mute">
+              Planned <span className="ml-2 rounded-full bg-ink/5 px-3 py-0.5 text-[12.5px] text-ink">Coming soon</span>
+            </h3>
+            <ul className="mt-4 space-y-3 text-[15.5px] leading-relaxed text-ink-mute">
+              {PLANNED_SPACE_CAPABILITIES.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
         <Reveal className="mt-14">
-          <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Access Points, temporary content running now and what needs attention" crop={0.74} />
-          <p className="mt-5 max-w-[60ch] text-[15px] leading-relaxed text-ink-mute">
-            Overview. See what is live, what is temporary and what needs attention, the moment you sign in.
+          <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud: the guest directory it shows now, and the three Access Points in the room that all show it" crop={0.74} />
+          <p className="mt-5 max-w-[62ch] text-[15px] leading-relaxed text-ink-mute">
+            Room 324 is a Space. Its Welcome Card, Bedside and TV Access Points all show what the Space shows, and the other rooms are managed separately. From a Space you can replace its content, use a website, or publish something temporary.
           </p>
         </Reveal>
       </Section>
@@ -93,27 +117,6 @@ export default function InformaxCloudPage() {
           <Reveal delay={0.08}>
             <AppShot name="restaurant-spaces" alt="Spaces for a restaurant in Informax Cloud: Main Restaurant, Terrace, Bar and Private Dining" crop={0.9} />
             <p className="mt-4 text-[15px] text-ink-mute">A restaurant. Tables, Terrace, Bar and Private Dining.</p>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* Space detail */}
-      <Section id="space">
-        <div className="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <Reveal blur>
-            <Kicker>One Space</Kicker>
-            <Display>
-              Room 324, <Soft>at a glance.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Every Space shows what a guest sees when they scan an Access Point there, and what you can do about it: replace the content, use a website, or publish something temporary.
-            </Lede>
-            <p className="mt-6 max-w-[44ch] leading-relaxed text-ink-mute">
-              Add another Access Point to the room later and it shows the same thing straight away.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud showing the Hotel Guest Directory to guests who scan an Access Point in the room" crop={0.72} />
           </Reveal>
         </div>
       </Section>
