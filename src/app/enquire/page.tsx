@@ -4,15 +4,15 @@ import EnquireForm from "@/components/EnquireForm";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Talk to Informax",
+  title: "Enquire",
   description:
-    "Talk to Informax about Informax Cloud, digital guest directories and Access Points for your hotel, or arrange a demonstration.",
+    "Enquire about Informax Cloud for your hotel or restaurant, or arrange a demonstration.",
   alternates: { canonical: "/enquire" },
 };
 
 const NEXT = [
-  { n: "01", title: "A conversation", body: "We learn how your property runs and what guests ask for most." },
-  { n: "02", title: "A demonstration", body: "We show you Informax Cloud with Spaces shaped around your hotel." },
+  { n: "01", title: "A conversation", body: "We learn how your business runs and where people need information." },
+  { n: "02", title: "A demonstration", body: "We show you Informax Cloud with Spaces shaped around your business." },
   { n: "03", title: "A clear proposal", body: "Scoped to the Spaces and Access Points you actually need." },
 ];
 
@@ -25,14 +25,13 @@ export default function EnquirePage() {
       <div className="relative mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:px-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-[140px] lg:self-start">
           <p className="mb-5 text-[15px] font-semibold text-brass-light md:text-[17px]">
-            Talk to Informax
+            Enquire
           </p>
           <h1 className="max-w-[13ch] text-balance font-serif-display text-[clamp(42px,6vw,76px)] font-medium leading-[0.98] tracking-[-0.02em] text-white">
-            Let&rsquo;s talk about <span className="text-cream-mute">your hotel.</span>
+            Let&rsquo;s talk about <span className="text-cream-mute">your business.</span>
           </h1>
           <p className="mt-7 max-w-[42ch] text-[17px] leading-relaxed text-white/72">
-            Tell us a little about your property. We&rsquo;ll come back with a
-            conversation, not a sales pitch.
+            Tell us where your Access Points will go and what you want them to open. We’ll show you how Informax Cloud can help.
           </p>
 
           <ol className="mt-12 border-t border-white/10">

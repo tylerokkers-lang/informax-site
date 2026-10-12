@@ -6,41 +6,144 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 26 September 2026 (Cloud entrance logo + hero playback fix
+Last updated: 10 October 2026 (Code / Space / live content repositioning on branch `website/qr-cloud-repositioning`, see §0b; earlier: 26 September 2026 (Cloud entrance logo + hero playback fix
 live; before that the 25 September Informax Cloud repositioning and full site
 redesign — see §0 first; §1 and the old hero/nav notes below it are
 historical where they conflict).
 
-## 0b. Access Point positioning (28 September 2026)
+## 0c. Merge with the earlier "Access Point" work on main (10 October 2026)
 
-- **Terminology (public site):** the physical object is the **Access Point**;
-  the machine-readable identity inside it is its **Code** (connected to a
-  Room, Area or Space). Never QR Code, Scan Code, NFC, Touch Point, Informax
-  Touch or Informax Scan in marketing copy. Cloud management demos say
-  **Codes** (list, "New Code", tabs, "Codes vs Direct"). Touch is kept in the
-  code (`kind: "touch" | "scan"`, `TouchPoint` renders an Access Point) for a
-  future Touch-enabled Access Point. Legal pages still say "NFC-enabled"
-  on purpose, pending legal review.
-- **Model:** Hotel → Spaces (shared: Spa, Restaurants, Gym, Meetings &
-  Events, Guest Information) → Rooms & Areas (precise control) → Access
-  Points / Codes → guest content. Every hotel has a **Default Landing Page**
-  that rooms return to after temporary content ends.
-- **Homepage (12 sections):** hero, one platform, the Access Point + Code,
-  Spaces, Rooms & Areas, temporary content, Access Point design, hotel-wide
-  control, analytics, audit, fits around your hotel, closing CTA. Components
-  in `src/components/access/`.
-- **Product maturity:** the site presents product direction (Rooms & Areas,
-  temporary content, bulk updates, Code colourways, audit) ahead of the live
-  app; unreleased workflows use "designed for / built for" wording. Keep it
-  that way until they ship. Drawn Codes are illustrative and captioned as
-  such; the centre mark is always Informax's.
-- **Sharing:** `src/app/opengraph-image.jpg` / `twitter-image.jpg` (and the
-  same under `informax-cloud/`), generated from the hero stills and official
-  logos. No site-wide `og:url`.
-- **Social links:** `SOCIAL_LINKS` in `src/lib/constants.ts`. Instagram is
-  live (instagram.com/informax_cloud, supplied by the owner 29 September
-  2026). LinkedIn is still empty and shows as an inactive icon until the
-  owner supplies it. Never guess it.
+`main` had three commits that were never in this branch's base: an **Access
+Point** homepage and terminology (28 September), **removal of /how-it-works**
+(it 308-redirects to `/informax-cloud`), and the Instagram link (29 September).
+Resolved in the merge: the Code / Space / live content positioning (§0b)
+**replaces** the Access Point wording and homepage (that homepage also showed
+Meetings & Events, analytics and audit visuals as if live, and its
+`components/access/*` drawings were deleted); **kept from main**: the How It
+Works removal and redirect (nav, footer and sitemap no longer list it; its FAQ
+was dropped, so the Analytics FAQ line lives only in `analytics-status.ts`
+unused), `SOCIAL_LINKS` (Instagram live, LinkedIn empty), logo and `sameAs` in
+the organisation data, per-page share addresses. The share images
+(`opengraph-image.jpg`, `twitter-image.jpg`, `informax-cloud/opengraph-image.jpg`)
+were regenerated with the new headlines. Legal pages still say "NFC-enabled".
+If the owner wants How It Works back, restore it from `git show 12a9118:src/app/how-it-works/page.tsx`.
+
+## 0b. Access Points to Spaces to live content repositioning (10 October 2026) — branch `website/qr-cloud-repositioning`, PR #2, NOT yet merged or live
+
+### PERMANENT BRANDING RULE (owner, 11 October 2026; supersedes the "Code" rule of 10 October) — read before writing any copy
+- The customer-facing word is **"Access Point" / "Access Points"**. It replaces "Codes" and
+  "QR codes" in all public copy: visible text, titles, meta descriptions, Open Graph/Twitter
+  text, share images and their alt text, image alt text, aria labels, FAQs, form options, CTAs.
+  Do not say "Code(s)" or "QR code(s)" publicly. "Scan" is fine.
+- **What an Access Point is** (always explain it for a first-time visitor; done in the homepage
+  hero, the "What is an Access Point?" section and the Informax Cloud page): the framed card
+  or plaque in a room, on a table or anywhere in a business that guests scan with their phone
+  camera. Informax Cloud manages what each one shows; the printed Access Point never changes.
+- **"Spaces"** (managed content destinations) and **"Informax Cloud"** (the platform) are unchanged.
+- Never reintroduce Touch Points, NFC, Informax Touch/Scan, or Meetings & Events as product
+  positioning. Never claim analytics, scan tracking or malware scanning as live.
+- Not renamed (by decision): routes, database fields, component and file names
+  (`qr-path.ts`, `SameCodeDemo`, `hotel-codes` screenshot file names, the `codes` anchor id),
+  and the Informax Cloud app's own features and UI.
+- **KNOWN MISMATCH:** the real Informax Cloud screenshots still show the app's own word
+  "Codes" (the Codes list, "Codes in Room 324", "Add a Code"), because the Cloud app has not
+  been renamed. Alt text describes them as Access Points. Until the Cloud UI says "Access
+  Points", re-capture the screens after it does (see §0b "Real screenshots"), or accept the
+  mismatch. Do not edit screenshots to fake the wording.
+- Headlines in use: "The Access Point stays. Everything behind it can change." /
+  "Information, always up to date." / "One Access Point. Content that changes." /
+  "Make every Access Point work harder."
+- **Flagged for the owner:** (1) the footer DENSO WAVE "QR Code" trademark credit was removed
+  (10 October): the site no longer uses the term; restore only on the owner's say-so. (2) The
+  Privacy and Terms pages still say "NFC-enabled tags": contract wording, held for legal
+  review, **unchanged**. (3) The About page founder biography mentions "front office, meetings
+  and events" as personal background (owner copy, kept).
+- The drawn graphic on the site is a real, scannable code to informax.co.uk; its alt text says
+  "Access Point".
+
+**This supersedes the "Touch Point" rules in §0 and §0a.** The site now matches the real
+Informax Cloud (informax-cloud-v2): *Access Point → Space → live content*. Product
+screenshots keep the app's own words (Codes, Spaces). Legal pages are untouched.
+
+- **Pages:** `/` (home story), `/informax-cloud` (real product), `/hotels`,
+  `/restaurants` (new), `/how-it-works`, `/digital-experiences` (optional
+  designed content), `/enquire`. Nav: Home, Informax Cloud, Hotels,
+  Restaurants, How It Works, About, Enquire. `PRIMARY_CTA` is "Enquire".
+- **Real screenshots:** `public/product/screens/*.webp`, indexed in
+  `src/lib/screens.ts` (generated; sizes). Captured from informax-cloud-v2
+  `/dev/preview/*` (the real views, fixture data) with Playwright. Names and
+  emails are rewritten at capture time (Marlowe Grand, Copper Table), the
+  QR codes are swapped for the site's own illustrative code, web addresses are
+  hidden, the Next dev badge is removed. Guest PDFs are demo documents made for
+  this purpose. To refresh: run informax-cloud-v2 on a spare port, re-capture,
+  **rename changed files** (media is cached), regenerate `screens.ts`.
+  The Platform (Super Admin) screen was captured but NOT used: its fixtures
+  show a suspended client and overdue payment.
+- **Components:** `src/components/real/` — `Shots` (AppShot, PhoneShot),
+  `SameCodeDemo` (auto-playing Room 324 / Table 7 demo built from the real
+  screens; pauses off screen, manual steps, reduced motion respected), `Flow`,
+  `TouchpointCard`. The old animated recreations (`components/product/*`,
+  Touch Point drawings, hotel scene, old story sections) and `lib/spaces.ts`
+  were deleted; use git history if ever needed.
+- Table 7 "normal service" admin frame uses the Restaurant Spaces screen because
+  the app has no Table 7 default-state preview scenario.
+
+### APPROVED HIERARCHY (owner, 12 October 2026): PROPERTY → SPACE → BLOCK → ACCESS POINT
+
+- **Property** = the hotel or restaurant. **Space** = an operational section (Bedrooms, Spa, Gym,
+  Restaurant, Bar). **Block** = an individually manageable room, table, facility or item inside a
+  Space (Room 324, Table 7). **Access Point** = what belongs to a Block and guests scan (Bedside
+  Table, Welcome Card, Spa Menu, Room Service Menu). Replaces earlier proposals (Locations, Nodes,
+  Elements, Units).
+- **Naming rules:** every Space, Block and Access Point has its own descriptive name; hierarchy
+  labels name the type, real-world names name the object; **a Block is never called a Space**
+  (never write "Room 324 is a Space" or "Table 7 is a Space"); public copy says "Access Points",
+  never Codes or QR; **never mention floors** (the approved hierarchy has no floor level).
+- **Application status (audited 12 October 2026, informax-cloud-v2 `origin/main` 7587f92):** the
+  Cloud app and database do NOT use these words yet: Property = Location, Block = leaf Space,
+  Access Point = Code, plus an intermediate Floor/Section level. Plan, gap analysis and owner
+  decisions D1-D10: Cloud repo `docs/product-hierarchy-plan.md` and ADR 0020 (PR #26, proposal;
+  nothing implemented, no architectural work until the owner approves the plan).
+- **Live (in substance, older words):** Spaces (top-level areas) contain rooms/tables (Blocks) that
+  each have their own content (default, temporary with expiry, version history) and several
+  Access Points; every Access Point in a Block shows that Block's content; temporary content on
+  one Block leaves others untouched. **Planned, NOT built:** shared Space default content and
+  inheritance (req. 1-2), changing content across a whole Space in one step (5), different content
+  for Access Points in the same Block (4, 6 for Access Points), override-aware bulk (8). The
+  **precedence rules are not yet defined**; the site says nothing about them.
+- Single source for these statements: `src/lib/product-status.ts` (read by the "One Space. Every
+  Access Point. Complete control." section on `/informax-cloud` and the planned-notes on `/hotels`
+  and `/restaurants`). The hierarchy diagram is `components/real/Flow.tsx`.
+- **KNOWN MISMATCH:** the real Cloud screenshots show the app's current words ("Spaces" for rooms,
+  "Codes", and a "Floor 3" level in the Room 324 breadcrumb). Alt text and captions use the approved
+  words; screenshots are not edited. Re-capture once the app adopts the hierarchy.
+
+### Analytics: PLANNED, not built (verified 10 October 2026)
+
+Checked in informax-cloud-v2 (branch `product/settings-and-navigation-polish`,
+HEAD `6217ca4`). **Live:** nothing. **In development:** nothing. **Planned
+(Stage 7 "Insights"):** an interaction recorder that stores the placement id and
+version id at scan time, outside the resolve path (ADR 0018 point 12), most
+viewed content/menus, scan counts. Evidence: no `/insights` route; no
+interaction/scan table in any migration; the public `/c/[code]` route only calls
+`resolve_public_code` and writes nothing; ADR 0018 says "No per-request
+analytics. None is recorded"; HANDOVER says "Do not start Stage 4 (... analytics
+recording)". Only placeholders exist: the `analytics.view` capability (seeded to
+admin, manager and the two support roles) and an "Insights" nav slot that no
+screen backs. V1 (`informax-analytics`) has analytics but is not the product.
+Unknown until built: who sees it, retention, any privacy limits.
+
+Owner decision (10 October 2026): Analytics stays on the site as a **secondary,
+clearly "Coming soon" capability**. The homepage carries only a small quiet note
+near the bottom (`AnalyticsNote`); the full planned-capability sections are on
+`/informax-cloud`, `/hotels` and `/restaurants` (`AnalyticsPanel`), plus one FAQ
+answer on `/how-it-works`. All wording is written as a future plan ("We plan to…",
+"Planned:"): no dashboard, no screenshot, no figures, and no statement about what
+is recorded, retained, who can see it or what is private, until those are built.
+All Analytics strings and the status switch are centralised in
+`src/lib/analytics-status.ts` (+ `components/real/AnalyticsPanel.tsx`); its header
+comment is the checklist for the day Analytics ships. The Cloud-side plan is in
+informax-cloud-v2 `docs/analytics-roadmap.md`.
 
 ## 0a. Design system and homepage story (27 September 2026) — live
 
@@ -66,10 +169,8 @@ historical where they conflict).
   the product point is "one permanent connection", not an address.
 - **Touch Point accent is platinum** (`--glow` #dfe3ea / `--glow-deep`
   #9aa3b2) — deliberately not blue (Cloud) or gold. One token to change.
-- **Nav order:** Home, Informax Cloud, Digital Experiences, About, Talk to
-  Informax (footer follows the same order). The How It Works page was
-  removed on 28 September 2026 and `/how-it-works` 308-redirects to
-  `/informax-cloud`.
+- **Nav order:** Home, Informax Cloud, Digital Experiences, How It Works,
+  About, Talk to Informax (footer follows the same order).
 - **Homepage story (no product demos):** hero → why information matters →
   the problem → how Informax works → throughout the Hotel (environments) →
   benefits → our approach → **Meet Informax Cloud** (final section, existing
@@ -587,7 +688,7 @@ resend.com/emails for individual send/delivery status.
 |---|---|
 | `/` | Home: Informax Cloud narrative (hero, what it is, Spaces, how it works, Touch Point stays, live Cloud demo, Touch Points, 400-room update, PDF or website, Activity, Guest Directory, CTA) |
 | `/informax-cloud` | Product page: Spaces, permanent address, content, demo, scale, the three-rule model, Activity, version history, remote management |
-| `/how-it-works` | **Removed 28 September 2026**; 308 → `/informax-cloud` |
+| `/how-it-works` | Three-stage story, worked Spa example, demo, FAQ |
 | `/hospitality` | Hotel problems mapped to Informax answers, per-department Spaces, founder credibility |
 | `/touch-points` | The physical product, Touch and Scan, placements, one Space many Touch Points |
 | `/about` | Founder story (copy supplied by the user, keep as is) |

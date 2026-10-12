@@ -25,6 +25,8 @@ export interface VideoHeroProps {
   showScrollCue?: boolean;
   /** Extra even darkening for bright footage, 0 to 1. */
   dim?: number;
+  /** A smaller, wider headline for longer statements. */
+  longHeadline?: boolean;
 }
 
 /**
@@ -49,6 +51,7 @@ export default function VideoHero({
   secondaryHref,
   showScrollCue = true,
   dim = 0,
+  longHeadline = false,
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -81,7 +84,7 @@ export default function VideoHero({
   }, [reduceMotion]);
 
   return (
-    <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-charcoal-950 text-cream">
+    <section className="relative min-h-[max(560px,100svh)] w-full overflow-hidden bg-charcoal-950 text-cream">
       {/* Film. The poster is the film's own first frame and sits on top,
           at the same scale, until the film is actually playing — then it
           fades away over identical pixels, so there is no jump or dip. */}
@@ -136,7 +139,7 @@ export default function VideoHero({
       />
 
       {/* Content */}
-      <div className="relative z-[2] flex h-full flex-col">
+      <div className="relative z-[2] flex min-h-[max(560px,100svh)] flex-col pt-28">
         <div className="mx-auto flex w-full max-w-8xl flex-1 flex-col justify-end px-6 pb-16 md:px-10 md:pb-20">
           <p
             style={rise(14, 0.8, 0.2)}
@@ -147,7 +150,7 @@ export default function VideoHero({
 
           <h1
             style={rise(24, 1, 0.32)}
-            className="ix-hero-rise max-w-[15ch] text-balance font-serif-display text-[clamp(40px,7.4vw,96px)] leading-[1] text-white"
+            className={`ix-hero-rise text-balance font-serif-display leading-[1] text-white ${longHeadline ? "max-w-[22ch] text-[clamp(38px,5.6vw,80px)]" : "max-w-[15ch] text-[clamp(40px,7.4vw,96px)]"}`}
           >
             {headline}
           </h1>

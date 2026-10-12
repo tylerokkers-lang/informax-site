@@ -5,6 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/informax-cloud",
+    "/hotels",
+    "/restaurants",
     "/digital-experiences",
     "/about",
     "/enquire",
@@ -18,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const priority: Record<string, number> = {
     "": 1,
     "/informax-cloud": 0.95,
+    "/hotels": 0.9,
+    "/restaurants": 0.9,
     "/digital-experiences": 0.85,
     "/enquire": 0.9,
     "/about": 0.6,

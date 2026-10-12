@@ -20,8 +20,8 @@ export default function DigitalInformationHero() {
       poster={DIGITAL_INFO_POSTER}
       eyebrow="Informax — Digital Information"
       headline="Documents your guests actually want to open."
-      description="Brochures, pamphlets and directories, designed to be read, opened and explored in seconds, not downloaded and forgotten."
-      primaryLabel="Talk to Informax"
+      description="Brochures, pamphlets and directories, designed to be scanned, opened and explored in seconds, not downloaded and forgotten."
+      primaryLabel="Enquire"
       primaryHref="/enquire"
       secondaryLabel="See how it works"
       secondaryHref="#flow"

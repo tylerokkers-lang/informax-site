@@ -455,3 +455,22 @@ svg {
     border-radius: 6px;
   }
 }
+
+/* Progress along the active step of a product demonstration. */
+.ix-step-bar {
+  width: 100%;
+  transform-origin: left;
+  animation: ix-step-bar linear both;
+}
+@keyframes ix-step-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ix-step-bar { animation: none; }
+}
+
+.ix-link { color: #0470b0; }
+.ix-link:hover { color: #0693e3; }
+.ix-link-dark { color: #8ed1fc; }
+.ix-link-dark:hover { color: #ffffff; }

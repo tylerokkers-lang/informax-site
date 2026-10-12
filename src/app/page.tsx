@@ -1,251 +1,270 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import VideoHero from "@/components/sections/VideoHero";
 import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
-import MeetCloud from "@/components/story/MeetCloud";
-import LocationFlow from "@/components/access/LocationFlow";
-import AccessPointScenes from "@/components/access/AccessPointScenes";
-import RoomsWorkflow from "@/components/access/RoomsWorkflow";
-import TemporaryTimeline, { OCCASIONS } from "@/components/access/TemporaryTimeline";
-import SpacesMap, { SPACE_EXAMPLES } from "@/components/access/SpacesMap";
-import Colourways from "@/components/access/Colourways";
-import BulkUpdate from "@/components/access/BulkUpdate";
-import AnalyticsSnapshot from "@/components/access/AnalyticsSnapshot";
-import AuditTrail from "@/components/access/AuditTrail";
-import FitsAround from "@/components/access/FitsAround";
+import CloudCta from "@/components/cloud/CloudCta";
+import SameCodeDemo from "@/components/real/SameCodeDemo";
+import { AppShot, PhoneShot } from "@/components/real/Shots";
+import { AnalyticsNote } from "@/components/real/AnalyticsPanel";
+import Flow from "@/components/real/Flow";
+import TouchpointCard from "@/components/real/TouchpointCard";
 
 export const metadata: Metadata = {
-  title: { absolute: "Informax | Hotel Information Management with Informax Cloud" },
+  title: { absolute: "Informax | Information, always up to date" },
   description:
-    "Informax Cloud gives every hotel room and area its own Access Point, so hotels control the guest information behind it, schedule temporary content and manage it all from one place.",
+    "The Access Point stays. Everything behind it can change. Informax Cloud gives hotels and restaurants one place to manage what guests see when they scan an Access Point.",
   alternates: { canonical: "/" },
 };
 
-/**
- * The homepage explains Informax Cloud in the order a hotel thinks about
- * it: the idea, the physical Access Point, the everyday workflow, the
- * capabilities that save time (temporary content, Spaces, hotel-wide
- * changes), what the Hotel learns and how it fits alongside what they
- * already use.
- */
+const HOTEL_PLACES = [
+  ["Room 324", "Hotel Guest Directory"],
+  ["Spa", "Treatment Guide"],
+  ["Gym", "Class Schedule"],
+  ["Lobby Lounge", "Afternoon Tea"],
+  ["Reception", "Hotel and local information"],
+];
+
 export default function Home() {
   return (
     <>
-      {/* 1. Hero: the existing film, new message */}
       <VideoHero
+        longHeadline
         videoMp4="/video/home-hero.mp4"
         videoWebm="/video/home-hero.webm"
         poster="/video/home-hero-poster.jpg"
         eyebrow="Informax Cloud"
-        headline="Hotel information, exactly where it needs to be."
-        description="Informax Cloud gives every room and area its own Access Point, so hotels control what guests see, show temporary information when it matters and manage everything from one place."
-        primaryLabel="Discover Informax Cloud"
+        headline={
+          <>
+            The Access Point stays.
+            <br />
+            Everything behind it can change.
+          </>
+        }
+        description="An Access Point is the framed card or plaque in a room, on a table or anywhere in your business that guests scan with their phone. Informax Cloud gives you one place to manage what each one shows."
+        primaryLabel="Explore Informax Cloud"
         primaryHref="/informax-cloud"
         secondaryLabel="Enquire"
         secondaryHref="/enquire"
       />
 
-      {/* 2. The whole idea */}
-      <Section id="one-platform">
+      {/* Familiar by design */}
+      <Section id="familiar">
         <Head>
           <Reveal blur>
-            <Kicker>How it works</Kicker>
+            <Kicker>What is an Access Point?</Kicker>
             <Display>
-              One platform. <Soft>Every room and area.</Soft>
+              Information, <Soft>always up to date.</Soft>
             </Display>
             <Lede className="mt-8">
-              Shared information lives in Spaces, such as the Spa or Restaurants. Rooms and areas that need their
-              own information can have it. Each place keeps a permanent Access Point, while what guests see can
-              change whenever the hotel needs it to.
+              A framed card or plaque, placed where people need information. They scan it with their phone camera and see what you have chosen. Informax gives you control over what happens next.
             </Lede>
           </Reveal>
         </Head>
-        <LocationFlow />
-      </Section>
-
-      {/* 3. The Access Point */}
-      <Section tone="alt">
-        <Head>
-          <Reveal blur>
-            <Kicker>Meet the Informax Access Point</Kicker>
-            <Display>
-              One permanent Access Point. <Soft>Unlimited possibilities behind it.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              The Access Point is the object guests find in the room, at the Spa or on the table. It carries a
-              Code, its permanent identity, connected to a Room, Area or Space. The Access Point stays where it
-              is; what its Code opens is managed in Informax Cloud.
-            </Lede>
-          </Reveal>
-        </Head>
-        <AccessPointScenes />
-        <p className="mt-6 text-[13px] text-ink-mute">
-          Illustrations. Access Point and Code designs are proven in real hotel conditions before production.
-        </p>
-      </Section>
-
-      {/* 4. Spaces: shared information */}
-      <Section>
-        <Head>
-          <Reveal blur>
-            <Kicker>Spaces</Kicker>
-            <Display>
-              Shared information. <Soft>One place to update it.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              A Space holds the information many places share: the Spa, Restaurants, the Gym, Meetings &amp; Events,
-              Guest Information. Every Access Point that follows a Space shows its latest version, so one update
-              reaches all of them.
-            </Lede>
-          </Reveal>
-        </Head>
-        <SpacesMap />
-        <Reveal className="mt-12">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-ink-mute">
-            {SPACE_EXAMPLES.map((s) => (
-              <li key={s}>{s}</li>
-            ))}
-          </ul>
-        </Reveal>
-      </Section>
-
-      {/* 5. Rooms & Areas: precise control */}
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>Rooms &amp; Areas</Kicker>
-            <Display dark>
-              Every location, <Soft dark>under control.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              When one place needs its own information, Rooms &amp; Areas add precise control on top of Spaces:
-              Room 324, Room 1001, the Ballroom, Reception. Informax Cloud is designed so that finding a place,
-              seeing what guests see and changing it takes a few simple steps.
-            </Lede>
-          </Reveal>
-        </Head>
-        <RoomsWorkflow />
-      </Section>
-
-      {/* 6. Temporary content and the Default Landing Page */}
-      <Section>
-        <Head>
-          <Reveal blur>
-            <Kicker>Temporary content</Kicker>
-            <Display>
-              Change it now. Change it later. <Soft>Let Informax change it back.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Show guests something for as long as it matters, then let the room go back to normal on its own.
-              Every hotel keeps a Default Landing Page, so there is always a permanent place to return to.
-            </Lede>
-          </Reveal>
-        </Head>
-        <TemporaryTimeline />
-        <Reveal className="mt-10">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px] text-ink-mute">
-            {OCCASIONS.map((o) => (
-              <li key={o}>{o}</li>
-            ))}
-          </ul>
-        </Reveal>
-      </Section>
-
-      {/* 7. Access Point design */}
-      <Section tone="alt">
-        <Head>
-          <Reveal blur>
-            <Kicker>Access Point design</Kicker>
-            <Display>
-              Designed <Soft>to belong.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Access Points come in approved colours to suit your hotel and its interiors. The Code keeps one
-              controlled Informax design, so guests recognise it anywhere in the property.
-            </Lede>
-          </Reveal>
-        </Head>
-        <Colourways />
-        <p className="mt-10 text-[13px] text-ink-mute">Illustrations. Final Code designs are tested in real conditions before production.</p>
-      </Section>
-
-      {/* 8. Hotel-wide control */}
-      <Section>
-        <Head>
-          <Reveal blur>
-            <Kicker>Hotel-wide control</Kicker>
-            <Display>
-              Change one room. <Soft>Or change the whole property.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Built for changes across the whole property, a floor, a range of rooms or a hand-picked selection,
-              and for putting everything back just as easily.
-            </Lede>
-          </Reveal>
-        </Head>
-        <BulkUpdate />
-      </Section>
-
-      {/* 9. Analytics */}
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>Analytics</Kicker>
-            <Display dark>
-              Understand what guests <Soft dark>actually use.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              Designed to answer the questions hotels ask: which rooms and areas guests use most, which PDFs and
-              websites they open, how temporary information did, and which Codes have gone quiet.
-            </Lede>
-          </Reveal>
-        </Head>
-        <AnalyticsSnapshot />
-      </Section>
-
-      {/* 10. Audit */}
-      <Section>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <Reveal blur>
-            <Kicker>Accountability</Kicker>
-            <Display>
-              Every change, <Soft>accounted for.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              A clear record of who changed what, for how long, and what came back automatically. Written the way
-              people talk.
-            </Lede>
-          </Reveal>
-          <AuditTrail />
+        <div className="grid gap-10 border-t border-line pt-8 md:grid-cols-3">
+          {[
+            ["No app", "Guests open their phone camera and scan. Nothing to download."],
+            ["No special hardware", "Use framed Access Points from Informax, or print your own."],
+            ["No new behaviour", "Guests already know how to scan."],
+          ].map(([t, b], i) => (
+            <Reveal key={t} delay={i * 0.08}>
+              <h3 className="text-xl font-semibold text-ink">{t}</h3>
+              <p className="mt-3 max-w-[34ch] leading-relaxed text-ink-mute">{b}</p>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
-      {/* 11. Works with what hotels already use */}
-      <Section tone="dark">
+      {/* One Access Point, content that changes: Room 324 */}
+      <Section tone="dark" id="same-code">
         <Head>
           <Reveal blur>
-            <Kicker dark>Works with what you have</Kicker>
+            <Kicker dark>Print it once. Update it anytime.</Kicker>
             <Display dark>
-              Informax fits <Soft dark>around your hotel.</Soft>
+              One Access Point. <Soft dark>Content that changes.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Keep the systems you already use. Informax is built to control how guests reach them from the right
-              place.
+              A hotel changes what Room 324 shows for a conference weekend. The card in the room stays exactly where it is.
             </Lede>
           </Reveal>
         </Head>
-        <FitsAround />
+        <SameCodeDemo variant="room" />
       </Section>
 
-      {/* 12. Final call to action */}
-      <MeetCloud
-        id="enquire-cta"
-        eyebrow="Informax Cloud"
-        headline="A simpler way to control hotel information."
-        body="Give every room and area a permanent Access Point and control the information behind it from Informax Cloud."
-        primary={{ label: "Enquire about Informax Cloud", href: "/enquire" }}
-        secondary={{ label: "Discover Informax Cloud", href: "/informax-cloud" }}
+      {/* Informax Cloud */}
+      <Section id="cloud">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <Reveal blur>
+            <Kicker>Informax Cloud</Kicker>
+            <Display>
+              Every Access Point, <Soft>in one place.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Organise your property into Spaces such as Bedrooms or the Spa. Each room or table inside is a Block with its own Access Points. Change what a Block shows in Informax Cloud and the next scan shows the new content.
+            </Lede>
+            <Link href="/informax-cloud" className="ix-link mt-10 inline-flex">
+              Explore Informax Cloud →
+            </Link>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <AppShot name="hotel-overview" alt="Informax Cloud Overview for a hotel: Spaces, active Access Points, temporary content running now and what needs attention" crop={0.7} />
+          </Reveal>
+        </div>
+        <Reveal className="mt-16">
+          <Flow />
+        </Reveal>
+      </Section>
+
+      {/* Hotels */}
+      <Section tone="alt" id="hotels">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <Reveal className="order-2 lg:order-1">
+            <AppShot name="hotel-spaces" alt="The Spaces of a hotel in Informax Cloud: Bedrooms, Spa, Gym, Main Restaurant, Bar and Public Areas" crop={0.85} />
+          </Reveal>
+          <Reveal blur className="order-1 lg:order-2">
+            <Kicker>For hotels</Kicker>
+            <Display>
+              Every part of the stay, <Soft>one scan away.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Bedrooms, the Spa, the Gym, restaurants, bars and public areas are Spaces. The rooms and facilities inside them are Blocks, each with its own Access Points showing what guests need there.
+            </Lede>
+            <ul className="mt-10 divide-y divide-line border-y border-line">
+              {HOTEL_PLACES.map(([place, content]) => (
+                <li key={place} className="flex items-baseline justify-between gap-6 py-3.5 text-[15px]">
+                  <span className="font-semibold text-ink">{place}</span>
+                  <span className="text-right text-ink-mute">{content}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/hotels" className="ix-link mt-10 inline-flex">
+              Informax for hotels →
+            </Link>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Restaurants */}
+      <Section tone="dark" id="restaurants">
+        <Head>
+          <Reveal blur>
+            <Kicker dark>For restaurants</Kicker>
+            <Display dark>
+              Table 7. <Soft dark>Two menus. One Access Point.</Soft>
+            </Display>
+            <Lede dark className="mt-8">
+              Table 7 normally opens the Terrace Menu. For an evening, it shows the Wine Pairing Menu. When the timer ends, the Terrace Menu is back.
+            </Lede>
+          </Reveal>
+        </Head>
+        <SameCodeDemo variant="table" />
+        <div className="mt-12">
+          <Link href="/restaurants" className="ix-link ix-link-dark inline-flex">
+            Informax for restaurants →
+          </Link>
+        </div>
+      </Section>
+
+      {/* Temporary content */}
+      <Section id="temporary">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <Reveal blur>
+            <Kicker>Temporary content</Kicker>
+            <Display>
+              Change it for an hour. <Soft>Then it changes back.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Show something different for an hour, a day or a promotion. Choose when it ends. Informax returns to the usual content on its own, so nobody has to remember.
+            </Lede>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <AppShot name="hotel-room-324-temporary" alt="Room 324 in Informax Cloud showing Conference Information now, ending tomorrow, then back to the Hotel Guest Directory" crop={0.62} offset={0.12} />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Version history */}
+      <Section tone="alt" id="versions">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+          <Reveal className="order-2 lg:order-1">
+            <AppShot name="hotel-room-324-versions" alt="Version history for Room 324 in Informax Cloud, with Restore on each earlier version" crop={0.6} offset={0.5} />
+          </Reveal>
+          <Reveal blur className="order-1 lg:order-2">
+            <Kicker>Version history</Kicker>
+            <Display>
+              Update without <Soft>losing what came before.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Changed your mind? Every earlier version is still there. Restore one whenever you need it.
+            </Lede>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Framed Access Points */}
+      <Section id="framed-codes">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
+          <Reveal blur>
+            <Kicker>Framed Access Points</Kicker>
+            <Display>
+              No special hardware. <Soft>No app. Just scan.</Soft>
+            </Display>
+            <Lede className="mt-8">
+              Informax can supply premium framed Access Points for rooms and tables. Prefer your own materials? Print your own. Either way, what an Access Point shows is managed in Informax Cloud.
+            </Lede>
+            <p className="mt-6 max-w-[46ch] leading-relaxed text-ink-mute">
+              Designed and printed guest information is an optional extra. The software is the product.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <TouchpointCard />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Real product, more of it */}
+      <Section tone="alt" id="product">
+        <Head>
+          <Reveal blur>
+            <Kicker>The real product</Kicker>
+            <Display>
+              This is Informax Cloud. <Soft>Not a mock-up.</Soft>
+            </Display>
+          </Reveal>
+        </Head>
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_1fr_230px]">
+          <Reveal>
+            <AppShot name="hotel-codes" alt="The Informax Cloud list of every Access Point, the Block it belongs to and its status" crop={0.78} />
+            <p className="mt-4 text-[15px] text-ink-mute">Access Points. Every one, and where it lives.</p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <AppShot name="hotel-activity" alt="Activity in Informax Cloud: what changed and who changed it, in plain language" crop={0.78} />
+            <p className="mt-4 text-[15px] text-ink-mute">Activity. What changed, and who changed it.</p>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <PhoneShot name="guest-transition" alt="The Informax Cloud screen guests see for a moment before a website opens" />
+            <p className="mt-4 text-center text-[15px] text-ink-mute">The guest sees a calm hand-off when an Access Point opens a website.</p>
+          </Reveal>
+        </div>
+        <div className="mt-12">
+          <Link href="/informax-cloud" className="ix-link inline-flex">
+            See Informax Cloud →
+          </Link>
+        </div>
+      </Section>
+
+      {/* Analytics: a quiet, secondary note (planned; see lib/analytics-status.ts) */}
+      <section id="analytics" className="bg-paper py-14 md:py-20">
+        <div className="mx-auto max-w-8xl border-t border-line px-6 pt-10 md:px-10 md:pt-12">
+          <AnalyticsNote />
+        </div>
+      </section>
+
+      <CloudCta
+        lead="Make every Access Point"
+        line="work harder."
+        secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
       />
     </>
   );

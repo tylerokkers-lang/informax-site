@@ -5,7 +5,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Informax was born from nearly a decade of hospitality experience. Today it builds Informax Cloud, connecting digital information with physical spaces throughout a hotel.",
+    "Informax was born from nearly a decade of hospitality experience. Today it builds Informax Cloud, the platform that keeps the information behind every Access Point up to date across hotels, restaurants and businesses.",
   alternates: { canonical: "/about" },
 };
 
@@ -81,10 +81,7 @@ export default function AboutPage() {
                 everywhere have valuable information, services and stories
                 that are difficult to find or poorly presented online.{" "}
                 <strong className="font-semibold text-ink">
-                  Today, Informax combines considered design and practical
-                  technology to create digital guest directories for
-                  hospitality, alongside distinctive websites and digital
-                  information experiences for businesses more broadly.
+                  Today, Informax Cloud gives businesses control over the Access Points guests already know how to scan. Organise them by the real places in your property, change the content behind them and keep the printed Access Point in place. Our design services support that experience with guest directories, websites and carefully considered printed materials.
                 </strong>
               </p>
             </Reveal>

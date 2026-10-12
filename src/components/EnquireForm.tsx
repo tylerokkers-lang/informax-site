@@ -46,7 +46,7 @@ export default function EnquireForm() {
       next.email = "Please enter a valid email address.";
     }
     if (!values.message.trim())
-      next.message = "Tell us a little about your property.";
+      next.message = "Tell us a little about your business.";
     return next;
   }
 
@@ -167,7 +167,7 @@ export default function EnquireForm() {
         </div>
       </Group>
 
-      <Group n="03" title="Your property">
+      <Group n="03" title="Your business">
         <Field label="Tell us a little about it" required error={errors.message} htmlFor="message" full>
           <textarea
             id="message"
@@ -196,7 +196,7 @@ export default function EnquireForm() {
           className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-ink px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-brass-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass-deep disabled:opacity-60"
         >
           {status === "submitting" && <Loader2 size={16} className="animate-spin" />}
-          {status === "submitting" ? "Sending…" : "Talk to Informax"}
+          {status === "submitting" ? "Sending…" : "Send enquiry"}
         </button>
       </div>
     </form>
