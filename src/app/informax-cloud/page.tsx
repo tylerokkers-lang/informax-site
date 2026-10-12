@@ -13,7 +13,7 @@ import { LIVE_SPACE_CAPABILITIES, PLANNED_SPACE_CAPABILITIES } from "@/lib/produ
 export const metadata: Metadata = {
   title: "Informax Cloud: manage what every Access Point shows",
   description:
-    "Organise your property into Spaces, choose what each one shows, publish temporary content that ends on its own, and keep every previous version. The Access Point never changes.",
+    "Organise your property into Spaces and Blocks, choose what each Block shows, publish temporary content that ends on its own, and keep every previous version. The Access Point never changes.",
   alternates: { canonical: "/informax-cloud" },
 };
 
@@ -24,7 +24,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "One place to manage what people see when they scan Access Points placed around hotels, restaurants and other physical locations.",
+    "One place to manage what people see when they scan Access Points placed around hotels, restaurants and other businesses.",
   url: `${SITE_URL}/informax-cloud`,
   publisher: { "@type": "Organization", name: "Informax", url: SITE_URL },
 };
@@ -58,14 +58,14 @@ export default function InformaxCloudPage() {
               One Space. Every Access Point. <Soft>Complete control.</Soft>
             </Display>
             <Lede className="mt-8">
-              Organise your rooms, tables or areas into Spaces. Every room or table has its own Access Point and its own content, so Room 324 can show conference information while the other rooms keep the standard guest directory.
+              Organise your property into Spaces. Inside each Space, every room or table is a Block with its own Access Points and its own content, so Room 324 can show conference information while the other rooms keep the standard guest directory.
             </Lede>
           </Reveal>
         </Head>
         <Reveal>
           <Flow />
-          <p className="mt-5 max-w-[62ch] text-[15px] leading-relaxed text-ink-mute">
-            An Access Point is the framed card or plaque guests scan with their phone. A Space is a real place: a bedroom, the spa, a table on the terrace. Restaurants work the same way: Table 7 can show the Wine Pairing Menu for an evening while other tables keep the Terrace Menu.
+          <p className="mt-6 max-w-[62ch] text-[15px] leading-relaxed text-ink-mute">
+            An Access Point is the framed card or plaque guests scan with their phone. Room 324 is a Block in the Bedrooms Space, and Table 7 is a Block in the Terrace Space. Table 7 can show the Wine Pairing Menu for an evening while other tables keep the Terrace Menu.
           </p>
         </Reveal>
         <div className="mt-12 grid gap-10 border-t border-line pt-8 md:grid-cols-2 md:gap-16">
@@ -89,9 +89,9 @@ export default function InformaxCloudPage() {
           </Reveal>
         </div>
         <Reveal className="mt-14">
-          <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud: the guest directory it shows now, and the three Access Points in the room that all show it" crop={0.74} />
+          <AppShot name="hotel-room-324" alt="Room 324 in Informax Cloud: the guest directory the room shows now, and the three Access Points in the room that all show it" crop={0.74} />
           <p className="mt-5 max-w-[62ch] text-[15px] leading-relaxed text-ink-mute">
-            Room 324 is a Space. Its Welcome Card, Bedside and TV Access Points all show what the Space shows, and the other rooms are managed separately. From a Space you can replace its content, use a website, or publish something temporary.
+            Room 324 is a Block in the Bedrooms Space. Its Welcome Card, Bedside and TV Access Points all show what the Block shows, and other rooms are managed separately. For a Block you can replace its content, use a website, or publish something temporary.
           </p>
         </Reveal>
       </Section>
@@ -100,23 +100,23 @@ export default function InformaxCloudPage() {
       <Section tone="alt" id="spaces">
         <Head>
           <Reveal blur>
-            <Kicker>Spaces</Kicker>
+            <Kicker>Spaces and Blocks</Kicker>
             <Display>
               Organised the way <Soft>your business is.</Soft>
             </Display>
             <Lede className="mt-8">
-              A hotel has Bedrooms, floors and rooms, a Spa, a Gym, restaurants, a Bar and Public Areas. A restaurant has a Main Restaurant, a Terrace, a Bar and Private Dining. Each can hold Spaces inside it.
+              A hotel has Spaces such as Bedrooms, the Spa, the Gym, restaurants, a Bar and Public Areas. A restaurant has a Main Restaurant, a Terrace, a Bar and Private Dining. Inside each Space, every room, table or facility is a Block.
             </Lede>
           </Reveal>
         </Head>
         <div className="grid items-start gap-8 lg:grid-cols-2">
           <Reveal>
-            <AppShot name="hotel-spaces" alt="Spaces for a hotel in Informax Cloud" crop={0.9} />
-            <p className="mt-4 text-[15px] text-ink-mute">A hotel. Bedrooms, Floor 3, Room 324, Spa, Gym, Public Areas.</p>
+            <AppShot name="hotel-spaces" alt="The Spaces of a hotel in Informax Cloud" crop={0.9} />
+            <p className="mt-4 text-[15px] text-ink-mute">A hotel. Bedrooms, Spa, Gym and Public Areas are Spaces.</p>
           </Reveal>
           <Reveal delay={0.08}>
-            <AppShot name="restaurant-spaces" alt="Spaces for a restaurant in Informax Cloud: Main Restaurant, Terrace, Bar and Private Dining" crop={0.9} />
-            <p className="mt-4 text-[15px] text-ink-mute">A restaurant. Tables, Terrace, Bar and Private Dining.</p>
+            <AppShot name="restaurant-spaces" alt="The Spaces of a restaurant in Informax Cloud: Main Restaurant, Terrace, Bar and Private Dining" crop={0.9} />
+            <p className="mt-4 text-[15px] text-ink-mute">A restaurant. Main Restaurant, Terrace, Bar and Private Dining are Spaces.</p>
           </Reveal>
         </div>
       </Section>
@@ -130,7 +130,7 @@ export default function InformaxCloudPage() {
               Change it for an hour. A day. A promotion. <Soft dark>Then it goes back.</Soft>
             </Display>
             <Lede dark className="mt-8">
-              Every piece of temporary content has an end time. When it passes, the Space returns to its usual content on its own. Nobody needs to remember to change it back.
+              Every piece of temporary content has an end time. When it passes, the room or table returns to its usual content on its own. Nobody needs to remember to change it back.
             </Lede>
           </Reveal>
         </Head>
@@ -173,7 +173,7 @@ export default function InformaxCloudPage() {
               Every Access Point, <Soft>and where it lives.</Soft>
             </Display>
             <Lede className="mt-8">
-              Find any Access Point by name or place, see its Space, and retire it if it is no longer used. An Access Point keeps its place for good, however often the content changes.
+              Find any Access Point by name or place, see which Block it belongs to, and retire it if it is no longer used. An Access Point keeps its place for good, however often the content changes.
             </Lede>
           </Reveal>
         </Head>
@@ -182,7 +182,7 @@ export default function InformaxCloudPage() {
             <AppShot name="hotel-codes" alt="The list of a hotel's Access Points in Informax Cloud" crop={0.8} />
           </Reveal>
           <Reveal delay={0.08}>
-            <AppShot name="hotel-code" alt="A single Access Point in Informax Cloud: its Space, what it shows and its history" crop={0.8} />
+            <AppShot name="hotel-code" alt="A single Access Point in Informax Cloud: the Block it belongs to, what it shows and its history" crop={0.8} />
           </Reveal>
         </div>
       </Section>

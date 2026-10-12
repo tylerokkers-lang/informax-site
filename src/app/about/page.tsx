@@ -81,7 +81,7 @@ export default function AboutPage() {
                 everywhere have valuable information, services and stories
                 that are difficult to find or poorly presented online.{" "}
                 <strong className="font-semibold text-ink">
-                  Today, Informax Cloud gives businesses control over the Access Points guests already know how to scan. Organise them by real-world Spaces, change the content behind them and keep the printed Access Point in place. Our design services support that experience with guest directories, websites and carefully considered printed materials.
+                  Today, Informax Cloud gives businesses control over the Access Points guests already know how to scan. Organise them by the real places in your property, change the content behind them and keep the printed Access Point in place. Our design services support that experience with guest directories, websites and carefully considered printed materials.
                 </strong>
               </p>
             </Reveal>

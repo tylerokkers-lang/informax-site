@@ -41,7 +41,7 @@ const organizationLd = {
   logo: `${SITE_URL}/icon.png`,
   sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
   description:
-    "Informax builds Informax Cloud, a platform for managing what people see when they scan Access Points placed around hotels, restaurants and other physical locations.",
+    "Informax builds Informax Cloud, a platform for managing what people see when they scan Access Points placed around hotels, restaurants and other businesses.",
 };
 
 export default function RootLayout({

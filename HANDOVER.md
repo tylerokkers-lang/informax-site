@@ -88,23 +88,35 @@ screenshots keep the app's own words (Codes, Spaces). Legal pages are untouched.
 - Table 7 "normal service" admin frame uses the Restaurant Spaces screen because
   the app has no Table 7 default-state preview scenario.
 
-### Spaces and Access Points: what is live, what is planned (verified 11 October 2026)
+### APPROVED HIERARCHY (owner, 12 October 2026): PROPERTY → SPACE → BLOCK → ACCESS POINT
 
-Checked in informax-cloud-v2 `origin/main` (7587f92; `docs/stage-2.md`, `docs/stage-3.md`, ADR 0018).
-**Live:** content (default, temporary with an expiry, version history) belongs to a *Space*;
-every Access Point in a Space shows exactly what that Space shows; a room or a table is its own
-Space, so each can differ and temporary content on one leaves the others alone; floors,
-terraces and public areas are container Spaces that only group places (no Access Points or
-content of their own). **Planned, NOT built:** (1) updating every room on a floor, or a whole
-restaurant, in one step (ADR 0018 point 13 "bulk operations later"; today each room or table is
-updated on its own); (2) giving one Access Point content that differs from its Space (an
-Access Point, called a Code in the app, owns nothing: "no Code-specific content").
-The owner's description (11 October) of "update all together by default, override individually"
-describes the intended product; the site presents (1) and (2) as "Planned / Coming soon" until
-they ship. The single source is `src/lib/product-status.ts`; the copy that reads it is the
-"One Space. Every Access Point. Complete control." section on `/informax-cloud`, plus short
-planned-notes on `/hotels` and `/restaurants`. Do not describe a Space as forcing identical
-content on rooms or tables, or a parent Space as updating its children.
+- **Property** = the hotel or restaurant. **Space** = an operational section (Bedrooms, Spa, Gym,
+  Restaurant, Bar). **Block** = an individually manageable room, table, facility or item inside a
+  Space (Room 324, Table 7). **Access Point** = what belongs to a Block and guests scan (Bedside
+  Table, Welcome Card, Spa Menu, Room Service Menu). Replaces earlier proposals (Locations, Nodes,
+  Elements, Units).
+- **Naming rules:** every Space, Block and Access Point has its own descriptive name; hierarchy
+  labels name the type, real-world names name the object; **a Block is never called a Space**
+  (never write "Room 324 is a Space" or "Table 7 is a Space"); public copy says "Access Points",
+  never Codes or QR; **never mention floors** (the approved hierarchy has no floor level).
+- **Application status (audited 12 October 2026, informax-cloud-v2 `origin/main` 7587f92):** the
+  Cloud app and database do NOT use these words yet: Property = Location, Block = leaf Space,
+  Access Point = Code, plus an intermediate Floor/Section level. Plan, gap analysis and owner
+  decisions D1-D10: Cloud repo `docs/product-hierarchy-plan.md` and ADR 0020 (PR #26, proposal;
+  nothing implemented, no architectural work until the owner approves the plan).
+- **Live (in substance, older words):** Spaces (top-level areas) contain rooms/tables (Blocks) that
+  each have their own content (default, temporary with expiry, version history) and several
+  Access Points; every Access Point in a Block shows that Block's content; temporary content on
+  one Block leaves others untouched. **Planned, NOT built:** shared Space default content and
+  inheritance (req. 1-2), changing content across a whole Space in one step (5), different content
+  for Access Points in the same Block (4, 6 for Access Points), override-aware bulk (8). The
+  **precedence rules are not yet defined**; the site says nothing about them.
+- Single source for these statements: `src/lib/product-status.ts` (read by the "One Space. Every
+  Access Point. Complete control." section on `/informax-cloud` and the planned-notes on `/hotels`
+  and `/restaurants`). The hierarchy diagram is `components/real/Flow.tsx`.
+- **KNOWN MISMATCH:** the real Cloud screenshots show the app's current words ("Spaces" for rooms,
+  "Codes", and a "Floor 3" level in the Room 324 breadcrumb). Alt text and captions use the approved
+  words; screenshots are not edited. Re-capture once the app adopts the hierarchy.
 
 ### Analytics: PLANNED, not built (verified 10 October 2026)
 

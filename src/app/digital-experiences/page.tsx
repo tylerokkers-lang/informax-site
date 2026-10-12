@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const BENEFITS = [
   { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, one touch or scan away." },
   { title: "Fewer repeat questions", body: "Reception spends less time answering what the directory already explains." },
-  { title: "Always current", body: "Change it once in Informax Cloud and every Access Point in that Space shows the new version." },
+  { title: "Always current", body: "Change it once in Informax Cloud and every Access Point in that Block shows the new version." },
   { title: "Unmistakably yours", body: "Designed around your brand, your tone and your property. No templates." },
   { title: "Nothing to download", body: "It opens straight away after a scan, in the phone's own browser." },
   { title: "Everything, once", body: "Dining, Spa, services and local knowledge, gathered in one place." },
@@ -33,7 +33,7 @@ const CREATE = [
 
 const STEPS = [
   { n: "01", title: "We design it", body: "Around your brand, your guests and the way your property runs." },
-  { n: "02", title: "We connect it", body: "Each experience is published to a Space in Informax Cloud, with Access Points where guests need them." },
+  { n: "02", title: "We connect it", body: "Each experience is published in Informax Cloud, with Access Points where guests need them." },
   { n: "03", title: "It stays current", body: "Update it whenever something changes. Nothing is reprinted or replaced." },
 ];
 
@@ -95,7 +95,7 @@ export default function DigitalExperiencesPage() {
               the way a guest actually looks for things.
             </Lede>
             <ul className="mt-10 max-w-md">
-              {["Designed to match your brand", "Opens with a familiar scan", "Shown by every Access Point in its Space"].map((l) => (
+              {["Designed to match your brand", "Opens with a familiar scan", "Shown by every Access Point in its Block"].map((l) => (
                 <li key={l} className="border-t border-line py-4 text-[15.5px] text-ink">
                   {l}
                 </li>
@@ -160,7 +160,7 @@ export default function DigitalExperiencesPage() {
             </Display>
             <Lede className="mt-8">
               Publish the winter Guest Directory in Informax Cloud. Every Access Point
-              in that Space shows it from the next scan.
+              in that Block shows it from the next scan.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>

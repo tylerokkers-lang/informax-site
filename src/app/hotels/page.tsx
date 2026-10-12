@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 };
 
 const PLACES = [
-  { place: "Room 324", shows: "Hotel Guest Directory", body: "Breakfast times, services and local information, on the card in the room." },
+  { place: "Bedrooms · Room 324", shows: "Hotel Guest Directory", body: "Breakfast times, services and local information, on the card in the room." },
   { place: "Spa", shows: "Treatment Guide", body: "The latest treatments and prices, at the spa." },
   { place: "Gym", shows: "Class Schedule", body: "This week's classes, changed in a minute." },
-  { place: "Lobby Lounge", shows: "Afternoon Tea", body: "Afternoon Tea information, in the lounge." },
-  { place: "Reception", shows: "Hotel and local information", body: "Useful information, or your own website, at the desk." },
-  { place: "Public Areas", shows: "Organised by place", body: "Group Reception, the Lobby Lounge and other areas together under one heading." },
+  { place: "Public Areas · Lobby Lounge", shows: "Afternoon Tea", body: "Afternoon Tea information, in the lounge." },
+  { place: "Public Areas · Reception", shows: "Hotel and local information", body: "Useful information, or your own website, at the desk." },
+  { place: "Public Areas", shows: "Organised by place", body: "A Space that groups Reception, the Lobby Lounge and other shared areas." },
 ];
 
 export default function HotelsPage() {
@@ -35,18 +35,18 @@ export default function HotelsPage() {
         lede="Give each room, restaurant, spa and public area the information it needs. Update any of it from one place, without replacing a single card."
         primary={{ label: "Enquire", href: "/enquire" }}
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
-        visual={<AppShot name="hotel-spaces" alt="Spaces for a hotel in Informax Cloud: Bedrooms, Spa, Gym, restaurants, Bar and Public Areas" crop={0.95} />}
+        visual={<AppShot name="hotel-spaces" alt="The Spaces of a hotel in Informax Cloud: Bedrooms, Spa, Gym, restaurants, Bar and Public Areas" crop={0.95} />}
       />
 
       <Section>
         <Head>
           <Reveal blur>
-            <Kicker>Spaces for a hotel</Kicker>
+            <Kicker>Spaces and Blocks</Kicker>
             <Display>
               Organised like <Soft>your property.</Soft>
             </Display>
             <Lede className="mt-8">
-              Bedrooms group floors, and floors group rooms. Each room, the Spa, the Gym, each restaurant and bar, and each public area such as Reception or the Lobby Lounge is a Space that decides what its Access Points show.
+              Bedrooms, the Spa, the Gym, restaurants, bars and Public Areas are Spaces. The rooms and facilities inside them are Blocks, such as Room 324 or the Lobby Lounge. Each Block has its own Access Points, and what they show is decided for that Block.
             </Lede>
           </Reveal>
         </Head>

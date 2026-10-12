@@ -25,7 +25,7 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
-              Information, always up to date. Manage what every room, table and Space opens with Informax Cloud.
+              Information, always up to date. Manage what every Access Point shows with Informax Cloud.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a

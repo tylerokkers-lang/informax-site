@@ -101,7 +101,7 @@ export default function Home() {
               Every Access Point, <Soft>in one place.</Soft>
             </Display>
             <Lede className="mt-8">
-              Organise your property into Spaces. Each Space decides what people see when they scan an Access Point placed there. Change it in Informax Cloud and the next scan shows the new content.
+              Organise your property into Spaces such as Bedrooms or the Spa. Each room or table inside is a Block with its own Access Points. Change what a Block shows in Informax Cloud and the next scan shows the new content.
             </Lede>
             <Link href="/informax-cloud" className="ix-link mt-10 inline-flex">
               Explore Informax Cloud →
@@ -120,7 +120,7 @@ export default function Home() {
       <Section tone="alt" id="hotels">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           <Reveal className="order-2 lg:order-1">
-            <AppShot name="hotel-spaces" alt="Spaces in Informax Cloud for a hotel: Bedrooms with floors, Spa, Gym, Main Restaurant, Bar and Public Areas" crop={0.85} />
+            <AppShot name="hotel-spaces" alt="The Spaces of a hotel in Informax Cloud: Bedrooms, Spa, Gym, Main Restaurant, Bar and Public Areas" crop={0.85} />
           </Reveal>
           <Reveal blur className="order-1 lg:order-2">
             <Kicker>For hotels</Kicker>
@@ -128,7 +128,7 @@ export default function Home() {
               Every part of the stay, <Soft>one scan away.</Soft>
             </Display>
             <Lede className="mt-8">
-              Rooms, the spa, the gym, restaurants, bars and public areas each have their own Space. Each one shows what guests need there.
+              Bedrooms, the Spa, the Gym, restaurants, bars and public areas are Spaces. The rooms and facilities inside them are Blocks, each with its own Access Points showing what guests need there.
             </Lede>
             <ul className="mt-10 divide-y divide-line border-y border-line">
               {HOTEL_PLACES.map(([place, content]) => (
@@ -235,7 +235,7 @@ export default function Home() {
         </Head>
         <div className="grid items-start gap-8 lg:grid-cols-[1fr_1fr_230px]">
           <Reveal>
-            <AppShot name="hotel-codes" alt="The Informax Cloud list of every Access Point, the Space it belongs to and its status" crop={0.78} />
+            <AppShot name="hotel-codes" alt="The Informax Cloud list of every Access Point, the Block it belongs to and its status" crop={0.78} />
             <p className="mt-4 text-[15px] text-ink-mute">Access Points. Every one, and where it lives.</p>
           </Reveal>
           <Reveal delay={0.08}>
@@ -244,7 +244,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.16}>
             <PhoneShot name="guest-transition" alt="The Informax Cloud screen guests see for a moment before a website opens" />
-            <p className="mt-4 text-center text-[15px] text-ink-mute">The guest sees a calm hand-off when a Space opens a website.</p>
+            <p className="mt-4 text-center text-[15px] text-ink-mute">The guest sees a calm hand-off when an Access Point opens a website.</p>
           </Reveal>
         </div>
         <div className="mt-12">

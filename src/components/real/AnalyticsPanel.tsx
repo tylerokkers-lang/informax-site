@@ -17,7 +17,7 @@ export function AnalyticsNote() {
           Planned: see how your Access Points are used.
         </h3>
         <p className="mt-3 max-w-[56ch] text-[15.5px] leading-relaxed text-ink-mute">
-          We plan to add analytics to Informax Cloud, so the platform that manages what people see could also show how your Access Points and Spaces are being used. {ANALYTICS_PLANNED_NOTE}
+          We plan to add analytics to Informax Cloud, so the platform that manages what people see could also show how your Access Points, Blocks and Spaces are being used. {ANALYTICS_PLANNED_NOTE}
         </p>
       </div>
     </div>
@@ -27,11 +27,11 @@ export function AnalyticsNote() {
 const VARIANTS = {
   cloud: {
     title: <>Planned: see how <Soft>your Access Points are used.</Soft></>,
-    lede: "We plan to add analytics alongside Spaces and Access Points, so the platform you use to change what people see could also show how often they look.",
+    lede: "We plan to add analytics alongside your Spaces, Blocks and Access Points, so the platform you use to change what people see could also show how often they look.",
     cards: [
       { icon: ScanLine, title: "Access Point activity", body: "How often each Access Point is used." },
       { icon: QrCode, title: "Rooms, tables and areas", body: "Which Access Points and places receive the most engagement." },
-      { icon: LayoutGrid, title: "Space-level reporting", body: "Activity across a Space and what is inside it." },
+      { icon: LayoutGrid, title: "Space-level reporting", body: "Activity across a Space and the Blocks inside it." },
       { icon: TrendingUp, title: "Trends over time", body: "How engagement changes across selected periods." },
     ] as Card[],
   },

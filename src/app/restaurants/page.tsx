@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const AREAS = [
-  { place: "Main Restaurant", body: "Each table is a Space with its own Access Point." },
+  { place: "Main Restaurant", body: "A Space. Each table inside it is a Block with its own Access Point." },
   { place: "Terrace", body: "Table 7 on the terrace shows the Terrace Menu, then a different menu for an evening." },
   { place: "Bar", body: "A bar menu that changes with the season, or for a promotion." },
   { place: "Private Dining", body: "The Private Dining Menu, on the door card." },
@@ -32,7 +32,7 @@ export default function RestaurantsPage() {
         lede="Change what a table shows without replacing its card. Publish a temporary menu, choose when it ends, and let the usual menu return on its own."
         primary={{ label: "Enquire", href: "/enquire" }}
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
-        visual={<AppShot name="restaurant-spaces" alt="Spaces for a restaurant in Informax Cloud: Main Restaurant, Terrace, Bar and Private Dining" crop={0.95} />}
+        visual={<AppShot name="restaurant-spaces" alt="The Spaces of a restaurant in Informax Cloud: Main Restaurant, Terrace, Bar and Private Dining" crop={0.95} />}
       />
 
       <Section tone="dark">
@@ -53,12 +53,12 @@ export default function RestaurantsPage() {
       <Section>
         <Head>
           <Reveal blur>
-            <Kicker>Spaces for a restaurant</Kicker>
+            <Kicker>Spaces and Blocks</Kicker>
             <Display>
-              Organised like <Soft>your floor.</Soft>
+              Organised like <Soft>your restaurant.</Soft>
             </Display>
             <Lede className="mt-8">
-              The Main Restaurant and the Terrace group your tables. Each table, the bar and private dining is a Space with its own Access Point, and the menu it shows is decided by that Space.
+              The Main Restaurant, the Terrace, the Bar and Private Dining are Spaces. The tables inside them are Blocks, such as Table 7. Each Block has its own Access Point, and the menu it shows is decided for that Block.
             </Lede>
           </Reveal>
         </Head>
