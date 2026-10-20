@@ -6,10 +6,131 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 26 September 2026 (Cloud entrance logo + hero playback fix
-live; before that the 25 September Informax Cloud repositioning and full site
-redesign — see §0 first; §1 and the old hero/nav notes below it are
-historical where they conflict).
+Last updated: 21 October 2026. **Read §0c first**: a complete restaurant-first
+redesign is on branch `redesign/restaurant-first`, NOT live. Production still
+serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
+§0b, §0a and §0 are historical wherever they conflict with it.
+
+## 0c. Restaurant-first redesign (20 to 21 October 2026): branch, NOT live
+
+**Status:** built and tested on branch `redesign/restaurant-first` (Vercel
+builds a preview for every pushed branch). `main`, informax.co.uk, DNS and
+Informax Cloud were not touched. **Do not merge to `main` until the owner
+approves the replacement**: merging deploys to production automatically (§4).
+
+**Blocking production: photography.** No licensed photographs exist yet, and
+this environment's network policy blocked Unsplash, Pexels and Wikimedia.
+Every photograph is a named slot in `src/lib/photography.ts` (what it must
+show, alt text). An empty slot renders a soft gradient with a visible
+"Photograph to come" label (`src/components/site/Photo.tsx`), and
+`PHOTOGRAPHY_PENDING` is true while any slot is empty. To finish: put
+licensed photos in `public/photos/`, set `src`, `width` and `height`, and check
+the alt text. Nine slots: restaurantRoom (unused for now), chefPass,
+restaurantTable, signatureDish, hotelLounge, hotelBathroom, spaTreatment,
+hotelSuite, hospitalityTeam.
+
+**Structure.** Nav: Home, Restaurants, Hotels, How It Works, Informax Cloud,
+Contact (`/enquire`), plus a **Request a Demo** button (`DEMO_CTA`) and the
+Cloud "Log in" pill. Footer: Explore, Company, Get in touch, Also from
+Informax (Digital Experiences, Websites, Digital Brochures). `/how-it-works`
+is a page again (its redirect was removed); `/hospitality` now 308s to
+`/hotels`, `/touch-points` to `/how-it-works`.
+- `/` restaurant hero (`MenuHero`: interactive 3 steps, the chef runs out of
+  sea bass) → what Informax is → hotel experience (`HotelShowcase`) → the real
+  product → See It in Action (`SeeItInAction`, Restaurant | Hotel, 5 steps
+  each) → How it works → More possibilities → Request a demo.
+- `/restaurants`, `/hotels`, `/how-it-works` (FAQ), `/informax-cloud`
+  (product tour from real desktop screens). All in `src/app/*/page.tsx`;
+  shared parts in `src/components/site/`.
+- Terminology: Code, Access Point, scan, digital information. Never "QR".
+  The site does not lead with Spaces / architecture words.
+
+**Honesty rules baked into the copy (keep them):** menus and directories are
+PDFs (or a website): there is no dish-by-dish editor, and the site says so.
+A guest with a page already open sees a change after refreshing. Informax
+shows offers; it does not check spa or room availability, take bookings or
+apply discounts. Demos are labelled "a guided walkthrough, not a live
+account", and every screen caption says real screens, fictional business.
+
+**Informax Cloud screenshots (`public/cloud/*.webp`, manifest
+`src/lib/screens.ts`).** Captured from the real application views of
+`informax-cloud-v2` branch `feature/access-points` (Property → Space → Access
+Point → Content; unmerged PR #30 at the time, V2 has no production yet). A
+local-only capture page rendered the app's real components (AppShell, Access
+Point page, Content panel, Bulk, Overview, the guest PDF viewer) with the
+product's own fictional businesses, The Copper Table and Marlowe Grand Hotel,
+and fictional PDFs; Playwright then clicked the real controls (Replace menu,
+choose file, Publish temporary content, end time 18:00). Nothing was redrawn.
+The capture page was never committed to the Cloud repo. Crops leave out the
+Code address and printable Code (no scannable Code or web address on the
+site). The app's own `/dev/preview` fixtures use a real hotel brand, so they
+were not used. To re-capture after the app changes: copy
+`docs/cloud-captures/capture-page.tsx.txt` to
+`src/app/dev/marketing/[shot]/page.tsx` and `capture-pdf-route.ts.txt` to
+`src/app/dev/marketing-pdf/[name]/route.ts` in a Cloud checkout, copy
+`docs/cloud-captures/pdfs/*` to its `public/mkt/` (lower-case hyphenated
+names, see the route), run `next dev -p 3100` with a local `.env.local`
+(`INFORMAX_ENV=local`, a local Supabase URL and a well-formed placeholder anon
+key; no database is needed), then `node docs/cloud-captures/shoot.mjs <out>`
+and convert to WebP (780 px phones, 1800 px desktop). Delete the capture files
+from the Cloud checkout afterwards.
+
+**Accessibility and brand fixes (site-wide):** primary button is `#0475bb`
+(white text 4.9:1; the brighter `#0693e3` was 3.3:1 and failed AA); small blue
+text on light backgrounds uses `brass-deep`; `--ink-mute` darkened to
+`#5a6577`; the inactive LinkedIn icon is no longer an `aria-label` on a link
+with no address. The header and footer logo were rendered stretched (the
+1024×559 file was declared as 420×140): they now use a lossless trimmed copy,
+`public/brand/informax-logo-white-trim.png`; the original is unchanged.
+
+**Removed** (unused after the rewrite, still in git history): the old
+`story/*`, most of `access/*` (AccessPoint stays), `cloud/*` story parts, and
+the V1 app recreations in `product/*` (the brief rules out recreated UI;
+`/digital-experiences` now uses real screens). Unused media in `public/video`
+and `public/images` was left in place.
+
+**Verified (21 October 2026, local production build):** `tsc`, `eslint`,
+`next build` clean. Playwright: 51 checks pass (axe-core WCAG 2.1 A/AA with
+zero violations on 9 pages, one h1 per page, every internal link 200, the
+three redirects, hero steps and no auto-advance after a choice, walkthrough
+Next / tabs with arrow keys / Start again, skip link, mobile menu incl.
+Escape, enquiry API 422 / honeypot / 503 without a key, form validation). No
+horizontal scrolling at 1440, 834, 390 or 320 px. Lighthouse (mobile,
+simulated slow 4G, local server): Home 94–95 performance, Restaurants 96,
+Hotels 98, Informax Cloud 99; accessibility and SEO 100; CLS 0; home LCP
+3.0 s (the guest phone screen), others 2.2–2.7 s.
+**Not verified:** real enquiry delivery from the preview (Preview has no
+`RESEND_API_KEY`; the form and API code paths are unchanged apart from
+labels, and production delivery was verified on 8 September); real devices
+and Safari; the preview URL by eye.
+
+**Production deployment procedure (only after owner approval):**
+1. Supply the photographs (above); check every page shows no "Photograph to
+   come" label (`grep -rn 'src: ""' src/lib/photography.ts` returns nothing).
+2. Owner reviews the branch preview on phone and desktop.
+3. Re-run `npx tsc --noEmit && npm run lint && npm run build`.
+4. Merge `redesign/restaurant-first` into `main` (fast-forward or PR); Vercel
+   deploys production. Note the previous production deployment id first as
+   the rollback target (`npx vercel ls`), and roll back with
+   `npx vercel promote <previous deployment url>` if needed.
+5. Send one real enquiry from informax.co.uk/enquire and confirm Delivered in
+   resend.com/emails.
+
+**Needs the owner's decision:**
+- Approve the redesign and the copy; supply or license photography.
+- The site shows V2 screens (Access Points) while informax.cloud still runs
+  V1. Confirm that is acceptable before go-live, or time it with the V2
+  launch.
+- LinkedIn address (still empty). Pricing stays unpublished (§5).
+- Product UI observations for Informax Cloud (not changed, separate repo):
+  the date-and-time field follows the browser language (a US browser shows
+  10/21/2026, 06:00 PM); the hotel temporary preset defaults to "1 day" when
+  most offers end today; Overview "Quick access" says "Nothing set up yet" for
+  an area holding exactly one Access Point even when that Access Point shows
+  content (`Tile` in `src/ui/views/overview-view.tsx` shows the area's own
+  content when it has one unit, and areas never hold content in the Access
+  Point model); a full-page capture shows the sidebar
+  ending part-way down long pages.
 
 ## 0b. Access Point positioning (28 September 2026)
 

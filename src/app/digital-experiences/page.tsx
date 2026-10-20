@@ -6,7 +6,7 @@ import Section, { Head } from "@/components/cloud/Section";
 import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
 import CloudCta from "@/components/cloud/CloudCta";
 import DirectoryShowcase from "@/components/story/DirectoryShowcase";
-import PhoneFilm from "@/components/product/PhoneFilm";
+import { Phone } from "@/components/site/Devices";
 
 export const metadata: Metadata = {
   title: "Digital Experiences: Digital Guest Directories for Hotels",
@@ -28,13 +28,13 @@ const CREATE = [
   { title: "Guest Directories", body: "The complete guide to your property, in every room." },
   { title: "Spa & treatment menus", body: "Treatments, rituals and booking, at the Spa and in the room." },
   { title: "Restaurant & bar menus", body: "Current menus at the table, the bar and in-room dining." },
-  { title: "Meetings & Events packs", body: "Floor plans, layouts and menus for planners and delegates." },
+  { title: "In-room dining menus", body: "The room service menu, current at every bedside." },
   { title: "Welcome & local guides", body: "Arrival information and the best of the area." },
 ];
 
 const STEPS = [
   { n: "01", title: "We design it", body: "Around your brand, your guests and the way your property runs." },
-  { n: "02", title: "We connect it", body: "Each experience becomes a Space in Informax Cloud, with Access Points where guests need them." },
+  { n: "02", title: "We connect it", body: "Each experience is published in Informax Cloud, behind permanent Codes where guests need them." },
   { n: "03", title: "It stays current", body: "Update it whenever something changes. Nothing is reprinted or replaced." },
 ];
 
@@ -51,7 +51,7 @@ export default function DigitalExperiencesPage() {
           </>
         }
         lede="Informax designs digital guest directories and guest information that feel like part of your hotel: beautifully presented, easy to find and always current."
-        primary={{ label: "Talk to Informax", href: "/enquire" }}
+        primary={{ label: "Request a Demo", href: "/enquire" }}
         secondary={{ label: "Explore Informax Cloud", href: "/informax-cloud" }}
         visual={<DirectoryShowcase tone="dark" />}
       />
@@ -96,7 +96,7 @@ export default function DigitalExperiencesPage() {
               the way a guest actually looks for things.
             </Lede>
             <ul className="mt-10 max-w-md">
-              {["Designed to match your brand", "Opens from any Informax Access Point", "Connected to every room from one Space"].map((l) => (
+              {["Designed to match your brand", "Opens from any Informax Access Point", "Every room shows the same, current version"].map((l) => (
                 <li key={l} className="border-t border-line py-4 text-[15.5px] text-ink">
                   {l}
                 </li>
@@ -160,12 +160,15 @@ export default function DigitalExperiencesPage() {
               A new season. <Soft>A new directory in every room.</Soft>
             </Display>
             <Lede className="mt-8">
-              Publish the winter Guest Directory from a phone and all four
-              hundred rooms show it straight away.
+              Publish the winter Guest Directory from a phone and every
+              room&rsquo;s Code opens it straight away.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>
-            <PhoneFilm variant="update" space="directory" captions="light" />
+            <div className="mx-auto flex max-w-[520px] items-end justify-center gap-4 sm:gap-6">
+              <Phone screens={["cloudDirectoryReplace"]} tone="light" className="w-1/2" sizes="260px" />
+              <Phone screens={["guestDirectoryAfter"]} tone="light" className="w-1/2 sm:-mb-8" sizes="260px" />
+            </div>
           </Reveal>
         </div>
       </Section>

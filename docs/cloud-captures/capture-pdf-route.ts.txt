@@ -1,0 +1,12 @@
+import { readFile } from "node:fs/promises";
+import { notFound } from "next/navigation";
+import { devRoutesEnabled } from "@/lib/environment";
+
+/** LOCAL ONLY, NEVER COMMITTED: serves the fictional demo PDFs for the marketing captures. */
+export async function GET(_: Request, { params }: { params: Promise<{ name: string }> }) {
+  if (!devRoutesEnabled()) notFound();
+  const { name } = await params;
+  if (!/^[a-z-]+\.pdf$/.test(name)) notFound();
+  const body = await readFile(`${process.cwd()}/public/mkt/${name}`);
+  return new Response(new Blob([body as BlobPart]), { headers: { "Content-Type": "application/pdf", "Cache-Control": "no-store" } });
+}

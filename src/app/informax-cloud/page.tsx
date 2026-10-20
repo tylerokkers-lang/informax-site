@@ -1,40 +1,18 @@
 import type { Metadata } from "next";
-import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import { SITE_URL } from "@/lib/constants";
-import VideoHero from "@/components/sections/VideoHero";
-import Section, { Head } from "@/components/cloud/Section";
-import { Display, Kicker, Lede, Soft } from "@/components/cloud/type";
-import ContentFormats from "@/components/cloud/ContentFormats";
-import CloudCta from "@/components/cloud/CloudCta";
-import { PermanentConnection } from "@/components/cloud/ProductPanels";
-import GuestDirectoryCallout from "@/components/cloud/GuestDirectoryCallout";
-import AppFilm from "@/components/product/AppFilm";
-import PhoneFilm from "@/components/product/PhoneFilm";
-import SpacesShowcase from "@/components/product/SpacesShowcase";
-import TouchPointsShowcase from "@/components/product/TouchPointsShowcase";
-import WorkspaceShowcase from "@/components/product/WorkspaceShowcase";
-import AccessPointScenes from "@/components/access/AccessPointScenes";
-import {
-  ActivityFilm,
-  PermanentUrlFilm,
-  VersionsFilm,
-} from "@/components/product/MicroFilms";
+import Link from "next/link";
+import { Check } from "lucide-react";
+import { Browser, Phone } from "@/components/site/Devices";
+import { DemoCta, Heading } from "@/components/site/Sections";
+import { Reveal } from "@/components/Reveal";
+import { CLOUD_LOGIN_URL, DEMO_CTA, SITE_URL } from "@/lib/constants";
+import type { ScreenKey } from "@/lib/screens";
 
 export const metadata: Metadata = {
-  title: "Informax Cloud: Hotel Content Management for Every Space",
+  title: "Informax Cloud: one place for everything your guests see",
   description:
-    "Informax Cloud is the control centre for guest information across your hotel. Give every part of your hotel a Space, serve a PDF or a website, connect Access Points and change it all from anywhere.",
+    "See the real Informax Cloud: what guests see right now at every Access Point, replace a PDF or use a website, temporary content that ends by itself, version history and updates to many Access Points at once.",
   alternates: { canonical: "/informax-cloud" },
 };
-
-const CONTROLS = [
-  { title: "Spaces", body: "A permanent destination for every real part of the Hotel." },
-  { title: "Current Content", body: "A PDF or a website, chosen by the Hotel." },
-  { title: "Codes", body: "Every Code, connected to its Room, Area or Space." },
-  { title: "Activity", body: "Interactions by Space, by Code and by room." },
-  { title: "Previous Versions", body: "Every published version, one step from restored." },
-  { title: "People & access", body: "Your team, each with their own sign-in." },
-];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -43,242 +21,175 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "Hotel information management: one place to control the essential guest information behind every part of a hotel.",
+    "One place for restaurants and hotels to manage the information guests open from permanent Codes: menus, guest directories and offers.",
   url: `${SITE_URL}/informax-cloud`,
   publisher: { "@type": "Organization", name: "Informax", url: SITE_URL },
 };
+
+const FEATURES: { eyebrow: string; title: string; soft: string; body: string; screen: ScreenKey; points: string[] }[] = [
+  {
+    eyebrow: "At a glance",
+    title: "What a guest sees.",
+    soft: "Right now.",
+    body: "Every Access Point opens on one clear answer: what a guest will see if they scan its Code at this moment, whether it is your usual content or something temporary, and who set it.",
+    screen: "deskMenuBefore",
+    points: ["Default or temporary, clearly marked", "Open it exactly as a guest would", "Applies to every copy of the Code"],
+  },
+  {
+    eyebrow: "Change it",
+    title: "Replace a PDF,",
+    soft: "or use your website.",
+    body: "Choose Replace, pick the new file and publish. Prefer your own web page? Point the Code at it instead, and switch back whenever you like.",
+    screen: "deskMenuReplace",
+    points: ["PDFs up to 20 MB, stored privately", "Or any secure web address", "Works from a computer or a phone"],
+  },
+  {
+    eyebrow: "Temporary content",
+    title: "Set it to end,",
+    soft: "and it does.",
+    body: "Publish something for a while: a menu for tonight, a spa offer until 18:00, information for a weekend event. When the time is up, the usual content comes back on its own.",
+    screen: "deskSpaCompose",
+    points: ["Quick choices, or an exact end time", "Start later if you need to", "End it early with one tap"],
+  },
+  {
+    eyebrow: "Nothing is lost",
+    title: "Every version,",
+    soft: "kept for good.",
+    body: "Each change creates a new version. Earlier versions are never edited or deleted, and any of them can be restored or shown again temporarily.",
+    screen: "deskMenuPublished",
+    points: ["A full history for every Access Point", "Restore in one step", "Who changed what, and when"],
+  },
+  {
+    eyebrow: "At scale",
+    title: "Update many",
+    soft: "at once.",
+    body: "Choose a type of Access Point, such as every Bathroom, check the list, and publish one PDF or website to all of them. You can undo it afterwards.",
+    screen: "deskBulk",
+    points: ["By type or by area", "Check the list before publishing", "Undo a whole update"],
+  },
+];
+
+const INCLUDED = [
+  "Your Access Points, organised by area",
+  "PDF or website for every Access Point",
+  "Temporary content with an end time",
+  "Version history and restore",
+  "Update many Access Points at once",
+  "Team sign-ins with the right access",
+  "Activity in plain language",
+  "Works on phones, tablets and computers",
+];
 
 export default function InformaxCloudPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <VideoHero
-        videoMp4="/video/cloud-hero.mp4"
-        videoWebm="/video/cloud-hero.webm"
-        poster="/video/cloud-hero-poster.jpg"
-        dim={0.42}
-        eyebrow="Informax Cloud"
-        headline="The control centre for guest information."
-        description="One place to control what guests see across every Space in your Hotel."
-        primaryLabel="Talk to Informax"
-        primaryHref="/enquire"
-        secondaryLabel="See the product"
-        secondaryHref="#product"
-      />
-
-      {/* What it controls */}
-      <Section id="product">
-        <Head>
-          <Reveal blur>
-            <Kicker>What Informax Cloud controls</Kicker>
-            <Display>
-              Everything guests see. <Soft>Nothing they don&rsquo;t.</Soft>
-            </Display>
-          </Reveal>
-        </Head>
-        <RevealStagger className="grid grid-cols-1 gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-          {CONTROLS.map((c, i) => (
-            <RevealStaggerItem key={c.title} className="border-t border-line py-8">
-              <span className="mb-6 block font-serif-display text-[15px] italic text-brass-deep">0{i + 1}</span>
-              <h3 className="font-serif-display text-[26px] leading-none text-ink">{c.title}</h3>
-              <p className="mt-3 max-w-[30ch] text-[15px] leading-relaxed text-ink-mute">{c.body}</p>
-            </RevealStaggerItem>
-          ))}
-        </RevealStagger>
-      </Section>
-
-      {/* Spaces */}
-      <Section tone="alt">
-        <Head>
-          <Reveal blur>
-            <Kicker>Spaces</Kicker>
-            <Display>
-              Every part of your Hotel, <Soft>as a Space.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Spa, Restaurants, Gym, Meetings &amp; Events, Guest Rooms. Each Space shows its status, what guests
-              currently see and how many Access Points are connected to it.
-            </Lede>
-          </Reveal>
-        </Head>
-        <Reveal>
-          <SpacesShowcase />
-        </Reveal>
-      </Section>
-
-      {/* Current content */}
-      <Section>
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          <Reveal blur>
-            <Kicker>Current Content</Kicker>
-            <Display>
-              One permanent connection. <Soft>Change what is behind it.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Each Access Point&rsquo;s Code stays connected to its Space, so whatever the Space shows, the Access Point never needs replacing.
-            </Lede>
-            <div className="mt-10">
-              <PermanentConnection />
+      <header className="relative overflow-hidden bg-[radial-gradient(120%_80%_at_50%_0%,#16304f_0%,#0b1524_45%,#060a12_100%)] pb-10 pt-[130px] text-cream md:pt-[160px]">
+        <div className="mx-auto max-w-8xl px-6 text-center md:px-10">
+          <div className="ix-hero-rise">
+            <p className="mb-5 text-[15px] font-semibold text-brass-light">Informax Cloud</p>
+            <h1 className="mx-auto max-w-[16ch] text-balance font-serif-display text-[clamp(44px,6.4vw,88px)] leading-[0.98] text-white">
+              One place for everything <span className="text-cream-mute">your guests see.</span>
+            </h1>
+            <p className="mx-auto mt-7 max-w-[40rem] text-[18px] leading-relaxed text-white/75">
+              Menus, guest directories, spa treatments and offers. Manage them all from a computer or your phone, and every Code
+              shows the latest version.
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary">{DEMO_CTA.label}</Link>
+              <a href={CLOUD_LOGIN_URL} className="ix-btn ix-btn-secondary-dark">Log in</a>
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <PermanentUrlFilm />
-          </Reveal>
+          </div>
+          <div className="relative mx-auto mt-16 max-w-[1080px]">
+            <Browser screen="deskHotelOverview" priority className="w-full sm:w-[88%]" />
+            <div className="absolute -bottom-6 right-0 w-[26%] max-w-[250px] sm:-bottom-10">
+              <Phone screens={["cloudHotelOverviewPhone"]} sizes="(min-width: 640px) 250px, 26vw" />
+            </div>
+          </div>
+          <p className="mt-14 text-[13px] text-cream-mute">Real Informax Cloud screens. The hotel and restaurant shown are fictional.</p>
         </div>
-      </Section>
+      </header>
 
-      {/* Change Content: the full product film */}
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>Change Content</Kicker>
-            <Display dark>
-              Open the Space. <Soft dark>Change it. Publish.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              The content changes. The Space and every connected Access Point stay exactly as they are.
-            </Lede>
-          </Reveal>
-        </Head>
-        <AppFilm captions="dark" />
-      </Section>
+      {FEATURES.map((f, i) => (
+        <section key={f.title} className={`py-20 md:py-28 ${i % 2 ? "bg-paper-alt" : "bg-paper"}`}>
+          <div className="mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+            <div className={i % 2 ? "lg:order-2" : undefined}>
+              <Heading eyebrow={f.eyebrow} title={f.title} soft={f.soft} body={f.body} />
+              <ul className="mt-7 space-y-2.5">
+                {f.points.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-[15.5px] text-ink-soft">
+                    <Check size={18} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Reveal delay={0.08} className={i % 2 ? "lg:order-1" : undefined}>
+              <Browser screen={f.screen} />
+            </Reveal>
+          </div>
+        </section>
+      ))}
 
-      {/* PDF or website */}
-      <Section>
-        <Head>
-          <Reveal blur>
-            <Kicker>PDF or website</Kicker>
-            <Display>
-              Your content. <Soft>Your choice.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Upload menus, brochures, guides, floor plans or directories, or connect a page your Hotel already
-              has. Switch whenever you want.
-            </Lede>
-          </Reveal>
-        </Head>
-        <ContentFormats />
-      </Section>
-
-      {/* Previous versions */}
-      <Section tone="dark">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-          <Reveal>
-            <VersionsFilm tone="dark" />
-          </Reveal>
-          <Reveal blur delay={0.1}>
-            <Kicker dark>Previous Versions</Kicker>
-            <Display dark>
-              Changed your mind? <Soft dark>Go back.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              PDFs and websites together, newest first. Restore an earlier version in one step without touching a
-              single Access Point.
-            </Lede>
-          </Reveal>
+      <section className="overflow-hidden bg-charcoal-950 py-24 text-cream md:py-32" aria-labelledby="phone-h">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div>
+            <Heading id="phone-h"
+              dark
+              center
+              eyebrow="On your phone"
+              title="Made for the middle of service."
+              body="Everything works on a phone, with the same screens, so whoever is on shift can make the change."
+            />
+          </div>
+          <div className="mx-auto mt-16 grid max-w-[900px] grid-cols-3 items-end gap-3 sm:gap-8">
+            <Phone screens={["cloudMenuReplace"]} sizes="(min-width: 640px) 280px, 30vw" />
+            <Phone screens={["cloudSpaTemporary"]} className="-translate-y-8" sizes="(min-width: 640px) 280px, 30vw" />
+            <Phone screens={["cloudHotelOverviewPhone"]} sizes="(min-width: 640px) 280px, 30vw" />
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Code management */}
-      <Section tone="alt">
-        <Head>
-          <Reveal blur>
-            <Kicker>Codes</Kicker>
-            <Display>
-              Every Code, <Soft>in one list.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Where each one is, which Space it opens, how many are deployed and how often guests use it. What a
-              Code opens is managed here, never by replacing the Access Point it sits in.
-            </Lede>
-          </Reveal>
-        </Head>
-        <Reveal>
-          <TouchPointsShowcase />
-        </Reveal>
-      </Section>
-
-      {/* Guest-facing: the Access Point */}
-      <Section>
-        <Head>
-          <Reveal blur>
-            <Kicker>The Informax Access Point</Kicker>
-            <Display>
-              Where guests begin. <Soft>Always current.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Guests use the Access Point with their own phone. Nothing to download, and they see what the Hotel
-              has chosen for that place straight away.
-            </Lede>
-          </Reveal>
-        </Head>
-        <AccessPointScenes />
-      </Section>
-
-      {/* Activity */}
-      <Section>
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <Reveal blur>
-            <Kicker>Activity</Kicker>
-            <Display>
-              See what <Soft>guests use.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              Interactions by Space and by Code, and whether guests arrived through a Code or
-              directly.
-            </Lede>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ActivityFilm tone="light" />
-          </Reveal>
+      <section className="bg-paper py-24 md:py-32" aria-labelledby="guest-h">
+        <div className="mx-auto grid max-w-8xl grid-cols-1 items-center gap-14 px-6 md:px-10 lg:grid-cols-2">
+          <div>
+            <Heading id="guest-h"
+              eyebrow="What guests get"
+              title="No app. No account."
+              soft="Just the information."
+              body="Guests scan the Code with their camera and your PDF opens full screen, easy to read and quick to load. If you use a website instead, they are taken straight to it."
+            />
+          </div>
+          <div className="grid grid-cols-3 items-end gap-3 sm:gap-5">
+            <Phone screens={["guestMenuAfter"]} tone="light" sizes="200px" />
+            <Phone screens={["guestDirectoryAfter"]} tone="light" className="-translate-y-6" sizes="200px" />
+            <Phone screens={["guestSpaOffer"]} tone="light" sizes="200px" />
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Hotel workspace and people */}
-      <Section tone="dark">
-        <Head>
-          <Reveal blur>
-            <Kicker dark>Your Hotel</Kicker>
-            <Display dark>
-              One workspace. <Soft dark>Everyone on the same page.</Soft>
-            </Display>
-            <Lede dark className="mt-8">
-              Your Hotel&rsquo;s Spaces, Codes, Activity and people in one place. Everyone with access has
-              their own sign-in, and you can see exactly who that is.
-            </Lede>
-          </Reveal>
-        </Head>
-        <Reveal>
-          <WorkspaceShowcase />
-        </Reveal>
-      </Section>
-
-      {/* Remote management */}
-      <Section>
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <Reveal blur>
-            <Kicker>Remote management</Kicker>
-            <Display>
-              Update it from <Soft>your phone.</Soft>
-            </Display>
-            <Lede className="mt-8">
-              A new Guest Directory for the winter season, published from a phone. Every Guest Room shows it
-              straight away.
-            </Lede>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <PhoneFilm variant="update" space="directory" captions="light" />
-          </Reveal>
+      <section className="bg-paper-alt py-24 md:py-28" aria-labelledby="included-h">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div>
+            <Heading id="included-h" eyebrow="Included" title="Everything you need." soft="Nothing you don't." />
+          </div>
+          <ul className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {INCLUDED.map((x) => (
+              <li key={x} className="flex items-start gap-3 rounded-2xl bg-white px-5 py-5 text-[15.5px] font-medium text-ink shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
+                <Check size={18} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />
+                {x}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 max-w-[52rem] text-[14.5px] leading-relaxed text-ink-mute">
+            Good to know: content is a PDF or a web page, so menus are updated by replacing the file. A guest who already has a page
+            open sees the change when they refresh. Informax shows your offers; it does not take bookings or payments.
+          </p>
         </div>
-      </Section>
+      </section>
 
-      {/* Guest Directory */}
-      <Section tone="alt">
-        <GuestDirectoryCallout />
-      </Section>
-
-      <CloudCta />
+      <DemoCta title="See it with your own content." />
     </>
   );
 }

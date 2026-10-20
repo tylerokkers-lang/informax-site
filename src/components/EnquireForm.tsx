@@ -39,7 +39,7 @@ export default function EnquireForm() {
     const next: FieldErrors = {};
     if (!values.name.trim()) next.name = "Please enter your name.";
     if (!values.company.trim())
-      next.company = "Please enter your hotel or company name.";
+      next.company = "Please enter your restaurant, hotel or company name.";
     if (!values.email.trim()) {
       next.email = "Please enter your email address.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
@@ -152,7 +152,7 @@ export default function EnquireForm() {
           <Field label="Name" required error={errors.name} htmlFor="name">
             <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={(e) => update("name", e.target.value)} aria-invalid={Boolean(errors.name)} className={inputClass(Boolean(errors.name))} />
           </Field>
-          <Field label="Hotel or company" required error={errors.company} htmlFor="company">
+          <Field label="Restaurant, hotel or company" required error={errors.company} htmlFor="company">
             <input id="company" name="company" type="text" autoComplete="organization" value={values.company} onChange={(e) => update("company", e.target.value)} aria-invalid={Boolean(errors.company)} className={inputClass(Boolean(errors.company))} />
           </Field>
           <Field label="Role" htmlFor="jobTitle">
@@ -173,7 +173,7 @@ export default function EnquireForm() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Number of rooms, the areas you'd like to connect, and anything you'd like us to know."
+            placeholder="Your restaurant or hotel, where guests need information, and anything else you'd like us to know."
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             aria-invalid={Boolean(errors.message)}
@@ -196,7 +196,7 @@ export default function EnquireForm() {
           className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-ink px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-brass-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass-deep disabled:opacity-60"
         >
           {status === "submitting" && <Loader2 size={16} className="animate-spin" />}
-          {status === "submitting" ? "Sending…" : "Talk to Informax"}
+          {status === "submitting" ? "Sending…" : "Send enquiry"}
         </button>
       </div>
     </form>

@@ -57,9 +57,12 @@ export default function AccessPoint({
   place,
   colourway = "navy",
   size = "md",
+  sub = "Guest information",
   className = "",
 }: {
   place: string;
+  /** The quiet line under the place name. */
+  sub?: string;
   colourway?: Colourway;
   size?: keyof typeof SIZES;
   className?: string;
@@ -72,7 +75,7 @@ export default function AccessPoint({
       aria-label={`Informax Access Point for ${place}`}
       className={`relative flex aspect-[3/4] shrink-0 flex-col ${s.plate} ${f.plate} ${f.edge} ${className}`}
     >
-      <Image src="/informax-logo-white.png" alt="" width={420} height={140} className={`w-auto self-start ${s.logo} ${f.logo}`} />
+      <Image src="/brand/informax-logo-white-trim.png" alt="" width={746} height={224} className={`w-auto self-start ${s.logo} ${f.logo}`} />
       <div className="flex flex-1 items-center justify-center">
         <div className={`aspect-square bg-white ${s.code} shadow-[0_0_0_1px_rgba(11,21,36,0.06),0_1px_2px_rgba(0,0,0,0.08)]`}>
           <svg viewBox={QR_VIEWBOX} className="h-full w-full" shapeRendering="crispEdges" aria-hidden>
@@ -81,7 +84,7 @@ export default function AccessPoint({
         </div>
       </div>
       <p className={`font-serif-display leading-tight ${s.label} ${f.text}`}>{place}</p>
-      <p className={`mt-0.5 font-medium ${s.sub} ${f.sub}`}>Guest information</p>
+      <p className={`mt-0.5 font-medium ${s.sub} ${f.sub}`}>{sub}</p>
     </div>
   );
 }

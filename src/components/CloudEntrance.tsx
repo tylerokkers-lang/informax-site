@@ -92,17 +92,12 @@ export default function CloudEntrance({
           onFocus={warm}
           onTouchStart={warm}
           onClick={onClick}
-          className={`group hidden md:inline-flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/[0.18] bg-white/[0.04] py-[7px] pl-3 pr-4 text-[13px] font-medium tracking-[0.01em] text-white/90 transition-[background-color,border-color,color] duration-300 hover:border-white/35 hover:bg-white/[0.08] hover:text-white ${focusRing}`}
+          aria-label="Log in to Informax Cloud"
+          className={`group hidden lg:inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/[0.18] bg-white/[0.04] py-[7px] pl-3 pr-3.5 text-[13px] font-medium tracking-[0.01em] text-white/90 transition-[background-color,border-color,color] duration-300 hover:border-white/35 hover:bg-white/[0.08] hover:text-white ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={MARK} alt="" width={20} height={18} className="h-[18px] w-auto shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-          Log in to Informax Cloud
-          <span
-            aria-hidden
-            className="text-white/55 transition-[transform,color] duration-300 group-hover:translate-x-0.5 group-hover:text-white"
-          >
-            →
-          </span>
+          Log in
         </a>
       ) : (
         <a
