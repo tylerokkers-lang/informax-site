@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 21 October 2026. **Read §0c first**: a complete restaurant-first
+Last updated: 21 October 2026 (final pass). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -22,21 +22,30 @@ without the owner's explicit approval**: merging deploys to production (§4).
 1. **Photography (hard blocker).** Nine slots in `src/lib/photography.ts`,
    specified exactly in `docs/photography-brief.md` (subject, shape, minimum
    size, safe area, licence rules). Still placeholders: the build environment's
-   network policy blocks Unsplash, Pexels and Wikimedia, and no AI imagery is
-   allowed. **A production build now refuses to run** while any slot lacks a
-   photograph, `licence` and `source` (guard in `next.config.ts`, only when
-   `VERCEL_ENV=production`; previews are unaffected), so an accidental merge
-   cannot publish placeholders: Vercel keeps the current site.
-2. **V2 timing.** Every Informax Cloud screen on the site is from V2
-   (`informax-cloud-v2`, PR #30 `feature/access-points` at `3ae4141`, still
-   open, unmerged, and V2 has no production environment). informax.cloud still
-   runs V1. See the dependency table below; decide whether to launch the site
-   with V2 or wait for it.
-3. **Owner review** of the preview on a real phone and desktop, and approval
+   network policy blocks Unsplash, Pexels and Wikimedia (re-checked 21 October
+   2026: `images.unsplash.com`, `unsplash.com`, `api.unsplash.com`,
+   `images.pexels.com`, `www.pexels.com`, `api.pexels.com` all refused), and no
+   AI imagery is allowed. No licence information has been recorded or invented.
+   **A production build refuses to run** while any slot lacks a photograph,
+   `licence` and `source` (guard in `next.config.ts`, only when
+   `VERCEL_ENV=production`; previews are unaffected, proven by the successful
+   preview builds), so an accidental merge cannot publish placeholders.
+2. **The "Informax Cloud — Coming Soon" link lands on a sign-in page.** It
+   points to `https://informax.cloud` as requested, but informax.cloud still
+   runs V1, whose root redirects to `/login` (`src/app/page.tsx` in
+   `informax-analytics`). Until informax.cloud shows a coming-soon page (a
+   change to the Cloud deployment, out of scope here), visitors who click it
+   see the V1 sign-in screen. Owner to decide: accept, change the link, or put
+   a holding page on informax.cloud.
+3. **V2 timing.** Every Informax Cloud screen on the site is from V2 (PR #30
+   `feature/access-points` at `3ae4141`, open and unmerged; no V2 production
+   environment). The site now says so everywhere: the Informax Cloud page says
+   Coming Soon and "currently in development", every product screen carries
+   "A preview of Informax Cloud, coming soon", and each feature carries a
+   status label (see below).
+4. **Owner review** of the preview on a real phone and desktop, and approval
    of the copy.
-4. **Enquiry delivery** must be confirmed on production after go-live (Preview
-   has no `RESEND_API_KEY`; the form and API code are unchanged apart from
-   labels, and production delivery was last verified on 8 September 2026).
+5. **Enquiry delivery** must be confirmed once on production (below).
 
 ### What the site claims, and what it depends on
 Checked against the V2 code at `3ae4141` (the captures' commit; no newer UI
@@ -59,6 +68,35 @@ Informax shows offers but does not check availability, take bookings or
 payments, or apply discounts (Hotels has an explicit "What it does not do"
 box); demos say "real screens, fictional business"; the headline times on
 Restaurants ("seven", "ten past") are labelled as an example.
+
+### The Informax Cloud page (`/informax-cloud`, rebuilt 21 October 2026)
+In the main nav with a "Soon" tag (desktop and mobile; footer says "Informax
+Cloud (coming soon)").
+1. Hero: **Coming Soon** badge, "Meet Informax Cloud.", "One platform. Every
+   Access Point. Always up to date.", the owner's supporting copy, the
+   in-development message, Request a Demo and the "Informax Cloud — Coming
+   Soon" link (`CLOUD_SITE_URL`, `src/components/site/ComingSoon.tsx`), over
+   the real Overview (desktop) and Spaces (phone) screens.
+2. "Informax is the guest information solution. Informax Cloud is the
+   platform that powers it."
+3. Your property → Your spaces → Your Access Points → Your content, with the
+   real Spaces screen (`h-spaces`, captured 21 October). No Block layer.
+4. Six features, each with a status label: "Working in the development build"
+   (one place, update once, temporary information, organise, version history)
+   or "Built, still in testing" (managing many Access Points together: built
+   in PR #30, its real-Storage end-to-end run still in progress per the V2
+   handover). The page says none of it is publicly available.
+5. On your phone; what guests get (incl. "refresh to see an update"); closing
+   Coming Soon section with the honesty notes. No sign-up, register, trial,
+   countdown, launch date or pricing (checked by the test suite).
+Copy note: the hero copy and the link label contain an em dash because the
+owner specified those exact strings on 21 October 2026; elsewhere the no-dash
+house style (§11) still applies.
+
+**Header log-in:** the pill to `informax.cloud/login` (V1, existing
+customers) now reads "Customer log in", so it does not suggest the new
+platform is open to the public. Removing it would cut existing V1 customers
+off from their sign-in link; owner to decide.
 
 ### Informax Cloud application issues (not changed: separate repo)
 Found while capturing; for the Cloud team, in `informax-cloud-v2`:
@@ -97,7 +135,12 @@ Nav: Home, Restaurants, Hotels, How It Works, Informax Cloud, Contact
   do"); directory before and after; spa offer; upgrades; many at once;
   structure; walkthrough; CTA.
 - `/how-it-works` (three steps, guests vs team, FAQ), `/informax-cloud`
-  (product tour from real desktop screens).
+  (Meet Informax Cloud, Coming Soon: see the section above).
+- Homepage band under the hero states the problem, the solution and the
+  platform; the hero steps are "The kitchen runs out", "The menu changes",
+  "Every Code is updated" ("No reprinting. No replacing Codes. No outdated
+  menus."). Hotels lists: digital hotel directory, Spa Access Points,
+  restaurant information, room upgrade opportunities.
 - Share images regenerated (were hotel-only): `src/app/opengraph-image.jpg`
   (restaurant), `src/app/hotels/…` (hotel), `src/app/informax-cloud/…`, from
   the trimmed official logo and real guest or Cloud screens.
@@ -106,7 +149,7 @@ Nav: Home, Restaurants, Hotels, How It Works, Informax Cloud, Contact
 
 ### Informax Cloud screenshots (`public/cloud/*.webp`, `src/lib/screens.ts`)
 Captured from the real V2 views (AppShell, Access Point page, Content panel,
-Bulk, Overview, guest PDF viewer) at `3ae4141`, with the product's own
+Bulk, Overview, Spaces, guest PDF viewer) at `3ae4141`, with the product's own
 fictional businesses (The Copper Table, Marlowe Grand Hotel) and fictional
 PDFs; Playwright clicked the real controls. Nothing redrawn; crops leave out
 the Code address and printable Code. The app's `/dev/preview` fixtures use a
@@ -121,7 +164,11 @@ names, see the route), run `next dev -p 3100` with a local `.env.local`
 (`INFORMAX_ENV=local`, a local Supabase URL and a well-formed placeholder
 anon key; no database is needed), then `node docs/cloud-captures/shoot.mjs
 <out>` and convert to WebP (780 px phones, 1800 px desktop). Delete the
-capture files from the Cloud checkout afterwards. If the menu PDF changes,
+capture files from the Cloud checkout afterwards. The Overview capture
+data gives every area at least two Access Points: an area with exactly one
+triggers the Quick access bug below, and an earlier capture showed it
+("Nothing set up yet"); the files were renamed `h-overview-v2` so no cache
+serves the old image. If the menu PDF changes,
 re-measure the dish position used for the highlight (`DISH` in `MenuHero`,
 `MenuBeforeAfter`, `SeeItInAction`).
 
@@ -137,41 +184,68 @@ Removed (still in git history): old `story/*`, most of `access/*`
 (AccessPoint stays), `cloud/*` story parts, and the V1 app recreations in
 `product/*`. Unused media in `public/video` and `public/images` was left.
 
-### Verification (21 October 2026, local production build of the branch)
-- `npx tsc --noEmit`, `npm run lint`, `npm run build`: clean. With
-  `VERCEL_ENV=production` the build stops on the photography guard, as
+### Verification (21 October 2026, final pass, local production build)
+Every item below was actually run; nothing is reported that was not.
+- `npx tsc --noEmit`, `npm run lint`, `npm run build`: clean.
+  `VERCEL_ENV=production npx next build` stops on the photography guard, as
   intended.
-- Playwright, 62 checks, all pass: axe-core WCAG 2.1 A/AA with **zero
-  violations on 9 pages**; one h1 per page; every internal link 200; the
-  three redirects; hero step selection, the updated menu shown and no
-  auto-advance after a choice; walkthrough Next, Restaurant/Hotel tabs with
-  arrow keys, Start again; skip link; mobile menu incl. Escape; enquiry API
-  422 / honeypot 200 / 503 without a key; form validation; the before/after
-  and the hotel "does / does not" statements; share images served.
-- No horizontal scrolling and no console errors on 8 pages at 1440, 834, 390
-  and 320 px.
-- Lighthouse (mobile, simulated slow 4G, local server; two runs each):
-  performance Home 95–96, Restaurants 96, Hotels 95–96, How It Works 95–96,
-  Informax Cloud 98–99; accessibility 100 everywhere (How It Works after the
-  heading fix); best practices 100; SEO 100; CLS 0; LCP 2.1–2.9 s.
-- **Vercel preview:** GitHub reports the Vercel deployment for each pushed
-  commit as successful (commit status "Vercel", deployment environment
-  Preview). The preview could **not** be opened from the build environment
-  (its network blocks `*.vercel.app`), so nothing on the live preview has
-  been checked by eye or by script. The branch alias is
-  `informax-site-git-redesign-restaurant-first-informax.vercel.app` (always the
-  newest commit); exact per-commit URLs are in Vercel or behind the tick on
-  the commit in GitHub. Vercel may require the owner's Vercel sign-in.
-  Commit `4d69da0` built successfully at
-  https://informax-site-rh6q24716-informax.vercel.app (GitHub deployment
-  7237607094, 21 October 2026), which also shows the production photo guard
-  does not block preview builds.
-- Not verified: real devices and Safari; real enquiry delivery; the preview.
+- **Test suite** (`docs/qa/test-site.mjs`, Playwright): **94 checks, all
+  pass**. axe-core WCAG 2.1 A/AA with zero violations on 9 pages; one h1 per
+  page; every internal link 200; three redirects; hero steps, highlight and no
+  auto-advance after a choice; walkthrough Next, tabs with arrow keys, Start
+  again; skip link; mobile menu incl. Escape; enquiry API 422 / honeypot /
+  503 without a key; form validation; before/after; hotel uses and "does not
+  do" list; Informax Cloud page h1, Coming Soon badge, in-development message,
+  link to `https://informax.cloud`, no sign-up/registration/trial/countdown
+  wording, the four layers, status labels, no Block layer; preview labels on
+  Home, Restaurants and Hotels; no "QR" and no prices in the text of any page;
+  share images served.
+- **Responsive sweep** (`docs/qa/responsive-sweep.mjs`): 13 pages × 1440,
+  834, 390 and 320 px = 52 combinations, no horizontal scrolling. It found a
+  **hydration error on `/websites` and `/digital-information`** for visitors
+  with reduced motion turned on (pre-existing on production: `VideoHero` read
+  the motion preference during the first render). Fixed with a
+  hydration-safe flag; re-checked clean.
+- Header fits at 1280 px with the Soon tag and "Customer log in" (measured).
+- **Metadata:** every page has a unique title, a description, a canonical
+  link, Open Graph and Twitter tags; share images are 1200×630 (restaurant
+  default, Hotels, Informax Cloud with Coming Soon). The Informax Cloud
+  description was trimmed to 155 characters. Privacy and cookie descriptions
+  are short (60 and 69 characters) and were left as they are.
+- **Lighthouse** (mobile, simulated slow 4G, local server, two runs each):
+  Home 93–95, Restaurants 96, Hotels 96–98, How It Works 96, Informax Cloud
+  99, Request a demo 98; accessibility, best practices and SEO 100 on every
+  page; CLS 0; LCP 1.0–3.2 s. Desktop preset, Informax Cloud: 100 / 100 / 100
+  / 100.
+- **Enquiry end to end (without sending email):** production build with a
+  dummy key and a test-only interceptor on the call to Resend
+  (`docs/qa/mock-resend.mjs`, `docs/qa/enquiry-e2e.mjs`). Filling in and
+  sending the real form showed "Thank you. We'll be in touch." and produced
+  exactly one request to `https://api.resend.com/emails` from `Informax
+  Enquiries <enquiries@informax.co.uk>` to `info@informax.co.uk`, reply-to the
+  visitor, with company, interests and message included. **Actual delivery was
+  not verified**: there is no key here or in Preview, and it must be confirmed
+  once on production.
+- **External links:** found `https://informax.cloud`, `https://informax.cloud/login`,
+  `https://www.instagram.com/informax_cloud/`, `mailto:info@informax.co.uk`, and
+  ico.org.uk / aboutcookies.org / allaboutcookies.org on legal pages. **None
+  could be opened from here** (outside hosts are blocked). What informax.cloud
+  serves was established from the V1 source code (blocker 2).
+- **Rollback rehearsal (git):** in a scratch copy, `main` merged with this
+  branch builds; `git revert -m 1` of that merge leaves a tree identical to
+  `main` (empty diff) and builds. Vercel's instant rollback could not be
+  rehearsed (no Vercel access here).
+- **Vercel preview:** GitHub reports a successful Vercel build for every
+  pushed commit (see the URL recorded below). The preview itself could not be
+  opened from here (`*.vercel.app` blocked), so it has not been inspected.
+- Not verified: real devices and Safari; real email delivery; the live
+  preview; external link targets.
 
 ### Production deployment (only after the owner's explicit approval)
 1. Supply the nine photographs (`docs/photography-brief.md`), with licence and
    source recorded; check each page at phone and desktop width.
-2. Decide the V2 question (blocker 2) and review the preview.
+2. Decide the informax.cloud link (blocker 2) and the V2 timing (blocker 3),
+   and review the preview on a phone and a desktop.
 3. On the branch: `npx tsc --noEmit && npm run lint && npm run build`, and
    `VERCEL_ENV=production npx next build` must now pass the photo guard.
 4. Record the rollback target first: the current production deployment
@@ -191,12 +265,16 @@ Removed (still in git history): old `story/*`, most of `access/*`
   the redesign.
 - Nothing else needs undoing: no DNS, environment variable or Informax Cloud
   change is part of this release.
+- The git half was rehearsed on 21 October 2026 (see Verification).
 
 ### Needs the owner's decision
 - Approve the redesign and copy; supply or license photography (or allow
   `images.unsplash.com` / `images.pexels.com` in the build environment's
   network settings so they can be sourced and checked there).
 - Launch with V2 screens before V2 is in production, or wait (table above).
+- The "Informax Cloud — Coming Soon" link currently lands on the V1 sign-in
+  page (blocker 2): accept, change it, or add a holding page on informax.cloud.
+- Keep the header "Customer log in" (existing V1 customers) or remove it.
 - LinkedIn address (still empty). Pricing stays unpublished (§5).
 
 ## 0b. Access Point positioning (28 September 2026)

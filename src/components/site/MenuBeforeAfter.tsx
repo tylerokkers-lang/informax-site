@@ -77,7 +77,8 @@ export default function MenuBeforeAfter() {
           </div>
         </div>
         <p className="mx-auto mt-6 max-w-[1000px] text-[13px] text-ink-mute">
-          Real guest screens from Informax Cloud, fictional restaurant. The times in the headline are an example.
+          A preview of Informax Cloud, coming soon: real guest screens from the development build, fictional restaurant. The
+          times in the headline are an example.
         </p>
       </div>
     </section>

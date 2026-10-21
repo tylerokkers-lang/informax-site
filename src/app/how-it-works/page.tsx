@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DemoCta, Heading, HowItWorksSteps } from "@/components/site/Sections";
 import { Phone } from "@/components/site/Devices";
+import { PreviewNote } from "@/components/site/ComingSoon";
 
 export const metadata: Metadata = {
   title: "How it works",
@@ -83,6 +84,9 @@ export default function HowItWorksPage() {
             <div className="mt-8 flex justify-center gap-4">
               <Phone screens={["cloudMenuReplace"]} tone="light" className="w-[44%] max-w-[200px]" sizes="200px" />
               <Phone screens={["cloudMenuPublished"]} tone="light" className="mt-10 w-[44%] max-w-[200px]" sizes="200px" />
+            </div>
+            <div className="mt-6">
+              <PreviewNote />
             </div>
           </div>
         </div>

@@ -119,8 +119,8 @@ export default function HotelShowcase({ as = "section", heading = "h2" }: { as?:
             ))}
           </ul>
           <p className="mt-4 text-[13px] text-cream-mute">
-            Real guest screens from Informax Cloud, fictional hotel. Informax shows your information and offers; bookings and
-            upgrades stay with your team.
+            A preview of Informax Cloud, coming soon: real guest screens from the development build, fictional hotel. Informax
+            shows your information and offers; bookings and upgrades stay with your team.
           </p>
         </div>
       </div>

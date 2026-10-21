@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
+
+/** A store that never changes: lets the first client render match the server. */
+const noSubscribe = () => () => {};
 
 /** Entrance timing for one line of hero copy (see .ix-hero-rise). */
 const rise = (y: number, duration: number, delay: number) =>
@@ -52,7 +55,12 @@ export default function VideoHero({
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const reduceMotion = useReducedMotion();
+  // The server cannot know the visitor's motion preference, so the first
+  // client render must match it (film present); the preference applies once
+  // hydrated. Reading it during the first render caused a hydration error for
+  // visitors with reduced motion turned on.
+  const hydrated = useSyncExternalStore(noSubscribe, () => true, () => false);
+  const reduceMotion = useReducedMotion() && hydrated;
 
   useEffect(() => {
     const video = videoRef.current;

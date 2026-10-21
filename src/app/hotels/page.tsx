@@ -16,10 +16,26 @@ export const metadata: Metadata = {
 };
 
 const USES = [
-  { title: "Digital guest directory", what: "One directory PDF behind the Code in every room.", how: "Replace it once in Informax Cloud." },
-  { title: "Restaurant hours", what: "Dinner now starts at 17:30 instead of 18:00.", how: "Upload the updated directory. Every room’s Code opens it." },
-  { title: "Spa promotion with an end time", what: "This afternoon’s treatment offer, in every bathroom.", how: "Publish it as temporary content ending at 18:00." },
-  { title: "Room upgrade invitation", what: "Ask guests if they would like a suite.", how: "Add the invitation to your guest information." },
+  {
+    title: "Digital hotel directory",
+    what: "A permanent Code on the coffee table opens your hotel information.",
+    how: "Change restaurant times or anything else without reprinting the directory.",
+  },
+  {
+    title: "Spa Access Points",
+    what: "A Code in the guest bathroom opens spa treatments and offers.",
+    how: "Promote an offer with an end time; the treatment menu comes back afterwards.",
+  },
+  {
+    title: "Restaurant information",
+    what: "Codes around the property open current menus and restaurant details.",
+    how: "Replace a menu once and every Code for it shows the new one.",
+  },
+  {
+    title: "Room upgrade opportunities",
+    what: "Show guests an invitation to ask about a suite or an experience.",
+    how: "Your team takes every enquiry from there.",
+  },
 ];
 
 const Note = ({ children }: { children: React.ReactNode }) => (
@@ -33,7 +49,7 @@ export default function HotelsPage() {
 
       <section className="bg-paper py-24 md:py-28" aria-labelledby="hotel-uses-h">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <Heading id="hotel-uses-h" eyebrow="At a glance" title="Four things your hotel can keep current." soft="Without replacing a card." />
+          <Heading id="hotel-uses-h" eyebrow="At a glance" title="Four ways hotels use Informax." soft="Without replacing a card." />
           <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {USES.map((u, i) => (
               <li key={u.title} className="flex flex-col rounded-[22px] bg-white p-6 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">

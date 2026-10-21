@@ -15,23 +15,23 @@ const STEPS: { label: string; line: string; detail: string; chip: string; photo:
   {
     label: "The kitchen runs out",
     line: "The menu needs to change.",
-    detail: "Sea bass is finished for tonight, but it is still on the menu every guest opens.",
+    detail: "The restaurant runs out of sea bass during dinner service, but it is still on the menu every guest opens.",
     chip: "Sea bass: sold out tonight",
     photo: "chefPass",
     dish: { ...DISH, tone: "warn" },
   },
   {
-    label: "Replace the menu PDF",
+    label: "The menu changes",
     line: "Make the change in seconds.",
-    detail: "A manager opens the Restaurant Menu in Informax Cloud, taps Replace menu and picks the updated PDF.",
+    detail: "The manager opens Informax Cloud and replaces the menu PDF with an updated version featuring roast hake.",
     chip: "Replace menu · updated PDF",
     photo: "hospitalityTeam",
     dish: null,
   },
   {
-    label: "Same Code, new menu",
+    label: "Every Code is updated",
     line: "One update. Every table.",
-    detail: "Informax Cloud confirms it is live. The same Code on every table now opens the menu with roast hake.",
+    detail: "Guests scan the same permanent Code and see the new menu straight away. No reprinting. No replacing Codes. No outdated menus.",
     chip: "Same Code · new menu",
     photo: "restaurantTable",
     dish: { ...DISH, tone: "ok" },
@@ -150,7 +150,8 @@ export default function MenuHero() {
             ))}
           </ol>
           <p className="mt-4 flex flex-wrap items-center gap-x-2 text-[13px] text-cream-mute">
-            Real Informax Cloud screens, fictional restaurant. Guests with the menu already open see it when they refresh.
+            A preview of Informax Cloud, coming soon: real screens from the development build, fictional restaurant. Guests with the
+            menu already open see the change when they refresh.
             <a href="#see-it-in-action" className="inline-flex items-center gap-1 font-semibold text-brass-light hover:text-white">
               Walk through it <ArrowRight size={14} aria-hidden />
             </a>

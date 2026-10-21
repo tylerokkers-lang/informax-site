@@ -1,0 +1,13 @@
+import { chromium } from "playwright-core";
+const b = await chromium.launch({ executablePath: process.env.CHROMIUM ?? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+const p = await b.newPage();
+await p.goto((process.env.BASE ?? "http://localhost:3201") + "/enquire", { waitUntil: "networkidle" });
+await p.locator("#name").fill("Test Owner");
+await p.getByLabel("Restaurant, hotel or company").fill("The Example Restaurant");
+await p.locator("#email").fill("test@example.com");
+await p.locator("#message").fill("End-to-end test of the enquiry form. Please ignore.");
+await p.getByRole("group", { name: "What would you like to explore?" }).getByText("A demonstration").click();
+await p.getByRole("button", { name: "Send enquiry" }).click();
+await p.waitForTimeout(2500);
+console.log("SUCCESS SHOWN:", await p.getByText(/thank you|thanks/i).first().isVisible().catch(() => false));
+await b.close();

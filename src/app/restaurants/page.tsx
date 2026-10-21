@@ -7,11 +7,12 @@ import MenuBeforeAfter from "@/components/site/MenuBeforeAfter";
 import { Phone } from "@/components/site/Devices";
 import { DemoCta, Story } from "@/components/site/Sections";
 import { DEMO_CTA } from "@/lib/constants";
+import { PreviewNote } from "@/components/site/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Restaurants: change your menu without reprinting",
   description:
-    "Sold out of a dish? New special tonight? Replace your menu from your phone in Informax Cloud and every table's Code shows the latest version. No app for guests, no reprinting.",
+    "Sold out of a dish? New special tonight? With Informax Cloud (coming soon) you replace your menu from your phone and every table's Code shows the latest version. No app for guests, no reprinting.",
   alternates: { canonical: "/restaurants" },
 };
 
@@ -34,6 +35,9 @@ export default function RestaurantsPage() {
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="#see-it-in-action" className="ix-btn ix-btn-primary">See It in Action</a>
               <Link href={DEMO_CTA.href} className="ix-btn ix-btn-secondary-dark">{DEMO_CTA.label}</Link>
+            </div>
+            <div className="mt-8 max-w-[34rem]">
+              <PreviewNote dark />
             </div>
           </div>
           <div className="relative mx-auto flex items-end gap-5 lg:mx-0">

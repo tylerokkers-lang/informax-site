@@ -22,6 +22,15 @@ const TRANSPARENT_AT_TOP_ROUTES = new Set([
   "/websites",
 ]);
 
+/** Informax Cloud is in development: the nav says so wherever it names it. */
+function SoonTag() {
+  return (
+    <span className="ml-1.5 inline-block translate-y-[-1px] rounded-full bg-brass-light/15 px-1.5 py-[1px] align-middle text-[10px] font-semibold uppercase tracking-[0.06em] text-brass-light">
+      Soon
+    </span>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const canBeTransparent = TRANSPARENT_AT_TOP_ROUTES.has(pathname);
@@ -74,6 +83,7 @@ export default function Header() {
                   }`}
                 >
                   {link.label}
+                  {link.href === "/informax-cloud" ? <SoonTag /> : null}
                 </Link>
               );
             })}
@@ -132,6 +142,7 @@ export default function Header() {
                     className={`py-3 text-lg font-medium transition-colors duration-300 ${active ? "text-brass-light" : "text-cream hover:text-brass-light"}`}
                   >
                     {link.label}
+                    {link.href === "/informax-cloud" ? <SoonTag /> : null}
                   </Link>
                 );
               })}

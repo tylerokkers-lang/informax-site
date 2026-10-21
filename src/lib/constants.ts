@@ -6,6 +6,13 @@ export const PRIMARY_CTA = "Request a Demo";
 export const CLOUD_LOGIN_URL = "https://informax.cloud/login";
 
 /**
+ * Informax Cloud (V2) is in development and not publicly available. The
+ * marketing site links to it only as "Coming Soon"; never as a sign-up.
+ */
+export const CLOUD_SITE_URL = "https://informax.cloud";
+export const CLOUD_COMING_SOON_LABEL = "Informax Cloud — Coming Soon";
+
+/**
  * Official Informax social profiles, supplied by the owner. LinkedIn is still
  * to come: paste its full profile address here when it is available. An
  * empty entry shows its footer icon as inactive (never a guessed or dead
@@ -32,7 +39,7 @@ export const FOOTER_PRODUCT_LINKS = [
   { label: "Restaurants", href: "/restaurants" },
   { label: "Hotels", href: "/hotels" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Informax Cloud", href: "/informax-cloud" },
+  { label: "Informax Cloud (coming soon)", href: "/informax-cloud" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [

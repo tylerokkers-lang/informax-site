@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 const DEFAULT_TITLE = "Informax | Menus and guest information, always up to date";
 const DEFAULT_DESCRIPTION =
-  "Informax Cloud gives restaurants and hotels one simple place to manage the information guests see. Update it once, and every connected Access Point stays up to date, with no reprinting.";
+  "Informax connects permanent Codes in restaurants and hotels to digital information your team can update without reprinting. Informax Cloud, the platform behind it, is coming soon.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

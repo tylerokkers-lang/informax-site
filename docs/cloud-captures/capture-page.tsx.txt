@@ -11,6 +11,7 @@ import { AccessPointView } from "@/ui/views/access-point-view";
 import { BulkView } from "@/ui/views/bulk-view";
 import { OverviewView } from "@/ui/views/overview-view";
 import { SpaceDetailView } from "@/ui/views/space-detail-view";
+import { SpacesView } from "@/ui/views/spaces-view";
 
 /**
  * LOCAL ONLY, NEVER COMMITTED: the real Informax Cloud views rendered with the product's own fictional demo businesses
@@ -92,7 +93,8 @@ function overview(i: "hotel" | "restaurant") {
   const sp = (id: string, name: string, parent: string | null) => ({ id, name, parent_id: parent, status: "active" as const });
   const hotel = i === "hotel";
   const spaces = hotel
-    ? [sp("bed", "Bedrooms", null), sp("ct", "Coffee Table", "bed"), sp("bath", "Bathroom", "bed"), sp("bs", "Bedside Table", "bed"), sp("spa", "Spa", null), sp("spa-e", "Spa Entrance", "spa"), sp("rest", "Restaurants", null), sp("gr", "Garden Room Menu", "rest"), sp("pub", "Public Areas", null), sp("rec", "Reception", "pub")]
+    // Every area holds at least two Access Points: an area with exactly one triggers the Quick access bug (HANDOVER.md §0c).
+    ? [sp("bed", "Bedrooms", null), sp("ct", "Coffee Table", "bed"), sp("bath", "Bathroom", "bed"), sp("bs", "Bedside Table", "bed"), sp("spa", "Spa", null), sp("spa-e", "Spa Entrance", "spa"), sp("spa-r", "Relaxation Room", "spa"), sp("rest", "The Garden Room", null), sp("gr", "Restaurant Menu", "rest"), sp("wl", "Wine List", "rest"), sp("pub", "Public Areas", null), sp("rec", "Reception", "pub"), sp("lob", "Lobby Lounge", "pub")]
     : [sp("main", "Main Restaurant", null), sp("menu", "Restaurant Menu", "main"), sp("drinks", "Drinks Menu", "main"), sp("ter", "Terrace", null), sp("tmenu", "Terrace Menu", "ter"), sp("bar", "Bar", null), sp("wine", "Wine List", "bar")];
   const leaf = spaces.filter((x) => !spaces.some((y) => y.parent_id === x.id));
   const placements = leaf.map((l, n) => ({ space_id: l.id, code_id: `c${n}` }));
@@ -104,7 +106,7 @@ function overview(i: "hotel" | "restaurant") {
   const tempSpace = hotel ? "bath" : "tmenu";
   const summary = summariseOverview({
     spaces, placements, versions, now, activeCodeIds: new Set(placements.map((p) => p.code_id)),
-    defaults: leaf.map((l) => ({ space_id: l.id, version_id: hotel && (l.id === "bath" || l.id === "spa-e") ? "v-spa" : "v-main" })),
+    defaults: leaf.map((l) => ({ space_id: l.id, version_id: hotel && (l.id === "bath" || l.id === "spa-e" || l.id === "spa-r") ? "v-spa" : "v-main" })),
     temporaries: [{ space_id: tempSpace, version_id: "v-temp", starts_at: ago(20), expires_at: ahead(hotel ? 198 : 100), ended_at: null }],
   });
   const f = hotel ? H : R;
@@ -147,6 +149,14 @@ export default async function Marketing({ params }: { params: Promise<{ shot: st
         childTotal={4} page={1} codes={[]} codeTotal={0} codePage={1} pageSize={50} showArchived={false} can={{ manage: true, codes: true }}
         content={{ state: { versions: [], defaults: [], temporaries: [], live: { live: null, default: null, scheduled: null } } as ContentState, timeZone: tz, now: NOW, can: CAN }}
         areaMode={{ classifications: [{ id: "c1", name: "Coffee Table" }, { id: "c2", name: "Bathroom" }], suggestions: PROFILES.hotel.suggestedAccessPoints, canBulk: true, emergency: null }} />);
+    case "h-spaces":
+      return shell("hotel", <SpacesView profile={PROFILES.hotel} canSeeLocations={false} sections={[{ locationId: "l1", locationName: H.loc.name, canManage: true, total: 5, page: 1, pageSize: 50, spaces: [
+        { id: "a1", name: "Bedrooms", inside: 4, codes: 4, children: [{ id: "ap1", name: "Coffee Table", inside: 0 }, { id: "ap2", name: "Bathroom", inside: 0 }, { id: "ap3", name: "Bedside Table", inside: 0 }, { id: "ap4", name: "Room Service", inside: 0 }] },
+        { id: "a2", name: "Spa", inside: 2, codes: 2, children: [{ id: "ap5", name: "Spa Entrance", inside: 0 }, { id: "ap6", name: "Relaxation Room", inside: 0 }] },
+        { id: "a3", name: "The Garden Room", inside: 2, codes: 2, children: [{ id: "ap7", name: "Restaurant Menu", inside: 0 }, { id: "ap8", name: "Wine List", inside: 0 }] },
+        { id: "a4", name: "Public Areas", inside: 2, codes: 2, children: [{ id: "ap9", name: "Reception", inside: 0 }, { id: "ap10", name: "Lobby Lounge", inside: 0 }] },
+        { id: "a5", name: "Suites", inside: 1, codes: 1, children: [{ id: "ap11", name: "Suite Bathroom", inside: 0 }] },
+      ] }]} />);
     case "h-bulk":
       return shell("hotel", <BulkView locations={[H.loc]} locationId="l1" locationName="Marlowe Grand"
         areas={[{ id: "a1", name: "Bedrooms" }, { id: "a2", name: "Suites" }]} classifications={[{ id: "c1", name: "Coffee Table" }, { id: "c2", name: "Bathroom" }]}

@@ -31,7 +31,8 @@ export const SCREENS = {
   cloudDirectoryPublished: phone("h-directory-after-phone", "Informax Cloud on a phone: the Coffee Table now shows the updated guest directory"),
   cloudSpaCompose: phone("h-spa-compose-phone", "Informax Cloud on a phone: publishing temporary spa content that ends at 18:00"),
   cloudSpaTemporary: phone("h-spa-temporary-phone", "Informax Cloud on a phone: Spa this afternoon is showing, ends 18:00 today, then back to Spa treatments"),
-  cloudHotelOverviewPhone: phone("h-overview-phone", "Informax Cloud overview for Marlowe Grand Hotel on a phone"),
+  cloudSpacesPhone: phone("h-spaces-phone", "Informax Cloud on a phone: the Spaces of Marlowe Grand Hotel and the Access Points in each"),
+  cloudHotelOverviewPhone: phone("h-overview-phone-v2", "Informax Cloud overview for Marlowe Grand Hotel on a phone"),
 
   // Desktop.
   deskMenuBefore: desk("r-menu-before-desk", "Informax Cloud on a computer: what a guest sees when they scan the Restaurant Menu Code"),
@@ -40,8 +41,8 @@ export const SCREENS = {
   deskDirectoryPublished: desk("h-directory-after-desk", "Informax Cloud on a computer: the Coffee Table Access Point showing the updated guest directory"),
   deskSpaCompose: desk("h-spa-compose-desk", "Informax Cloud on a computer: publishing temporary content with an end time of 18:00"),
   deskSpaTemporary: desk("h-spa-temporary-desk", "Informax Cloud on a computer: temporary spa content showing until 18:00, then back to the spa treatments menu"),
-  deskHotelOverview: desk("h-overview", "Informax Cloud overview for Marlowe Grand Hotel: Spaces, active Codes and temporary content running now"),
-  deskRestaurantOverview: desk("r-overview", "Informax Cloud overview for The Copper Table"),
+  deskHotelOverview: desk("h-overview-v2", "Informax Cloud overview for Marlowe Grand Hotel: Spaces, active Codes and temporary content running now"),
+  deskSpaces: desk("h-spaces", "Informax Cloud: the Spaces of Marlowe Grand Hotel (Bedrooms, Spa, The Garden Room, Public Areas) and the Access Points in each"),
   deskBedrooms: desk("h-bedrooms", "Informax Cloud: the Access Points in Bedrooms, each showing whether its content is live or temporary"),
   deskBulk: desk("h-bulk", "Informax Cloud: update many at once, publishing one PDF to every Bathroom Access Point"),
 } satisfies Record<string, Screen>;

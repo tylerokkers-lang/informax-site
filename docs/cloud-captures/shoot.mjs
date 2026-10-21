@@ -72,6 +72,8 @@ const jobs = [
   ["h-overview-phone", "h-overview", "phone", null, "viewport"],
   ["h-bedrooms", "h-bedrooms", "desktop", null, "viewport"],
   ["h-bulk", "h-bulk", "desktop", null, "viewport"],
+  ["h-spaces", "h-spaces", "desktop", null, "viewport"],
+  ["h-spaces-phone", "h-spaces", "phone", null, "viewport"],
   ["g-menu-before", "g-menu-before", "phone", null, "viewport"],
   ["g-menu-after", "g-menu-after", "phone", null, "viewport"],
   ["g-directory-before", "g-directory-before", "phone", null, "viewport"],

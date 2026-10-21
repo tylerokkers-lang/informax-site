@@ -167,9 +167,9 @@ export default function SeeItInAction({ initial = "restaurant", id = "see-it-in-
               ))}
             </ol>
             <p className="mt-8 max-w-[56ch] rounded-2xl bg-ink/[0.04] px-5 py-4 text-[13.5px] leading-relaxed text-ink-mute">
-              <strong className="font-semibold text-ink-soft">A guided walkthrough, not a live account.</strong> Every screen is a real
-              capture of Informax Cloud using a fictional {industry === "restaurant" ? "restaurant" : "hotel"}. Captions outside
-              the phones are ours.
+              <strong className="font-semibold text-ink-soft">A preview of upcoming functionality, not a live account.</strong> Every
+              screen is a real capture of Informax Cloud&rsquo;s development build, which is coming soon, using a fictional{" "}
+              {industry === "restaurant" ? "restaurant" : "hotel"}. Captions outside the phones are ours.
             </p>
           </div>
 

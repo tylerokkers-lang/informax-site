@@ -92,12 +92,12 @@ export default function CloudEntrance({
           onFocus={warm}
           onTouchStart={warm}
           onClick={onClick}
-          aria-label="Log in to Informax Cloud"
+          aria-label="Customer log in to Informax Cloud"
           className={`group hidden lg:inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/[0.18] bg-white/[0.04] py-[7px] pl-3 pr-3.5 text-[13px] font-medium tracking-[0.01em] text-white/90 transition-[background-color,border-color,color] duration-300 hover:border-white/35 hover:bg-white/[0.08] hover:text-white ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={MARK} alt="" width={20} height={18} className="h-[18px] w-auto shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-          Log in
+          Customer log in
         </a>
       ) : (
         <a
@@ -105,7 +105,7 @@ export default function CloudEntrance({
           onFocus={warm}
           onTouchStart={warm}
           onClick={onClick}
-          aria-label="Log in to Informax Cloud"
+          aria-label="Customer log in to Informax Cloud"
           className={`group mt-8 flex w-full items-center gap-3 rounded-2xl border border-white/[0.14] bg-white/[0.04] px-3.5 py-3.5 min-[360px]:gap-3.5 min-[360px]:px-4 transition-colors duration-300 active:bg-white/[0.08] ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -114,7 +114,7 @@ export default function CloudEntrance({
             <span className="whitespace-nowrap text-[10.5px] font-semibold uppercase tracking-[0.12em] text-white/50 min-[360px]:text-[11px] min-[360px]:tracking-[0.18em]">
               Informax Cloud
             </span>
-            <span className="mt-1 text-[15px] font-medium text-white">Log in</span>
+            <span className="mt-1 text-[15px] font-medium text-white">Customer log in</span>
           </span>
           <span aria-hidden className="text-white/55">
             →

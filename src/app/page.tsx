@@ -9,14 +9,14 @@ import { Reveal } from "@/components/Reveal";
 export const metadata: Metadata = {
   title: { absolute: "Informax | Update your menus and guest information without reprinting" },
   description:
-    "Informax Cloud gives restaurants and hotels one simple place to manage the information guests see. Update it once, and every connected Access Point stays up to date. No app for guests, no reprinting.",
+    "Informax connects permanent Codes in restaurants and hotels to digital information your team can update without reprinting. Informax Cloud, the platform behind it, is coming soon.",
   alternates: { canonical: "/" },
 };
 
 const FACTS = [
-  { title: "No app, no account", body: "Guests scan a Code and the information opens." },
-  { title: "No reprinting", body: "The printed Code stays. What it opens changes." },
-  { title: "From your phone", body: "Replace a menu or directory in a few taps." },
+  { label: "The problem", title: "Printed information goes out of date.", body: "Menus, directories and offers change. The printed copies do not." },
+  { label: "The solution", title: "Permanent Codes, current information.", body: "Guests scan a Code. Your team changes what it opens, without reprinting." },
+  { label: "The platform", title: "Informax Cloud.", body: "Where you manage every Code and its content. Coming soon." },
 ];
 
 export default function Home() {
@@ -32,16 +32,18 @@ export default function Home() {
               Your information. Everywhere it needs to be. <span className="text-ink-mute">Always up to date.</span>
             </h2>
             <p className="mx-auto mt-6 max-w-[42rem] text-[18px] leading-relaxed text-ink-soft">
-              From restaurant menus to hotel directories, Informax Cloud gives you one simple place to manage the information
-              your guests see. Update it once, and every connected Access Point stays up to date.
+              From restaurant menus to hotel directories, Informax puts permanent Codes where guests need information, and Informax
+              Cloud gives you one simple place to manage what they show. Update it once, and every connected Access Point stays up
+              to date.
             </p>
           </Reveal>
           <ul className="mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-3">
             {FACTS.map((f, i) => (
               <li key={f.title}>
-                <Reveal delay={i * 0.06} className="h-full rounded-[20px] bg-white px-6 py-6 text-center shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
-                  <p className="text-[17px] font-semibold text-ink">{f.title}</p>
-                  <p className="mt-1.5 text-[15px] text-ink-mute">{f.body}</p>
+                <Reveal delay={i * 0.06} className="h-full rounded-[20px] bg-white px-6 py-7 text-left shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
+                  <p className="text-[13px] font-semibold text-brass-deep">{f.label}</p>
+                  <p className="mt-2 text-[18px] font-semibold leading-snug text-ink">{f.title}</p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-mute">{f.body}</p>
                 </Reveal>
               </li>
             ))}
@@ -57,13 +59,13 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <Heading
               id="cloud-h"
-              eyebrow="Informax Cloud in action"
-              title="The real product."
+              eyebrow="Informax Cloud · Coming soon"
+              title="A first look at the platform."
               soft="Simple enough for any shift."
-              body="This is Informax Cloud. Every Access Point shows exactly what a guest sees right now, and the actions to change it are directly underneath."
+              body="Informax is the guest information solution. Informax Cloud is the platform that powers it: every Access Point shows exactly what a guest sees right now, with the actions to change it directly underneath."
             />
             <div className="shrink-0">
-              <MoreLink href="/informax-cloud">Explore Informax Cloud</MoreLink>
+              <MoreLink href="/informax-cloud">Meet Informax Cloud</MoreLink>
             </div>
           </div>
           <Reveal className="relative mt-14">
@@ -73,7 +75,8 @@ export default function Home() {
             </div>
           </Reveal>
           <p className="mt-6 pb-4 text-[13px] text-ink-mute lg:mt-16">
-            Real Informax Cloud screens with fictional businesses: Marlowe Grand Hotel and The Copper Table.
+            A preview of Informax Cloud, coming soon: real screens from the development build, with fictional businesses
+            (Marlowe Grand Hotel and The Copper Table).
           </p>
         </div>
       </section>
