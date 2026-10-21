@@ -41,7 +41,7 @@ const QUESTIONS = [
   },
   {
     q: "Who on my team can make changes?",
-    a: "Everyone gets their own sign-in, and you decide what each person may do. Every change is recorded in plain language.",
+    a: "Each person on your team gets their own sign-in, and every change is recorded, so you can always see who changed what.",
   },
 ];
 

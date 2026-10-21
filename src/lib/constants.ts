@@ -5,12 +5,13 @@ export const PRIMARY_CTA = "Request a Demo";
 
 export const CLOUD_LOGIN_URL = "https://informax.cloud/login";
 
-/**
- * Informax Cloud (V2) is in development and not publicly available. The
- * marketing site links to it only as "Coming Soon"; never as a sign-up.
+/*
+ * Informax Cloud (V2) is in development and not publicly available. Its
+ * Coming Soon page lives on this site (/informax-cloud). Do not link Coming
+ * Soon calls to action to informax.cloud: that domain runs V1 and redirects
+ * to its sign-in page. The only link there is the existing customers' log-in
+ * (CLOUD_LOGIN_URL).
  */
-export const CLOUD_SITE_URL = "https://informax.cloud";
-export const CLOUD_COMING_SOON_LABEL = "Informax Cloud — Coming Soon";
 
 /**
  * Official Informax social profiles, supplied by the owner. LinkedIn is still

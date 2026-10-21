@@ -16,7 +16,18 @@ const NEXT = [
   { n: "03", title: "A clear proposal", body: "Scoped to the Access Points and Codes you actually need." },
 ];
 
-export default function EnquirePage() {
+/** Links can preselect one interest (e.g. "Ask about Informax Cloud"). Only these values are accepted. */
+const PRESELECT: Record<string, string> = {
+  "informax-cloud": "Informax Cloud",
+  demo: "A demonstration",
+  restaurants: "Restaurant menus",
+  hotels: "Hotel guest directory",
+};
+
+export default async function EnquirePage({ searchParams }: { searchParams: Promise<{ interest?: string | string[] }> }) {
+  const { interest } = await searchParams;
+  const key = Array.isArray(interest) ? interest[0] : interest;
+  const preselected = key && PRESELECT[key] ? [PRESELECT[key]] : [];
   return (
     <section className="relative overflow-hidden bg-charcoal-950 pb-24 pt-[150px] text-cream md:pb-32 md:pt-[190px]">
       <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-brass/20 blur-[140px]" />
@@ -60,7 +71,7 @@ export default function EnquirePage() {
         </div>
 
         <div className="rounded-[28px] bg-paper p-6 text-ink shadow-[0_40px_100px_-40px_rgba(0,0,0,0.8)] sm:p-10 lg:p-12">
-          <EnquireForm />
+          <EnquireForm initialInterests={preselected} />
         </div>
       </div>
     </section>

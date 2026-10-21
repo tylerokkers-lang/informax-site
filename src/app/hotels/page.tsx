@@ -3,6 +3,7 @@ import AccessPoint from "@/components/access/AccessPoint";
 import HotelShowcase from "@/components/site/HotelShowcase";
 import Photo from "@/components/site/Photo";
 import { drawCodeOver } from "@/lib/photography";
+import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
 import SeeItInAction from "@/components/site/SeeItInAction";
 import { Browser, Phone } from "@/components/site/Devices";
 import { DemoCta, Heading, Story } from "@/components/site/Sections";
@@ -176,7 +177,9 @@ export default function HotelsPage() {
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
-              <p className="mb-4 text-[15px] font-semibold text-brass-deep">Across the whole hotel</p>
+              <p className="mb-4 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-deep">
+                Across the whole hotel <ComingSoonBadge dark={false} />
+              </p>
               <h2 id="many-h" className="text-balance font-serif-display text-[clamp(34px,4.4vw,54px)] leading-[1.04] text-ink">
                 Update every bathroom at once. <span className="text-ink-mute">Or every bedside.</span>
               </h2>
@@ -184,6 +187,9 @@ export default function HotelsPage() {
                 Group your Access Points by type, such as Bathroom, Coffee Table or Bedside Table, then publish one PDF or website to
                 all of them. Every Code stays the same, each keeps its own history, and you can undo it afterwards.
               </p>
+              <div className="mt-5 max-w-[32rem]">
+                <PreviewNote>Coming with the new Informax Cloud. Shown: a real screen from the development build, fictional hotel.</PreviewNote>
+              </div>
             </div>
             <Browser screen="deskBulk" />
           </div>
@@ -197,6 +203,9 @@ export default function HotelsPage() {
                 Bedrooms, the spa, restaurants and public areas each hold their own Access Points. At a glance you can see what is
                 live, what is temporary and what still needs setting up.
               </p>
+              <div className="mt-5 max-w-[30rem]">
+                <PreviewNote />
+              </div>
             </div>
           </div>
         </div>

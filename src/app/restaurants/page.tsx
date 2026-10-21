@@ -7,7 +7,7 @@ import MenuBeforeAfter from "@/components/site/MenuBeforeAfter";
 import { Phone } from "@/components/site/Devices";
 import { DemoCta, Story } from "@/components/site/Sections";
 import { DEMO_CTA } from "@/lib/constants";
-import { PreviewNote } from "@/components/site/ComingSoon";
+import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
 
 export const metadata: Metadata = {
   title: "Restaurants: change your menu without reprinting",
@@ -24,7 +24,9 @@ export default function RestaurantsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.15)_100%)]" aria-hidden />
         <div className="relative mx-auto grid min-h-[100svh] max-w-8xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-[120px] md:px-10 lg:grid-cols-[1fr_auto]">
           <div className="ix-hero-rise max-w-[44rem]">
-            <p className="mb-5 text-[15px] font-semibold text-brass-light">Restaurants</p>
+            <p className="mb-5 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-light">
+              Informax Cloud for restaurants <ComingSoonBadge />
+            </p>
             <h1 className="text-balance font-serif-display text-[clamp(42px,5.2vw,72px)] leading-[1] text-white">
               A menu that&rsquo;s always right. <span className="text-cream-mute">Without printing a thing.</span>
             </h1>

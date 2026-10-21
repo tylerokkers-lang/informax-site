@@ -90,6 +90,7 @@ export default function WebsitesPage() {
       </section>
 
       <FinalCta
+        primaryLabel="Talk to Informax"
         title={<>A website that works for your business.</>}
         description="Tell us about your business and what you need the site to do, and we'll put together a clear, honest proposal."
       />

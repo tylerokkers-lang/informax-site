@@ -17,7 +17,7 @@ export default function WebsitesHero() {
       videoMp4={WEBSITE_VIDEO_MP4}
       videoWebm={WEBSITE_VIDEO_WEBM}
       poster={WEBSITE_POSTER}
-      eyebrow="Informax — Websites"
+      eyebrow="Websites by Informax"
       headline="A website that actually looks like it's yours."
       description="Custom-designed and built around your business, not a generic template. Part of the same studio behind your guest directory."
       primaryLabel="Talk to Informax"

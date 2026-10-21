@@ -105,9 +105,14 @@ await page.goto(BASE + "/informax-cloud", { waitUntil: "networkidle" });
 ok((await page.locator("h1").innerText()).trim() === "Meet Informax Cloud.", "Informax Cloud h1 is 'Meet Informax Cloud.'");
 ok(await page.locator("header").getByText("Coming Soon", { exact: true }).first().isVisible(), "Coming Soon badge visible in the hero");
 ok(await page.getByText("Informax Cloud is currently in development.", { exact: false }).first().isVisible(), "in-development message visible");
-const soon = page.getByRole("link", { name: "Informax Cloud — Coming Soon" }).first();
-ok((await soon.getAttribute("href")) === "https://informax.cloud" && (await soon.isVisible()), "Coming Soon link points to https://informax.cloud");
-ok(!(await page.getByText(/sign up|register|free trial|countdown/i).count()), "no sign-up, registration, trial or countdown wording");
+// Owner decision (22 Oct 2026): no Coming Soon call to action may go to informax.cloud while it redirects to the V1 sign-in.
+const cloudLinks = await page.$$eval("main a[href*='informax.cloud']", (as) => as.map((a) => ({ href: a.getAttribute("href"), text: a.textContent.trim() })));
+ok(cloudLinks.every((l) => l.href === "https://informax.cloud/login" && /Customer log in/.test(l.text)), `only the customer log-in links to informax.cloud on the Cloud page (${JSON.stringify(cloudLinks)})`);
+ok(await page.getByRole("link", { name: "See what it will offer" }).first().isVisible(), "hero offers an on-page 'See what it will offer'");
+ok((await page.getByRole("link", { name: "Ask about Informax Cloud" }).first().getAttribute("href")) === "/enquire?interest=informax-cloud", "closing CTA asks about Informax Cloud on this site");
+ok(await page.getByText("Already an Informax customer?", { exact: false }).isVisible(), "existing customers are told their account keeps working");
+for (const t of ["How it will work", "What it will offer"]) ok((await page.getByText(t, { exact: true }).count()) >= 1, `Cloud page has "${t}"`);
+ok(!(await page.getByText(/sign up|register|free trial|countdown|launch date/i).count()), "no sign-up, registration, trial, countdown or launch-date wording");
 for (const t of ["Your property", "Your spaces", "Your Access Points", "Your content"]) ok(await page.getByRole("heading", { name: t, exact: true }).isVisible(), `structure shows "${t}"`);
 ok((await page.getByText("Built, still in testing").count()) >= 1 && (await page.getByText("Working in the development build").count()) >= 1, "feature status labels shown");
 ok(!(await page.getByText(/\bBlock\b/).count()), "no Block layer mentioned");
@@ -122,6 +127,24 @@ for (const p of PAGES) {
   ok(!/\bQR\b/i.test(text), `${p} has no "QR" wording`);
   ok(!/£\s?\d/.test(text), `${p} shows no prices in its text`);
 }
+
+// 8d. Site-wide: no Coming Soon or call-to-action link to informax.cloud other than the customer log-in; the log-in is secondary.
+for (const p of PAGES) {
+  await page.goto(BASE + p, { waitUntil: "networkidle" });
+  const links = await page.$$eval("a[href*='informax.cloud']", (as) => as.map((a) => a.getAttribute("href")));
+  ok(links.every((h) => h === "https://informax.cloud/login"), `${p}: every informax.cloud link is the customer log-in (${[...new Set(links)].join(", ")})`);
+}
+await page.goto(BASE + "/", { waitUntil: "networkidle" });
+const login = page.locator("header a", { hasText: "Customer log in" }).first();
+const demo = page.locator("header a", { hasText: "Request a Demo" }).first();
+const [lf, df] = await Promise.all([login.evaluate((e) => parseFloat(getComputedStyle(e).fontSize)), demo.evaluate((e) => parseFloat(getComputedStyle(e).fontSize))]);
+const lbg = await login.evaluate((e) => getComputedStyle(e).backgroundColor);
+ok(lf < df && (lbg === "rgba(0, 0, 0, 0)" || lbg === "transparent"), `header "Customer log in" is secondary (font ${lf}px vs ${df}px, no fill)`);
+// 8e. Enquiry prefill from "Ask about Informax Cloud", and nothing for unknown values.
+await page.goto(BASE + "/enquire?interest=informax-cloud", { waitUntil: "networkidle" });
+ok(await page.getByRole("group", { name: "What would you like to explore?" }).getByLabel("Informax Cloud").isChecked(), "?interest=informax-cloud ticks Informax Cloud");
+await page.goto(BASE + "/enquire?interest=<script>", { waitUntil: "networkidle" });
+ok((await page.locator("input[type=checkbox]:checked").count()) === 0, "unknown ?interest values preselect nothing");
 
 // 9. Share images exist for the three entry pages.
 for (const p of ["/opengraph-image.jpg", "/hotels/opengraph-image.jpg", "/informax-cloud/opengraph-image.jpg"]) {

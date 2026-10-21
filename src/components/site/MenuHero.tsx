@@ -6,6 +6,7 @@ import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
 import { Phone, type Highlight } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
+import { ComingSoonBadge } from "@/components/site/ComingSoon";
 import { drawCodeOver, type PhotoKey } from "@/lib/photography";
 
 /** Where the first main dish sits on the guest's menu (fractions of the screen height, measured from the captures). */
@@ -54,7 +55,9 @@ export default function MenuHero() {
       <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-brass/15 blur-[140px]" aria-hidden />
       <div className="relative mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <div className="ix-hero-rise">
-          <p className="mb-5 text-[15px] font-semibold text-brass-light">Informax Cloud for restaurants</p>
+          <p className="mb-5 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-light">
+            Informax Cloud for restaurants <ComingSoonBadge />
+          </p>
           <h1 className="text-balance font-serif-display text-[clamp(42px,5.4vw,74px)] leading-[1] text-white">
             Your menu changes. <span className="text-cream-mute">Your Codes don&rsquo;t.</span>
           </h1>

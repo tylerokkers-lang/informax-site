@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowDown, ArrowRight, Check } from "lucide-react";
 import AccessPoint from "@/components/access/AccessPoint";
-import { ComingSoonBadge, ComingSoonLink, PreviewNote } from "@/components/site/ComingSoon";
+import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
 import { Browser, Phone } from "@/components/site/Devices";
 import { Heading } from "@/components/site/Sections";
 import { Reveal } from "@/components/Reveal";
-import { DEMO_CTA, SITE_URL } from "@/lib/constants";
+import { CLOUD_LOGIN_URL, DEMO_CTA, SITE_URL } from "@/lib/constants";
 import type { ScreenKey } from "@/lib/screens";
 
 export const metadata: Metadata = {
@@ -44,6 +44,12 @@ const LEVELS = [
   { name: "Your spaces", body: "An area such as Bedrooms, Spa or Main Restaurant.", example: "Bedrooms" },
   { name: "Your Access Points", body: "A permanent Code placed where guests need information.", example: "Coffee Table" },
   { name: "Your content", body: "The digital information guests see when they access that Code.", example: "Guest Directory.pdf" },
+];
+
+const WORK = [
+  { title: "Your property is set up", body: "Your hotel or restaurant, and its Spaces such as Bedrooms, Spa or Main Restaurant." },
+  { title: "Codes go where guests need them", body: "Each Access Point gets one permanent Code, printed as often as you like." },
+  { title: "Your team keeps it current", body: "Change what a Code opens in Informax Cloud. Every printed copy shows the update." },
 ];
 
 const FEATURES: { title: string; soft: string; body: string; screen: ScreenKey; status: Status; points: string[] }[] = [
@@ -135,7 +141,9 @@ export default function InformaxCloudPage() {
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary">{DEMO_CTA.label}</Link>
-              <ComingSoonLink />
+              <a href="#what-it-offers" className="ix-link text-brass-light hover:text-white">
+                See what it will offer <ArrowDown size={16} aria-hidden />
+              </a>
             </div>
           </div>
           <div className="relative mx-auto mt-16 max-w-[1080px]">
@@ -181,6 +189,18 @@ export default function InformaxCloudPage() {
               </p>
             </Reveal>
           </div>
+          <div className="mx-auto mt-16 max-w-[980px]">
+            <h3 className="text-center font-serif-display text-[26px] text-ink">How it will work</h3>
+            <ol className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-3">
+              {WORK.map((w, i) => (
+                <li key={w.title} className="rounded-[20px] bg-paper-alt p-6">
+                  <span className="text-[13px] font-semibold text-brass-deep">Step {i + 1}</span>
+                  <p className="mt-2 text-[17px] font-semibold text-ink">{w.title}</p>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">{w.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
@@ -216,17 +236,27 @@ export default function InformaxCloudPage() {
           <div className="mx-auto mt-5 max-w-[1000px]">
             <PreviewNote>The Spaces of a hotel and the Access Points in each, as they appear in the development build. Fictional hotel.</PreviewNote>
           </div>
-          <p className="mx-auto mt-10 flex max-w-[1000px] flex-wrap items-center gap-3 text-[14.5px] text-ink-soft">
-            <span className="font-semibold text-ink">Below, each feature shows how far along it is:</span>
+        </div>
+      </section>
+
+      <section id="what-it-offers" className="scroll-mt-20 bg-paper pb-4 pt-24 md:pt-32" aria-labelledby="offer-h">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Heading
+            id="offer-h"
+            eyebrow="What it will offer"
+            title="Everything your guests see,"
+            soft="in one simple place."
+            body="These are the parts of Informax Cloud being built now. Each one is labelled honestly with how far along it is, and none of it is publicly available yet."
+          />
+          <p className="mt-8 flex flex-wrap items-center gap-3 text-[14.5px] text-ink-soft">
             <StatusTag status="built" />
             <StatusTag status="testing" />
-            <span>None of it is publicly available yet.</span>
           </p>
         </div>
       </section>
 
       {FEATURES.map((f, i) => (
-        <section key={f.title} className={`py-20 md:py-28 ${i % 2 ? "bg-paper-alt" : "bg-paper"}`} aria-labelledby={`feature-${i}`}>
+        <section key={f.title} className={`py-20 md:py-28 ${i % 2 ? "bg-paper" : "bg-paper-alt"}`} aria-labelledby={`feature-${i}`}>
           <div className={`mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 md:px-10 lg:gap-16 ${i % 2 ? "lg:grid-cols-[1.25fr_0.75fr]" : "lg:grid-cols-[0.75fr_1.25fr]"}`}>
             <div className={i % 2 ? "lg:order-2" : undefined}>
               <StatusTag status={f.status} />
@@ -299,10 +329,14 @@ export default function InformaxCloudPage() {
             <li>Content is a PDF or a web page: menus are updated by replacing the file.</li>
             <li>Informax shows your information and offers. It does not take bookings or payments, or check availability.</li>
           </ul>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary">{DEMO_CTA.label}</Link>
-            <ComingSoonLink />
+            <Link href="/enquire?interest=informax-cloud" className="ix-btn ix-btn-secondary-dark">Ask about Informax Cloud</Link>
           </div>
+          <p className="mx-auto mt-10 max-w-[40rem] text-[14px] text-cream-mute">
+            Already an Informax customer? Your current account keeps working as it does today.{" "}
+            <a href={CLOUD_LOGIN_URL} className="whitespace-nowrap font-semibold text-cream underline-offset-4 hover:text-white hover:underline">Customer log in</a>
+          </p>
         </div>
       </section>
     </>

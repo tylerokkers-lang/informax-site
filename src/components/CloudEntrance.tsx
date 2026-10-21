@@ -93,10 +93,11 @@ export default function CloudEntrance({
           onTouchStart={warm}
           onClick={onClick}
           aria-label="Customer log in to Informax Cloud"
-          className={`group hidden lg:inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/[0.18] bg-white/[0.04] py-[7px] pl-3 pr-3.5 text-[13px] font-medium tracking-[0.01em] text-white/90 transition-[background-color,border-color,color] duration-300 hover:border-white/35 hover:bg-white/[0.08] hover:text-white ${focusRing}`}
+          // Deliberately quiet: for existing V1 customers, secondary to the nav and to Request a Demo.
+          className={`group hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1 py-2 text-[12.5px] font-medium text-cream-mute transition-colors duration-300 hover:text-white ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={MARK} alt="" width={20} height={18} className="h-[18px] w-auto shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+          <img src={MARK} alt="" width={20} height={18} className="h-[13px] w-auto shrink-0 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
           Customer log in
         </a>
       ) : (
@@ -106,19 +107,11 @@ export default function CloudEntrance({
           onTouchStart={warm}
           onClick={onClick}
           aria-label="Customer log in to Informax Cloud"
-          className={`group mt-8 flex w-full items-center gap-3 rounded-2xl border border-white/[0.14] bg-white/[0.04] px-3.5 py-3.5 min-[360px]:gap-3.5 min-[360px]:px-4 transition-colors duration-300 active:bg-white/[0.08] ${focusRing}`}
+          className={`group mt-8 flex w-full items-center gap-2.5 border-t border-white/10 pt-6 text-[14px] font-medium text-cream-mute transition-colors duration-300 hover:text-white ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={MARK} alt="" width={30} height={27} className="h-[27px] w-auto shrink-0" />
-          <span className="flex min-w-0 flex-1 flex-col leading-tight">
-            <span className="whitespace-nowrap text-[10.5px] font-semibold uppercase tracking-[0.12em] text-white/50 min-[360px]:text-[11px] min-[360px]:tracking-[0.18em]">
-              Informax Cloud
-            </span>
-            <span className="mt-1 text-[15px] font-medium text-white">Customer log in</span>
-          </span>
-          <span aria-hidden className="text-white/55">
-            →
-          </span>
+          <img src={MARK} alt="" width={20} height={18} className="h-[15px] w-auto shrink-0 opacity-70" />
+          Customer log in
         </a>
       )}
 
