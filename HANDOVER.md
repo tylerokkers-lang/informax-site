@@ -162,6 +162,10 @@ Removed (still in git history): old `story/*`, most of `access/*`
   `informax-site-git-redesign-restaurant-first-informax.vercel.app` (always the
   newest commit); exact per-commit URLs are in Vercel or behind the tick on
   the commit in GitHub. Vercel may require the owner's Vercel sign-in.
+  Commit `4d69da0` built successfully at
+  https://informax-site-rh6q24716-informax.vercel.app (GitHub deployment
+  7237607094, 21 October 2026), which also shows the production photo guard
+  does not block preview builds.
 - Not verified: real devices and Safari; real enquiry delivery; the preview.
 
 ### Production deployment (only after the owner's explicit approval)
