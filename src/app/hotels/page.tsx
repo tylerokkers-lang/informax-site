@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import AccessPoint from "@/components/access/AccessPoint";
 import HotelShowcase from "@/components/site/HotelShowcase";
 import Photo from "@/components/site/Photo";
+import { drawCodeOver } from "@/lib/photography";
 import SeeItInAction from "@/components/site/SeeItInAction";
 import { Browser, Phone } from "@/components/site/Devices";
-import { DemoCta, Story } from "@/components/site/Sections";
+import { DemoCta, Heading, Story } from "@/components/site/Sections";
+import { Check, X } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Hotels: guest information that is always current",
@@ -12,6 +14,13 @@ export const metadata: Metadata = {
     "Keep your hotel directory, restaurant hours, spa menus and guest offers up to date in every room, without replacing a single card. Informax Cloud for hotels.",
   alternates: { canonical: "/hotels" },
 };
+
+const USES = [
+  { title: "Digital guest directory", what: "One directory PDF behind the Code in every room.", how: "Replace it once in Informax Cloud." },
+  { title: "Restaurant hours", what: "Dinner now starts at 17:30 instead of 18:00.", how: "Upload the updated directory. Every room’s Code opens it." },
+  { title: "Spa promotion with an end time", what: "This afternoon’s treatment offer, in every bathroom.", how: "Publish it as temporary content ending at 18:00." },
+  { title: "Room upgrade invitation", what: "Ask guests if they would like a suite.", how: "Add the invitation to your guest information." },
+];
 
 const Note = ({ children }: { children: React.ReactNode }) => (
   <p className="rounded-2xl bg-white px-5 py-4 text-[15px] text-ink-mute shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">{children}</p>
@@ -22,8 +31,44 @@ export default function HotelsPage() {
     <>
       <HotelShowcase as="header" heading="h1" />
 
+      <section className="bg-paper py-24 md:py-28" aria-labelledby="hotel-uses-h">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Heading id="hotel-uses-h" eyebrow="At a glance" title="Four things your hotel can keep current." soft="Without replacing a card." />
+          <ol className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {USES.map((u, i) => (
+              <li key={u.title} className="flex flex-col rounded-[22px] bg-white p-6 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
+                <span className="text-[13px] font-semibold text-brass-deep">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-2 font-serif-display text-[21px] leading-tight text-ink">{u.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{u.what}</p>
+                <p className="mt-auto pt-4 text-[14px] font-medium text-ink">{u.how}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="rounded-[22px] bg-white p-6 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
+              <p className="text-[15px] font-semibold text-ink">What Informax does</p>
+              <ul className="mt-3 space-y-2">
+                {["Shows guests the information and offers you publish", "Ends temporary content at the time you set, then brings back your usual content", "Keeps every earlier version, ready to restore"].map((t) => (
+                  <li key={t} className="flex items-start gap-3 text-[15px] text-ink-soft"><Check size={17} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />{t}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-[22px] bg-paper-alt p-6">
+              <p className="text-[15px] font-semibold text-ink">What it does not do</p>
+              <ul className="mt-3 space-y-2">
+                {["Check room or treatment availability", "Take bookings or payments", "Apply discounts or prices for you"].map((t) => (
+                  <li key={t} className="flex items-start gap-3 text-[15px] text-ink-soft"><X size={17} className="mt-0.5 shrink-0 text-ink-mute" aria-hidden />{t}</li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[14px] text-ink-mute">Guests book and enquire with your team, the way they do today.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Story
         id="directory"
+        tone="alt"
         eyebrow="The coffee-table directory"
         title="Restaurant hours changed?"
         soft="Every room knows."
@@ -54,7 +99,6 @@ export default function HotelsPage() {
       </Story>
 
       <Story
-        tone="alt"
         flip
         eyebrow="Bathroom spa menu"
         title="Fill the spa this afternoon."
@@ -85,6 +129,7 @@ export default function HotelsPage() {
       </Story>
 
       <Story
+        tone="alt"
         eyebrow="Room upgrades"
         title="Make your stay even more memorable."
         media={
@@ -93,9 +138,11 @@ export default function HotelsPage() {
             <div className="absolute bottom-6 right-6 w-[40%] max-w-[220px]">
               <Phone screens={["guestDirectoryBefore"]} sizes="220px" />
             </div>
-            <div className="absolute bottom-8 left-6 hidden sm:block">
-              <AccessPoint place="Suite 401" sub="Guest Directory" size="sm" colourway="platinum" />
-            </div>
+            {drawCodeOver("hotelSuite") ? (
+              <div className="absolute bottom-8 left-6 hidden sm:block">
+                <AccessPoint place="Suite 401" sub="Guest Directory" size="sm" colourway="platinum" />
+              </div>
+            ) : null}
           </div>
         }
       >
@@ -109,7 +156,7 @@ export default function HotelsPage() {
         </Note>
       </Story>
 
-      <section className="bg-paper-alt py-24 md:py-32" aria-labelledby="many-h">
+      <section className="bg-paper py-24 md:py-32" aria-labelledby="many-h">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>

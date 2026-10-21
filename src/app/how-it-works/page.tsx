@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
             soft="No technical knowledge needed."
             body="Informax puts a permanent Code wherever guests need information. You decide what it opens, and you can change that at any time."
           />
-          <HowItWorksSteps />
+          <HowItWorksSteps level="h2" />
         </div>
       </header>
 

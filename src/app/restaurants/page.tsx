@@ -3,6 +3,7 @@ import Link from "next/link";
 import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
 import SeeItInAction from "@/components/site/SeeItInAction";
+import MenuBeforeAfter from "@/components/site/MenuBeforeAfter";
 import { Phone } from "@/components/site/Devices";
 import { DemoCta, Story } from "@/components/site/Sections";
 import { DEMO_CTA } from "@/lib/constants";
@@ -45,18 +46,7 @@ export default function RestaurantsPage() {
         </div>
       </header>
 
-      <Story
-        eyebrow="The problem"
-        title="Printed menus fall behind."
-        soft="Every single week."
-        media={<Photo slot="chefPass" className="aspect-[4/3] rounded-[24px]" sizes="(min-width: 1024px) 560px, 100vw" />}
-      >
-        <p>
-          A dish sells out. A supplier sends something better. Prices move. Each change means reprinting, swapping cards on every
-          table, or asking your team to explain what is off tonight.
-        </p>
-        <p>With Informax, the Code on the table stays exactly where it is. What it opens is always the menu you want guests to see.</p>
-      </Story>
+      <MenuBeforeAfter />
 
       <Story
         tone="alt"
@@ -106,10 +96,14 @@ export default function RestaurantsPage() {
         title="One Code for each menu."
         soft="As many copies as you like."
         media={
-          <div className="flex flex-wrap items-end justify-center gap-5 rounded-[28px] bg-paper-alt px-6 py-14">
-            <AccessPoint place="Restaurant Menu" sub="Main Restaurant" size="md" />
-            <AccessPoint place="Drinks Menu" sub="Bar" size="md" colourway="stone" />
-            <AccessPoint place="Wine List" sub="Main Restaurant" size="md" colourway="graphite" />
+          <div className="relative overflow-hidden rounded-[28px]">
+            <Photo slot="restaurantRoom" fill sizes="(min-width: 1024px) 560px, 100vw" />
+            <div className="absolute inset-0 bg-black/25" aria-hidden />
+            <div className="relative flex flex-wrap items-end justify-center gap-4 px-6 pb-16 pt-14 sm:gap-5">
+              <AccessPoint place="Restaurant Menu" sub="Main Restaurant" size="md" />
+              <AccessPoint place="Drinks Menu" sub="Bar" size="md" colourway="stone" />
+              <AccessPoint place="Wine List" sub="Main Restaurant" size="md" colourway="graphite" />
+            </div>
           </div>
         }
       >

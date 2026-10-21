@@ -6,7 +6,7 @@ import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
 import { Phone } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
-import type { PhotoKey } from "@/lib/photography";
+import { drawCodeOver, type PhotoKey } from "@/lib/photography";
 import type { ScreenKey } from "@/lib/screens";
 
 const MOMENTS: { label: string; place: string; line: string; chip: string; photo: PhotoKey; screen: ScreenKey }[] = [
@@ -88,9 +88,11 @@ export default function HotelShowcase({ as = "section", heading = "h2" }: { as?:
               />
             ))}
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0)_40%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
-            <div className="absolute left-[7%] top-1/2 hidden -translate-y-1/2 md:block">
-              <AccessPoint key={m.label} place={m.place} sub={m.label.replace(/ menu$/, "")} size="md" className="ixp-enter-fade" />
-            </div>
+            {drawCodeOver(m.photo) ? (
+              <div className="absolute left-[7%] top-1/2 hidden -translate-y-1/2 md:block">
+                <AccessPoint key={m.label} place={m.place} sub={m.label.replace(/ menu$/, "")} size="md" className="ixp-enter-fade" />
+              </div>
+            ) : null}
             <p key={`chip-${step}`} className="ixp-enter absolute left-4 top-4 rounded-full bg-white/92 px-3.5 py-2 text-[13px] font-semibold text-ink shadow-lg sm:left-6 sm:top-6" aria-live="polite">
               {m.chip}
             </p>

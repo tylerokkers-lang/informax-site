@@ -61,7 +61,8 @@ const HOW = [
 ];
 
 /** The product in three plain steps, with the object, the app and the guest's phone. */
-export function HowItWorksSteps({ dark = false }: { dark?: boolean }) {
+export function HowItWorksSteps({ dark = false, level = "h3" }: { dark?: boolean; /** h2 when the steps sit directly under the page h1. */ level?: "h2" | "h3" }) {
+  const H = level;
   return (
     <ol className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
       {HOW.map((s, i) => (
@@ -82,7 +83,7 @@ export function HowItWorksSteps({ dark = false }: { dark?: boolean }) {
             </div>
             <div className="flex flex-1 flex-col p-7">
               <span className={`text-[13px] font-semibold ${dark ? "text-brass-light" : "text-brass-deep"}`}>Step {s.n}</span>
-              <h3 className={`mt-2 font-serif-display text-[24px] leading-tight ${dark ? "text-white" : "text-ink"}`}>{s.title}</h3>
+              <H className={`mt-2 font-serif-display text-[24px] leading-tight ${dark ? "text-white" : "text-ink"}`}>{s.title}</H>
               <p className={`mt-3 text-[16px] leading-relaxed ${dark ? "text-white/75" : "text-ink-soft"}`}>{s.body}</p>
               <p className={`mt-3 text-[14.5px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>{s.detail}</p>
             </div>

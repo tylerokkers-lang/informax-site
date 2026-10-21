@@ -4,12 +4,12 @@ import { useState, type KeyboardEvent } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
-import { Phone } from "@/components/site/Devices";
-import type { PhotoKey } from "@/lib/photography";
+import { Phone, type Highlight } from "@/components/site/Devices";
+import { drawCodeOver, type PhotoKey } from "@/lib/photography";
 import type { ScreenKey } from "@/lib/screens";
 
 type Visual =
-  | { kind: "phone"; screen: ScreenKey; who: "Guest’s phone" | "Your phone · Informax Cloud" }
+  | { kind: "phone"; screen: ScreenKey; who: "Guest’s phone" | "Your phone · Informax Cloud"; highlight?: Highlight }
   | { kind: "code"; place: string; sub: string; photo: PhotoKey; note: string };
 
 type Step = { title: string; body: string; visual: Visual };
@@ -21,12 +21,12 @@ const STORIES: Record<"restaurant" | "hotel", { label: string; intro: string; st
     steps: [
       {
         title: "A guest opens tonight’s menu",
-        body: "They scan the Code on their table. The menu opens straight away, with no app and no account.",
-        visual: { kind: "phone", screen: "guestMenuBefore", who: "Guest’s phone" },
+        body: "They scan the Code on their table and the menu opens straight away, with no app and no account. Sea bass is on it.",
+        visual: { kind: "phone", screen: "guestMenuBefore", who: "Guest’s phone", highlight: { top: 0.428, height: 0.043, tone: "warn" } },
       },
       {
-        title: "You replace the menu",
-        body: "On the Restaurant Menu Access Point, choose Replace menu and pick the updated PDF from your phone.",
+        title: "The chef runs out. You replace the menu",
+        body: "The kitchen has no more sea bass. A manager opens the Restaurant Menu in Informax Cloud, taps Replace menu and picks the updated PDF.",
         visual: { kind: "phone", screen: "cloudMenuReplace", who: "Your phone · Informax Cloud" },
       },
       {
@@ -42,7 +42,7 @@ const STORIES: Record<"restaurant" | "hotel", { label: string; intro: string; st
       {
         title: "Guests see the latest menu",
         body: "Roast Cornish hake is on the menu, marked for tonight. Sea bass is gone.",
-        visual: { kind: "phone", screen: "guestMenuAfter", who: "Guest’s phone" },
+        visual: { kind: "phone", screen: "guestMenuAfter", who: "Guest’s phone", highlight: { top: 0.428, height: 0.043, tone: "ok" } },
       },
     ],
   },
@@ -179,12 +179,12 @@ export default function SeeItInAction({ initial = "restaurant", id = "see-it-in-
                 {current.visual.kind === "phone" ? current.visual.who : "At the Access Point"}
               </p>
               {current.visual.kind === "phone" ? (
-                <Phone key={`${industry}-${step}`} screens={[current.visual.screen]} tone="light" className="ixp-enter-fade" sizes="340px" />
+                <Phone key={`${industry}-${step}`} screens={[current.visual.screen]} highlight={current.visual.highlight} tone="light" className="ixp-enter-fade" sizes="340px" />
               ) : (
                 <div key={`${industry}-${step}`} className="ixp-enter-fade relative aspect-[390/844] overflow-hidden rounded-[28px]">
                   <Photo slot={current.visual.photo} fill sizes="340px" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 bg-black/10">
-                    <AccessPoint place={current.visual.place} sub={current.visual.sub} size="lg" />
+                    {drawCodeOver(current.visual.photo) ? <AccessPoint place={current.visual.place} sub={current.visual.sub} size="lg" /> : null}
                     <p className="rounded-full bg-white/92 px-4 py-2 text-[13px] font-semibold text-ink shadow-lg">{current.visual.note}</p>
                   </div>
                 </div>

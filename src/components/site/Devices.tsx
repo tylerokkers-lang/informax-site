@@ -2,6 +2,12 @@ import Image from "next/image";
 import { SCREENS, type ScreenKey } from "@/lib/screens";
 
 /**
+ * A ring drawn over part of a screen to point at what changed (a marketing
+ * layer, never part of the captured screen). Fractions of the screen height.
+ */
+export type Highlight = { top: number; height: number; tone: "warn" | "ok" };
+
+/**
  * A modern phone around a real screen. Several screens can be passed: they
  * are stacked and the `active` one crossfades in, so a demo can change what
  * the phone shows without moving the phone.
@@ -13,8 +19,10 @@ export function Phone({
   sizes = "(min-width: 1024px) 320px, 70vw",
   priority = false,
   tone = "dark",
+  highlight = null,
 }: {
   screens: ScreenKey[];
+  highlight?: Highlight | null;
   active?: number;
   className?: string;
   sizes?: string;
@@ -47,6 +55,18 @@ export function Phone({
             />
           );
         })}
+        {highlight ? (
+          <span
+            key={`${highlight.tone}-${highlight.top}`}
+            aria-hidden
+            className={`ixp-enter-fade pointer-events-none absolute inset-x-[4%] rounded-[6px] ${
+              highlight.tone === "warn"
+                ? "bg-amber-400/15 shadow-[0_0_0_2px_rgba(245,158,11,0.9)]"
+                : "bg-emerald-400/15 shadow-[0_0_0_2px_rgba(16,185,129,0.9)]"
+            }`}
+            style={{ top: `${highlight.top * 100}%`, height: `${highlight.height * 100}%` }}
+          />
+        ) : null}
         {/* Dynamic Island */}
         <div className="absolute left-1/2 top-[1.6%] h-[3.3%] w-[30%] -translate-x-1/2 rounded-full bg-black" aria-hidden />
       </div>

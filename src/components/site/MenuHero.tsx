@@ -4,24 +4,50 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
-import { Phone } from "@/components/site/Devices";
+import { Phone, type Highlight } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
-import type { PhotoKey } from "@/lib/photography";
+import { drawCodeOver, type PhotoKey } from "@/lib/photography";
 
-const STEPS: { label: string; line: string; photo: PhotoKey; chip: string }[] = [
-  { label: "Something changes", line: "The menu needs to change.", photo: "chefPass", chip: "Sea bass: sold out tonight" },
-  { label: "Update it on your phone", line: "Make the change in seconds.", photo: "hospitalityTeam", chip: "Replace menu · new PDF chosen" },
-  { label: "Everyone sees the latest menu", line: "One update. Every table.", photo: "restaurantTable", chip: "Same Code on every table" },
+/** Where the first main dish sits on the guest's menu (fractions of the screen height, measured from the captures). */
+const DISH = { top: 0.428, height: 0.043 };
+
+const STEPS: { label: string; line: string; detail: string; chip: string; photo: PhotoKey; dish: Highlight | null }[] = [
+  {
+    label: "The kitchen runs out",
+    line: "The menu needs to change.",
+    detail: "Sea bass is finished for tonight, but it is still on the menu every guest opens.",
+    chip: "Sea bass: sold out tonight",
+    photo: "chefPass",
+    dish: { ...DISH, tone: "warn" },
+  },
+  {
+    label: "Replace the menu PDF",
+    line: "Make the change in seconds.",
+    detail: "A manager opens the Restaurant Menu in Informax Cloud, taps Replace menu and picks the updated PDF.",
+    chip: "Replace menu · updated PDF",
+    photo: "hospitalityTeam",
+    dish: null,
+  },
+  {
+    label: "Same Code, new menu",
+    line: "One update. Every table.",
+    detail: "Informax Cloud confirms it is live. The same Code on every table now opens the menu with roast hake.",
+    chip: "Same Code · new menu",
+    photo: "restaurantTable",
+    dish: { ...DISH, tone: "ok" },
+  },
 ];
 
 /**
  * The homepage hero: a restaurant runs out of an ingredient, a manager
  * replaces the menu PDF from a phone, and the guest scanning the same Code
- * sees the new menu. Every phone screen is a real Informax Cloud capture.
+ * sees the new menu. Every phone screen is a real Informax Cloud capture;
+ * the chip, captions and the ring around the changed dish are ours.
  */
 export default function MenuHero() {
-  const { ref, step, choose, playing, intervalMs, pauseProps } = useSteps(STEPS.length, 5600);
+  const { ref, step, choose, playing, intervalMs, pauseProps } = useSteps(STEPS.length, 6000);
   const staffFront = step === 1;
+  const current = STEPS[step];
 
   return (
     <section className="relative overflow-hidden bg-charcoal-950 pb-16 pt-[112px] text-cream md:pb-24 md:pt-[136px]">
@@ -61,22 +87,12 @@ export default function MenuHero() {
             ))}
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.15)_0%,rgba(6,10,18,0)_40%,rgba(6,10,18,0.45)_100%)]" aria-hidden />
 
-            {/* What changed, as a marketing caption outside the app. */}
-            <p
-              key={step}
-              className="ixp-enter absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-white/92 px-3.5 py-2 text-[13px] font-semibold text-ink shadow-lg sm:left-6 sm:top-6"
-              aria-live="polite"
-            >
-              <span className={`h-2 w-2 rounded-full ${step === 0 ? "bg-amber-500" : step === 1 ? "bg-brass" : "bg-emerald-500"}`} aria-hidden />
-              {STEPS[step].chip}
-            </p>
-
             <div
               className={`absolute bottom-[5%] left-[7%] w-[38%] max-w-[210px] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
                 staffFront ? "z-20 scale-100 opacity-100" : "z-10 scale-[0.92] opacity-80"
               }`}
             >
-              <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80">Your phone</p>
+              <p className="mb-2 whitespace-nowrap text-center text-[10px] font-semibold uppercase tracking-[0.08em] text-white/80 sm:text-[11px] sm:tracking-[0.14em]">Manager&rsquo;s phone</p>
               <Phone screens={["cloudMenuBefore", "cloudMenuReplace", "cloudMenuPublished"]} active={step} sizes="(min-width: 640px) 210px, 38vw" />
             </div>
             <div
@@ -84,18 +100,36 @@ export default function MenuHero() {
                 staffFront ? "z-10 scale-[0.92] opacity-80" : "z-20 scale-100 opacity-100"
               }`}
             >
-              <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80">Guest&rsquo;s phone</p>
-              <Phone screens={["guestMenuBefore", "guestMenuBefore", "guestMenuAfter"]} active={step} sizes="(min-width: 640px) 224px, 40vw" priority />
+              <p className="mb-2 whitespace-nowrap text-center text-[10px] font-semibold uppercase tracking-[0.08em] text-white/80 sm:text-[11px] sm:tracking-[0.14em]">Guest&rsquo;s phone</p>
+              <Phone
+                screens={["guestMenuBefore", "guestMenuBefore", "guestMenuAfter"]}
+                active={step}
+                highlight={current.dish}
+                sizes="(min-width: 640px) 224px, 40vw"
+                priority
+              />
             </div>
-            <div
-              className={`absolute bottom-[8%] left-1/2 z-0 hidden -translate-x-1/2 transition-opacity duration-700 sm:block ${step === 2 ? "opacity-100" : "opacity-0"}`}
-              aria-hidden={step !== 2}
-            >
-              <AccessPoint place="Table 12" sub="Menu" size="sm" />
-            </div>
+            {drawCodeOver("restaurantTable") ? (
+              <div
+                className={`absolute bottom-[4%] left-1/2 z-30 hidden -translate-x-1/2 transition-all duration-700 sm:block ${step === 2 ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"}`}
+                aria-hidden
+              >
+                <AccessPoint place="Table 12" sub="Menu" size="sm" />
+              </div>
+            ) : null}
           </div>
 
-          <ol className="mt-5 grid grid-cols-3 gap-2 sm:gap-3" aria-label="How the menu update works">
+          <div className="mt-5 min-h-[5.5em] sm:min-h-[4.4em]" aria-live="polite">
+            <p key={step} className="ixp-enter mb-2 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-3 py-1.5 text-[13px] font-semibold text-white">
+              <span className={`h-2 w-2 rounded-full ${step === 0 ? "bg-amber-400" : step === 1 ? "bg-brass-light" : "bg-emerald-400"}`} aria-hidden />
+              {current.chip}
+            </p>
+            <p className="text-[15.5px] leading-snug text-white/85">
+              <strong className="font-semibold text-white">{current.line}</strong> {current.detail}
+            </p>
+          </div>
+
+          <ol className="mt-4 grid grid-cols-3 gap-2 sm:gap-3" aria-label="How the menu update works">
             {STEPS.map((s, i) => (
               <li key={s.label}>
                 <button
@@ -108,7 +142,6 @@ export default function MenuHero() {
                 >
                   <span className={`block text-[12px] font-semibold ${i === step ? "text-brass-light" : "text-cream-mute"}`}>Step {i + 1}</span>
                   <span className="mt-1 block text-[13.5px] font-semibold leading-snug text-white sm:text-[15px]">{s.label}</span>
-                  <span className="mt-1 hidden text-[13.5px] leading-snug text-cream-mute sm:block">{s.line}</span>
                   {i === step && playing ? (
                     <span className="absolute inset-x-0 bottom-0 h-[2px] origin-left bg-brass-light animate-[ix-step_var(--d)_linear_forwards]" style={{ ["--d" as string]: `${intervalMs}ms` }} aria-hidden />
                   ) : null}
