@@ -1,0 +1,333 @@
+{
+  "restaurantInterior": {
+    "file": "13476222_3840_2160_25fps.mp4",
+    "page": null,
+    "licence": "Pexels Licence declared by owner, but the original listing is unknown and the file's history is contradictory: NOT cleared",
+    "licenceVerified": false,
+    "alt": "A restaurant table set for the evening, with a lamp, glasses and plates, and the dining room behind",
+    "usedFor": "Homepage hero background (film, under a navy overlay)",
+    "start": 0,
+    "duration": 6,
+    "focus": "40% 50%",
+    "focusMobile": "0% 50%",
+    "mode": "pingpong",
+    "notes": "Slow push-in, 12 s source, shot through a window. The left 32% of the frame carries third-party branding (gold 'RISTORANTE' and a script venue name on the glass, a crest on the table runner); `region` crops it away before any other crop (checked frame by frame at full resolution: no lettering remains; bottle labels behind are out of focus and unreadable). The 68% region is 2611 px wide, so the 1920 px output is still downscaled from the source.",
+    "region": "0.32 0.08 0.68 0.68",
+    "licenceCheck": "Technical evidence (ffprobe, 22 Oct 2026): this file was re-encoded with FFmpeg 6.1 (libx264, Lavc60.31.102 / Lavf60.16.100), has no creation date, no vendor tags and an extra empty data stream. The three other 1080p/4K files from the same set that the owner reports as matching carry the original-encoder fingerprints (\"AVC Coding\", L-SMASH or Apple Core Media). So this is not a direct download of an original listing's file, and its filename ID cannot be relied on. A web search by description found no page that could be confirmed as this clip (Pexels pages cannot be opened or compared from this environment). No candidate has been recorded as the source.",
+    "branding": "Third-party venue branding in the left third of the source (gold 'RISTORANTE' and a script venue name on the window, a crest on the table runner). Removed by `region` (frame-by-frame check at full resolution). Bottle and packaging labels behind are out of focus and unreadable.",
+    "filenameClaim": "https://www.pexels.com/video/13476222/",
+    "sourceStatus": "UNIDENTIFIED. The owner opened https://www.pexels.com/video/13476222/ on 22 Oct 2026 and it is not this footage. The real original source (platform, author, licence) is unknown.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [],
+      "contradictingEvidence": [
+        "CONTRADICTORY EVIDENCE: the owner opened the Pexels page for the file name's ID and it is a different video, so the file name's ID is wrong. The file is also not an original download: it was re-encoded with FFmpeg 6.1 (Lavc60.31.102), has no creation date or vendor tags and an extra empty data stream, unlike the original-encoder files in the same set. The owner's declaration that it came from Pexels therefore cannot be matched to any listing, and the re-encoding means it passed through another tool or platform. The licence terms that apply are unknown."
+      ]
+    },
+    "sourceUrlStatus": "unknown (filename ID reported incorrect by owner; original listing not located)",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "unresolved",
+      "peopleAndBranding": "Third-party venue branding (gold 'RISTORANTE', a script venue name on the glass, a crest on the table runner) is cropped away with `region` and verified absent. Pexels does not permit implying endorsement by a brand or place, so the footage must also never name or suggest the venue.",
+      "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
+      "reviewedOn": "2026-10-22"
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- restaurantInterior`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
+  },
+  "diningTable": {
+    "file": "2174411-hd_1920_1080_30fps.mp4",
+    "page": "https://www.pexels.com/video/2174411/",
+    "licence": "Pexels Licence (owner-declared; listing page not independently verified from this environment)",
+    "licenceVerified": true,
+    "alt": "Wine glasses and a candle on a restaurant table at dusk",
+    "usedFor": "Restaurants hero (film); the table step of the homepage story (poster)",
+    "start": 2,
+    "duration": 10,
+    "focus": "60% 50%",
+    "focusMobile": "65% 50%",
+    "mode": "loop",
+    "notes": "Static shot, shallow focus, blue dusk light. 21.8 s source.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
+    "branding": "None legible: one oil bottle label, out of focus. No people.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [
+        "The file carries an original-encoder fingerprint (not re-encoded), consistent with a direct download.",
+        "The owner reviewed the source links on 22 Oct 2026 and reported only four as incorrect (restaurant interior, hotel room, bedside, bathroom); this clip's link was not reported as incorrect."
+      ]
+    },
+    "sourceUrlStatus": "owner-checked",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "cleared",
+      "peopleAndBranding": "No people. One oil-bottle label, out of focus and unreadable. No third-party branding.",
+      "conditions": "None beyond the Pexels Licence terms.",
+      "reviewedOn": "2026-10-22"
+    }
+  },
+  "chef": {
+    "file": "19905887-uhd_3840_2160_24fps.mp4",
+    "page": "https://www.pexels.com/video/19905887/",
+    "licence": "Pexels Licence (owner-declared; listing page not independently verified from this environment)",
+    "licenceVerified": true,
+    "alt": "A chef's hands finishing plated dishes along the pass in a professional kitchen",
+    "usedFor": "Restaurant menu update story (the kitchen runs out)",
+    "start": 0,
+    "duration": 7,
+    "focus": "35% 50%",
+    "focusMobile": "30% 50%",
+    "notes": "Close shot of hands plating along the pass, 8.5 s source (played as 7 s plus the loop crossfade). Repetitive hand motion, so the crossfade loop is unobtrusive. Supplied as a .MOV (H.264 + AAC audio); the build drops the audio.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file was supplied by the owner on 22 Oct 2026 as a .MOV (Apple QuickTime export, original creation date 2024-01-18); it carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "branding": "None seen: no faces, no logos. A wristwatch is visible, brand not legible. Checked on the contact sheet; full-resolution check below.",
+    "mode": "loop",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [
+        "The file carries an original-encoder fingerprint (not re-encoded), consistent with a direct download. (Apple QuickTime export, original creation date 2024-01-18).",
+        "The owner reviewed the source links on 22 Oct 2026 and reported only four as incorrect (restaurant interior, hotel room, bedside, bathroom); this clip's link was not reported as incorrect."
+      ]
+    },
+    "sourceUrlStatus": "owner-checked",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "cleared",
+      "peopleAndBranding": "A chef's hands only, no face. A wristwatch whose brand is not legible. No logos or signage.",
+      "conditions": "Illustrates a use case only; never imply a named restaurant or chef.",
+      "reviewedOn": "2026-10-22"
+    }
+  },
+  "fineDining": {
+    "file": "3769032-hd_1920_1080_25fps.mp4",
+    "page": "https://www.pexels.com/video/3769032/",
+    "licence": "Pexels Licence (owner-declared; listing page not independently verified from this environment)",
+    "licenceVerified": true,
+    "alt": "A server lifts a cloche from a dish at a candle-lit table",
+    "usedFor": "Restaurants 'Every table' panel (film, the restaurant experience); the manager step of the homepage story (poster)",
+    "start": 0,
+    "duration": 12,
+    "focus": "50% 50%",
+    "focusMobile": "50% 45%",
+    "mode": "loop",
+    "notes": "The cloche lifts and the smoke clears; the loop dissolves back to the start. 15.7 s source.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
+    "branding": "No branding seen. A server's hands and torso, no face. Diners in the background are out of focus and unidentifiable.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [
+        "The file carries an original-encoder fingerprint (not re-encoded), consistent with a direct download.",
+        "The owner reviewed the source links on 22 Oct 2026 and reported only four as incorrect (restaurant interior, hotel room, bedside, bathroom); this clip's link was not reported as incorrect."
+      ]
+    },
+    "sourceUrlStatus": "owner-checked",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "cleared",
+      "peopleAndBranding": "A server's hands and torso, no face. Diners in the background are out of focus and unidentifiable. No logos.",
+      "conditions": "Illustrates a use case only: never present the venue, server or diners as an Informax customer or endorser.",
+      "reviewedOn": "2026-10-22"
+    }
+  },
+  "hotelBedroom": {
+    "file": "15358608_3840_2160_25fps.mp4",
+    "page": null,
+    "licence": "Pexels Licence declared by owner, but the original listing is unknown and the file's history is contradictory: NOT cleared",
+    "licenceVerified": false,
+    "alt": "A hotel room door opening onto a desk and a lit lamp",
+    "usedFor": "Hotels hero (film, plays once and holds); Hotels card in More possibilities (poster)",
+    "start": 1.9,
+    "duration": 5.7,
+    "focus": "40% 50%",
+    "focusMobile": "35% 50%",
+    "mode": "once",
+    "notes": "Not a bedroom view: a door swings open onto the desk. Moves throughout its 7.7 s, so it plays once instead of looping; starts at 1.9 s so the poster shows the room, not the closed door. The desk's blue tent cards are not Informax products and are never presented as such.",
+    "licenceCheck": "Technical evidence (ffprobe, 22 Oct 2026): this file was re-encoded with FFmpeg 6.1 (libx264, Lavc60.31.102 / Lavf60.16.100), has no creation date, no vendor tags and an extra empty data stream. The three other 1080p/4K files from the same set that the owner reports as matching carry the original-encoder fingerprints (\"AVC Coding\", L-SMASH or Apple Core Media). So this is not a direct download of an original listing's file, and its filename ID cannot be relied on. A web search by description found no page that could be confirmed as this clip (Pexels pages cannot be opened or compared from this environment). No candidate has been recorded as the source.",
+    "branding": "Two third-party tent cards on the desk (hotel information, small logo, a small code). In the published 1080p output they are illegible and the code is about 12 px, not scannable (checked at 3x magnification). Not presented as Informax products.",
+    "filenameClaim": "https://www.pexels.com/video/15358608/",
+    "sourceStatus": "UNIDENTIFIED. The owner opened https://www.pexels.com/video/15358608/ on 22 Oct 2026 and it is not this footage. The real original source (platform, author, licence) is unknown.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [],
+      "contradictingEvidence": [
+        "CONTRADICTORY EVIDENCE: the owner opened the Pexels page for the file name's ID and it is a different video, so the file name's ID is wrong. The file is also not an original download: it was re-encoded with FFmpeg 6.1 (Lavc60.31.102), has no creation date or vendor tags and an extra empty data stream, unlike the original-encoder files in the same set. The owner's declaration that it came from Pexels therefore cannot be matched to any listing, and the re-encoding means it passed through another tool or platform. The licence terms that apply are unknown."
+      ]
+    },
+    "sourceUrlStatus": "unknown (filename ID reported incorrect by owner; original listing not located)",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "unresolved",
+      "peopleAndBranding": "Two third-party tent cards on the desk (hotel information, a small logo, a ~12 px code) are illegible in the published 1080p. No people.",
+      "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
+      "reviewedOn": "2026-10-22"
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- hotelBedroom`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
+  },
+  "bedside": {
+    "file": "12680170_3840_2160_25fps.mp4",
+    "page": null,
+    "licence": "Pexels Licence declared by owner, but the original listing is unknown and the file's history is contradictory: NOT cleared",
+    "licenceVerified": false,
+    "alt": "A lamp lit on a round bedside table beside a hotel bed",
+    "usedFor": "Bedroom Access Points: the in-room directory scene (poster)",
+    "start": 0,
+    "duration": 3.6,
+    "focus": "50% 50%",
+    "focusMobile": "45% 50%",
+    "mode": "pingpong",
+    "notes": "Nearly static, 3.8 s source. No card in shot; the site draws its Code card over it.",
+    "licenceCheck": "Technical evidence (ffprobe, 22 Oct 2026): this file was re-encoded with FFmpeg 6.1 (libx264, Lavc60.31.102 / Lavf60.16.100), has no creation date, no vendor tags and an extra empty data stream. The three other 1080p/4K files from the same set that the owner reports as matching carry the original-encoder fingerprints (\"AVC Coding\", L-SMASH or Apple Core Media). So this is not a direct download of an original listing's file, and its filename ID cannot be relied on. A web search by description found no page that could be confirmed as this clip (Pexels pages cannot be opened or compared from this environment). No candidate has been recorded as the source.",
+    "branding": "None. No card, no people.",
+    "filenameClaim": "https://www.pexels.com/video/12680170/",
+    "sourceStatus": "UNIDENTIFIED. The owner opened https://www.pexels.com/video/12680170/ on 22 Oct 2026 and it is not this footage. The real original source (platform, author, licence) is unknown.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [],
+      "contradictingEvidence": [
+        "CONTRADICTORY EVIDENCE: the owner opened the Pexels page for the file name's ID and it is a different video, so the file name's ID is wrong. The file is also not an original download: it was re-encoded with FFmpeg 6.1 (Lavc60.31.102), has no creation date or vendor tags and an extra empty data stream, unlike the original-encoder files in the same set. The owner's declaration that it came from Pexels therefore cannot be matched to any listing, and the re-encoding means it passed through another tool or platform. The licence terms that apply are unknown."
+      ]
+    },
+    "sourceUrlStatus": "unknown (filename ID reported incorrect by owner; original listing not located)",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "unresolved",
+      "peopleAndBranding": "No branding, no people.",
+      "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
+      "reviewedOn": "2026-10-22"
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- bedside`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
+  },
+  "bathroom": {
+    "file": "14983318_3840_2160_25fps.mp4",
+    "page": null,
+    "licence": "Pexels Licence declared by owner, but the original listing is unknown and the file's history is contradictory: NOT cleared",
+    "licenceVerified": false,
+    "alt": "A hotel bathroom with a round illuminated mirror, hanging towels and a glass basin",
+    "usedFor": "Bathroom Access Points: the spa offer scene (poster)",
+    "start": 0,
+    "duration": 6.2,
+    "focus": "40% 50%",
+    "focusMobile": "35% 45%",
+    "mode": "pingpong",
+    "notes": "Slow sideways move past a wooden screen, 6.3 s source.",
+    "licenceCheck": "Technical evidence (ffprobe, 22 Oct 2026): this file was re-encoded with FFmpeg 6.1 (libx264, Lavc60.31.102 / Lavf60.16.100), has no creation date, no vendor tags and an extra empty data stream. The three other 1080p/4K files from the same set that the owner reports as matching carry the original-encoder fingerprints (\"AVC Coding\", L-SMASH or Apple Core Media). So this is not a direct download of an original listing's file, and its filename ID cannot be relied on. A web search by description found no page that could be confirmed as this clip (Pexels pages cannot be opened or compared from this environment). No candidate has been recorded as the source.",
+    "branding": "None. No people.",
+    "filenameClaim": "https://www.pexels.com/video/14983318/",
+    "sourceStatus": "UNIDENTIFIED. The owner opened https://www.pexels.com/video/14983318/ on 22 Oct 2026 and it is not this footage. The real original source (platform, author, licence) is unknown.",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [],
+      "contradictingEvidence": [
+        "CONTRADICTORY EVIDENCE: the owner opened the Pexels page for the file name's ID and it is a different video, so the file name's ID is wrong. The file is also not an original download: it was re-encoded with FFmpeg 6.1 (Lavc60.31.102), has no creation date or vendor tags and an extra empty data stream, unlike the original-encoder files in the same set. The owner's declaration that it came from Pexels therefore cannot be matched to any listing, and the re-encoding means it passed through another tool or platform. The licence terms that apply are unknown."
+      ]
+    },
+    "sourceUrlStatus": "unknown (filename ID reported incorrect by owner; original listing not located)",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "unresolved",
+      "peopleAndBranding": "No branding, no people.",
+      "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
+      "reviewedOn": "2026-10-22"
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- bathroom`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
+  },
+  "spa": {
+    "file": "6187887-uhd_3840_2160_25fps.mp4",
+    "page": "https://www.pexels.com/video/6187887/",
+    "licence": "Pexels Licence (owner-declared; listing page not independently verified from this environment)",
+    "licenceVerified": true,
+    "alt": "A spa therapist giving a hand and arm massage to a client in a softly lit treatment room",
+    "usedFor": "Spa promotions; Spa card in More possibilities",
+    "start": 0,
+    "duration": 8,
+    "focus": "30% 50%",
+    "focusMobile": "25% 50%",
+    "notes": "Dim, warm treatment room: a therapist in a red uniform (face out of frame) massaging a client's arm; the client is seen from behind. 9.3 s source (8 s plus crossfade). Dark overall, so it needs no extra overlay behind white text.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file was supplied by the owner on 22 Oct 2026 as a .MOV (Apple QuickTime export, original creation date 2020-12-14); it carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "branding": "No logos or readable signage. No faces visible: the therapist is cropped at the neck and the client is shown from behind.",
+    "mode": "loop",
+    "provenance": {
+      "basis": "owner-declaration",
+      "declaredOn": "2026-10-22",
+      "declaredBy": "Informax site owner",
+      "statement": "The site owner declares (message of 22 October 2026) that the videos supplied for the Informax website were downloaded from Pexels, which provides free photos and videos for commercial use under the Pexels Licence (https://www.pexels.com/license/).",
+      "supportingEvidence": [
+        "The file carries an original-encoder fingerprint (not re-encoded), consistent with a direct download. (Apple QuickTime export, original creation date 2020-12-14).",
+        "The owner reviewed the source links on 22 Oct 2026 and reported only four as incorrect (restaurant interior, hotel room, bedside, bathroom); this clip's link was not reported as incorrect."
+      ]
+    },
+    "sourceUrlStatus": "owner-checked",
+    "licenceUrl": "https://www.pexels.com/license/",
+    "rightsReview": {
+      "status": "cleared",
+      "peopleAndBranding": "A therapist (face out of frame) and a client (seen from behind, no face). No logos or signage. Neutral, non-sensitive treatment.",
+      "conditions": "Shown only as an illustration of a spa treatment; never imply the people are staff, customers or endorsers of Informax or of any spa.",
+      "reviewedOn": "2026-10-22"
+    }
+  },
+  "smartphone": {
+    "file": "6278838-uhd_3840_2160_30fps.mp4",
+    "page": "https://www.pexels.com/video/6278838/",
+    "licence": "Pexels Licence (presumed from the file name; not yet verified)",
+    "licenceVerified": false,
+    "alt": "A person using a smartphone",
+    "usedFor": "Not used",
+    "start": 0,
+    "duration": 8,
+    "focus": "50% 50%",
+    "focusMobile": "50% 50%",
+    "excluded": "The phone's screen is blank white (a mock-up clip). As a still it shows an empty phone beside the drawn phone with a genuine Informax Cloud capture; filling it would mean compositing an interface onto stock footage, which would not be a genuine screenshot. Its slot (the manager step) uses the fine-dining clip instead.",
+    "notes": "Hand holding a phone in a cafe, 15.3 s source.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
+    "branding": "Blank-screen mock-up phone (the reason it is excluded). A hand, no face.",
+    "rightsReview": {
+      "status": "not-used",
+      "peopleAndBranding": "Excluded from the site; not reviewed for use.",
+      "conditions": "",
+      "reviewedOn": "2026-10-22"
+    },
+    "sourceUrlStatus": "not used"
+  },
+  "staircase": {
+    "file": "15018462_2160_3840_30fps.mp4",
+    "page": "https://www.pexels.com/video/15018462/",
+    "licence": "Pexels Licence (presumed from the file name; not yet verified)",
+    "licenceVerified": false,
+    "alt": "An architectural staircase",
+    "usedFor": "Not used",
+    "start": 0,
+    "duration": 8,
+    "focus": "50% 50%",
+    "focusMobile": "50% 50%",
+    "excluded": "Portrait (2160x3840) and not tied to a use case: decorative motion that does not explain the product. Kept out to keep the site calm and fast.",
+    "notes": "Not supplied; excluded in any case.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file has not been supplied; the clip is excluded.",
+    "branding": "Not supplied; not reviewed.",
+    "rightsReview": {
+      "status": "not-used",
+      "peopleAndBranding": "Excluded from the site; not reviewed for use.",
+      "conditions": "",
+      "reviewedOn": "2026-10-22"
+    },
+    "sourceUrlStatus": "not used"
+  }
+}

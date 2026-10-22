@@ -73,7 +73,7 @@ export default function DirectoryShowcase({ tone = "light" }: { tone?: "light" |
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[14px] font-medium text-[#1d1b18]">{sct.title}</div>
-                    <div className="truncate text-[11.5px] text-[#8a8175]">{sct.note}</div>
+                    <div className="truncate text-[11.5px] text-[#6b6358]">{sct.note}</div>
                   </div>
                   <ChevronRight size={15} className="text-[#b3a996]" />
                 </div>

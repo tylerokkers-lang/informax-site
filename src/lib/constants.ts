@@ -1,9 +1,17 @@
 export const SITE_URL = "https://informax.co.uk";
 export const CONTACT_EMAIL = "info@informax.co.uk";
 
-export const PRIMARY_CTA = "Talk to Informax";
+export const PRIMARY_CTA = "Request a Demo";
 
 export const CLOUD_LOGIN_URL = "https://informax.cloud/login";
+
+/*
+ * Informax Cloud (V2) is in development and not publicly available. Its
+ * Coming Soon page lives on this site (/informax-cloud). Do not link Coming
+ * Soon calls to action to informax.cloud: that domain runs V1 and redirects
+ * to its sign-in page. The only link there is the existing customers' log-in
+ * (CLOUD_LOGIN_URL).
+ */
 
 /**
  * Official Informax social profiles, supplied by the owner. LinkedIn is still
@@ -16,27 +24,34 @@ export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/informax_cloud/",
 } as const;
 
+/** The demo request is the site's one primary action. */
+export const DEMO_CTA = { label: "Request a Demo", href: "/enquire" } as const;
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Restaurants", href: "/restaurants" },
+  { label: "Hotels", href: "/hotels" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "Informax Cloud", href: "/informax-cloud" },
-  { label: "Digital Experiences", href: "/digital-experiences" },
-  { label: "About", href: "/about" },
-  { label: "Talk to Informax", href: "/enquire" },
+  { label: "Contact", href: "/enquire" },
 ] as const;
 
 export const FOOTER_PRODUCT_LINKS = [
-  { label: "Informax Cloud", href: "/informax-cloud" },
-  { label: "Digital Experiences", href: "/digital-experiences" },
+  { label: "Restaurants", href: "/restaurants" },
+  { label: "Hotels", href: "/hotels" },
+  { label: "How It Works", href: "/how-it-works" },
+  { label: "Informax Cloud (coming soon)", href: "/informax-cloud" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [
+  { label: "Digital Experiences", href: "/digital-experiences" },
   { label: "Websites", href: "/websites" },
   { label: "Digital Brochures & Directories", href: "/digital-information" },
 ] as const;
 
 export const FOOTER_COMPANY_LINKS = [
   { label: "About Informax", href: "/about" },
-  { label: "Enquire", href: "/enquire" },
+  { label: "Request a Demo", href: "/enquire" },
   { label: "Contact", href: `mailto:${CONTACT_EMAIL}` },
 ] as const;
 
@@ -47,12 +62,12 @@ export const FOOTER_LEGAL_LINKS = [
 ] as const;
 
 export const ENQUIRY_INTERESTS = [
-  "Informax Cloud",
-  "Guest Directory",
-  "Digital Experiences",
   "A demonstration",
-  "Spa & Wellness",
-  "Restaurants",
-  "Meetings & Events",
+  "Restaurant menus",
+  "Hotel guest directory",
+  "Spa & wellness",
+  "Access Points",
+  "Informax Cloud",
+  "Something else",
   "Not sure yet",
 ] as const;

@@ -18,7 +18,7 @@ export default function DigitalInformationHero() {
       videoMp4={DIGITAL_INFO_VIDEO_MP4}
       videoWebm={DIGITAL_INFO_VIDEO_WEBM}
       poster={DIGITAL_INFO_POSTER}
-      eyebrow="Informax — Digital Information"
+      eyebrow="Digital information by Informax"
       headline="Documents your guests actually want to open."
       description="Brochures, pamphlets and directories, designed to be read, opened and explored in seconds, not downloaded and forgotten."
       primaryLabel="Talk to Informax"

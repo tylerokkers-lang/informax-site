@@ -4,6 +4,9 @@ import { SITE_URL } from "@/lib/constants";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/restaurants",
+    "/hotels",
+    "/how-it-works",
     "/informax-cloud",
     "/digital-experiences",
     "/about",
@@ -17,8 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const priority: Record<string, number> = {
     "": 1,
-    "/informax-cloud": 0.95,
-    "/digital-experiences": 0.85,
+    "/restaurants": 0.95,
+    "/hotels": 0.95,
+    "/how-it-works": 0.85,
+    "/informax-cloud": 0.9,
+    "/digital-experiences": 0.6,
     "/enquire": 0.9,
     "/about": 0.6,
     "/websites": 0.5,

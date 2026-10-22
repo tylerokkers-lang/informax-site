@@ -17,26 +17,29 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-flex">
               <Image
-                src="/informax-logo-white.png"
+                src="/brand/informax-logo-white-trim.png"
                 alt="Informax"
-                width={420}
-                height={140}
-                className="h-[72px] w-auto"
+                width={746}
+                height={224}
+                className="h-[46px] w-auto"
               />
             </Link>
             <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
-              Informax Cloud connects the information guests need with the
-              places they are, throughout your hotel. Built in hospitality.
+              Informax stands for ease of information. Informax Cloud keeps
+              menus, directories and guest information current, wherever
+              your Codes are. Built in hospitality.
             </p>
             <div className="mt-6 flex gap-2.5">
               <a
                 href={SOCIAL_LINKS.linkedin || undefined}
                 target={SOCIAL_LINKS.linkedin ? "_blank" : undefined}
                 rel={SOCIAL_LINKS.linkedin ? "noopener noreferrer" : undefined}
-                aria-label="Informax on LinkedIn"
-                aria-disabled={SOCIAL_LINKS.linkedin ? undefined : true}
+                // Without an address it is not a link: an image with a label, never a dead link.
+                role={SOCIAL_LINKS.linkedin ? undefined : "img"}
+                aria-label={SOCIAL_LINKS.linkedin ? "Informax on LinkedIn" : "LinkedIn profile to be added"}
+                data-inactive={SOCIAL_LINKS.linkedin ? undefined : true}
                 title={SOCIAL_LINKS.linkedin ? undefined : "LinkedIn profile to be added"}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light aria-disabled:opacity-40 aria-disabled:hover:border-line-dark aria-disabled:hover:text-cream-mute/80"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light data-[inactive]:opacity-40 data-[inactive]:hover:border-line-dark data-[inactive]:hover:text-cream-mute/80"
               >
                 <svg
                   width="15"
@@ -82,22 +85,22 @@ export default function Footer() {
             </div>
           </div>
 
-          <FooterCol title="Informax" links={FOOTER_PRODUCT_LINKS} />
+          <FooterCol title="Explore" links={FOOTER_PRODUCT_LINKS} />
           <FooterCol title="Company" links={FOOTER_COMPANY_LINKS} />
 
           <div>
-            <h5 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
+            <h2 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
               Get in Touch
-            </h5>
+            </h2>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
               className="text-sm text-cream-mute transition-colors hover:text-brass-light"
             >
               {CONTACT_EMAIL}
             </a>
-            <h5 className="mb-4 mt-9 text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute">
+            <h2 className="mb-4 mt-9 text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute">
               Also from Informax
-            </h5>
+            </h2>
             <ul className="flex flex-col gap-3">
               {FOOTER_ALSO_LINKS.map((link) => (
                 <li key={link.href}>
@@ -138,9 +141,9 @@ function FooterCol({
 }) {
   return (
     <div>
-      <h5 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
+      <h2 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
         {title}
-      </h5>
+      </h2>
       <ul className="flex flex-col gap-3">
         {links.map((link) => (
           <li key={link.href}>

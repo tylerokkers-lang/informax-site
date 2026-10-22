@@ -1,0 +1,179 @@
+import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
+import { devRoutesEnabled } from "@/lib/environment";
+import type { ContentState } from "@/lib/content";
+import type { NavItem } from "@/core/industry/contract";
+import { summariseOverview } from "@/core/dashboard/summary";
+import { PROFILES } from "@/industries/registry";
+import { PdfViewer } from "@/ui/content/pdf-viewer";
+import { AppShell } from "@/ui/shell/app-shell";
+import { AccessPointView } from "@/ui/views/access-point-view";
+import { BulkView } from "@/ui/views/bulk-view";
+import { OverviewView } from "@/ui/views/overview-view";
+import { SpaceDetailView } from "@/ui/views/space-detail-view";
+import { SpacesView } from "@/ui/views/spaces-view";
+
+/**
+ * LOCAL ONLY, NEVER COMMITTED: the real Informax Cloud views rendered with the product's own fictional demo businesses
+ * (The Copper Table, Marlowe Grand Hotel) so the marketing site can show authentic screens. Same idea as /dev/preview.
+ */
+export const dynamic = "force-dynamic";
+
+const NAV = new Set<NavItem["id"]>(["overview", "spaces", "content", "activity", "team", "settings"]);
+const R = { org: "The Copper Table", loc: { id: "r1", name: "The Copper Table, Soho" }, user: { name: "Sam Price", email: "sam@coppertable.example" } };
+const H = { org: "Marlowe Grand Hotel", loc: { id: "l1", name: "Marlowe Grand, Mayfair" }, user: { name: "Olivia Bennett", email: "olivia@marlowe.example" } };
+
+function shell(i: "hotel" | "restaurant", children: ReactNode, roleLine?: string) {
+  const f = i === "hotel" ? H : R;
+  return (
+    <AppShell profile={PROFILES[i]} organisations={[{ id: "o", name: f.org }]} activeOrganisationId="o" locations={[f.loc]} selectedLocationId={f.loc.id}
+      user={{ ...f.user, roleLine: roleLine ?? PROFILES[i].roleLabels.admin }} allowedNav={NAV}>
+      {children}
+    </AppShell>
+  );
+}
+
+/** A fixed, believable moment: Wednesday afternoon, 14:42 in London. */
+const NOW = new Date("2026-10-21T13:42:00Z");
+const ago = (min: number) => new Date(NOW.getTime() - min * 60_000).toISOString();
+const ahead = (min: number) => new Date(NOW.getTime() + min * 60_000).toISOString();
+const v = (n: number, name: string, origin: "publish" | "temporary" | "restore", by: string, minAgo: number) =>
+  ({ id: `v${n}`, version_no: n, kind: "pdf", source_ref: `private/${n}.pdf`, display_name: name, origin, restored_from_version_id: null, created_by_label: by, created_at: ago(minAgo) });
+
+/** A default that was replaced (or not yet): the earlier versions stay in the history. */
+function replaced(names: string[], by: string, updatedName?: string): ContentState {
+  const all = names.map((n, i) => v(i + 1, n, "publish", by, (names.length - i) * 60 * 24 * 9));
+  if (updatedName) all.push(v(all.length + 1, updatedName, "publish", by, 2));
+  const cur = all[all.length - 1];
+  const defaults = all.map((x, i) => ({ version_id: x.id, valid_from: x.created_at, valid_to: i < all.length - 1 ? all[i + 1].created_at : null }));
+  return {
+    versions: [...all].reverse(),
+    defaults: defaults.reverse(),
+    temporaries: [],
+    live: {
+      live: { source: "default", kind: "pdf", name: cur.display_name, version: cur.version_no, version_id: cur.id, since: cur.created_at, expires_at: null },
+      default: { kind: "pdf", name: cur.display_name, version: cur.version_no, version_id: cur.id, since: cur.created_at, by },
+      scheduled: null,
+    },
+  } as ContentState;
+}
+
+/** Temporary content live now, going back to the default by itself. */
+function temporary(defName: string, tempName: string, by: string, endsInMin: number): ContentState {
+  const d = v(1, defName, "publish", by, 60 * 24 * 20);
+  const t = v(2, tempName, "temporary", by, 3);
+  return {
+    versions: [t, d],
+    defaults: [{ version_id: "v1", valid_from: d.created_at, valid_to: null }],
+    temporaries: [{ version_id: "v2", starts_at: t.created_at, expires_at: ahead(endsInMin), ended_at: null, end_reason: null }],
+    live: {
+      live: { source: "temporary", kind: "pdf", name: tempName, version: 2, version_id: "v2", since: t.created_at, expires_at: ahead(endsInMin) },
+      default: { kind: "pdf", name: defName, version: 1, version_id: "v1", since: d.created_at, by },
+      scheduled: null,
+    },
+  } as ContentState;
+}
+
+const CAN = { manage: true, restore: true, temporary: true, assign: true, end: true };
+const tz = "Europe/London";
+
+function ap(i: "hotel" | "restaurant", name: string, area: string, classification: string, state: ContentState, notice?: string) {
+  return shell(i, <AccessPointView profile={PROFILES[i]}
+    accessPoint={{ id: "ap1", name, status: "active", locationId: i === "hotel" ? "l1" : "r1", classificationId: "c1" }}
+    area={{ id: "a1", name: area }} locationName={null}
+    code={{ id: "code1", publicCode: "7m4k2x9q0p", url: "https://go.informax.cloud/c/7m4k2x9q0p", status: "active" }}
+    classifications={[{ id: "c1", name: classification, status: "active" }]}
+    can={{ manage: true, archive: true, bulk: true }}
+    notice={notice ? { kind: "ok", text: notice } : undefined}
+    content={{ state, timeZone: tz, now: NOW, can: CAN }} />);
+}
+
+function overview(i: "hotel" | "restaurant") {
+  const now = NOW;
+  const sp = (id: string, name: string, parent: string | null) => ({ id, name, parent_id: parent, status: "active" as const });
+  const hotel = i === "hotel";
+  const spaces = hotel
+    // Every area holds at least two Access Points: an area with exactly one triggers the Quick access bug (HANDOVER.md §0c).
+    ? [sp("bed", "Bedrooms", null), sp("ct", "Coffee Table", "bed"), sp("bath", "Bathroom", "bed"), sp("bs", "Bedside Table", "bed"), sp("spa", "Spa", null), sp("spa-e", "Spa Entrance", "spa"), sp("spa-r", "Relaxation Room", "spa"), sp("rest", "The Garden Room", null), sp("gr", "Restaurant Menu", "rest"), sp("wl", "Wine List", "rest"), sp("pub", "Public Areas", null), sp("rec", "Reception", "pub"), sp("lob", "Lobby Lounge", "pub")]
+    : [sp("main", "Main Restaurant", null), sp("menu", "Restaurant Menu", "main"), sp("drinks", "Drinks Menu", "main"), sp("ter", "Terrace", null), sp("tmenu", "Terrace Menu", "ter"), sp("bar", "Bar", null), sp("wine", "Wine List", "bar")];
+  const leaf = spaces.filter((x) => !spaces.some((y) => y.parent_id === x.id));
+  const placements = leaf.map((l, n) => ({ space_id: l.id, code_id: `c${n}` }));
+  const versions = [
+    { id: "v-main", kind: "pdf", display_name: hotel ? "Guest Directory.pdf" : "Dinner menu (hake tonight).pdf" },
+    { id: "v-temp", kind: "pdf", display_name: hotel ? "Spa this afternoon.pdf" : "Sunday lunch.pdf" },
+    { id: "v-spa", kind: "pdf", display_name: "Spa treatments.pdf" },
+  ];
+  const tempSpace = hotel ? "bath" : "tmenu";
+  const summary = summariseOverview({
+    spaces, placements, versions, now, activeCodeIds: new Set(placements.map((p) => p.code_id)),
+    defaults: leaf.map((l) => ({ space_id: l.id, version_id: hotel && (l.id === "bath" || l.id === "spa-e" || l.id === "spa-r") ? "v-spa" : "v-main" })),
+    temporaries: [{ space_id: tempSpace, version_id: "v-temp", starts_at: ago(20), expires_at: ahead(hotel ? 198 : 100), ended_at: null }],
+  });
+  const f = hotel ? H : R;
+  const by = f.user.name;
+  const ev = (id: string, action: string, subject: string, min: number, payload: Record<string, unknown> = {}) =>
+    ({ id, organisation_id: "o", location_id: f.loc.id, actor_kind: "user", actor_label: by, action, subject_type: "space", subject_id: "s", subject_label: subject, payload, visibility: "operational", occurred_at: ago(min) });
+  const recent = hotel
+    ? [ev("e1", "content.temporary_set", "Bathroom", 20, { name: "Spa this afternoon.pdf", expires_at: ahead(198) }), ev("e2", "content.replaced", "Coffee Table", 95, { name: "Guest Directory (new dinner hours).pdf" })]
+    : [ev("e1", "content.replaced", "Restaurant Menu", 2, { name: "Dinner menu (hake tonight).pdf" }), ev("e2", "content.temporary_set", "Terrace Menu", 20, { name: "Sunday lunch.pdf", expires_at: ahead(100) })];
+  return shell(i, <OverviewView profile={PROFILES[i]} organisationName={f.org} greeting={`Good afternoon, ${by.split(" ")[0]}`} locations={[{ ...f.loc, timezone: tz, status: "active" }]}
+    roleLine={PROFILES[i].roleLabels.admin} canInvite summary={{ ...summary, retiredCodes: 0 }} recent={recent as never} timeZone={tz} now={now}
+    roleLabel={(k: string) => (PROFILES[i].roleLabels as Record<string, string>)[k] ?? k} />);
+}
+
+export default async function Marketing({ params }: { params: Promise<{ shot: string }> }) {
+  if (!devRoutesEnabled()) notFound();
+  const { shot } = await params;
+  switch (shot) {
+    // Restaurant: the menu changes, the Code does not.
+    case "r-menu-before":
+      return ap("restaurant", "Restaurant Menu", "Main Restaurant", "Restaurant Menu", replaced(["Summer menu.pdf", "Dinner menu.pdf"], R.user.name));
+    case "r-menu-after":
+      return ap("restaurant", "Restaurant Menu", "Main Restaurant", "Restaurant Menu", replaced(["Summer menu.pdf", "Dinner menu.pdf"], R.user.name, "Dinner menu (hake tonight).pdf"), "Published. It is live now.");
+    case "r-overview":
+      return overview("restaurant");
+    // Hotel: coffee-table directory, bathroom spa offer, many at once.
+    case "h-directory-before":
+      return ap("hotel", "Coffee Table", "Bedrooms", "Coffee Table", replaced(["Guest Directory.pdf"], H.user.name));
+    case "h-directory-after":
+      return ap("hotel", "Coffee Table", "Bedrooms", "Coffee Table", replaced(["Guest Directory.pdf"], H.user.name, "Guest Directory (new dinner hours).pdf"), "Published. It is live now.");
+    case "h-spa-default":
+      return ap("hotel", "Bathroom", "Bedrooms", "Bathroom", replaced(["Spa treatments.pdf"], H.user.name));
+    case "h-spa-temporary":
+      return ap("hotel", "Bathroom", "Bedrooms", "Bathroom", temporary("Spa treatments.pdf", "Spa this afternoon.pdf", H.user.name, 198), "Temporary content is live.");
+    case "h-overview":
+      return overview("hotel");
+    case "h-bedrooms":
+      return shell("hotel", <SpaceDetailView profile={PROFILES.hotel} space={{ id: "a1", name: "Bedrooms", status: "active", depth: 1, locationId: "l1" }} locationName={null} ancestors={[]}
+        inside={[{ id: "ap1", name: "Coffee Table", inside: 0, archived: false, codes: 1, content: "default" }, { id: "ap2", name: "Bathroom", inside: 0, archived: false, codes: 1, content: "temporary" }, { id: "ap3", name: "Bedside Table", inside: 0, archived: false, codes: 1, content: "default" }, { id: "ap4", name: "Room Service", inside: 0, archived: false, codes: 1, content: "default" }]}
+        childTotal={4} page={1} codes={[]} codeTotal={0} codePage={1} pageSize={50} showArchived={false} can={{ manage: true, codes: true }}
+        content={{ state: { versions: [], defaults: [], temporaries: [], live: { live: null, default: null, scheduled: null } } as ContentState, timeZone: tz, now: NOW, can: CAN }}
+        areaMode={{ classifications: [{ id: "c1", name: "Coffee Table" }, { id: "c2", name: "Bathroom" }], suggestions: PROFILES.hotel.suggestedAccessPoints, canBulk: true, emergency: null }} />);
+    case "h-spaces":
+      return shell("hotel", <SpacesView profile={PROFILES.hotel} canSeeLocations={false} sections={[{ locationId: "l1", locationName: H.loc.name, canManage: true, total: 5, page: 1, pageSize: 50, spaces: [
+        { id: "a1", name: "Bedrooms", inside: 4, codes: 4, children: [{ id: "ap1", name: "Coffee Table", inside: 0 }, { id: "ap2", name: "Bathroom", inside: 0 }, { id: "ap3", name: "Bedside Table", inside: 0 }, { id: "ap4", name: "Room Service", inside: 0 }] },
+        { id: "a2", name: "Spa", inside: 2, codes: 2, children: [{ id: "ap5", name: "Spa Entrance", inside: 0 }, { id: "ap6", name: "Relaxation Room", inside: 0 }] },
+        { id: "a3", name: "The Garden Room", inside: 2, codes: 2, children: [{ id: "ap7", name: "Restaurant Menu", inside: 0 }, { id: "ap8", name: "Wine List", inside: 0 }] },
+        { id: "a4", name: "Public Areas", inside: 2, codes: 2, children: [{ id: "ap9", name: "Reception", inside: 0 }, { id: "ap10", name: "Lobby Lounge", inside: 0 }] },
+        { id: "a5", name: "Suites", inside: 1, codes: 1, children: [{ id: "ap11", name: "Suite Bathroom", inside: 0 }] },
+      ] }]} />);
+    case "h-bulk":
+      return shell("hotel", <BulkView locations={[H.loc]} locationId="l1" locationName="Marlowe Grand"
+        areas={[{ id: "a1", name: "Bedrooms" }, { id: "a2", name: "Suites" }]} classifications={[{ id: "c1", name: "Coffee Table" }, { id: "c2", name: "Bathroom" }]}
+        chosen={{ space: null, classification: "c2" }} target={{ classification: "Bathroom" }} timeZone={tz}
+        targets={[
+          { id: "ap2", name: "Bathroom", spaceName: "Bedrooms", classification: "Bathroom", current: "Spa treatments.pdf", currentKind: "pdf" },
+          { id: "ap6", name: "Suite Bathroom", spaceName: "Suites", classification: "Bathroom", current: "Spa treatments.pdf", currentKind: "pdf" },
+        ]}
+        recent={[]} />);
+    // Guest phones: the real viewer, the demo PDFs.
+    case "g-menu-before": return <PdfViewer src="/dev/marketing-pdf/menu-before.pdf" label="Menu" />;
+    case "g-menu-after": return <PdfViewer src="/dev/marketing-pdf/menu-after.pdf" label="Menu" />;
+    case "g-directory-before": return <PdfViewer src="/dev/marketing-pdf/directory-before.pdf" label="Guest Directory" />;
+    case "g-directory-after": return <PdfViewer src="/dev/marketing-pdf/directory-after.pdf" label="Guest Directory" />;
+    case "g-spa-default": return <PdfViewer src="/dev/marketing-pdf/spa-default.pdf" label="Spa" />;
+    case "g-spa-offer": return <PdfViewer src="/dev/marketing-pdf/spa-offer.pdf" label="Spa" />;
+    case "g-loading": return <PdfViewer src="/dev/marketing-pdf/never.pdf?delay" label="Menu" />;
+    default: notFound();
+  }
+}

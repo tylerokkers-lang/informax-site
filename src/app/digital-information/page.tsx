@@ -8,7 +8,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "Digital Brochures, Pamphlets & Directories",
   description:
-    "Turn information into an experience. Informax designs digital brochures, pamphlets and directories that make company, product, property and hospitality information easy to explore.",
+    "Informax designs digital brochures, pamphlets and directories that make company, product, property and hospitality information easy to explore.",
   alternates: { canonical: "/digital-information" },
 };
 
@@ -146,8 +146,8 @@ export default function DigitalInformationPage() {
                 Put the information where people need it.
               </h2>
               <p className="mb-8 max-w-[48ch] text-[15.5px] leading-relaxed text-ink-mute">
-                Directories aren&rsquo;t limited to hotels. Anywhere there
-                &rsquo;s a lot to manage, such as facilities, services,
+                Directories aren&rsquo;t limited to hotels. Anywhere
+                there&rsquo;s a lot to manage, such as facilities, services,
                 contacts or locations, a custom directory makes it navigable
                 instead of overwhelming.
               </p>
@@ -185,6 +185,7 @@ export default function DigitalInformationPage() {
       </section>
 
       <FinalCta
+        primaryLabel="Talk to Informax"
         title={<>Information that deserves better design?</>}
         description="Tell us what you're trying to communicate and we'll help you work out the right shape for it."
       />
