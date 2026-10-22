@@ -1,8 +1,8 @@
 # Stock video
 
-Ten stock videos were named for the redesign on 22 October 2026; seven were
-supplied, six are built and one (smartphone) is excluded. Chef and spa are
-still to come. Status per clip: `media/videos.json` and HANDOVER.md §0c. The
+Ten stock videos were named for the redesign on 22 October 2026; nine were
+supplied, eight are built and used and one (smartphone) is excluded. The staircase
+was never supplied and is excluded. Status per clip: `media/videos.json` and HANDOVER.md §0c. The
 originals are **not committed** (too large for git, and never served); only
 the optimised web versions are.
 

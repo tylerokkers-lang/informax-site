@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026 (final readiness pass: NO-GO until the chef and spa clips and the licences, see §0c). **Read §0c first**: a complete restaurant-first
+Last updated: 22 October 2026 (all ten clips handled; only the licence checks remain before launch, see §0c). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -18,7 +18,59 @@ serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 variables and Informax Cloud were not touched. **Do not merge to `main`
 without the owner's explicit approval**: merging deploys to production (§4).
 
-### Final production-readiness pass (22 October 2026): NO-GO until two clips and the licences
+### Launch-phase update (22 October 2026): all ten clips handled; one blocker left, the licences
+**Verdict: still NO-GO, for one external reason: no clip licence could be
+verified.** Everything else is complete and tested.
+- **Chef (`19905887`) and spa (`6187887`) were supplied** by the owner (as
+  `.MOV`, uploaded to the session) and are integrated: reviewed, framed,
+  built and live on the branch.
+  - Chef: hands plating along the pass, no faces, loops with a crossfade
+    (seam 31.6 dB). It is the film in the Restaurants "The sea bass is
+    finished" band (now visible) and the still in homepage story step 1 and in
+    walkthrough step 2. Sizes: 1648 KB MP4 / 979 KB WebM desktop,
+    516 / 402 KB phone.
+  - Spa: a therapist (face out of frame) massaging a client's arm, the
+    client seen from behind, dark warm room, loops (seam 34.3 dB). It is the
+    film in the Hotels spa story. Sizes: 1316 / 707 KB desktop, 506 / 425 KB
+    phone.
+  - All stand-ins (`slotOr`) now resolve to the real slots.
+- **Contrast:** `docs/qa/film-contrast.mjs` now also measures the kitchen
+  band. It found a real failure on phones (3.76:1: bright plates behind the
+  paragraph); fixed with an even overlay on phones and tablets (now 7.9:1).
+  63 measurements, all pass.
+- **Licences: re-attempted, still unverifiable from here.** `www.pexels.com`
+  now answers, but with a Cloudflare bot challenge (HTTP 403,
+  `cf-mitigated: challenge`) that cannot complete because
+  `challenges.cloudflare.com` is refused by the network policy.
+  `videos.pexels.com`, `api.pexels.com`, `images.pexels.com` and
+  `web.archive.org` are refused at the proxy. The supplied files carry no
+  author or licence metadata (Apple QuickTime exports; original creation dates
+  2024-01-18 chef, 2020-12-14 spa). Evidence per clip is in `media/videos.json`
+  (`licenceCheck`). All ten are `licenceVerified: false`. **Verified by the
+  owner opening each page in a browser: that is the remaining action.**
+- **The production guard:** with the real state (nothing verified) a
+  `VERCEL_ENV=production` build stops, listing all nine slots. With every
+  licence marked verified (simulated, then reverted) the production build
+  **completes** (exit 0). So verifying the six clips the site uses is the
+  only thing between this branch and a passing guard.
+  Clips used by the site: `13476222`, `2174411`, `3769032`, `15358608`,
+  `12680170`, `14983318`, `19905887`, `6187887`. Not used: `6278838`
+  (blank-screen phone, excluded) and `15018462` (not supplied, excluded).
+
+**Final QA, 22 October 2026, clean build with all eight clips** (local):
+`tsc`, `eslint`, `next build` clean; `test-site` 120/120 (axe: zero
+violations); `video-checks` 42 pass, 0 fail, 6 skipped (MP4 playback in a
+Chromium without H.264; all 32 files decode with zero errors in ffmpeg);
+`film-contrast` 63/63; `seo-checks` 179/179; responsive sweep 13 pages × 4
+widths with no horizontal scroll or console errors; enquiry end to end
+(mocked Resend) correct. Lighthouse mobile: Home 91–94, Restaurants 93–97,
+Hotels 90–93, Informax Cloud 99, How It Works 97, Request a demo 98;
+desktop 100; accessibility, best practices and SEO 100; CLS 0. Total video:
+28 MB. Not verified: real Safari/iOS, the live preview, email delivery, the
+licences.
+
+Earlier today (superseded where it conflicts with the above):
+### Final production-readiness pass (22 October 2026): superseded by the launch-phase update above
 **Verdict: NO-GO for production today**, for external reasons only. The site
 itself is complete and every QA suite passes. Three things block launch, and
 the production guard enforces all of them (`VERCEL_ENV=production` refuses to
@@ -143,8 +195,8 @@ actually shows. Notes per clip: `media/videos.json`.
 | 12680170 bedside | hotelLounge | Bedroom Access Points ("In-room directory") | Poster |
 | 14983318 bathroom | hotelBathroom | Bathroom Access Points ("Bathroom spa menu") | Poster |
 | 6278838 smartphone | none | **Excluded**: the phone screen is blank white (a mock-up clip). It would put an empty phone beside the drawn phone with a genuine Cloud capture; filling it would mean compositing an interface onto stock footage | None |
-| 19905887 chef | chefPass | **Not supplied.** Homepage story step 1 shows its labelled placeholder; the Restaurants kitchen band ("The sea bass is finished…") is hidden until it exists | Film when supplied |
-| 6187887 spa | spaTreatment | **Not supplied.** Hotels spa story shows its labelled placeholder | Film when supplied |
+| 19905887 chef | chefPass | Restaurants kitchen band ("The sea bass is finished…"); homepage story step 1 and walkthrough step 2 | Film / still |
+| 6187887 spa | spaTreatment | Hotels spa story ("Fill the spa this afternoon") | Film |
 | 15018462 staircase | none | Not supplied; excluded anyway (portrait, decorative, no use case) | None |
 
 What the footage shows, and what to watch for:
@@ -207,25 +259,16 @@ What a visitor downloads: the hero film on each page (phone, WebM)
 is 127–376 KB; desktop 274 KB–1.2 MB. Films below the fold load only near the
 screen. Total committed video: 21 MB.
 
-**To add the chef and spa clips** (about 5 minutes):
-1. Put `19905887-uhd_3840_2160_24fps.mp4` and
-   `6187887-uhd_3840_2160_25fps.mp4` in `media/source/`.
-2. Run `npm run media:review` and check the contact sheets. Set `start`,
-   `duration`, `mode`, `focus` and `alt` for `chef` and `spa` in
-   `media/videos.json` from what they show.
-3. Run `npm run media:build -- chef spa`.
-4. Check `/`, `/restaurants` and `/hotels`, run the QA below, and commit.
-
 **Production guard:** a `VERCEL_ENV=production` build stops unless every image
 slot has a licensed photograph OR a built clip with `licenceVerified: true`
 (`next.config.ts`). Today it lists all nine slots, because no licence is
-verified. Simulated with every licence marked verified, it lists only
-`chefPass` and `spaTreatment` (simulated, then reverted; nothing committed).
+verified. Simulated with every licence marked verified, the production build
+completes (simulated, then reverted; nothing committed).
 
 ### Launch blockers
-1. **Footage licences and two clips (the only hard blocker).** Verify the
-   six built clips' licences, and supply the chef and spa clips (see "Stock
-   video" above; together these clear the guard). The alternative is
+1. **Footage licences (the only hard blocker).** Verify the licence of the
+   eight clips the site uses (see the launch-phase update above; that alone
+   clears the guard). The alternative is
    photographs for the remaining slots in
    `src/lib/photography.ts`, specified in `docs/photography-brief.md`. Still
    placeholders because the build environment's network policy refuses every
@@ -522,8 +565,9 @@ Every item below was actually run; nothing is reported that was not.
 - The git half was rehearsed on 21 October 2026 (see Verification).
 
 ### Needs the owner's decision
-- Supply the chef (19905887) and spa (6187887) clips; confirm the Pexels licence
-  of each clip used (or allow `www.pexels.com` here so a session can check).
+- Confirm the Pexels licence of each of the eight clips used (open each page
+  listed in `media/videos.json` in a browser), then tell Claude, or set
+  `licenceVerified: true` and replace `licence` with what the page states.
 - Approve the final preview, then explicitly approve the merge to `main`.
 - LinkedIn address (still empty). Pricing stays unpublished (§5).
 

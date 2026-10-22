@@ -174,5 +174,63 @@
       "fps": 25,
       "bytes": 18793488
     }
+  },
+  "chef": {
+    "mp4": "/video/stock/chef/chef-1080.mp4",
+    "webm": "/video/stock/chef/chef-1080.webm",
+    "mp4Mobile": "/video/stock/chef/chef-m720.mp4",
+    "webmMobile": "/video/stock/chef/chef-m720.webm",
+    "poster": "/video/stock/chef/chef-poster.jpg",
+    "posterMobile": "/video/stock/chef/chef-poster-m.jpg",
+    "width": 1920,
+    "height": 1080,
+    "mobileWidth": 720,
+    "mobileHeight": 960,
+    "duration": 7,
+    "loop": true,
+    "bytes": {
+      "mp4": 1687371,
+      "webm": 1002288,
+      "mp4Mobile": 527879,
+      "webmMobile": 411285,
+      "poster": 113656,
+      "posterMobile": 45271
+    },
+    "source": {
+      "file": "19905887-uhd_3840_2160_24fps.mp4",
+      "width": 3840,
+      "height": 2160,
+      "fps": 23.98,
+      "bytes": 20216232
+    }
+  },
+  "spa": {
+    "mp4": "/video/stock/spa/spa-1080.mp4",
+    "webm": "/video/stock/spa/spa-1080.webm",
+    "mp4Mobile": "/video/stock/spa/spa-m720.mp4",
+    "webmMobile": "/video/stock/spa/spa-m720.webm",
+    "poster": "/video/stock/spa/spa-poster.jpg",
+    "posterMobile": "/video/stock/spa/spa-poster-m.jpg",
+    "width": 1920,
+    "height": 1080,
+    "mobileWidth": 720,
+    "mobileHeight": 960,
+    "duration": 8,
+    "loop": true,
+    "bytes": {
+      "mp4": 1347515,
+      "webm": 723555,
+      "mp4Mobile": 518099,
+      "webmMobile": 435683,
+      "poster": 104485,
+      "posterMobile": 49240
+    },
+    "source": {
+      "file": "6187887-uhd_3840_2160_25fps.mp4",
+      "width": 3840,
+      "height": 2160,
+      "fps": 25,
+      "bytes": 16452630
+    }
   }
 }

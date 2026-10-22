@@ -60,7 +60,7 @@ export default function RestaurantsPage() {
       {slotHasMedia("chefPass") ? (
         <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
           <Photo slot="chefPass" fill motion sizes="100vw" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.78)_0%,rgba(6,10,18,0.84)_100%)] lg:bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
           <div className="relative mx-auto flex min-h-[70svh] max-w-8xl items-end px-6 pb-16 pt-28 md:min-h-[78vh] md:px-10 md:pb-24">
             <div className="max-w-[38rem]">
               <p className="mb-4 text-[15px] font-semibold text-brass-light">During dinner service</p>

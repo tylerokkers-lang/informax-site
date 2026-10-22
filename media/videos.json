@@ -13,7 +13,7 @@
     "mode": "pingpong",
     "notes": "Slow push-in, 12 s source, shot through a window. The left 32% of the frame carries third-party branding (gold 'RISTORANTE' and a script venue name on the glass, a crest on the table runner); `region` crops it away before any other crop (checked frame by frame at full resolution: no lettering remains; bottle labels behind are out of focus and unreadable). The 68% region is 2611 px wide, so the 1920 px output is still downscaled from the source.",
     "region": "0.32 0.08 0.68 0.68",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "Third-party venue branding in the left third of the source (gold 'RISTORANTE' and a script venue name on the window, a crest on the table runner). Removed by `region` (frame-by-frame check at full resolution). Bottle and packaging labels behind are out of focus and unreadable."
   },
   "diningTable": {
@@ -29,7 +29,7 @@
     "focusMobile": "65% 50%",
     "mode": "loop",
     "notes": "Static shot, shallow focus, blue dusk light. 21.8 s source.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "None legible: one oil bottle label, out of focus. No people."
   },
   "chef": {
@@ -37,15 +37,16 @@
     "page": "https://www.pexels.com/video/19905887/",
     "licence": "Pexels Licence (presumed from the file name; not yet verified)",
     "licenceVerified": false,
-    "alt": "A chef preparing a dish in a professional kitchen",
+    "alt": "A chef's hands finishing plated dishes along the pass in a professional kitchen",
     "usedFor": "Restaurant menu update story (the kitchen runs out)",
     "start": 0,
-    "duration": 8,
-    "focus": "50% 40%",
-    "focusMobile": "50% 40%",
-    "notes": "Not supplied yet (expected 19905887-uhd_3840_2160_24fps.mp4). Placeholder until it is.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. The file itself has not been supplied to this environment.",
-    "branding": "Not yet reviewed (file not supplied). Check for faces, logos on uniforms and readable signage before use."
+    "duration": 7,
+    "focus": "35% 50%",
+    "focusMobile": "30% 50%",
+    "notes": "Close shot of hands plating along the pass, 8.5 s source (played as 7 s plus the loop crossfade). Repetitive hand motion, so the crossfade loop is unobtrusive. Supplied as a .MOV (H.264 + AAC audio); the build drops the audio.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file was supplied by the owner on 22 Oct 2026 as a .MOV (Apple QuickTime export, original creation date 2024-01-18); it carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "branding": "None seen: no faces, no logos. A wristwatch is visible, brand not legible. Checked on the contact sheet; full-resolution check below.",
+    "mode": "loop"
   },
   "fineDining": {
     "file": "3769032-hd_1920_1080_25fps.mp4",
@@ -60,7 +61,7 @@
     "focusMobile": "50% 45%",
     "mode": "loop",
     "notes": "The cloche lifts and the smoke clears; the loop dissolves back to the start. 15.7 s source.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "No branding seen. A server's hands and torso, no face. Diners in the background are out of focus and unidentifiable."
   },
   "hotelBedroom": {
@@ -76,7 +77,7 @@
     "focusMobile": "35% 50%",
     "mode": "once",
     "notes": "Not a bedroom view: a door swings open onto the desk. Moves throughout its 7.7 s, so it plays once instead of looping; starts at 1.9 s so the poster shows the room, not the closed door. The desk's blue tent cards are not Informax products and are never presented as such.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "Two third-party tent cards on the desk (hotel information, small logo, a small code). In the published 1080p output they are illegible and the code is about 12 px, not scannable (checked at 3x magnification). Not presented as Informax products."
   },
   "bedside": {
@@ -92,7 +93,7 @@
     "focusMobile": "45% 50%",
     "mode": "pingpong",
     "notes": "Nearly static, 3.8 s source. No card in shot; the site draws its Code card over it.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "None. No card, no people."
   },
   "bathroom": {
@@ -108,7 +109,7 @@
     "focusMobile": "35% 45%",
     "mode": "pingpong",
     "notes": "Slow sideways move past a wooden screen, 6.3 s source.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "None. No people."
   },
   "spa": {
@@ -116,15 +117,16 @@
     "page": "https://www.pexels.com/video/6187887/",
     "licence": "Pexels Licence (presumed from the file name; not yet verified)",
     "licenceVerified": false,
-    "alt": "A calm spa treatment",
+    "alt": "A spa therapist giving a hand and arm massage to a client in a softly lit treatment room",
     "usedFor": "Spa promotions; Spa card in More possibilities",
     "start": 0,
     "duration": 8,
-    "focus": "50% 50%",
-    "focusMobile": "50% 50%",
-    "notes": "Not supplied yet (expected 6187887-uhd_3840_2160_25fps.mp4). Placeholder until it is.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. The file itself has not been supplied to this environment.",
-    "branding": "Not yet reviewed (file not supplied)."
+    "focus": "30% 50%",
+    "focusMobile": "25% 50%",
+    "notes": "Dim, warm treatment room: a therapist in a red uniform (face out of frame) massaging a client's arm; the client is seen from behind. 9.3 s source (8 s plus crossfade). Dark overall, so it needs no extra overlay behind white text.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file was supplied by the owner on 22 Oct 2026 as a .MOV (Apple QuickTime export, original creation date 2020-12-14); it carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "branding": "No logos or readable signage. No faces visible: the therapist is cropped at the neck and the client is shown from behind.",
+    "mode": "loop"
   },
   "smartphone": {
     "file": "6278838-uhd_3840_2160_30fps.mp4",
@@ -139,7 +141,7 @@
     "focusMobile": "50% 50%",
     "excluded": "The phone's screen is blank white (a mock-up clip). As a still it shows an empty phone beside the drawn phone with a genuine Informax Cloud capture; filling it would mean compositing an interface onto stock footage, which would not be a genuine screenshot. Its slot (the manager step) uses the fine-dining clip instead.",
     "notes": "Hand holding a phone in a cafe, 15.3 s source.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. Presumed Pexels Licence from the file name only.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. Presumed Pexels Licence from the file name only (the file carries no author or licence metadata).",
     "branding": "Blank-screen mock-up phone (the reason it is excluded). A hand, no face."
   },
   "staircase": {
@@ -155,7 +157,7 @@
     "focusMobile": "50% 50%",
     "excluded": "Portrait (2160x3840) and not tied to a use case: decorative motion that does not explain the product. Kept out to keep the site calm and fast.",
     "notes": "Not supplied; excluded in any case.",
-    "licenceCheck": "22 Oct 2026: not verifiable from this environment. The page, videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are all refused by the session's network policy (HTTP 403 at the proxy); web search (standard and extended, restricted to pexels.com) does not index the clip by its ID; the file carries no author or licence metadata. The file itself has not been supplied to this environment.",
+    "licenceCheck": "22 Oct 2026 (launch phase): NOT verified. www.pexels.com answers with a Cloudflare bot challenge (HTTP 403, cf-mitigated: challenge) that cannot complete here because challenges.cloudflare.com is refused by the network policy; videos.pexels.com, api.pexels.com, images.pexels.com and web.archive.org are refused at the proxy; web search does not index the clip by ID. The file has not been supplied; the clip is excluded.",
     "branding": "Not supplied; not reviewed."
   }
 }

@@ -7,6 +7,8 @@ import { chromium } from "playwright-core";
 
 const BASE = process.env.BASE ?? "http://localhost:3200";
 const PAGES = ["/", "/restaurants", "/hotels"];
+// Film sections below the hero that carry text (measured after scrolling them to the middle of the screen).
+const BANDS = { "/restaurants": ["#kitchen-h"] };
 const VIEWS = { desktop: { width: 1440, height: 900 }, tablet: { width: 834, height: 1112 }, phone: { width: 390, height: 844 } };
 let failures = 0;
 
@@ -16,8 +18,12 @@ const lab = await (await browser.newContext()).newPage(); // decodes screenshots
 for (const [view, viewport] of Object.entries(VIEWS)) {
   const ctx = await browser.newContext({ viewport, isMobile: view !== "desktop", deviceScaleFactor: 1 });
   const page = await ctx.newPage();
-  for (const path of PAGES) {
+  for (const [path, band] of PAGES.flatMap((p) => [[p, null], ...(BANDS[p] ?? []).map((b) => [p, b])])) {
     await page.goto(BASE + path, { waitUntil: "networkidle" });
+    if (band) {
+      await page.evaluate((sel) => document.querySelector(sel)?.scrollIntoView({ block: "center" }), band);
+      await page.waitForTimeout(600);
+    }
     // Measure the settled page: wait for entrance animations (finite ones) to finish first, or the text would be half
     // faded in and its boxes recorded mid-slide.
     await page.evaluate(() =>
@@ -30,10 +36,9 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
     // The text over the film: the hero's eyebrow, heading, paragraphs and pill labels, measured on the line boxes of
     // each element's own text (so a badge or chip inside a paragraph is judged on its own background). Text inside the
     // hero's cards (the phones and the story stage) is not over the film and is left out.
-    const items = await page.evaluate(() => {
-      const film = document.querySelector("[data-film]");
-      const hero = film?.closest("header,section");
-      if (!hero || hero.getBoundingClientRect().top > innerHeight) return null;
+    const items = await page.evaluate((band) => {
+      const hero = band ? document.querySelector(band)?.closest("section") : document.querySelector("[data-film]")?.closest("header,section");
+      if (!hero || (!band && hero.getBoundingClientRect().top > innerHeight)) return null;
       hero.setAttribute("data-contrast", "");
       const out = [];
       for (const e of hero.querySelectorAll("h1, h1 *, p, p *")) {
@@ -52,9 +57,9 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
         }
       }
       return out;
-    });
+    }, band);
     if (!items) {
-      console.log(`SKIP  ${view} ${path}: no film in the hero`);
+      console.log(`SKIP  ${view} ${path}${band ? " " + band : ""}: no film here`);
       continue;
     }
     await page.addStyleTag({ content: "[data-contrast] :is(h1, h1 *, p, p *) { color: transparent !important; text-shadow: none !important; }" });
@@ -110,7 +115,7 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
       const need = large ? 3 : 4.5;
       const pass = r >= need;
       if (!pass) failures++;
-      console.log(`${pass ? "PASS" : "FAIL"}  ${view} ${path}: ${r.toFixed(2)}:1 (needs ${need}) "${text}"`);
+      console.log(`${pass ? "PASS" : "FAIL"}  ${view} ${path}${band ? " " + band : ""}: ${r.toFixed(2)}:1 (needs ${need}) "${text}"`);
     }
   }
   await ctx.close();
