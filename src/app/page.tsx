@@ -33,7 +33,7 @@ export default function Home() {
             </h2>
             <p className="mx-auto mt-6 max-w-[42rem] text-[18px] leading-relaxed text-ink-soft">
               From restaurant menus to hotel directories, Informax puts permanent Codes where guests need information, and Informax
-              Cloud gives you one simple place to manage what they show. Update it once, and every connected Access Point stays up
+              Cloud gives you one simple place to manage what they show. Update it once, and every connected Scan Point stays up
               to date.
             </p>
           </Reveal>
@@ -62,7 +62,7 @@ export default function Home() {
               eyebrow="Informax Cloud · Coming soon"
               title="A first look at the platform."
               soft="Simple enough for any shift."
-              body="Informax is the guest information solution. Informax Cloud is the platform that powers it: every Access Point shows exactly what a guest sees right now, with the actions to change it directly underneath."
+              body="Informax is the guest information solution. Informax Cloud is the platform that powers it: every Scan Point shows exactly what a guest sees right now, with the actions to change it directly underneath."
             />
             <div className="shrink-0">
               <MoreLink href="/informax-cloud">Meet Informax Cloud</MoreLink>

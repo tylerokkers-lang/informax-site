@@ -6,14 +6,14 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Request a demo",
   description:
-    "Request a demonstration of Informax Cloud for your restaurant or hotel, or ask us anything about menus, guest information and Access Points.",
+    "Request a demonstration of Informax Cloud for your restaurant or hotel, or ask us anything about menus, guest information and Scan Points.",
   alternates: { canonical: "/enquire" },
 };
 
 const NEXT = [
   { n: "01", title: "A conversation", body: "We learn how your restaurant or hotel runs and what guests ask for most." },
   { n: "02", title: "A demonstration", body: "We show you Informax Cloud with your own menu or guest information." },
-  { n: "03", title: "A clear proposal", body: "Scoped to the Access Points and Codes you actually need." },
+  { n: "03", title: "A clear proposal", body: "Scoped to the Scan Points and Codes you actually need." },
 ];
 
 /** Links can preselect one interest (e.g. "Ask about Informax Cloud"). Only these values are accepted. */

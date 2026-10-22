@@ -37,7 +37,7 @@ const MOMENTS: { label: string; place: string; line: string; chip: string; photo
 ];
 
 /**
- * The hotel experience: one hotel, three Access Points, each showing real
+ * The hotel experience: one hotel, three Scan Points, each showing real
  * guest content that the hotel can change without replacing the card.
  */
 export default function HotelShowcase({ as = "section", heading = "h2" }: { as?: "section" | "header"; heading?: "h1" | "h2" }) {

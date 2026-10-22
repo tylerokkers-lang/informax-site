@@ -2,7 +2,7 @@ import Image from "next/image";
 import { QR_PATH, QR_VIEWBOX } from "@/components/cloud/qr-path";
 
 /**
- * The Informax Access Point: one consistent physical object in a small set
+ * The Informax Scan Point: one consistent physical object in a small set
  * of approved colourways. The structure never changes (mark at the top, the
  * code in the centre, the place at the foot); only the finish does.
  *
@@ -11,7 +11,7 @@ import { QR_PATH, QR_VIEWBOX } from "@/components/cloud/qr-path";
  * illustrative, not the production Code system, and the centre mark stays
  * Informax's: colourways change the finish, never the mark. The public site never names the
  * technology behind it, so the object stays flexible: a future
- * Touch-enabled Access Point keeps the same face.
+ * Touch-enabled Scan Point keeps the same face.
  */
 
 export type Colourway = "navy" | "platinum" | "stone" | "graphite";
@@ -72,7 +72,7 @@ export default function AccessPoint({
   return (
     <div
       role="img"
-      aria-label={`Informax Access Point for ${place}`}
+      aria-label={`Informax Scan Point for ${place}`}
       className={`relative flex aspect-[3/4] shrink-0 flex-col ${s.plate} ${f.plate} ${f.edge} ${className}`}
     >
       <Image src="/brand/informax-logo-white-trim.png" alt="" width={746} height={224} className={`w-auto self-start ${s.logo} ${f.logo}`} />

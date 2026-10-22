@@ -177,7 +177,7 @@ export default function SeeItInAction({ initial = "restaurant", id = "see-it-in-
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="relative mx-auto w-full max-w-[340px]" aria-live="polite">
               <p className="mb-3 text-center text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mute">
-                {current.visual.kind === "phone" ? current.visual.who : current.visual.kind === "scene" ? current.visual.label : "At the Access Point"}
+                {current.visual.kind === "phone" ? current.visual.who : current.visual.kind === "scene" ? current.visual.label : "At the Scan Point"}
               </p>
               {current.visual.kind === "phone" ? (
                 <Phone key={`${industry}-${step}`} screens={[current.visual.screen]} highlight={current.visual.highlight} tone="light" className="ixp-enter-fade" sizes="340px" />

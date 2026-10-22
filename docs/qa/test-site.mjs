@@ -120,7 +120,7 @@ await page.goto(BASE + "/restaurants", { waitUntil: "networkidle" });
 ok(await page.getByText("Same Code. Not reprinted.").isVisible(), "restaurants before/after shows the unchanged Code");
 ok(await page.getByText("Editing individual dishes inside Informax Cloud is not available today", { exact: false }).isVisible(), "restaurants page says dish editing is not available");
 await page.goto(BASE + "/hotels", { waitUntil: "networkidle" });
-for (const t of ["Digital hotel directory", "Spa Access Points", "Restaurant information", "Room upgrade opportunities", "Check room or treatment availability", "Take bookings or payments"]) {
+for (const t of ["Digital hotel directory", "Spa Scan Points", "Restaurant information", "Room upgrade opportunities", "Check room or treatment availability", "Take bookings or payments"]) {
   ok(await page.getByText(t, { exact: true }).first().isVisible(), `hotels shows "${t}"`);
 }
 // 8b. Informax Cloud page: Coming Soon, the in-development message and the informax.cloud link.
@@ -137,7 +137,7 @@ ok((await page.getByRole("link", { name: "Ask about Informax Cloud" }).first().g
 ok(await page.getByText("Already an Informax customer?", { exact: false }).isVisible(), "existing customers are told their account keeps working");
 for (const t of ["How it will work", "What it will offer"]) ok((await page.getByText(t, { exact: true }).count()) >= 1, `Cloud page has "${t}"`);
 ok(!(await page.getByText(/sign up|register|free trial|countdown|launch date/i).count()), "no sign-up, registration, trial, countdown or launch-date wording");
-for (const t of ["Your property", "Your spaces", "Your Access Points", "Your content"]) ok(await page.getByRole("heading", { name: t, exact: true }).isVisible(), `structure shows "${t}"`);
+for (const t of ["Your property", "Your spaces", "Your Scan Points", "Your content"]) ok(await page.getByRole("heading", { name: t, exact: true }).isVisible(), `structure shows "${t}"`);
 ok((await page.getByText("Built, still in testing").count()) >= 1 && (await page.getByText("Working in the development build").count()) >= 1, "feature status labels shown");
 ok(!(await page.getByText(/\bBlock\b/).count()), "no Block layer mentioned");
 for (const p of ["/", "/restaurants", "/hotels"]) {

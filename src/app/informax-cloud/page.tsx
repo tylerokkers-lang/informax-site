@@ -42,13 +42,13 @@ const STATUS: Record<Status, string> = {
 const LEVELS = [
   { name: "Your property", body: "The hotel or restaurant using Informax.", example: "Marlowe Grand Hotel" },
   { name: "Your spaces", body: "An area such as Bedrooms, Spa or Main Restaurant.", example: "Bedrooms" },
-  { name: "Your Access Points", body: "A permanent Code placed where guests need information.", example: "Coffee Table" },
+  { name: "Your Scan Points", body: "A permanent Code placed where guests need information.", example: "Coffee Table" },
   { name: "Your content", body: "The digital information guests see when they access that Code.", example: "Guest Directory.pdf" },
 ];
 
 const WORK = [
   { title: "Your property is set up", body: "Your hotel or restaurant, and its Spaces such as Bedrooms, Spa or Main Restaurant." },
-  { title: "Codes go where guests need them", body: "Each Access Point gets one permanent Code, printed as often as you like." },
+  { title: "Codes go where guests need them", body: "Each Scan Point gets one permanent Code, printed as often as you like." },
   { title: "Your team keeps it current", body: "Change what a Code opens in Informax Cloud. Every printed copy shows the update." },
 ];
 
@@ -56,7 +56,7 @@ const FEATURES: { title: string; soft: string; body: string; screen: ScreenKey; 
   {
     title: "One place",
     soft: "to manage everything.",
-    body: "Manage the guest-facing information across your whole property from one place. Every Access Point opens on what a guest sees right now.",
+    body: "Manage the guest-facing information across your whole property from one place. Every Scan Point opens on what a guest sees right now.",
     screen: "deskMenuBefore",
     status: "built",
     points: ["What guests see, at a glance", "Your usual content or something temporary, clearly marked", "From a computer or your phone"],
@@ -64,7 +64,7 @@ const FEATURES: { title: string; soft: string; body: string; screen: ScreenKey; 
   {
     title: "Update once.",
     soft: "Change everywhere.",
-    body: "Replace the content behind a shared Access Point and every printed copy of its Code shows the new version. Upload a PDF, or point the Code at your own website.",
+    body: "Replace the content behind a shared Scan Point and every printed copy of its Code shows the new version. Upload a PDF, or point the Code at your own website.",
     screen: "deskMenuReplace",
     status: "built",
     points: ["One Code, printed as often as you need", "PDF or website", "Nothing to reprint"],
@@ -80,22 +80,22 @@ const FEATURES: { title: string; soft: string; body: string; screen: ScreenKey; 
   {
     title: "Organise",
     soft: "your property.",
-    body: "Arrange your Spaces and the Access Points inside them in a structure that matches your building, and see at a glance what is live and what is temporary.",
+    body: "Arrange your Spaces and the Scan Points inside them in a structure that matches your building, and see at a glance what is live and what is temporary.",
     screen: "deskBedrooms",
     status: "built",
-    points: ["Spaces such as Bedrooms, Spa or Main Restaurant", "Access Points inside each Space", "Live, temporary or not set up, at a glance"],
+    points: ["Spaces such as Bedrooms, Spa or Main Restaurant", "Scan Points inside each Space", "Live, temporary or not set up, at a glance"],
   },
   {
-    title: "Manage many Access Points",
+    title: "Manage many Scan Points",
     soft: "together.",
-    body: "Choose a type of Access Point, such as every Bathroom, check the list, then publish one PDF or website to all of them, with the option to undo the whole update.",
+    body: "Choose a type of Scan Point, such as every Bathroom, check the list, then publish one PDF or website to all of them, with the option to undo the whole update.",
     screen: "deskBulk",
     status: "testing",
     points: ["By type or by Space", "Check the list before publishing", "Undo a whole update"],
   },
   {
     title: "Version history",
-    soft: "for every Access Point.",
+    soft: "for every Scan Point.",
     body: "Each change creates a new version. Earlier versions are kept, so you can review them and restore one when you need it.",
     screen: "deskMenuPublished",
     status: "built",
@@ -129,7 +129,7 @@ export default function InformaxCloudPage() {
               Meet Informax Cloud.
             </h1>
             <p className="mx-auto mt-5 max-w-[30ch] text-balance font-serif-display text-[clamp(22px,2.6vw,32px)] leading-snug text-cream-mute">
-              One platform. Every Access Point. Always up to date.
+              One platform. Every Scan Point. Always up to date.
             </p>
             <p className="mx-auto mt-7 max-w-[42rem] text-[18px] leading-relaxed text-white/75">
               Informax Cloud gives hotels and restaurants one simple place to manage the digital information their guests see.
@@ -173,7 +173,7 @@ export default function InformaxCloudPage() {
               <AccessPoint place="Table 12" sub="Menu" size="md" />
               <h3 className="mt-6 font-serif-display text-[24px] text-ink">Informax</h3>
               <p className="mt-2 max-w-[24rem] text-[15.5px] leading-relaxed text-ink-soft">
-                Permanent Codes at the Access Points around your property, where guests need information.
+                Permanent Codes at the Scan Points around your property, where guests need information.
               </p>
             </Reveal>
             <div className="hidden items-center justify-center text-ink-mute md:flex" aria-hidden>
@@ -204,7 +204,7 @@ export default function InformaxCloudPage() {
         </div>
       </section>
 
-      {/* Property, Spaces, Access Points, Content. */}
+      {/* Property, Spaces, Scan Points, Content. */}
       <section className="bg-paper-alt py-24 md:py-32" aria-labelledby="structure-h">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Heading
@@ -213,7 +213,7 @@ export default function InformaxCloudPage() {
             title="Your property, in four simple layers."
             body="Everything in Informax Cloud follows the shape of your building, so it is easy to find what guests see in any room."
           />
-          <ol className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Your property, your spaces, your Access Points, your content">
+          <ol className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Your property, your spaces, your Scan Points, your content">
             {LEVELS.map((l, i) => (
               <li key={l.name} className="relative flex flex-col rounded-[22px] bg-white p-6 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
                 <span className="text-[13px] font-semibold text-brass-deep">{i + 1}</span>
@@ -234,7 +234,7 @@ export default function InformaxCloudPage() {
             <Browser screen="deskSpaces" className="mx-auto max-w-[1000px]" />
           </Reveal>
           <div className="mx-auto mt-5 max-w-[1000px]">
-            <PreviewNote>The Spaces of a hotel and the Access Points in each, as they appear in the development build. Fictional hotel.</PreviewNote>
+            <PreviewNote>The Spaces of a hotel and the Scan Points in each, as they appear in the development build. Fictional hotel.</PreviewNote>
           </div>
         </div>
       </section>
