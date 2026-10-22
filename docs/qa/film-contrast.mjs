@@ -18,6 +18,15 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
   const page = await ctx.newPage();
   for (const path of PAGES) {
     await page.goto(BASE + path, { waitUntil: "networkidle" });
+    // Measure the settled page: wait for entrance animations (finite ones) to finish first, or the text would be half
+    // faded in and its boxes recorded mid-slide.
+    await page.evaluate(() =>
+      Promise.race([
+        Promise.all(document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations !== Infinity).map((a) => a.finished.catch(() => undefined))),
+        new Promise((r) => setTimeout(r, 4000)),
+      ]),
+    );
+    // Hide the text by selector, not per element: story captions remount as they change.
     // The text over the film: the hero's eyebrow, heading, paragraphs and pill labels, measured on the line boxes of
     // each element's own text (so a badge or chip inside a paragraph is judged on its own background). Text inside the
     // hero's cards (the phones and the story stage) is not over the film and is left out.
@@ -37,7 +46,7 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
           const range = document.createRange();
           range.selectNodeContents(n);
           for (const r of range.getClientRects()) {
-            if (r.width < 4 || r.top > innerHeight || r.bottom < 0) continue;
+            if (r.width < 4 || r.top < 0 || r.bottom > innerHeight) continue; // lines fully on screen only
             out.push({ text: n.textContent.trim().slice(0, 36), color: cs.color, large, box: [r.left, r.top, r.width, r.height].map(Math.round) });
           }
         }
@@ -48,7 +57,6 @@ for (const [view, viewport] of Object.entries(VIEWS)) {
       console.log(`SKIP  ${view} ${path}: no film in the hero`);
       continue;
     }
-    // Hide the text by selector, not per element: story captions remount as they change.
     await page.addStyleTag({ content: "[data-contrast] :is(h1, h1 *, p, p *) { color: transparent !important; text-shadow: none !important; }" });
     const worst = new Map();
     for (const wait of [800, 2500, 2500]) {

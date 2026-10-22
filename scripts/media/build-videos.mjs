@@ -88,7 +88,7 @@ for (const [key, slot] of Object.entries(slots)) {
   if (review) {
     mkdirSync(REVIEW, { recursive: true });
     const step = info.duration / 12;
-    ffmpeg(["-i", src, "-vf", `fps=1/${step.toFixed(3)},scale=480:-2,tile=4x3:padding=4:color=white`, "-frames:v", "1", join(REVIEW, `${key}.jpg`)]);
+    ffmpeg(["-i", src, "-vf", `${slot.region ? `crop=iw*${slot.region.split(/\s+/)[2]}:ih*${slot.region.split(/\s+/)[3]}:iw*${slot.region.split(/\s+/)[0]}:ih*${slot.region.split(/\s+/)[1]},` : ""}fps=1/${step.toFixed(3)},scale=480:-2,tile=4x3:padding=4:color=white`, "-frames:v", "1", join(REVIEW, `${key}.jpg`)]);
     console.log(`review ${key}: ${info.width}x${info.height} ${info.fps.toFixed(2)}fps ${info.duration.toFixed(1)}s -> media/review/${key}.jpg`);
     continue;
   }
@@ -102,16 +102,20 @@ for (const [key, slot] of Object.entries(slots)) {
   rmSync(dir, { recursive: true, force: true });
   mkdirSync(dir, { recursive: true });
 
+  // Optional `region` ("x y w h", fractions of the source): cut away part of the frame first, e.g. third-party
+  // branding at one edge. Both the desktop and phone versions are taken from inside it.
+  const region = slot.region ? slot.region.split(/\s+/).map(Number) : null;
+  const pre = region ? `crop=iw*${region[2]}:ih*${region[3]}:iw*${region[0]}:ih*${region[1]},` : "";
   // Desktop: 16:9 crop around the focus point if needed, then at most 1920 wide.
   const [fx, fy] = focusOf(slot.focus);
   const cw = `min(iw\\,ih*16/9)`;
   const ch = `min(ih\\,iw*9/16)`;
-  const desk = `crop=${cw}:${ch}:(iw-${cw})*${fx}:(ih-${ch})*${fy},scale='min(${DESKTOP_WIDTH},iw)':-2:flags=lanczos,format=yuv420p`;
+  const desk = `${pre}crop=${cw}:${ch}:(iw-${cw})*${fx}:(ih-${ch})*${fy},scale='min(${DESKTOP_WIDTH},iw)':-2:flags=lanczos,format=yuv420p`;
   // Phone: 3:4 portrait crop around the (mobile) focus point.
   const [mx, my] = focusOf(slot.focusMobile || slot.focus);
   const mw = `min(iw\\,ih*3/4)`;
   const mh = `min(ih\\,iw*4/3)`;
-  const mob = `crop=${mw}:${mh}:(iw-${mw})*${mx}:(ih-${mh})*${my},scale=${MOBILE.width}:${MOBILE.height}:flags=lanczos,format=yuv420p`;
+  const mob = `${pre}crop=${mw}:${mh}:(iw-${mw})*${mx}:(ih-${mh})*${my},scale=${MOBILE.width}:${MOBILE.height}:flags=lanczos,format=yuv420p`;
 
   const outs = {
     mp4: join(dir, `${key}-1080.mp4`),
@@ -123,13 +127,14 @@ for (const [key, slot] of Object.entries(slots)) {
     // A film that plays once ends on its strongest frame: stills elsewhere on the site use that.
     ...(mode === "once" ? { still: join(dir, `${key}-still.jpg`) } : {}),
   };
-  const h264 = (crf, maxrate) => ["-an", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-crf", String(crf), "-maxrate", maxrate, "-bufsize", `${parseFloat(maxrate) * 2}M`, "-movflags", "+faststart", "-pix_fmt", "yuv420p"];
+  // Level pinned (4.1 for 1080p, 3.1 for the phone crop) so older iPhones and hardware decoders accept it; avc1 tag for Safari.
+  const h264 = (crf, maxrate, level) => ["-an", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-level:v", level, "-tag:v", "avc1", "-crf", String(crf), "-maxrate", maxrate, "-bufsize", `${parseFloat(maxrate) * 2}M`, "-movflags", "+faststart", "-pix_fmt", "yuv420p"];
   // Constrained quality: CRF sets the quality, -b:v caps the bitrate so a busy clip cannot balloon.
   const vp9 = (crf, cap) => ["-an", "-c:v", "libvpx-vp9", "-crf", String(crf), "-b:v", cap, "-deadline", "good", "-cpu-used", "2", "-row-mt", "1", "-pix_fmt", "yuv420p"];
 
-  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, desk), "-map", "[v]", ...h264(24, "3M"), outs.mp4]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, desk), "-map", "[v]", ...h264(24, "3M", "4.1"), outs.mp4]);
   ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, desk), "-map", "[v]", ...vp9(35, "2.5M"), outs.webm]);
-  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, mob), "-map", "[v]", ...h264(26, "1.2M"), outs.mp4Mobile]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, mob), "-map", "[v]", ...h264(26, "1.2M", "3.1"), outs.mp4Mobile]);
   ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, mob), "-map", "[v]", ...vp9(37, "1M"), outs.webmMobile]);
   // Posters are the exact first frames, so the swap from poster to film never jumps.
   ffmpeg(["-i", outs.mp4, "-frames:v", "1", "-q:v", "3", outs.poster]);

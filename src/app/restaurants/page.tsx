@@ -13,7 +13,7 @@ import { slotHasMedia } from "@/lib/photography";
 export const metadata: Metadata = {
   title: "Restaurants: change your menu without reprinting",
   description:
-    "Sold out of a dish? New special tonight? With Informax Cloud (coming soon) you replace your menu from your phone and every table's Code shows the latest version. No app for guests, no reprinting.",
+    "Sold out of a dish? With Informax Cloud (coming soon) you replace your menu from your phone and every table's Code shows the new one. No app, no reprinting.",
   alternates: { canonical: "/restaurants" },
 };
 

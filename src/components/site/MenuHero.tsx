@@ -7,7 +7,7 @@ import Photo from "@/components/site/Photo";
 import { Phone, type Highlight } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
 import { ComingSoonBadge } from "@/components/site/ComingSoon";
-import { drawCodeOver, slotVideo, type PhotoKey } from "@/lib/photography";
+import { drawCodeOver, slotOr, slotVideo, type PhotoKey } from "@/lib/photography";
 
 /** Where the first main dish sits on the guest's menu (fractions of the screen height, measured from the captures). */
 const DISH = { top: 0.428, height: 0.043 };
@@ -18,13 +18,14 @@ const STEPS: { label: string; line: string; detail: string; chip: string; photo:
     line: "The menu needs to change.",
     detail: "The restaurant runs out of sea bass during dinner service, but it is still on the menu every guest opens.",
     chip: "Sea bass: sold out tonight",
-    photo: "chefPass",
+    // The kitchen film once it is supplied; the dining room meanwhile.
+    photo: slotOr("chefPass", "restaurantRoom"),
     dish: { ...DISH, tone: "warn" },
   },
   {
     label: "The menu changes",
     line: "Make the change in seconds.",
-    detail: "The manager opens Informax Cloud and replaces the menu PDF with an updated version featuring roast hake.",
+    detail: "The chef chooses roast Cornish hake instead. A manager opens Informax Cloud and replaces the menu PDF with the updated one.",
     chip: "Replace menu · updated PDF",
     photo: "hospitalityTeam",
     dish: null,
@@ -58,7 +59,7 @@ export default function MenuHero() {
         <>
           <Photo slot="restaurantRoom" fill motion priority label={false} />
           <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.94)_0%,rgba(6,10,18,0.82)_45%,rgba(6,10,18,0.7)_100%)] md:bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_50%,rgba(6,10,18,0.55)_100%)]"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.94)_0%,rgba(6,10,18,0.82)_45%,rgba(6,10,18,0.7)_100%)] md:bg-[linear-gradient(90deg,rgba(6,10,18,0.94)_0%,rgba(6,10,18,0.9)_40%,rgba(6,10,18,0.72)_62%,rgba(6,10,18,0.62)_100%)]"
             aria-hidden
           />
           <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(0deg,#060a12,transparent)]" aria-hidden />
@@ -135,14 +136,23 @@ export default function MenuHero() {
             ) : null}
           </div>
 
-          <div className="mt-5 min-h-[5.5em] sm:min-h-[4.4em]" aria-live="polite">
-            <p key={step} className="ixp-enter mb-2 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-3 py-1.5 text-[13px] font-semibold text-white">
-              <span className={`h-2 w-2 rounded-full ${step === 0 ? "bg-amber-400" : step === 1 ? "bg-brass-light" : "bg-emerald-400"}`} aria-hidden />
-              {current.chip}
-            </p>
-            <p className="text-[15.5px] leading-snug text-white/85">
-              <strong className="font-semibold text-white">{current.line}</strong> {current.detail}
-            </p>
+          {/* Every caption sits in the same grid cell, so the block is always as tall as the longest one and the
+              headline beside it never moves as the story advances. Only the current one is visible (and announced). */}
+          <div className="mt-5 grid" aria-live="polite">
+            {STEPS.map((s, i) => (
+              <div key={s.label} className={`[grid-area:1/1] ${i === step ? "" : "invisible"}`} aria-hidden={i !== step}>
+                <p
+                  key={i === step ? `on-${step}` : "off"}
+                  className={`${i === step ? "ixp-enter" : ""} mb-2 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-3 py-1.5 text-[13px] font-semibold text-white`}
+                >
+                  <span className={`h-2 w-2 rounded-full ${i === 0 ? "bg-amber-400" : i === 1 ? "bg-brass-light" : "bg-emerald-400"}`} aria-hidden />
+                  {s.chip}
+                </p>
+                <p className="text-[15.5px] leading-snug text-white/85">
+                  <strong className="font-semibold text-white">{s.line}</strong> {s.detail}
+                </p>
+              </div>
+            ))}
           </div>
 
           <ol className="mt-4 grid grid-cols-3 gap-2 sm:gap-3" aria-label="How the menu update works">

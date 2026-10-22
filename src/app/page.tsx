@@ -9,7 +9,7 @@ import { Reveal } from "@/components/Reveal";
 export const metadata: Metadata = {
   title: { absolute: "Informax | Update your menus and guest information without reprinting" },
   description:
-    "Informax connects permanent Codes in restaurants and hotels to digital information your team can update without reprinting. Informax Cloud, the platform behind it, is coming soon.",
+    "Permanent Codes in restaurants and hotels, linked to information your team can update without reprinting. Informax Cloud, the platform behind it, is coming soon.",
   alternates: { canonical: "/" },
 };
 

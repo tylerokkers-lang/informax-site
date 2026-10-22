@@ -41,8 +41,14 @@ export type VideoSlot = {
   /** CSS object-position: keep the subject visible when the frame is cropped (desktop, then phone). */
   focus: string;
   focusMobile?: string;
+  /** "x y w h" fractions of the source frame to keep before any other crop (e.g. to cut away third-party branding). */
+  region?: string;
   /** "loop" (crossfade, default), "pingpong" (forward then reverse) or "once" (plays once, holds the last frame). */
   mode?: "loop" | "pingpong" | "once";
+  /** What was done to verify the licence, and when. */
+  licenceCheck?: string;
+  /** Third-party branding, people or signage in the footage, and how it is handled. */
+  branding?: string;
   /** What the footage actually shows, and anything to watch for. */
   notes?: string;
   /** Excluded slots are documented but not built or shown. */

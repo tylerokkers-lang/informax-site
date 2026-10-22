@@ -55,6 +55,36 @@ for (const path of PAGES) {
     ok(r.status() === 200 && /video\//.test(r.headers()["content-type"] ?? ""), `${path}: ${s} -> ${r.status()} ${r.headers()["content-type"]}`);
   }
 
+  // Each file plays on its own, so the MP4 fallback (Safari without VP9) is proven, not just present.
+  for (const src of new Set(srcs)) {
+    const r = await page.evaluate(async (u) => {
+      const v = document.createElement("video");
+      // Playwright's Chromium is built without H.264; real Chrome, Safari and Edge have it. Say so rather than fail.
+      const type = u.endsWith(".mp4") ? 'video/mp4; codecs="avc1.640029"' : 'video/webm; codecs="vp9"';
+      if (!v.canPlayType(type)) return { skip: `this browser cannot play ${type}; check the file with ffmpeg instead` };
+      v.muted = true;
+      v.playsInline = true;
+      v.src = u;
+      try {
+        await v.play();
+      } catch (e) {
+        return { ok: false, why: String(e) };
+      }
+      const t0 = v.currentTime;
+      await new Promise((r) => setTimeout(r, 700));
+      const res = { ok: v.currentTime > t0, w: v.videoWidth, h: v.videoHeight, d: v.duration };
+      v.pause();
+      v.removeAttribute("src");
+      v.load();
+      return res;
+    }, src);
+    if (r.skip) {
+      console.log(`SKIP  ${path}: ${src}: ${r.skip}`);
+      continue;
+    }
+    ok(r.ok, `${path}: ${src} plays on its own (${r.w}x${r.h}, ${r.d?.toFixed?.(2)} s${r.why ? ", " + r.why : ""})`);
+  }
+
   // Plays when visible; never more than one playing at a time.
   let maxPlaying = 0;
   let sawPlay = false;

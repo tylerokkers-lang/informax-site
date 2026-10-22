@@ -17,7 +17,12 @@ function arbitrate() {
   for (const [v, ratio] of players) if (ratio > best) [leader, best] = [v, ratio];
   for (const v of players.keys()) {
     if (v === leader) {
-      if (v.paused && !v.ended) v.play().catch(() => undefined); // a film that plays once stays on its last frame
+      if (v.paused && !v.ended) {
+        // iOS only autoplays a muted film; React sets `muted` as a property, so make sure of it before play().
+        v.muted = true;
+        v.defaultMuted = true;
+        v.play().catch(() => undefined); // a film that plays once stays on its last frame (not restarted)
+      }
     } else if (!v.paused) v.pause();
   }
 }
@@ -51,7 +56,8 @@ export default function CinematicVideo({
   alt: string;
   /** Desktop object-position of the subject. Phone files are already cropped around their own focus, so they stay centred. */
   focus?: string;
-  /** Above the fold: load the poster eagerly (at normal priority, so it never delays the page's main image). */
+  /** Above the fold: load the poster eagerly, at normal priority. A full-bleed poster is never the largest contentful
+   * paint (Chrome treats viewport-filling images as background), so high priority would only slow the real one. */
   priority?: boolean;
   className?: string;
 }) {

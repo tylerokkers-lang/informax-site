@@ -5,44 +5,45 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
 import { Phone, type Highlight } from "@/components/site/Devices";
-import { drawCodeOver, type PhotoKey } from "@/lib/photography";
+import { drawCodeOver, slotOr, type PhotoKey } from "@/lib/photography";
 import type { ScreenKey } from "@/lib/screens";
 
 type Visual =
   | { kind: "phone"; screen: ScreenKey; who: "Guest’s phone" | "Your phone · Informax Cloud"; highlight?: Highlight }
-  | { kind: "code"; place: string; sub: string; photo: PhotoKey; note: string };
+  | { kind: "code"; place: string; sub: string; photo: PhotoKey; note: string }
+  | { kind: "scene"; label: string; photo: PhotoKey; note: string };
 
 type Step = { title: string; body: string; visual: Visual };
 
 const STORIES: Record<"restaurant" | "hotel", { label: string; intro: string; steps: Step[] }> = {
   restaurant: {
     label: "Restaurant",
-    intro: "The kitchen runs out of sea bass halfway through service. Here is the whole change, start to finish.",
+    intro: "The kitchen runs out of sea bass halfway through dinner service. Here is the whole change, start to finish.",
     steps: [
       {
-        title: "A guest opens tonight’s menu",
-        body: "They scan the Code on their table and the menu opens straight away, with no app and no account. Sea bass is on it.",
+        title: "The kitchen runs out",
+        body: "There is no more sea bass tonight, but it is still on the menu every guest opens when they scan the Code on their table.",
         visual: { kind: "phone", screen: "guestMenuBefore", who: "Guest’s phone", highlight: { top: 0.428, height: 0.043, tone: "warn" } },
       },
       {
-        title: "The chef runs out. You replace the menu",
-        body: "The kitchen has no more sea bass. A manager opens the Restaurant Menu in Informax Cloud, taps Replace menu and picks the updated PDF.",
+        title: "The chef chooses an alternative",
+        body: "Roast Cornish hake will take its place. The restaurant updates its menu PDF the way it always does.",
+        visual: { kind: "scene", label: "In the restaurant", photo: slotOr("chefPass", "signatureDish"), note: "Tonight: roast Cornish hake" },
+      },
+      {
+        title: "A manager updates the menu in Informax Cloud",
+        body: "From a phone: open the Restaurant Menu, tap Replace menu and pick the new PDF. Informax Cloud confirms it is live, and the earlier menu stays in the history.",
         visual: { kind: "phone", screen: "cloudMenuReplace", who: "Your phone · Informax Cloud" },
       },
       {
-        title: "Informax Cloud confirms it",
-        body: "“Published. It is live now.” The earlier menu stays in the version history, ready to restore.",
-        visual: { kind: "phone", screen: "cloudMenuPublished", who: "Your phone · Informax Cloud" },
-      },
-      {
-        title: "The same Code, on every table",
-        body: "Nothing is reprinted. The next guest who scans, or anyone who refreshes an open menu, gets the new version.",
-        visual: { kind: "code", place: "Table 12", sub: "Menu", photo: "restaurantTable", note: "Same printed Code. Nothing to replace." },
-      },
-      {
-        title: "Guests see the latest menu",
-        body: "Roast Cornish hake is on the menu, marked for tonight. Sea bass is gone.",
+        title: "Every table has the new menu",
+        body: "Every Code for the Restaurant Menu now opens it. The next guest who scans, or anyone who refreshes an open menu, sees roast Cornish hake.",
         visual: { kind: "phone", screen: "guestMenuAfter", who: "Guest’s phone", highlight: { top: 0.428, height: 0.043, tone: "ok" } },
+      },
+      {
+        title: "No new Codes to print",
+        body: "The printed Codes stay exactly where they are. Nothing is reprinted, replaced or collected from the tables.",
+        visual: { kind: "code", place: "Table 12", sub: "Menu", photo: "restaurantTable", note: "Same printed Code. Nothing to replace." },
       },
     ],
   },
@@ -176,10 +177,17 @@ export default function SeeItInAction({ initial = "restaurant", id = "see-it-in-
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="relative mx-auto w-full max-w-[340px]" aria-live="polite">
               <p className="mb-3 text-center text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mute">
-                {current.visual.kind === "phone" ? current.visual.who : "At the Access Point"}
+                {current.visual.kind === "phone" ? current.visual.who : current.visual.kind === "scene" ? current.visual.label : "At the Access Point"}
               </p>
               {current.visual.kind === "phone" ? (
                 <Phone key={`${industry}-${step}`} screens={[current.visual.screen]} highlight={current.visual.highlight} tone="light" className="ixp-enter-fade" sizes="340px" />
+              ) : current.visual.kind === "scene" ? (
+                <div key={`${industry}-${step}`} className="ixp-enter-fade relative aspect-[390/844] overflow-hidden rounded-[28px]">
+                  <Photo slot={current.visual.photo} fill sizes="340px" />
+                  <div className="absolute inset-x-0 bottom-0 flex justify-center bg-[linear-gradient(0deg,rgba(6,10,18,0.55),transparent)] px-4 pb-8 pt-24">
+                    <p className="rounded-full bg-white/92 px-4 py-2 text-[13px] font-semibold text-ink shadow-lg">{current.visual.note}</p>
+                  </div>
+                </div>
               ) : (
                 <div key={`${industry}-${step}`} className="ixp-enter-fade relative aspect-[390/844] overflow-hidden rounded-[28px]">
                   <Photo slot={current.visual.photo} fill sizes="340px" />

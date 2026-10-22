@@ -58,8 +58,10 @@ Tune per clip in `media/videos.json`: `start` (seconds into the source),
 `duration` (loop length), `mode` ("loop": 1 s crossfade, the default;
 "pingpong": forward then reverse, for slow camera moves; "once": plays once
 and holds, and stills use its last frame), `focus` / `focusMobile` (CSS
-object-position of the subject, used for the crops and on the page), `alt`,
-`notes` and `excluded` (with a reason).
+object-position of the subject, used for the crops and on the page), `region`
+("x y w h" fractions of the source to keep before any other crop, e.g. to cut
+away third-party branding; restaurantInterior uses it), `alt`,
+`notes`, `branding`, `licenceCheck` and `excluded` (with a reason).
 
 After building, run the QA in `docs/qa/` (video-checks and film-contrast in
 particular: a new clip can make hero text unreadable).

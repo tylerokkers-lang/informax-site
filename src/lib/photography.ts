@@ -47,7 +47,7 @@ export const PHOTOS = {
     video: "restaurantInterior",
     width: 2400,
     height: 1600,
-    alt: "A candle-lit restaurant table in the evening, seen through the window",
+    alt: "A restaurant table set for the evening, with a lamp, glasses and plates",
     brief: "Contemporary fine-dining room at dusk, warm light, tables laid",
     tone: "candle",
   },
@@ -147,6 +147,12 @@ export const slotVideo = (k: PhotoKey) => {
 
 /** Whether a slot has anything real to show yet (a photograph or a built clip). For scenes that exist only for their footage. */
 export const slotHasMedia = (k: PhotoKey) => Boolean((PHOTOS[k] as PhotoSlot).src) || Boolean(slotVideo(k));
+
+/**
+ * A slot, or a stand-in while the slot's own footage is still to come. Only for scenes where the stand-in
+ * honestly illustrates the same moment; the production guard still requires the slot itself (PENDING_SLOTS).
+ */
+export const slotOr = (k: PhotoKey, standIn: PhotoKey): PhotoKey => (slotHasMedia(k) ? k : standIn);
 
 /** Whether to draw a Code card over this photograph (not when the photograph already shows a real one). */
 export const drawCodeOver = (k: PhotoKey) => !(PHOTOS[k] as PhotoSlot).showsAccessPoint;

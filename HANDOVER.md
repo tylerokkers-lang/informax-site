@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026 (stock video integrated). **Read §0c first**: a complete restaurant-first
+Last updated: 22 October 2026 (final readiness pass: NO-GO until the chef and spa clips and the licences, see §0c). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -17,6 +17,82 @@ serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 `redesign/restaurant-first`. `main`, informax.co.uk, DNS, environment
 variables and Informax Cloud were not touched. **Do not merge to `main`
 without the owner's explicit approval**: merging deploys to production (§4).
+
+### Final production-readiness pass (22 October 2026): NO-GO until two clips and the licences
+**Verdict: NO-GO for production today**, for external reasons only. The site
+itself is complete and every QA suite passes. Three things block launch, and
+the production guard enforces all of them (`VERCEL_ENV=production` refuses to
+build):
+1. **Chef clip (`19905887-uhd_3840_2160_24fps.mp4`) and spa clip
+   (`6187887-uhd_3840_2160_25fps.mp4`) are not in this environment.** They
+   were reportedly uploaded in a ChatGPT conversation, which does not reach
+   this session. The whole machine was searched. The only files with those
+   names were synthetic test patterns generated here for pipeline testing, in
+   `/home/user/vt/media/source/`. They are not footage and were never used or
+   committed (that scratch folder can be deleted). Pexels and every mirror
+   tried are blocked here (403 at the proxy).
+2. **No clip licence is verified.** `www.pexels.com`, `videos.pexels.com`,
+   `api.pexels.com`, `images.pexels.com` and `web.archive.org` are all refused
+   by the network policy. Web search (standard and extended) does not index
+   the clips by ID, and the files carry no author or licence metadata. Every
+   clip stays `licenceVerified: false`; the attempt is recorded per clip in
+   `media/videos.json` (`licenceCheck`).
+3. Owner review of the preview, then explicit approval to merge.
+
+Simulated with every licence marked verified (then reverted), the guard lists
+only `chefPass` and `spaTreatment`. So once the two clips are built and the
+licences are confirmed, the guard passes.
+
+Done in this pass:
+- **Restaurant branding removed.** The interior clip carried "RISTORANTE" and a
+  script venue name on the window, and a crest on the table runner, all in the
+  left third. A new `region` option in the build crops the frame to x 32–100%,
+  y 8–76% before anything else. Checked frame by frame at full resolution: no
+  lettering remains. The region is 2611 px wide, so the 1920 px output is still
+  downscaled from 4K.
+- **Restaurant story = the five required steps**, in the "See it in action"
+  walkthrough (on `/` and `/restaurants`):
+  1. the kitchen runs out (guest menu with sea bass);
+  2. the chef chooses an alternative (the chef film once supplied; until then
+     the dinner-service clip, with "Tonight: roast Cornish hake");
+  3. a manager updates the menu in Informax Cloud (genuine Replace menu
+     capture);
+  4. every table has the new menu (genuine guest capture);
+  5. no new Codes to print.
+
+  The homepage hero says the same in three steps.
+- **Hotel coverage** (unchanged, verified against the brief): in-room
+  directory and restaurant hours ("Restaurant hours changed?"), room upgrades,
+  the spa treatment menu and its afternoon offer, and bathroom Access Points
+  introducing it (hero showcase plus the five-step walkthrough).
+- **Stand-ins until the chef and spa clips exist** (`slotOr` in
+  `src/lib/photography.ts`):
+  - homepage story step 1 shows the dining room;
+  - walkthrough step 2 shows the dinner-service clip;
+  - the Hotels spa story shows the bathroom clip.
+
+  No placeholder is visible anywhere on the preview. The Restaurants kitchen
+  band stays hidden until the chef film exists. The guard still requires the
+  real slots.
+- **A layout-shift bug fixed:** the homepage headline jumped about 10 px
+  whenever the hero story advanced, because the caption height changed.
+  Captions now share one grid cell. A new test checks the h1 stays put on `/`
+  and `/hotels` at 1440, 834 and 390 px.
+- **Safari and iOS:**
+  - MP4s are pinned to H.264 High@4.1 (1080p) and @3.1 (phone), tagged
+    `avc1`, faststart, with no audio. All 24 files decode with zero errors
+    (`ffmpeg -xerror`).
+  - `muted` and `defaultMuted` are forced before `play()`.
+  - Not tested on real Safari: no WebKit build exists here. Playwright's
+    Chromium has no H.264, so the MP4 playback checks SKIP there; WebM plays.
+- **SEO and social:** new `docs/qa/seo-checks.mjs` (179 checks) covers titles,
+  descriptions, canonicals, Open Graph and Twitter cards, 1200×630 share
+  images, robots, sitemap, JSON-LD and a single h1. Fixes: `<html lang>` is now
+  `en-GB` (was `en`), and three over-long meta descriptions were shortened.
+- **Contrast:** the home overlay was strengthened, and the dark Coming Soon
+  badge now has a solid navy base. `film-contrast.mjs` now waits for entrance
+  animations to finish and measures only lines fully on screen (it had
+  measured mid-animation positions).
 
 ### Owner decisions (22 October 2026)
 1. Photography: nine premium, commercially licensed photographs, with source,
@@ -60,15 +136,15 @@ actually shows. Notes per clip: `media/videos.json`.
 | 15018462 staircase | none | Not supplied; excluded anyway (portrait, decorative, no use case) | None |
 
 What the footage shows, and what to watch for:
-- The restaurant interior is shot through a window: faint gold lettering of
-  the venue's name is in the glass, top left. It sits under the hero's
-  darkest overlay (not legible in screenshots) and outside the phone crop.
-  Never name the venue.
+- The restaurant interior was shot through a window carrying the venue's
+  branding (left third). It is cropped away with `region`; nothing legible
+  remains (see the final pass above). Never name the venue.
 - The "hotel room" clip is a door opening onto a desk and lamp, not a
   bedroom view. It moves throughout, so it plays once (from 1.9 s, so the
   poster is not the closed door) and holds; stills use its last frame. The
-  desk's tent cards belong to the hotel filmed and are never presented as
-  Informax products.
+  desk's tent cards belong to the hotel filmed. In the published 1080p they
+  are illegible and their code is about 12 px, not scannable. They are never
+  presented as Informax products.
 - The bedside and bathroom clips show no card; the site's drawn Code card
   sits over them, as before.
 - The four 4K files arrived already re-encoded (6–22 MB each). At 1080p they
@@ -311,6 +387,28 @@ Removed (still in git history): old `story/*`, most of `access/*`
 
 ### Verification (22 October 2026, local production build of the branch)
 Every item below was actually run; nothing is reported that was not.
+
+**Final pass, 22 October 2026** (local production build of the final commit):
+- `tsc`, `eslint`, `next build`: clean. The guard stops production (all nine
+  slots today; only chef and spa with the licences simulated as verified).
+- `test-site.mjs`: **120/120** (axe WCAG 2.1 A/AA zero violations on 9 pages;
+  the five restaurant steps in order; the h1 never moves while a story
+  advances, on `/` and `/hotels` at 3 widths).
+- `video-checks.mjs`: **39 pass, 0 fail, 5 SKIP** (the MP4s, which this
+  Chromium cannot decode; all 24 files decode cleanly in ffmpeg).
+- `film-contrast.mjs`: **57/57**. `seo-checks.mjs`: **179/179**.
+- Responsive sweep: 13 pages × 4 widths = 52 shots. No horizontal scroll, no
+  console errors.
+- Enquiry end to end (mocked Resend): success shown; one request, from
+  `enquiries@informax.co.uk` to `info@informax.co.uk`, reply-to the visitor.
+- Lighthouse, local:
+  - Mobile (simulated slow 4G): Home 90–97, Restaurants 98, Hotels 93–97,
+    Informax Cloud 97, How It Works 96, Request a demo 98.
+  - Desktop: 100 on all six.
+  - Accessibility, best practices and SEO: 100. CLS 0.
+  - Observed LCP 0.14–0.31 s.
+- Not verified: real Safari and iOS devices, the live preview (`*.vercel.app`
+  is blocked here), real email delivery, the licences.
 
 **Re-run 22 October 2026 with the six films built** (local production build):
 - `npx tsc --noEmit`, `npm run lint`, `npm run build`: clean.

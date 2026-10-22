@@ -8,7 +8,7 @@ import FinalCta from "@/components/sections/FinalCta";
 export const metadata: Metadata = {
   title: "Digital Brochures, Pamphlets & Directories",
   description:
-    "Turn information into an experience. Informax designs digital brochures, pamphlets and directories that make company, product, property and hospitality information easy to explore.",
+    "Informax designs digital brochures, pamphlets and directories that make company, product, property and hospitality information easy to explore.",
   alternates: { canonical: "/digital-information" },
 };
 

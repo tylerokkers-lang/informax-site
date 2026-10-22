@@ -13,12 +13,12 @@
     "duration": 11.92,
     "loop": true,
     "bytes": {
-      "mp4": 2128555,
-      "webm": 1212273,
-      "mp4Mobile": 507150,
-      "webmMobile": 385061,
-      "poster": 155975,
-      "posterMobile": 64365
+      "mp4": 2022916,
+      "webm": 1117947,
+      "mp4Mobile": 528120,
+      "webmMobile": 456315,
+      "poster": 136171,
+      "posterMobile": 58935
     },
     "source": {
       "file": "13476222_3840_2160_25fps.mp4",
@@ -42,7 +42,7 @@
     "duration": 10,
     "loop": true,
     "bytes": {
-      "mp4": 1222343,
+      "mp4": 1231675,
       "webm": 485758,
       "mp4Mobile": 329658,
       "webmMobile": 270207,
@@ -71,7 +71,7 @@
     "duration": 12,
     "loop": true,
     "bytes": {
-      "mp4": 2827005,
+      "mp4": 2827783,
       "webm": 1250506,
       "mp4Mobile": 751211,
       "webmMobile": 474512,
@@ -101,13 +101,13 @@
     "duration": 5.72,
     "loop": false,
     "bytes": {
-      "mp4": 873292,
+      "mp4": 870627,
       "webm": 280446,
       "mp4Mobile": 200047,
       "webmMobile": 130009,
       "poster": 61319,
       "posterMobile": 28033,
-      "still": 83242
+      "still": 83214
     },
     "source": {
       "file": "15358608_3840_2160_25fps.mp4",
@@ -131,7 +131,7 @@
     "duration": 7.12,
     "loop": true,
     "bytes": {
-      "mp4": 863764,
+      "mp4": 862950,
       "webm": 245102,
       "mp4Mobile": 225407,
       "webmMobile": 138151,
@@ -160,7 +160,7 @@
     "duration": 12.32,
     "loop": true,
     "bytes": {
-      "mp4": 3488391,
+      "mp4": 3541251,
       "webm": 1602634,
       "mp4Mobile": 586762,
       "webmMobile": 298702,

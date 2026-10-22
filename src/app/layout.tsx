@@ -52,7 +52,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       data-scroll-behavior="smooth"
     >
       <head>

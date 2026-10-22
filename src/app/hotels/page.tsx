@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AccessPoint from "@/components/access/AccessPoint";
 import HotelShowcase from "@/components/site/HotelShowcase";
 import Photo from "@/components/site/Photo";
-import { drawCodeOver } from "@/lib/photography";
+import { drawCodeOver, slotOr } from "@/lib/photography";
 import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
 import SeeItInAction from "@/components/site/SeeItInAction";
 import { Browser, Phone } from "@/components/site/Devices";
@@ -122,7 +122,7 @@ export default function HotelsPage() {
         soft="Then put it back."
         media={
           <div className="relative overflow-hidden rounded-[24px] bg-charcoal-950">
-            <Photo slot="spaTreatment" fill motion sizes="(min-width: 1024px) 560px, 100vw" label={false} />
+            <Photo slot={slotOr("spaTreatment", "hotelBathroom")} fill motion sizes="(min-width: 1024px) 560px, 100vw" label={false} />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.15)_0%,rgba(6,10,18,0.55)_100%)]" aria-hidden />
             <div className="relative mx-auto flex max-w-[460px] items-end justify-center gap-4 px-6 pb-8 pt-10 sm:gap-6">
               <div className="w-1/2">

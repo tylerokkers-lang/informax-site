@@ -51,7 +51,13 @@ await page.locator("#see-it-in-action").scrollIntoViewIfNeeded();
 await page.getByRole("button", { name: "Next" }).first().click();
 await page.getByRole("button", { name: "Next" }).first().click();
 ok(await page.getByText("Step 3 of 5").first().isVisible(), "walkthrough Next advances to step 3");
-ok(await page.locator('img[alt*="Published. It is live now."]').first().isVisible(), "restaurant step 3 shows the confirmation screen");
+ok(await page.locator('img[alt*="Replace the default menu"]').first().isVisible(), "restaurant step 3 shows the Replace menu screen in Informax Cloud");
+const restaurantSteps = await page.locator("#see-it-in-action ol li button > span:last-child > span:first-child").allTextContents();
+ok(
+  JSON.stringify(restaurantSteps) ===
+    JSON.stringify(["The kitchen runs out", "The chef chooses an alternative", "A manager updates the menu in Informax Cloud", "Every table has the new menu", "No new Codes to print"]),
+  `restaurant walkthrough tells the five steps in order (${restaurantSteps.join(" / ")})`,
+);
 await tabs.getByRole("tab", { name: "Restaurant" }).focus();
 await page.keyboard.press("ArrowRight");
 ok((await tabs.getByRole("tab", { name: "Hotel" }).getAttribute("aria-selected")) === "true", "ArrowRight switches to the Hotel tab");
@@ -59,6 +65,23 @@ ok(await page.getByText("Step 1 of 5").first().isVisible(), "switching industry 
 for (let i = 0; i < 4; i++) await page.getByRole("button", { name: "Next" }).first().click();
 ok(await page.locator('img[alt*="ends 18:00 today"]').first().isVisible(), "hotel step 5 shows the temporary content ending at 18:00");
 ok(await page.getByRole("button", { name: "Start again" }).first().isVisible(), "last step offers Start again");
+
+// 3b. Auto-advancing stories never move the headline beside them (no layout shift while a visitor reads).
+for (const [w, h] of [[1440, 900], [834, 1112], [390, 844]]) {
+  const sctx = await browser.newContext({ viewport: { width: w, height: h } });
+  const sp = await sctx.newPage();
+  for (const path of ["/", "/hotels"]) {
+    await sp.goto(BASE + path, { waitUntil: "networkidle" });
+    await sp.waitForTimeout(1500);
+    const tops = [];
+    for (let i = 0; i < 8; i++) {
+      tops.push(await sp.locator("h1").first().evaluate((e) => Math.round(e.getBoundingClientRect().top + scrollY)));
+      await sp.waitForTimeout(1750);
+    }
+    ok(new Set(tops).size === 1, `${path} at ${w}px: the h1 stays put while the story advances (${[...new Set(tops)].join(", ")})`);
+  }
+  await sctx.close();
+}
 
 // 4. Keyboard: skip link and visible focus on the demo button.
 await page.goto(BASE + "/", { waitUntil: "networkidle" });
