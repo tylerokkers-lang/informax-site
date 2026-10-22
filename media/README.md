@@ -1,6 +1,8 @@
 # Stock video
 
-Ten stock videos were supplied for the redesign on 22 October 2026. The 4K
+Ten stock videos were named for the redesign on 22 October 2026; seven were
+supplied, six are built and one (smartphone) is excluded. Chef and spa are
+still to come. Status per clip: `media/videos.json` and HANDOVER.md §0c. The
 originals are **not committed** (too large for git, and never served); only
 the optimised web versions are.
 
@@ -53,8 +55,14 @@ and records sizes and paths in `src/lib/video-assets.json`. Commit those
 outputs and the JSON. A slot with no outputs keeps its labelled placeholder.
 
 Tune per clip in `media/videos.json`: `start` (seconds into the source),
-`duration` (loop length), `focus` / `focusMobile` (CSS object-position of the
-subject, used for the crops and on the page), and `excluded` (with a reason).
+`duration` (loop length), `mode` ("loop": 1 s crossfade, the default;
+"pingpong": forward then reverse, for slow camera moves; "once": plays once
+and holds, and stills use its last frame), `focus` / `focusMobile` (CSS
+object-position of the subject, used for the crops and on the page), `alt`,
+`notes` and `excluded` (with a reason).
+
+After building, run the QA in `docs/qa/` (video-checks and film-contrast in
+particular: a new clip can make hero text unreadable).
 
 ## 3. Confirm the licences
 

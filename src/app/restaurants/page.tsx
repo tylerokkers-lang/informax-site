@@ -8,6 +8,7 @@ import { Phone } from "@/components/site/Devices";
 import { DemoCta, Story } from "@/components/site/Sections";
 import { DEMO_CTA } from "@/lib/constants";
 import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
+import { slotHasMedia } from "@/lib/photography";
 
 export const metadata: Metadata = {
   title: "Restaurants: change your menu without reprinting",
@@ -21,7 +22,8 @@ export default function RestaurantsPage() {
     <>
       <header className="relative min-h-[100svh] overflow-hidden bg-charcoal-950 text-cream">
         <Photo slot="restaurantTable" fill motion priority className="opacity-90" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.15)_100%)]" aria-hidden />
+        {/* Phones and tablets: the text spans the full width, so the overlay is even. From lg up: dark behind the text, the film clear on the right. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.82)_0%,rgba(6,10,18,0.78)_60%,rgba(6,10,18,0.9)_100%)] lg:bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.15)_100%)]" aria-hidden />
         <div className="relative mx-auto grid min-h-[100svh] max-w-8xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-[120px] md:px-10 lg:grid-cols-[1fr_auto]">
           <div className="ix-hero-rise max-w-[44rem]">
             <p className="mb-5 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-light">
@@ -45,30 +47,34 @@ export default function RestaurantsPage() {
           <div className="relative mx-auto flex items-end gap-5 lg:mx-0">
             <AccessPoint place="Table 12" sub="Menu" size="md" className="mb-10 hidden sm:flex" />
             <div className="w-[240px] sm:w-[280px]">
-              <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/75">What the guest sees</p>
+              <p className="mx-auto mb-3 w-fit rounded-full bg-[rgba(6,10,18,0.6)] px-3 py-1 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
+                What the guest sees
+              </p>
               <Phone screens={["guestMenuAfter"]} priority sizes="280px" />
             </div>
           </div>
         </div>
       </header>
 
-      {/* The moment it starts: the chef film, full width. */}
-      <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
-        <Photo slot="chefPass" fill motion sizes="100vw" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
-        <div className="relative mx-auto flex min-h-[70svh] max-w-8xl items-end px-6 pb-16 pt-28 md:min-h-[78vh] md:px-10 md:pb-24">
-          <div className="max-w-[38rem]">
-            <p className="mb-4 text-[15px] font-semibold text-brass-light">During dinner service</p>
-            <h2 id="kitchen-h" className="text-balance font-serif-display text-[clamp(34px,4.8vw,62px)] leading-[1.02] text-white">
-              The sea bass is finished. <span className="text-cream-mute">The hake is ready to serve.</span>
-            </h2>
-            <p className="mt-6 max-w-[32rem] text-[18px] leading-relaxed text-white/80">
-              The kitchen has the replacement dish. The printed menus on the tables don&rsquo;t know that yet. With Informax, the
-              menu every guest opens changes in the time it takes to upload one file.
-            </p>
+      {/* The moment it starts: the chef film, full width. Only once the footage (or a photograph) exists. */}
+      {slotHasMedia("chefPass") ? (
+        <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
+          <Photo slot="chefPass" fill motion sizes="100vw" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
+          <div className="relative mx-auto flex min-h-[70svh] max-w-8xl items-end px-6 pb-16 pt-28 md:min-h-[78vh] md:px-10 md:pb-24">
+            <div className="max-w-[38rem]">
+              <p className="mb-4 text-[15px] font-semibold text-brass-light">During dinner service</p>
+              <h2 id="kitchen-h" className="text-balance font-serif-display text-[clamp(34px,4.8vw,62px)] leading-[1.02] text-white">
+                The sea bass is finished. <span className="text-cream-mute">The hake is ready to serve.</span>
+              </h2>
+              <p className="mt-6 max-w-[32rem] text-[18px] leading-relaxed text-white/80">
+                The kitchen has the replacement dish. The printed menus on the tables don&rsquo;t know that yet. With Informax, the
+                menu every guest opens changes in the time it takes to upload one file.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <MenuBeforeAfter />
 
@@ -121,8 +127,8 @@ export default function RestaurantsPage() {
         soft="As many copies as you like."
         media={
           <div className="relative overflow-hidden rounded-[28px]">
-            <Photo slot="signatureDish" fill sizes="(min-width: 1024px) 560px, 100vw" />
-            <div className="absolute inset-0 bg-black/25" aria-hidden />
+            <Photo slot="signatureDish" fill motion sizes="(min-width: 1024px) 560px, 100vw" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.2)_0%,rgba(6,10,18,0.55)_100%)]" aria-hidden />
             <div className="relative flex flex-wrap items-end justify-center gap-4 px-6 pb-16 pt-14 sm:gap-5">
               <AccessPoint place="Restaurant Menu" sub="Main Restaurant" size="md" />
               <AccessPoint place="Drinks Menu" sub="Bar" size="md" colourway="stone" />

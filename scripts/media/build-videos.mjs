@@ -47,13 +47,22 @@ function probe(file) {
 const focusOf = (f) => (f || "50% 50%").split(/\s+/).map((v) => Math.min(1, Math.max(0, parseFloat(v) / 100)));
 
 /**
- * A seamless loop of `duration` seconds: take duration+FADE seconds, play from FADE to the end,
- * and crossfade the last FADE seconds into the first FADE seconds, so the last frame flows into the first.
+ * The film's filter graph, by `mode` in media/videos.json:
+ * - "loop" (default): a seamless loop of `duration` seconds. Take duration+FADE seconds, play from FADE to the end,
+ *   and crossfade the last FADE seconds into the first FADE seconds, so the last frame flows into the first.
+ * - "pingpong": `duration` seconds forward, then the same in reverse (end frames not repeated). Seamless for slow
+ *   camera moves over a still scene, where a crossfade would ghost.
+ * - "once": `duration` seconds, played once; the page holds the last frame.
  */
-function loopFilter(start, duration, fps, tail) {
-  const total = duration + FADE;
+function filmFilter(mode, start, duration, fps, tail) {
+  const take = `[0:v]trim=start=${start}:duration=${mode === "loop" ? duration + FADE : duration},setpts=PTS-STARTPTS,fps=${fps}`;
+  if (mode === "once") return `${take},${tail}[v]`;
+  if (mode === "pingpong") {
+    const n = Math.round(duration * fps);
+    return `${take},${tail},split[a][b];[b]reverse,trim=start_frame=1:end_frame=${n - 1},setpts=PTS-STARTPTS[r];[a][r]concat=n=2:v=1:a=0[v]`;
+  }
   return (
-    `[0:v]trim=start=${start}:duration=${total},setpts=PTS-STARTPTS,fps=${fps},split[a][b];` +
+    `${take},split[a][b];` +
     `[a]trim=start=${FADE},setpts=PTS-STARTPTS[body];` +
     `[b]trim=duration=${FADE},setpts=PTS-STARTPTS[head];` +
     `[body][head]xfade=transition=fade:duration=${FADE}:offset=${duration - FADE},${tail}[v]`
@@ -73,9 +82,9 @@ for (const [key, slot] of Object.entries(slots)) {
   }
   const info = probe(src);
   const fps = Math.min(30, Math.round(info.fps));
-  const start = Math.max(0, Math.min(slot.start, info.duration - slot.duration - FADE));
-  if (info.duration < slot.duration + FADE) throw new Error(`${key}: source is ${info.duration.toFixed(1)}s, needs ${slot.duration + FADE}s`);
-
+  const mode = slot.mode || "loop";
+  const need = mode === "loop" ? slot.duration + FADE : slot.duration;
+  const start = Math.max(0, Math.min(slot.start, info.duration - need));
   if (review) {
     mkdirSync(REVIEW, { recursive: true });
     const step = info.duration / 12;
@@ -83,6 +92,7 @@ for (const [key, slot] of Object.entries(slots)) {
     console.log(`review ${key}: ${info.width}x${info.height} ${info.fps.toFixed(2)}fps ${info.duration.toFixed(1)}s -> media/review/${key}.jpg`);
     continue;
   }
+  if (info.duration < need) throw new Error(`${key}: source is ${info.duration.toFixed(2)}s, "${mode}" needs ${need}s (lower "duration")`);
   if (slot.excluded) {
     console.log(`- ${key}: excluded (${slot.excluded.slice(0, 60)}...)`);
     continue;
@@ -110,18 +120,21 @@ for (const [key, slot] of Object.entries(slots)) {
     webmMobile: join(dir, `${key}-m720.webm`),
     poster: join(dir, `${key}-poster.jpg`),
     posterMobile: join(dir, `${key}-poster-m.jpg`),
+    // A film that plays once ends on its strongest frame: stills elsewhere on the site use that.
+    ...(mode === "once" ? { still: join(dir, `${key}-still.jpg`) } : {}),
   };
   const h264 = (crf, maxrate) => ["-an", "-c:v", "libx264", "-preset", "slow", "-profile:v", "high", "-crf", String(crf), "-maxrate", maxrate, "-bufsize", `${parseFloat(maxrate) * 2}M`, "-movflags", "+faststart", "-pix_fmt", "yuv420p"];
   // Constrained quality: CRF sets the quality, -b:v caps the bitrate so a busy clip cannot balloon.
   const vp9 = (crf, cap) => ["-an", "-c:v", "libvpx-vp9", "-crf", String(crf), "-b:v", cap, "-deadline", "good", "-cpu-used", "2", "-row-mt", "1", "-pix_fmt", "yuv420p"];
 
-  ffmpeg(["-i", src, "-filter_complex", loopFilter(start, slot.duration, fps, desk), "-map", "[v]", ...h264(24, "3M"), outs.mp4]);
-  ffmpeg(["-i", src, "-filter_complex", loopFilter(start, slot.duration, fps, desk), "-map", "[v]", ...vp9(35, "2.5M"), outs.webm]);
-  ffmpeg(["-i", src, "-filter_complex", loopFilter(start, slot.duration, fps, mob), "-map", "[v]", ...h264(26, "1.2M"), outs.mp4Mobile]);
-  ffmpeg(["-i", src, "-filter_complex", loopFilter(start, slot.duration, fps, mob), "-map", "[v]", ...vp9(37, "1M"), outs.webmMobile]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, desk), "-map", "[v]", ...h264(24, "3M"), outs.mp4]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, desk), "-map", "[v]", ...vp9(35, "2.5M"), outs.webm]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, mob), "-map", "[v]", ...h264(26, "1.2M"), outs.mp4Mobile]);
+  ffmpeg(["-i", src, "-filter_complex", filmFilter(mode, start, slot.duration, fps, mob), "-map", "[v]", ...vp9(37, "1M"), outs.webmMobile]);
   // Posters are the exact first frames, so the swap from poster to film never jumps.
   ffmpeg(["-i", outs.mp4, "-frames:v", "1", "-q:v", "3", outs.poster]);
   ffmpeg(["-i", outs.mp4Mobile, "-frames:v", "1", "-q:v", "3", outs.posterMobile]);
+  if (outs.still) ffmpeg(["-sseof", "-0.2", "-i", outs.mp4, "-update", "1", "-q:v", "3", outs.still]);
 
   const d = probe(outs.mp4);
   const m = probe(outs.mp4Mobile);
@@ -133,11 +146,13 @@ for (const [key, slot] of Object.entries(slots)) {
     webmMobile: pub(outs.webmMobile),
     poster: pub(outs.poster),
     posterMobile: pub(outs.posterMobile),
+    ...(outs.still ? { still: pub(outs.still) } : {}),
     width: d.width,
     height: d.height,
     mobileWidth: m.width,
     mobileHeight: m.height,
     duration: Number(d.duration.toFixed(2)),
+    loop: mode !== "once",
     bytes: Object.fromEntries(Object.entries(outs).map(([k, f]) => [k, size(f)])),
     source: { file: slot.file, width: info.width, height: info.height, fps: Number(info.fps.toFixed(2)), bytes: size(src) },
   };

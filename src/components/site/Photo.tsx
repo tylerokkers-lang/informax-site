@@ -57,7 +57,7 @@ export default function Photo({
     return (
       <div className={box}>
         <Image
-          src={v.asset.poster}
+          src={v.asset.still ?? v.asset.poster}
           alt={v.slot.alt}
           fill
           sizes={sizes}

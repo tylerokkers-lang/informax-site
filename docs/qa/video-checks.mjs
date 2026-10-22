@@ -74,8 +74,9 @@ for (const path of PAGES) {
     await page.waitForTimeout(1200);
     const t1 = await first.evaluate((v) => v.currentTime);
     await page.waitForTimeout(1200);
-    const t2 = await first.evaluate((v) => v.currentTime);
-    ok(t2 > t1 || t2 < t1 /* looped */, `${path}: the on-screen film advances (${t1.toFixed(2)} -> ${t2.toFixed(2)})`);
+    const [t2, ended, loops] = await first.evaluate((v) => [v.currentTime, v.ended, v.loop]);
+    // A film that plays once ("once" in media/videos.json) may already have finished and be holding its last frame.
+    ok(t2 !== t1 || (!loops && ended), `${path}: the on-screen film advances (${t1.toFixed(2)} -> ${t2.toFixed(2)}${!loops ? ", plays once" + (ended ? ", ended" : "") : ""})`);
   }
   ok(errors.length === 0, `${path}: no console errors${errors.length ? " (" + errors.slice(0, 2).join(" | ") + ")" : ""}`);
   await ctx.close();

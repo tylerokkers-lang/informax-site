@@ -47,7 +47,7 @@ export const PHOTOS = {
     video: "restaurantInterior",
     width: 2400,
     height: 1600,
-    alt: "An elegant contemporary restaurant in the evening, tables laid for dinner",
+    alt: "A candle-lit restaurant table in the evening, seen through the window",
     brief: "Contemporary fine-dining room at dusk, warm light, tables laid",
     tone: "candle",
   },
@@ -65,8 +65,8 @@ export const PHOTOS = {
     video: "diningTable",
     width: 2000,
     height: 2500,
-    alt: "A restaurant table for two with an Informax Code card beside the glasses",
-    brief: "Table for two, linen and glassware, a discreet Code card by the candle",
+    alt: "Wine glasses and a candle on a restaurant table at dusk",
+    brief: "Restaurant table at dusk, glassware and a candle",
     tone: "candle",
   },
   signatureDish: {
@@ -74,8 +74,8 @@ export const PHOTOS = {
     video: "fineDining",
     width: 2800,
     height: 1800,
-    alt: "An editorial photograph of a plated fish dish on a dark ceramic plate",
-    brief: "Editorial plate: roast hake, mussels, saffron broth",
+    alt: "A server lifts a cloche from a dish at a candle-lit table",
+    brief: "Table service: a dish revealed at a candle-lit table",
     tone: "candle",
   },
   hotelLounge: {
@@ -83,8 +83,8 @@ export const PHOTOS = {
     video: "bedside",
     width: 2800,
     height: 1600,
-    alt: "A hotel bedside table with a Code card beside the lamp",
-    brief: "Hotel bedside table, soft lamp light, a premium Code card",
+    alt: "A lamp lit on a round bedside table beside a hotel bed",
+    brief: "Hotel bedside table, soft lamp light",
     tone: "linen",
   },
   hotelBathroom: {
@@ -92,8 +92,8 @@ export const PHOTOS = {
     video: "bathroom",
     width: 2400,
     height: 2400,
-    alt: "A marble hotel bathroom with a vanity, folded towels and a small Code card",
-    brief: "Marble bathroom vanity, folded towels, a small Code card by the basin",
+    alt: "A hotel bathroom with a round illuminated mirror, hanging towels and a glass basin",
+    brief: "Hotel bathroom: illuminated mirror, towels, basin",
     tone: "marble",
   },
   spaTreatment: {
@@ -110,17 +110,18 @@ export const PHOTOS = {
     video: "hotelBedroom",
     width: 2800,
     height: 1600,
-    alt: "A premium hotel suite bedroom with a view at dusk",
-    brief: "Premium suite bedroom with a city or garden view at dusk",
+    alt: "A hotel room door opening onto a desk and a lit lamp",
+    brief: "A hotel room, seen as the door opens",
     tone: "dusk",
   },
   hospitalityTeam: {
     ...pending,
-    video: "smartphone",
+    // The smartphone clip is excluded (blank mock-up screen; media/videos.json), so this scene uses table service.
+    video: "fineDining",
     width: 2400,
     height: 1600,
-    alt: "A restaurant manager checking a phone at the front of house",
-    brief: "Manager at front of house checking a phone before service",
+    alt: "A server lifts a cloche from a dish at a candle-lit table",
+    brief: "Dinner service in the restaurant",
     tone: "kitchen",
   },
 } satisfies Record<string, PhotoSlot>;
@@ -143,6 +144,9 @@ export const slotVideo = (k: PhotoKey) => {
   const asset = v ? videoAsset(v) : null;
   return v && asset ? { key: v, asset, slot: VIDEOS[v] } : null;
 };
+
+/** Whether a slot has anything real to show yet (a photograph or a built clip). For scenes that exist only for their footage. */
+export const slotHasMedia = (k: PhotoKey) => Boolean((PHOTOS[k] as PhotoSlot).src) || Boolean(slotVideo(k));
 
 /** Whether to draw a Code card over this photograph (not when the photograph already shows a real one). */
 export const drawCodeOver = (k: PhotoKey) => !(PHOTOS[k] as PhotoSlot).showsAccessPoint;

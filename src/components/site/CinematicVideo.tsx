@@ -17,7 +17,7 @@ function arbitrate() {
   for (const [v, ratio] of players) if (ratio > best) [leader, best] = [v, ratio];
   for (const v of players.keys()) {
     if (v === leader) {
-      if (v.paused) v.play().catch(() => undefined);
+      if (v.paused && !v.ended) v.play().catch(() => undefined); // a film that plays once stays on its last frame
     } else if (!v.paused) v.pause();
   }
 }
@@ -51,7 +51,7 @@ export default function CinematicVideo({
   alt: string;
   /** Desktop object-position of the subject. Phone files are already cropped around their own focus, so they stay centred. */
   focus?: string;
-  /** Above the fold: load the poster eagerly with high priority. */
+  /** Above the fold: load the poster eagerly (at normal priority, so it never delays the page's main image). */
   priority?: boolean;
   className?: string;
 }) {
@@ -66,13 +66,33 @@ export default function CinematicVideo({
   const phone = hydrated && typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
   const allowed = hydrated && !reduce && !saveData;
 
-  // Start fetching when the film is within about a screen of the viewport.
+  // Films never compete with the page's own content: nothing is fetched until the page has loaded and the browser is idle.
+  const [settled, setSettled] = useState(false);
   useEffect(() => {
-    if (!allowed || !box.current) return;
+    if (!allowed) return;
+    let idleId: number | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const go = () => {
+      // Safari has no requestIdleCallback.
+      if (typeof window.requestIdleCallback === "function") idleId = window.requestIdleCallback(() => setSettled(true), { timeout: 2000 });
+      else timer = setTimeout(() => setSettled(true), 200);
+    };
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
+    return () => {
+      window.removeEventListener("load", go);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      clearTimeout(timer);
+    };
+  }, [allowed]);
+
+  // Then start fetching when the film is within about a screen of the viewport.
+  useEffect(() => {
+    if (!allowed || !settled || !box.current) return;
     const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "100% 0px" });
     io.observe(box.current);
     return () => io.disconnect();
-  }, [allowed]);
+  }, [allowed, settled]);
 
   // Report visibility to the arbiter once the film element exists.
   useEffect(() => {
@@ -109,7 +129,6 @@ export default function CinematicVideo({
           width={asset.width}
           height={asset.height}
           alt={alt}
-          fetchPriority={priority ? "high" : "auto"}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           className={`absolute inset-0 h-full w-full ${fit}`}
@@ -119,7 +138,7 @@ export default function CinematicVideo({
         <video
           ref={video}
           muted
-          loop
+          loop={asset.loop !== false}
           playsInline
           preload="metadata"
           poster={poster}

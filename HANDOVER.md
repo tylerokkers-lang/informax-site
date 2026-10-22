@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026. **Read §0c first**: a complete restaurant-first
+Last updated: 22 October 2026 (stock video integrated). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -37,81 +37,108 @@ without the owner's explicit approval**: merging deploys to production (§4).
    never fabricate interfaces or conceal known application bugs (the Quick
    access bug and how the captures avoid triggering it are recorded below).
 
-### Stock video (22 October 2026): pipeline built, footage NOT yet in the repo
-Ten stock clips were named for the site. **None of the files reached this
-build environment.** They are not in the repo, on any branch, or on the
-filesystem, and `videos.pexels.com` / `www.pexels.com` are blocked by the
-network policy. So no real footage is integrated yet: every slot still shows
-its labelled placeholder, exactly as before. Everything around the footage is
-built and was tested end to end with stand-in clips of the same names,
-resolutions and frame rates (generated locally, never committed).
+### Stock video (22 October 2026): 6 clips integrated, 3 still to supply
+The owner supplied seven of the ten named clips (uploaded to the session). Six
+are built and live on the branch; one is excluded; three were not supplied.
+Originals go in `media/source/` (git-ignored, never committed or served); the
+optimised outputs in `public/video/stock/` and `src/lib/video-assets.json`
+are committed. Every clip was watched (contact sheets via `npm run
+media:review`) and its alt text, focus point and placement set from what it
+actually shows. Notes per clip: `media/videos.json`.
 
-**To finish (about 15 minutes of machine time):** put the ten originals,
-under their original names, in `media/source/` (git-ignored), then
-`npm run media:review` (contact sheets to check content and framing),
-`npm run media:build`, check each page, confirm each licence page and set
-`licenceVerified: true` in `media/videos.json`, then commit `public/video/stock/`
-and `src/lib/video-assets.json`. Full steps: `media/README.md`. To do it in a
-cloud session, allow `videos.pexels.com` and `www.pexels.com` in the
-environment's network settings.
-
-**Placement** (`media/videos.json` → `src/lib/photography.ts` slot → page).
-"Film" plays muted on a loop; "Poster" is the clip's first frame as a still.
-Five films only, never two at once: fewer, stronger moments.
-
-| Clip | Slot | Where | Use |
+| Clip | Slot (photography.ts) | Where | Use |
 |---|---|---|---|
-| 13476222 restaurant interior | restaurantInterior → restaurantRoom | Homepage hero, full-bleed behind the headline, navy overlay | Film |
-| 2174411 dining table | diningTable → restaurantTable | Restaurants hero | Film |
-| 19905887 chef | chef → chefPass | Restaurants: "The sea bass is finished. The hake is ready to serve." band before the menu change | Film |
-| 3769032 fine dining | fineDining → signatureDish | Restaurants "Every table" panel; Possibilities restaurant card | Poster |
-| 15358608 hotel bedroom | hotelBedroom → hotelSuite | Hotels hero background; Possibilities hotel card | Film (hero) / Poster |
-| 12680170 bedside | bedside → hotelLounge | Bedroom Access Points (in-room directory) | Poster |
-| 14983318 bathroom | bathroom → hotelBathroom | Bathroom Access Points | Poster |
-| 6187887 spa | spa → spaTreatment | Hotels spa promotions story, phones over the film | Film |
-| 6278838 smartphone | smartphone → hospitalityTeam | Digital guest experience / manager step | Poster |
-| 15018462 staircase | staircase | **Excluded**: portrait 2160×3840 and not tied to a use case (decorative motion) | None |
+| 13476222 restaurant interior | restaurantRoom | Homepage hero, full-bleed behind the headline, navy overlay | Film (forward then reverse) |
+| 2174411 dining table | restaurantTable | Restaurants hero; table step of the homepage story | Film / poster |
+| 3769032 fine dining | signatureDish, hospitalityTeam | Restaurants "Every table" panel (the restaurant experience); manager step of the homepage story | Film / poster |
+| 15358608 hotel room | hotelSuite | Hotels hero (plays once and holds); "Room upgrades" scene; Possibilities hotel card | Film / last frame |
+| 12680170 bedside | hotelLounge | Bedroom Access Points ("In-room directory") | Poster |
+| 14983318 bathroom | hotelBathroom | Bathroom Access Points ("Bathroom spa menu") | Poster |
+| 6278838 smartphone | none | **Excluded**: the phone screen is blank white (a mock-up clip). It would put an empty phone beside the drawn phone with a genuine Cloud capture; filling it would mean compositing an interface onto stock footage | None |
+| 19905887 chef | chefPass | **Not supplied.** Homepage story step 1 shows its labelled placeholder; the Restaurants kitchen band ("The sea bass is finished…") is hidden until it exists | Film when supplied |
+| 6187887 spa | spaTreatment | **Not supplied.** Hotels spa story shows its labelled placeholder | Film when supplied |
+| 15018462 staircase | none | Not supplied; excluded anyway (portrait, decorative, no use case) | None |
 
-Focus points (`focus`, `focusMobile`) are 50% 50% (chef 50% 40%) until the
-real footage is seen; adjust them after `media:review`. Alt text describes
-the intended scene and must be re-read against each real clip.
+What the footage shows, and what to watch for:
+- The restaurant interior is shot through a window: faint gold lettering of
+  the venue's name is in the glass, top left. It sits under the hero's
+  darkest overlay (not legible in screenshots) and outside the phone crop.
+  Never name the venue.
+- The "hotel room" clip is a door opening onto a desk and lamp, not a
+  bedroom view. It moves throughout, so it plays once (from 1.9 s, so the
+  poster is not the closed door) and holds; stills use its last frame. The
+  desk's tent cards belong to the hotel filmed and are never presented as
+  Informax products.
+- The bedside and bathroom clips show no card; the site's drawn Code card
+  sits over them, as before.
+- The four 4K files arrived already re-encoded (6–22 MB each). At 1080p they
+  look clean; no artefacts were seen on the contact sheets or screenshots.
 
-**Licences and provenance.** The file names follow Pexels' download naming,
-so each is *presumed* to be under the Pexels Licence (commercial use, no
+**Licences: NOT verified.** File names follow Pexels' download naming, so
+each is presumed to be under the Pexels Licence (free commercial use, no
 attribution required, must not imply endorsement by people, brands or places
-shown). **Not verified**: pexels.com is blocked here. Every clip is recorded
-as `licenceVerified: false` with its Pexels page URL. Stock footage
-illustrates use cases; the site never names or implies a venue or customer.
+shown). The pages are blocked here (`www.pexels.com` refused again today) and
+the files carry no licence or author metadata. Every clip is
+`licenceVerified: false` with its Pexels page URL in `media/videos.json`.
+The owner (or a session with Pexels allowed) must open each page, confirm the
+clip and set `licenceVerified: true`.
 
-**How it plays** (`src/components/site/CinematicVideo.tsx`): the poster
-(the encoded film's exact first frame) is always rendered first, so there is
-no layout shift and the page works with video off. The film is fetched only
-within about a screen of the viewport; only the most visible film plays
-(global arbiter); muted, loop, playsInline, no controls, `aria-hidden` (the
-poster carries the alt text). Reduced motion or Data Saver: poster only, no
-video request. Phones (≤767 px) get a 720×960 portrait crop around
-`focusMobile`; desktop gets 16:9 at most 1920×1080 positioned on `focus`.
-Each browser takes the smaller of WebM (VP9) and MP4 (H.264, faststart).
-Every film with text over it sits under a navy gradient so white text keeps WCAG contrast.
+**How it plays** (`src/components/site/CinematicVideo.tsx`):
+- The poster (the encoded film's exact first frame) is always rendered first:
+  no layout shift (CLS 0), and the page works with video off.
+- Films fetch nothing until the page has loaded and the browser is idle, and
+  then only within about a screen of the viewport.
+- Only the most visible film plays (a global arbiter).
+- Muted, `playsInline`, no controls, `aria-hidden` (the poster carries the
+  alt text). Each film loops unless its mode is "once".
+- Reduced motion or Data Saver: poster only, no video request.
+- Phones (767 px and under) get a 720×960 portrait crop around `focusMobile`.
+- Each browser takes the smaller of WebM (VP9) and MP4 (H.264, faststart).
+- On phones and tablets the hero overlays are even. From 1024 px they are
+  dark behind the text and lighter over the subject.
 
-**Encoding** (`scripts/media/build-videos.mjs`): no audio; seamless loop
-(1 s crossfade from the end into the start); desktop H.264 CRF 24 capped at
-3 Mbit/s, VP9 CRF 35 capped at 2.5 Mbit/s; phone H.264 CRF 26 capped at
-1.2 Mbit/s, VP9 CRF 37 capped at 1 Mbit/s; JPEG posters.
+**Encoding** (`scripts/media/build-videos.mjs`, `npm run media:build`):
+- No audio.
+- Modes per clip: "loop" (1 s crossfade from the end into the start),
+  "pingpong" (forward, then reverse, for slow camera moves) and "once".
+- Desktop: H.264 CRF 24 capped at 3 Mbit/s; VP9 CRF 35 capped at 2.5 Mbit/s.
+- Phone: H.264 CRF 26 capped at 1.2 Mbit/s; VP9 CRF 37 capped at 1 Mbit/s.
+- Loop seams measured 33–43 dB PSNR, last frame against first (as close as
+  consecutive frames).
 
-**Production guard:** `VERCEL_ENV=production` builds stop unless every image
+| Slot | Source | Loop | Desktop MP4 / WebM | Phone MP4 / WebM | Posters |
+|---|---|---|---|---|---|
+| restaurantInterior | 3840×2160, 21.3 MB | 11.92 s | 2.0 MB / 1.2 MB | 495 KB / 376 KB | 152 KB / 63 KB |
+| diningTable | 1920×1080, 5.3 MB | 10 s | 1.2 MB / 474 KB | 322 KB / 264 KB | 90 KB / 42 KB |
+| fineDining | 1920×1080, 8.4 MB | 12 s | 2.7 MB / 1.2 MB | 734 KB / 463 KB | 81 KB / 27 KB |
+| hotelBedroom | 3840×2160, 16.8 MB | 5.72 s (once) | 853 KB / 274 KB | 195 KB / 127 KB | 60 KB / 27 KB |
+| bedside | 3840×2160, 5.8 MB | 7.12 s | 844 KB / 239 KB | 220 KB / 135 KB | 50 KB / 25 KB |
+| bathroom | 3840×2160, 17.9 MB | 12.32 s | 3.3 MB / 1.5 MB | 573 KB / 292 KB | 246 KB / 66 KB |
+
+What a visitor downloads: the hero film on each page (phone, WebM)
+is 127–376 KB; desktop 274 KB–1.2 MB. Films below the fold load only near the
+screen. Total committed video: 21 MB.
+
+**To add the chef and spa clips** (about 5 minutes):
+1. Put `19905887-uhd_3840_2160_24fps.mp4` and
+   `6187887-uhd_3840_2160_25fps.mp4` in `media/source/`.
+2. Run `npm run media:review` and check the contact sheets. Set `start`,
+   `duration`, `mode`, `focus` and `alt` for `chef` and `spa` in
+   `media/videos.json` from what they show.
+3. Run `npm run media:build -- chef spa`.
+4. Check `/`, `/restaurants` and `/hotels`, run the QA below, and commit.
+
+**Production guard:** a `VERCEL_ENV=production` build stops unless every image
 slot has a licensed photograph OR a built clip with `licenceVerified: true`
-(`next.config.ts`, `PENDING_SLOTS` in `src/lib/photography.ts`). So the
-footage alone, once built and verified, unblocks launch; no photographs are
-then required.
-
-**End-to-end check with stand-in clips:** in progress at the time of this commit; results are recorded in the next update of this section.
-
+(`next.config.ts`). Today it lists all nine slots, because no licence is
+verified. Simulated with every licence marked verified, it lists only
+`chefPass` and `spaTreatment` (simulated, then reverted; nothing committed).
 
 ### Launch blockers
-1. **Footage or photography (the only hard blocker).** Either build the ten
-   supplied stock clips with verified licences (see "Stock video" above;
-   this alone clears the guard), or supply photographs for the nine slots in
+1. **Footage licences and two clips (the only hard blocker).** Verify the
+   six built clips' licences, and supply the chef and spa clips (see "Stock
+   video" above; together these clear the guard). The alternative is
+   photographs for the remaining slots in
    `src/lib/photography.ts`, specified in `docs/photography-brief.md`. Still
    placeholders because the build environment's network policy refuses every
    photo source (re-checked 22 October 2026: `images.unsplash.com`,
@@ -284,6 +311,43 @@ Removed (still in git history): old `story/*`, most of `access/*`
 
 ### Verification (22 October 2026, local production build of the branch)
 Every item below was actually run; nothing is reported that was not.
+
+**Re-run 22 October 2026 with the six films built** (local production build):
+- `npx tsc --noEmit`, `npm run lint`, `npm run build`: clean.
+  `VERCEL_ENV=production npx next build` stops on the guard, as intended.
+- `docs/qa/test-site.mjs`: **113 checks, all pass**, including axe-core
+  WCAG 2.1 A/AA with zero violations on 9 pages. New check: the Cloud hero's
+  "See How It Works" has an on-page target.
+- `docs/qa/video-checks.mjs` (new): **32 checks, all pass** on `/`,
+  `/restaurants` and `/hotels`:
+  - every film has a poster, and its sources return 200 with a video type;
+  - films far below the fold are not fetched on load;
+  - a film plays when on screen, and at most one plays at once;
+  - the visible film advances (the play-once hotel film is allowed to hold);
+  - no console errors;
+  - reduced motion means no video element and zero video requests;
+  - phones fetch only the 720×960 files.
+- `docs/qa/film-contrast.mjs` (new): WCAG contrast of every hero text line,
+  measured with the text hidden on three moments of the real film, against
+  the brightest 2% of pixels behind it, at 1440, 834 and 390 px. **51
+  measurements, all pass** (lowest 4.69:1 against 4.5). It caught three real
+  problems, all fixed:
+  - the Restaurants hero text on phones and tablets, over bright dusk light;
+  - the "What the guest sees" label;
+  - the Hotels hero overlay, which hid the film entirely.
+- Responsive sweep: 13 pages × 1440/834/390/320 px. No horizontal scroll, no
+  console errors. A 320 px clip of the three-card row in "How it works" was
+  fixed.
+- Lighthouse (mobile, simulated slow 4G, local, two runs each):
+  - Performance: Home 91–96, Restaurants 91–93, Hotels 94–98, Informax Cloud
+    95–98.
+  - Accessibility, best practices and SEO: 100.
+  - CLS 0; LCP 2.3–3.4 s.
+  - The first pass with films scored 88–93. Two changes recovered it: films
+    wait for page load and idle, and posters lost their high fetch priority.
+- Enquiry end to end (mocked Resend): success shown, one correct request.
+- Not verified: real iPhone/Safari playback (WebM falls back to MP4
+  automatically where VP9 is unsupported), the live preview, the licences.
 - `npx tsc --noEmit`, `npm run lint`, `npm run build`: clean.
   `VERCEL_ENV=production npx next build` stops on the photography guard, as
   intended (and will until the nine photographs are recorded).
@@ -348,8 +412,8 @@ Every item below was actually run; nothing is reported that was not.
 - The git half was rehearsed on 21 October 2026 (see Verification).
 
 ### Needs the owner's decision
-- Put the ten stock clips in `media/source/` (or allow `videos.pexels.com` and
-  `www.pexels.com`), confirm their licences; or supply nine licensed photographs.
+- Supply the chef (19905887) and spa (6187887) clips; confirm the Pexels licence
+  of each clip used (or allow `www.pexels.com` here so a session can check).
 - Approve the final preview, then explicitly approve the merge to `main`.
 - LinkedIn address (still empty). Pricing stays unpublished (§5).
 

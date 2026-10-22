@@ -41,6 +41,10 @@ export type VideoSlot = {
   /** CSS object-position: keep the subject visible when the frame is cropped (desktop, then phone). */
   focus: string;
   focusMobile?: string;
+  /** "loop" (crossfade, default), "pingpong" (forward then reverse) or "once" (plays once, holds the last frame). */
+  mode?: "loop" | "pingpong" | "once";
+  /** What the footage actually shows, and anything to watch for. */
+  notes?: string;
   /** Excluded slots are documented but not built or shown. */
   excluded?: string;
 };
@@ -56,13 +60,17 @@ export type VideoAsset = {
   mp4Mobile: string;
   webmMobile: string;
   poster: string;
+  /** "once" films: the last frame, for still uses of the clip (the poster stays the film's first frame). */
+  still?: string;
   width: number;
   height: number;
   duration: number;
+  /** False for "once" films: play through, then hold the last frame. */
+  loop?: boolean;
   posterMobile: string;
   mobileWidth: number;
   mobileHeight: number;
-  bytes: Record<"mp4" | "webm" | "mp4Mobile" | "webmMobile" | "poster" | "posterMobile", number>;
+  bytes: Record<"mp4" | "webm" | "mp4Mobile" | "webmMobile" | "poster" | "posterMobile", number> & { still?: number };
 };
 
 export const VIDEO_ASSETS = generated as Partial<Record<VideoKey, VideoAsset>>;

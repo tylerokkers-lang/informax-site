@@ -53,7 +53,7 @@ export default function HotelShowcase({ as = "section", heading = "h2" }: { as?:
       {heroFilm ? (
         <>
           <Photo slot="hotelSuite" fill motion priority label={false} />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,22,38,0.88)_0%,rgba(13,22,38,0.8)_40%,rgba(13,22,38,0.96)_75%,#0d1626_100%)]" aria-hidden />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,22,38,0.88)_0%,rgba(13,22,38,0.8)_40%,rgba(13,22,38,0.96)_75%,#0d1626_100%)] md:bg-[linear-gradient(180deg,rgba(13,22,38,0.8)_0%,rgba(13,22,38,0.72)_40%,rgba(13,22,38,0.96)_70%,#0d1626_100%)]" aria-hidden />
         </>
       ) : null}
       <div className="relative mx-auto max-w-8xl px-6 md:px-10">
