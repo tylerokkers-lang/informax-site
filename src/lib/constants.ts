@@ -66,7 +66,7 @@ export const ENQUIRY_INTERESTS = [
   "Restaurant menus",
   "Hotel guest directory",
   "Spa & wellness",
-  "Access Points",
+  "Scan Points",
   "Informax Cloud",
   "Something else",
   "Not sure yet",

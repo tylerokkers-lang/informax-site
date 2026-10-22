@@ -23,7 +23,7 @@ const USES = [
     how: "Change restaurant times or anything else without reprinting the directory.",
   },
   {
-    title: "Spa Access Points",
+    title: "Spa Scan Points",
     what: "A Code in the guest bathroom opens spa treatments and offers.",
     how: "Promote an offer with an end time; the treatment menu comes back afterwards.",
   },
@@ -188,7 +188,7 @@ export default function HotelsPage() {
                 Update every bathroom at once. <span className="text-ink-mute">Or every bedside.</span>
               </h2>
               <p className="mt-6 max-w-[32rem] text-[17.5px] leading-relaxed text-ink-soft">
-                Group your Access Points by type, such as Bathroom, Coffee Table or Bedside Table, then publish one PDF or website to
+                Group your Scan Points by type, such as Bathroom, Coffee Table or Bedside Table, then publish one PDF or website to
                 all of them. Every Code stays the same, each keeps its own history, and you can undo it afterwards.
               </p>
               <div className="mt-5 max-w-[32rem]">
@@ -204,7 +204,7 @@ export default function HotelsPage() {
                 Organised the way your hotel is.
               </h3>
               <p className="mt-5 max-w-[30rem] text-[17.5px] leading-relaxed text-ink-soft">
-                Bedrooms, the spa, restaurants and public areas each hold their own Access Points. At a glance you can see what is
+                Bedrooms, the spa, restaurants and public areas each hold their own Scan Points. At a glance you can see what is
                 live, what is temporary and what still needs setting up.
               </p>
               <div className="mt-5 max-w-[30rem]">

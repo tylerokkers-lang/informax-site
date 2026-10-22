@@ -93,7 +93,7 @@ function overview(i: "hotel" | "restaurant") {
   const sp = (id: string, name: string, parent: string | null) => ({ id, name, parent_id: parent, status: "active" as const });
   const hotel = i === "hotel";
   const spaces = hotel
-    // Every area holds at least two Access Points: an area with exactly one triggers the Quick access bug (HANDOVER.md §0c).
+    // Every area holds at least two Scan Points: an area with exactly one triggers the Quick access bug (HANDOVER.md §0c).
     ? [sp("bed", "Bedrooms", null), sp("ct", "Coffee Table", "bed"), sp("bath", "Bathroom", "bed"), sp("bs", "Bedside Table", "bed"), sp("spa", "Spa", null), sp("spa-e", "Spa Entrance", "spa"), sp("spa-r", "Relaxation Room", "spa"), sp("rest", "The Garden Room", null), sp("gr", "Restaurant Menu", "rest"), sp("wl", "Wine List", "rest"), sp("pub", "Public Areas", null), sp("rec", "Reception", "pub"), sp("lob", "Lobby Lounge", "pub")]
     : [sp("main", "Main Restaurant", null), sp("menu", "Restaurant Menu", "main"), sp("drinks", "Drinks Menu", "main"), sp("ter", "Terrace", null), sp("tmenu", "Terrace Menu", "ter"), sp("bar", "Bar", null), sp("wine", "Wine List", "bar")];
   const leaf = spaces.filter((x) => !spaces.some((y) => y.parent_id === x.id));

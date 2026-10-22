@@ -11,6 +11,9 @@ redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
 
+## 0d. Terminology: "Scan Point" (22 October 2026, branch `website/scan-point-terminology`)
+Customer-facing wording changed from "Access Point" to **Scan Point(s)** (pages, alt text, screen captions, QA assertions, the physical-object component's label). Code identifiers and file names (`AccessPoint.tsx`) are unchanged. **Not changed:** the Informax Cloud screenshots in `public/` and `media/` were captured with the older product wording and still show "Access Point" inside the images; recapture them from Cloud (`docs/cloud-captures/`) once Cloud's Scan Point build is on a preview. Merging deploys to production (§4): needs the owner's approval.
+
 ## 0c. Restaurant-first redesign (20 to 21 October 2026): branch, NOT live
 
 **Status: not ready for production.** Built, tested and pushed on branch
