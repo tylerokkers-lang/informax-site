@@ -27,8 +27,20 @@ import slots from "../../media/videos.json";
 export type VideoSlot = {
   /** The original file name, as supplied. */
   file: string;
-  /** Where the clip came from (to be confirmed). */
-  page: string;
+  /** The clip's original listing, once the owner has confirmed it shows this footage. `null` = source not identified. */
+  page: string | null;
+  /** The listing the file name claimed, when it was found not to match (kept for the record only). */
+  filenameClaim?: string;
+  /** Why `page` is null, or how the source was confirmed (older free-text field). */
+  sourceStatus?: string;
+  /** "owner-checked" (owner reviewed the link), "verified" (independently opened), "unknown" (listing not found) or "mismatch" (known wrong). */
+  sourceUrlStatus?: string;
+  /** The licence's own terms, e.g. https://www.pexels.com/license/. */
+  licenceUrl?: string;
+  /** Documented origin of the file: who said what, when, and what supports or contradicts it. */
+  provenance?: { basis: "owner-declaration" | "verified-listing"; declaredOn: string; declaredBy: string; statement: string; supportingEvidence: string[]; contradictingEvidence?: string[] };
+  /** People, branding and endorsement review. Only "cleared" can reach production. */
+  rightsReview?: { status: "cleared" | "unresolved" | "not-used"; peopleAndBranding: string; conditions: string; reviewedOn: string };
   licence: string;
   licenceVerified: boolean;
   /** Plain description for alt text and captions. Check it against the footage. */
@@ -84,5 +96,23 @@ export const VIDEO_ASSETS = generated as Partial<Record<VideoKey, VideoAsset>>;
 /** A clip the site may show: generated, not excluded. */
 export const videoAsset = (k: VideoKey): VideoAsset | null => ((VIDEOS[k] as VideoSlot).excluded ? null : VIDEO_ASSETS[k] ?? null);
 
-/** Ready for production: generated AND its licence confirmed. */
-export const videoReady = (k: VideoKey) => Boolean(videoAsset(k) && VIDEOS[k].licenceVerified);
+/**
+ * Ready for production: the film is built AND its licence is cleared. Cleared means `licenceVerified` with a documented
+ * `provenance` (an independently opened listing, or the owner's declaration), the licence's URL, a `rightsReview` of
+ * "cleared" (people, branding, endorsement), no contradicting evidence, and a source URL that is not known to be wrong.
+ * An owner declaration is accepted as provenance; a contradicted or unreviewed one is not. `npm run media:licences` checks
+ * the manifest against the same rules.
+ */
+export const videoCleared = (k: VideoKey): boolean => {
+  const v = VIDEOS[k] as VideoSlot;
+  return Boolean(
+    v.licenceVerified &&
+      v.provenance &&
+      !v.provenance.contradictingEvidence?.length &&
+      v.licenceUrl &&
+      v.rightsReview?.status === "cleared" &&
+      !/^mismatch/.test(v.sourceUrlStatus ?? "") &&
+      (v.page === null || /^https:\/\/www\.pexels\.com\/video\//.test(v.page)),
+  );
+};
+export const videoReady = (k: VideoKey) => Boolean(videoAsset(k) && videoCleared(k));

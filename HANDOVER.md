@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026 (all ten clips handled; only the licence checks remain before launch, see §0c). **Read §0c first**: a complete restaurant-first
+Last updated: 22 October 2026 (four of eight clips cleared; four have unresolved provenance and block production, see §0c). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -17,6 +17,65 @@ serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 `redesign/restaurant-first`. `main`, informax.co.uk, DNS, environment
 variables and Informax Cloud were not touched. **Do not merge to `main`
 without the owner's explicit approval**: merging deploys to production (§4).
+
+### Media licensing decision (22 October 2026): four clips cleared, four not
+**Verdict: NO-GO for production until four clips are resolved.** The website,
+tests and safeguards are all complete; four of the eight videos have a
+provenance problem that an owner declaration cannot fix on its own.
+
+The owner declared that the videos were downloaded from Pexels
+(https://www.pexels.com/license/). That is recorded as owner-provided
+provenance in `media/videos.json` (`provenance`), kept separate from any
+independently verified source URL: no listing page could be opened from this
+environment (Cloudflare challenge; see below), so **no source URL is
+independently verified**. The process now accepts an owner declaration as
+sufficient provenance (see `media/README.md` §3) and `npm run media:licences`
+audits it.
+
+| Clip | File | Where used | Source URL | Status |
+|---|---|---|---|---|
+| Dining table | 2174411 | Restaurants hero | https://www.pexels.com/video/2174411/ (owner-checked) | **Cleared** (owner declaration; original-encoder file; no people or branding) |
+| Fine dining | 3769032 | Restaurants "Every table" | https://www.pexels.com/video/3769032/ (owner-checked) | **Cleared** (hands and torso only; condition: never imply a customer) |
+| Chef | 19905887 | Restaurants kitchen band | https://www.pexels.com/video/19905887/ (owner-checked) | **Cleared** (hands only) |
+| Spa | 6187887 | Hotels spa story | https://www.pexels.com/video/6187887/ (owner-checked) | **Cleared** (faces not visible; condition: never imply the people are staff or endorsers) |
+| Restaurant interior | 13476222 | Home hero | **Unknown** (file-name ID is wrong) | **Not cleared** |
+| Hotel room | 15358608 | Hotels hero | **Unknown** (file-name ID is wrong) | **Not cleared** |
+| Bedside | 12680170 | Bedroom Access Points | **Unknown** (file-name ID is wrong) | **Not cleared** |
+| Bathroom | 14983318 | Bathroom Access Points | **Unknown** (file-name ID is wrong) | **Not cleared** |
+
+"Owner-checked" means the owner reviewed the source links on 22 Oct 2026 and
+reported only four as incorrect. It is the owner's check, not an independent
+one.
+
+**Why the four are not cleared.** The owner opened the Pexels page for each
+file name's ID and it showed different footage. And the files are not
+original downloads: all four share one fingerprint (re-encoded with FFmpeg
+6.1, `Lavc60.31.102`, no creation date or vendor tags, an extra empty data
+stream), unlike the four cleared files, which carry original-encoder
+fingerprints (`AVC Coding`, L-SMASH or Apple Core Media). So the declaration
+that they came from Pexels cannot be matched to any listing, and the files
+passed through another tool or platform whose licence terms are unknown.
+That is a contradiction in the evidence, not only a missing page, so they
+stay blocked. Web searches by description found only unconfirmable
+candidates; none is recorded as a source.
+
+Leads to check by eye (unconfirmed; nothing here is recorded as a source): the
+hotel-room clip may be a Pexels listing such as "Shot of a Hotel Room with an
+Open Door" (https://www.pexels.com/video/shot-of-a-hotel-room-with-an-open-door-7507165/,
+cottonbro studio). The other three had no usable lead.
+
+**What clears them (any one):**
+1. Re-download each of the four from its true Pexels page (the files then
+   carry the right ID and an original fingerprint); send them and Claude
+   builds, reviews and records them (about 15 minutes).
+2. Replace them with other footage with a verifiable licence, same process.
+3. The owner records an explicit risk acceptance for the unresolved
+   provenance (the process does not yet have this path; say so and it will be
+   added and documented, so the decision is the owner's and on the record).
+
+Guard today (real state, no overrides): `VERCEL_ENV=production` stops,
+listing `restaurantRoom, hotelLounge, hotelBathroom, hotelSuite` (the four
+slots that depend on the uncleared clips).
 
 ### Launch-phase update (22 October 2026): all ten clips handled; one blocker left, the licences
 **Verdict: still NO-GO, for one external reason: no clip licence could be
@@ -266,9 +325,9 @@ verified. Simulated with every licence marked verified, the production build
 completes (simulated, then reverted; nothing committed).
 
 ### Launch blockers
-1. **Footage licences (the only hard blocker).** Verify the licence of the
-   eight clips the site uses (see the launch-phase update above; that alone
-   clears the guard). The alternative is
+1. **Four clips with unresolved provenance (the only hard blocker).**
+   Restaurant interior, hotel room, bedside and bathroom (see "Media
+   licensing decision" above; resolving those four clears the guard). The alternative is
    photographs for the remaining slots in
    `src/lib/photography.ts`, specified in `docs/photography-brief.md`. Still
    placeholders because the build environment's network policy refuses every
@@ -565,9 +624,9 @@ Every item below was actually run; nothing is reported that was not.
 - The git half was rehearsed on 21 October 2026 (see Verification).
 
 ### Needs the owner's decision
-- Confirm the Pexels licence of each of the eight clips used (open each page
-  listed in `media/videos.json` in a browser), then tell Claude, or set
-  `licenceVerified: true` and replace `licence` with what the page states.
+- Resolve the four uncleared clips (re-download them from their true Pexels
+  pages, replace them, or record an explicit risk acceptance; see "Media
+  licensing decision").
 - Approve the final preview, then explicitly approve the merge to `main`.
 - LinkedIn address (still empty). Pricing stays unpublished (§5).
 

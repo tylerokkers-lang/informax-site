@@ -66,15 +66,33 @@ away third-party branding; restaurantInterior uses it), `alt`,
 After building, run the QA in `docs/qa/` (video-checks and film-contrast in
 particular: a new clip can make hero text unreadable).
 
-## 3. Confirm the licences
+## 3. Licences: the clearance process
 
-Each clip is presumed to be from Pexels (the file names follow Pexels'
-download naming) under the Pexels Licence: free for commercial use, no
-attribution required, and it must not suggest endorsement by the people,
-brands or places shown. Open each `page` in `media/videos.json`, confirm the
-clip matches, then set `licenceVerified` to `true` and replace the `licence`
-text with what the page states. **A production build refuses to run** while
-any clip the site uses is unverified (`next.config.ts`).
+Clips are free stock under the Pexels Licence (https://www.pexels.com/license/):
+free for commercial use, editing and cropping allowed, no attribution needed;
+not allowed: selling unaltered copies, implying endorsement by the people, brands
+or places shown, or showing identifiable people in a bad light. Never name or
+imply a real venue: the footage illustrates use cases, not Informax customers.
 
-Never name or imply a real venue: the footage illustrates use cases, not
-Informax customers.
+A clip may be used in production when `media/videos.json` documents, and
+`videoCleared()` in `src/lib/videos.ts` accepts:
+
+1. **Provenance** (`provenance`): either an independently opened listing
+   (`basis: "verified-listing"`) or the owner's dated declaration of where the
+   file came from (`basis: "owner-declaration"`), with the evidence that
+   supports it. An owner declaration is sufficient on its own **unless
+   something contradicts it** (`contradictingEvidence`), such as a file name
+   whose ID shows different footage, or a file that was re-encoded rather than
+   downloaded as an original.
+2. **The licence's URL** (`licenceUrl`).
+3. **A people, branding and endorsement review** (`rightsReview.status:
+   "cleared"`, with any conditions).
+4. **A source URL that is not known to be wrong.** `page` is either a real
+   listing URL or `null` (unknown). Never invent one. A wrong file-name ID is
+   recorded in `filenameClaim` and never reused as the source.
+5. `licenceVerified: true`.
+
+`npm run media:licences` prints every clip's status and fails if a clip is
+marked verified without the above. A `VERCEL_ENV=production` build refuses to
+run while any slot the site uses depends on an uncleared clip (`next.config.ts`).
+Do not weaken either; fix the evidence.

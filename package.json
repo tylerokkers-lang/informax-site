@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "media:build": "node scripts/media/build-videos.mjs",
-    "media:review": "node scripts/media/build-videos.mjs --review"
+    "media:review": "node scripts/media/build-videos.mjs --review",
+    "media:licences": "node scripts/media/check-licences.mjs"
   },
   "dependencies": {
     "framer-motion": "^13.1.1",
