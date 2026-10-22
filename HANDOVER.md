@@ -39,6 +39,18 @@ build):
    `media/videos.json` (`licenceCheck`).
 3. Owner review of the preview, then explicit approval to merge.
 
+**Retrieval re-tried, 22 October 2026 (launch phase):**
+- `www.pexels.com` is now reachable through the proxy, but Pexels answers
+  with a Cloudflare bot challenge (HTTP 403, `cf-mitigated: challenge`, "Just
+  a moment..."). In a real browser the challenge cannot complete, because its
+  script host `challenges.cloudflare.com` is refused by this environment's
+  network policy.
+- `videos.pexels.com` (the video files) and `api.pexels.com` are still refused
+  at the proxy (CONNECT 403).
+- No new uploads in the session. Not retried further.
+- Re-ran the full QA on a clean build of `16043c9`: all green. The guard
+  still stops production, as intended.
+
 Simulated with every licence marked verified (then reverted), the guard lists
 only `chefPass` and `spaTreatment`. So once the two clips are built and the
 licences are confirmed, the guard passes.
