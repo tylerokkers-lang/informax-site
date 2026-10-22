@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { PHOTOS, type PhotoKey } from "@/lib/photography";
+import CinematicVideo from "@/components/site/CinematicVideo";
+import { PHOTOS, slotVideo, type PhotoKey } from "@/lib/photography";
 
 const TONES: Record<(typeof PHOTOS)[PhotoKey]["tone"], string> = {
   candle:
@@ -17,10 +18,10 @@ const TONES: Record<(typeof PHOTOS)[PhotoKey]["tone"], string> = {
 };
 
 /**
- * One photograph slot. Until a licensed photograph is supplied for the slot
- * (src/lib/photography.ts), it renders the scene's light as a soft gradient
- * with a visible "Photograph to come" label, so a placeholder can never be
- * mistaken for a finished page.
+ * One photograph slot. It shows, in order of preference: a licensed photograph,
+ * the slot's stock video (its poster as a still, or the film itself with
+ * `motion`), or a soft gradient with a visible "Photograph to come" label, so a
+ * placeholder can never be mistaken for a finished page.
  */
 export default function Photo({
   slot,
@@ -29,6 +30,7 @@ export default function Photo({
   priority = false,
   label = true,
   fill = false,
+  motion = false,
 }: {
   slot: PhotoKey;
   className?: string;
@@ -38,9 +40,34 @@ export default function Photo({
   label?: boolean;
   /** Cover the nearest positioned parent instead of sizing itself. */
   fill?: boolean;
+  /** Play the slot's stock video here (when built) instead of showing its poster. Use sparingly: heroes and the active scene only. */
+  motion?: boolean;
 }) {
   const p = PHOTOS[slot];
   const box = `${fill ? "absolute inset-0" : "relative"} overflow-hidden ${className}`;
+  const v = p.src ? null : slotVideo(slot);
+  if (v && motion) {
+    return (
+      <div className={box}>
+        <CinematicVideo slot={v.key} asset={v.asset} alt={v.slot.alt} focus={v.slot.focus} priority={priority} />
+      </div>
+    );
+  }
+  if (v) {
+    return (
+      <div className={box}>
+        <Image
+          src={v.asset.poster}
+          alt={v.slot.alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+          style={{ objectPosition: v.slot.focus }}
+        />
+      </div>
+    );
+  }
   if (p.src) {
     return (
       <div className={box}>

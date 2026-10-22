@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const USES = [
   {
     title: "Digital hotel directory",
-    what: "A permanent Code on the coffee table opens your hotel information.",
+    what: "A permanent Code in each room, on the bedside or coffee table, opens your hotel information.",
     how: "Change restaurant times or anything else without reprinting the directory.",
   },
   {
@@ -86,7 +86,7 @@ export default function HotelsPage() {
       <Story
         id="directory"
         tone="alt"
-        eyebrow="The coffee-table directory"
+        eyebrow="The in-room directory"
         title="Restaurant hours changed?"
         soft="Every room knows."
         media={
@@ -106,7 +106,7 @@ export default function HotelsPage() {
         }
       >
         <p>
-          A Code card on the coffee table opens your guest directory: dining times, in-room dining, the spa and how to reach
+          A Code card in each room, on the bedside or coffee table, opens your guest directory: dining times, in-room dining, the spa and how to reach
           reception. No app to download, nothing to sign in to.
         </p>
         <p>
@@ -121,14 +121,18 @@ export default function HotelsPage() {
         title="Fill the spa this afternoon."
         soft="Then put it back."
         media={
-          <div className="mx-auto flex max-w-[520px] items-end justify-center gap-4 sm:gap-6">
-            <div className="w-1/2">
-              <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-mute">Guest&rsquo;s phone</p>
-              <Phone screens={["guestSpaOffer"]} tone="light" sizes="260px" />
-            </div>
-            <div className="w-1/2 sm:-mb-8">
-              <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-mute">Informax Cloud</p>
-              <Phone screens={["cloudSpaTemporary"]} tone="light" sizes="260px" />
+          <div className="relative overflow-hidden rounded-[24px] bg-charcoal-950">
+            <Photo slot="spaTreatment" fill motion sizes="(min-width: 1024px) 560px, 100vw" label={false} />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.15)_0%,rgba(6,10,18,0.55)_100%)]" aria-hidden />
+            <div className="relative mx-auto flex max-w-[460px] items-end justify-center gap-4 px-6 pb-8 pt-10 sm:gap-6">
+              <div className="w-1/2">
+                <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85">Guest&rsquo;s phone</p>
+                <Phone screens={["guestSpaOffer"]} sizes="230px" />
+              </div>
+              <div className="w-1/2">
+                <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85">Informax Cloud</p>
+                <Phone screens={["cloudSpaTemporary"]} sizes="230px" />
+              </div>
             </div>
           </div>
         }

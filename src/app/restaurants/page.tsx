@@ -20,7 +20,7 @@ export default function RestaurantsPage() {
   return (
     <>
       <header className="relative min-h-[100svh] overflow-hidden bg-charcoal-950 text-cream">
-        <Photo slot="signatureDish" fill priority className="opacity-90" />
+        <Photo slot="restaurantTable" fill motion priority className="opacity-90" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.15)_100%)]" aria-hidden />
         <div className="relative mx-auto grid min-h-[100svh] max-w-8xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-[120px] md:px-10 lg:grid-cols-[1fr_auto]">
           <div className="ix-hero-rise max-w-[44rem]">
@@ -51,6 +51,24 @@ export default function RestaurantsPage() {
           </div>
         </div>
       </header>
+
+      {/* The moment it starts: the chef film, full width. */}
+      <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
+        <Photo slot="chefPass" fill motion sizes="100vw" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
+        <div className="relative mx-auto flex min-h-[70svh] max-w-8xl items-end px-6 pb-16 pt-28 md:min-h-[78vh] md:px-10 md:pb-24">
+          <div className="max-w-[38rem]">
+            <p className="mb-4 text-[15px] font-semibold text-brass-light">During dinner service</p>
+            <h2 id="kitchen-h" className="text-balance font-serif-display text-[clamp(34px,4.8vw,62px)] leading-[1.02] text-white">
+              The sea bass is finished. <span className="text-cream-mute">The hake is ready to serve.</span>
+            </h2>
+            <p className="mt-6 max-w-[32rem] text-[18px] leading-relaxed text-white/80">
+              The kitchen has the replacement dish. The printed menus on the tables don&rsquo;t know that yet. With Informax, the
+              menu every guest opens changes in the time it takes to upload one file.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <MenuBeforeAfter />
 
@@ -103,7 +121,7 @@ export default function RestaurantsPage() {
         soft="As many copies as you like."
         media={
           <div className="relative overflow-hidden rounded-[28px]">
-            <Photo slot="restaurantRoom" fill sizes="(min-width: 1024px) 560px, 100vw" />
+            <Photo slot="signatureDish" fill sizes="(min-width: 1024px) 560px, 100vw" />
             <div className="absolute inset-0 bg-black/25" aria-hidden />
             <div className="relative flex flex-wrap items-end justify-center gap-4 px-6 pb-16 pt-14 sm:gap-5">
               <AccessPoint place="Restaurant Menu" sub="Main Restaurant" size="md" />

@@ -37,8 +37,81 @@ without the owner's explicit approval**: merging deploys to production (§4).
    never fabricate interfaces or conceal known application bugs (the Quick
    access bug and how the captures avoid triggering it are recorded below).
 
+### Stock video (22 October 2026): pipeline built, footage NOT yet in the repo
+Ten stock clips were named for the site. **None of the files reached this
+build environment.** They are not in the repo, on any branch, or on the
+filesystem, and `videos.pexels.com` / `www.pexels.com` are blocked by the
+network policy. So no real footage is integrated yet: every slot still shows
+its labelled placeholder, exactly as before. Everything around the footage is
+built and was tested end to end with stand-in clips of the same names,
+resolutions and frame rates (generated locally, never committed).
+
+**To finish (about 15 minutes of machine time):** put the ten originals,
+under their original names, in `media/source/` (git-ignored), then
+`npm run media:review` (contact sheets to check content and framing),
+`npm run media:build`, check each page, confirm each licence page and set
+`licenceVerified: true` in `media/videos.json`, then commit `public/video/stock/`
+and `src/lib/video-assets.json`. Full steps: `media/README.md`. To do it in a
+cloud session, allow `videos.pexels.com` and `www.pexels.com` in the
+environment's network settings.
+
+**Placement** (`media/videos.json` → `src/lib/photography.ts` slot → page).
+"Film" plays muted on a loop; "Poster" is the clip's first frame as a still.
+Five films only, never two at once: fewer, stronger moments.
+
+| Clip | Slot | Where | Use |
+|---|---|---|---|
+| 13476222 restaurant interior | restaurantInterior → restaurantRoom | Homepage hero, full-bleed behind the headline, navy overlay | Film |
+| 2174411 dining table | diningTable → restaurantTable | Restaurants hero | Film |
+| 19905887 chef | chef → chefPass | Restaurants: "The sea bass is finished. The hake is ready to serve." band before the menu change | Film |
+| 3769032 fine dining | fineDining → signatureDish | Restaurants "Every table" panel; Possibilities restaurant card | Poster |
+| 15358608 hotel bedroom | hotelBedroom → hotelSuite | Hotels hero background; Possibilities hotel card | Film (hero) / Poster |
+| 12680170 bedside | bedside → hotelLounge | Bedroom Access Points (in-room directory) | Poster |
+| 14983318 bathroom | bathroom → hotelBathroom | Bathroom Access Points | Poster |
+| 6187887 spa | spa → spaTreatment | Hotels spa promotions story, phones over the film | Film |
+| 6278838 smartphone | smartphone → hospitalityTeam | Digital guest experience / manager step | Poster |
+| 15018462 staircase | staircase | **Excluded**: portrait 2160×3840 and not tied to a use case (decorative motion) | None |
+
+Focus points (`focus`, `focusMobile`) are 50% 50% (chef 50% 40%) until the
+real footage is seen; adjust them after `media:review`. Alt text describes
+the intended scene and must be re-read against each real clip.
+
+**Licences and provenance.** The file names follow Pexels' download naming,
+so each is *presumed* to be under the Pexels Licence (commercial use, no
+attribution required, must not imply endorsement by people, brands or places
+shown). **Not verified**: pexels.com is blocked here. Every clip is recorded
+as `licenceVerified: false` with its Pexels page URL. Stock footage
+illustrates use cases; the site never names or implies a venue or customer.
+
+**How it plays** (`src/components/site/CinematicVideo.tsx`): the poster
+(the encoded film's exact first frame) is always rendered first, so there is
+no layout shift and the page works with video off. The film is fetched only
+within about a screen of the viewport; only the most visible film plays
+(global arbiter); muted, loop, playsInline, no controls, `aria-hidden` (the
+poster carries the alt text). Reduced motion or Data Saver: poster only, no
+video request. Phones (≤767 px) get a 720×960 portrait crop around
+`focusMobile`; desktop gets 16:9 at most 1920×1080 positioned on `focus`.
+Each browser takes the smaller of WebM (VP9) and MP4 (H.264, faststart).
+Every film with text over it sits under a navy gradient so white text keeps WCAG contrast.
+
+**Encoding** (`scripts/media/build-videos.mjs`): no audio; seamless loop
+(1 s crossfade from the end into the start); desktop H.264 CRF 24 capped at
+3 Mbit/s, VP9 CRF 35 capped at 2.5 Mbit/s; phone H.264 CRF 26 capped at
+1.2 Mbit/s, VP9 CRF 37 capped at 1 Mbit/s; JPEG posters.
+
+**Production guard:** `VERCEL_ENV=production` builds stop unless every image
+slot has a licensed photograph OR a built clip with `licenceVerified: true`
+(`next.config.ts`, `PENDING_SLOTS` in `src/lib/photography.ts`). So the
+footage alone, once built and verified, unblocks launch; no photographs are
+then required.
+
+**End-to-end check with stand-in clips:** in progress at the time of this commit; results are recorded in the next update of this section.
+
+
 ### Launch blockers
-1. **Photography (the only hard blocker).** Nine slots in
+1. **Footage or photography (the only hard blocker).** Either build the ten
+   supplied stock clips with verified licences (see "Stock video" above;
+   this alone clears the guard), or supply photographs for the nine slots in
    `src/lib/photography.ts`, specified in `docs/photography-brief.md`. Still
    placeholders because the build environment's network policy refuses every
    photo source (re-checked 22 October 2026: `images.unsplash.com`,
@@ -216,8 +289,7 @@ Every item below was actually run; nothing is reported that was not.
   intended (and will until the nine photographs are recorded).
 - **Test suite** (`docs/qa/test-site.mjs`): **112 checks, all pass.** Adds,
   since 21 October: only the customer log-in links to informax.cloud on any of
-  the 9 tested pages and no Coming Soon call to action does; "See what it will
-  offer", "Ask about Informax Cloud" (→ `/enquire?interest=informax-cloud`),
+  the 9 tested pages and no Coming Soon call to action does; "See How It Works", "Ask about Informax Cloud" (→ `/enquire?interest=informax-cloud`),
   the existing-customer note, "How it will work" and "What it will offer";
   the header log-in is smaller than and unfilled next to Request a Demo; the
   enquiry prefill works and ignores unknown values; no launch-date wording.
@@ -276,7 +348,8 @@ Every item below was actually run; nothing is reported that was not.
 - The git half was rehearsed on 21 October 2026 (see Verification).
 
 ### Needs the owner's decision
-- Unblock photography (network allow-list) or supply the nine licensed files.
+- Put the ten stock clips in `media/source/` (or allow `videos.pexels.com` and
+  `www.pexels.com`), confirm their licences; or supply nine licensed photographs.
 - Approve the final preview, then explicitly approve the merge to `main`.
 - LinkedIn address (still empty). Pricing stays unpublished (§5).
 

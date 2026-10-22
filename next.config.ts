@@ -1,13 +1,14 @@
 import type { NextConfig } from "next";
-import { PHOTOGRAPHY_PENDING } from "./src/lib/photography";
+import { PENDING_SLOTS } from "./src/lib/photography";
 
 // Launch guard: a production deployment must never show "Photograph to come"
-// placeholders or a photograph without a recorded licence. Vercel keeps the
-// current production site when this build fails. Preview builds are not
-// affected. See HANDOVER.md §0c.
-if (process.env.VERCEL_ENV === "production" && PHOTOGRAPHY_PENDING) {
+// placeholders, a photograph without a recorded licence, or a stock video whose
+// licence has not been verified. Vercel keeps the current production site when
+// this build fails. Preview builds are not affected. See HANDOVER.md §0c and
+// media/README.md.
+if (process.env.VERCEL_ENV === "production" && PENDING_SLOTS.length > 0) {
   throw new Error(
-    "Production build stopped: src/lib/photography.ts still has photo slots without a photograph, licence and source.",
+    `Production build stopped: these image slots have no licensed photograph and no built, licence-verified video: ${PENDING_SLOTS.join(", ")}. See media/README.md.`,
   );
 }
 

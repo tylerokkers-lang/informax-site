@@ -9,6 +9,7 @@ then run the scripts from there), and a Chromium (`CHROMIUM=/path/to/chrome`).
 npm run build && npx next start -p 3200
 BASE=http://localhost:3200 AXE_JS=<path>/axe.min.js node docs/qa/test-site.mjs        # functional, links, axe, copy rules
 BASE=http://localhost:3200 node docs/qa/responsive-sweep.mjs <out-dir>                  # 1440/834/390/320, overflow, console errors
+BASE=http://localhost:3200 node docs/qa/video-checks.mjs                                # films: lazy loading, one at a time, reduced motion, phone files (SKIP until built)
 ```
 
 Enquiry end to end without sending email: start the production build with a

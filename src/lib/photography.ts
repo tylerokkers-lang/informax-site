@@ -10,6 +10,8 @@
  * in public/photos/, set `src`, `width`, `height`, `licence` and `source`,
  * and check the `alt` text still describes it.
  */
+import { VIDEOS, videoAsset, videoReady, type VideoKey } from "./videos";
+
 export type PhotoSlot = {
   src: string;
   width: number;
@@ -29,6 +31,12 @@ export type PhotoSlot = {
    * place over the photograph, so there are never two.
    */
   showsAccessPoint?: boolean;
+  /**
+   * The supplied stock video for this scene (src/lib/videos.ts). Once its web
+   * versions are built, still uses show its poster and `motion` uses play it.
+   * A finished photograph (`src`) takes precedence for stills.
+   */
+  video?: VideoKey;
 };
 
 const pending = { src: "", licence: "", source: "" };
@@ -36,6 +44,7 @@ const pending = { src: "", licence: "", source: "" };
 export const PHOTOS = {
   restaurantRoom: {
     ...pending,
+    video: "restaurantInterior",
     width: 2400,
     height: 1600,
     alt: "An elegant contemporary restaurant in the evening, tables laid for dinner",
@@ -44,6 +53,7 @@ export const PHOTOS = {
   },
   chefPass: {
     ...pending,
+    video: "chef",
     width: 2400,
     height: 1600,
     alt: "A chef at the pass in a professional kitchen, finishing a dish",
@@ -52,6 +62,7 @@ export const PHOTOS = {
   },
   restaurantTable: {
     ...pending,
+    video: "diningTable",
     width: 2000,
     height: 2500,
     alt: "A restaurant table for two with an Informax Code card beside the glasses",
@@ -60,6 +71,7 @@ export const PHOTOS = {
   },
   signatureDish: {
     ...pending,
+    video: "fineDining",
     width: 2800,
     height: 1800,
     alt: "An editorial photograph of a plated fish dish on a dark ceramic plate",
@@ -68,14 +80,16 @@ export const PHOTOS = {
   },
   hotelLounge: {
     ...pending,
+    video: "bedside",
     width: 2800,
     height: 1600,
-    alt: "A luxury hotel suite with a low coffee table and a Code card beside a book",
-    brief: "Luxury suite sitting area, coffee table with a premium Code card",
+    alt: "A hotel bedside table with a Code card beside the lamp",
+    brief: "Hotel bedside table, soft lamp light, a premium Code card",
     tone: "linen",
   },
   hotelBathroom: {
     ...pending,
+    video: "bathroom",
     width: 2400,
     height: 2400,
     alt: "A marble hotel bathroom with a vanity, folded towels and a small Code card",
@@ -84,6 +98,7 @@ export const PHOTOS = {
   },
   spaTreatment: {
     ...pending,
+    video: "spa",
     width: 2000,
     height: 1500,
     alt: "A calm spa treatment room with soft light and folded towels",
@@ -92,6 +107,7 @@ export const PHOTOS = {
   },
   hotelSuite: {
     ...pending,
+    video: "hotelBedroom",
     width: 2800,
     height: 1600,
     alt: "A premium hotel suite bedroom with a view at dusk",
@@ -100,6 +116,7 @@ export const PHOTOS = {
   },
   hospitalityTeam: {
     ...pending,
+    video: "smartphone",
     width: 2400,
     height: 1600,
     alt: "A restaurant manager checking a phone at the front of house",
@@ -110,11 +127,22 @@ export const PHOTOS = {
 
 export type PhotoKey = keyof typeof PHOTOS;
 
-/** A slot is finished only when it has a photograph AND a recorded licence and source. */
-export const photoReady = (p: PhotoSlot) => Boolean(p.src && p.licence && p.source);
+/**
+ * A slot is finished when it has a photograph with a recorded licence and
+ * source, OR its stock video is built and that video's licence is verified.
+ */
+export const photoReady = (p: PhotoSlot) => Boolean(p.src && p.licence && p.source) || Boolean(p.video && videoReady(p.video));
 
-/** True while any slot still needs its photograph. Production is blocked while this is true. */
-export const PHOTOGRAPHY_PENDING = Object.values(PHOTOS).some((p) => !photoReady(p));
+/** Slots still unfinished. Production is blocked while any remain. */
+export const PENDING_SLOTS = (Object.keys(PHOTOS) as PhotoKey[]).filter((k) => !photoReady(PHOTOS[k] as PhotoSlot));
+export const PHOTOGRAPHY_PENDING = PENDING_SLOTS.length > 0;
+
+/** The video behind a slot, if built (for stills: its poster; for motion: the film). */
+export const slotVideo = (k: PhotoKey) => {
+  const v = (PHOTOS[k] as PhotoSlot).video;
+  const asset = v ? videoAsset(v) : null;
+  return v && asset ? { key: v, asset, slot: VIDEOS[v] } : null;
+};
 
 /** Whether to draw a Code card over this photograph (not when the photograph already shows a real one). */
 export const drawCodeOver = (k: PhotoKey) => !(PHOTOS[k] as PhotoSlot).showsAccessPoint;

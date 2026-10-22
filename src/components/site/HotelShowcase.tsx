@@ -6,12 +6,12 @@ import AccessPoint from "@/components/access/AccessPoint";
 import Photo from "@/components/site/Photo";
 import { Phone } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
-import { drawCodeOver, type PhotoKey } from "@/lib/photography";
+import { drawCodeOver, slotVideo, type PhotoKey } from "@/lib/photography";
 import type { ScreenKey } from "@/lib/screens";
 
 const MOMENTS: { label: string; place: string; line: string; chip: string; photo: PhotoKey; screen: ScreenKey }[] = [
   {
-    label: "Coffee-table directory",
+    label: "In-room directory",
     place: "Suite 401",
     line: "Dinner now starts at 17:30. Replace the directory once and every room has it.",
     chip: "New dinner hours, same Code",
@@ -45,10 +45,18 @@ export default function HotelShowcase({ as = "section", heading = "h2" }: { as?:
   const m = MOMENTS[step];
   const Wrap = as;
   const H = heading;
+  const heroFilm = heading === "h1" ? slotVideo("hotelSuite") : null;
 
   return (
     <Wrap className={`relative overflow-hidden bg-[#0d1626] text-cream ${heading === "h1" ? "pt-[112px] md:pt-[136px]" : "pt-24 md:pt-32"} pb-20 md:pb-28`}>
-      <div className="mx-auto max-w-8xl px-6 md:px-10">
+      {/* On the Hotels page the bedroom film plays behind the whole header (only once its web version exists). */}
+      {heroFilm ? (
+        <>
+          <Photo slot="hotelSuite" fill motion priority label={false} />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,22,38,0.88)_0%,rgba(13,22,38,0.8)_40%,rgba(13,22,38,0.96)_75%,#0d1626_100%)]" aria-hidden />
+        </>
+      ) : null}
+      <div className="relative mx-auto max-w-8xl px-6 md:px-10">
         <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className={heading === "h1" ? "ix-hero-rise" : undefined}>
             <p className="mb-5 text-[15px] font-semibold text-brass-light">Informax Cloud for hotels</p>

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "media:build": "node scripts/media/build-videos.mjs",
+    "media:review": "node scripts/media/build-videos.mjs --review"
   },
   "dependencies": {
     "framer-motion": "^13.1.1",

@@ -70,7 +70,7 @@ export function HowItWorksSteps({ dark = false, level = "h3" }: { dark?: boolean
           <Reveal delay={i * 0.08} className={`flex h-full flex-col overflow-hidden rounded-[24px] ${dark ? "bg-white/[0.04]" : "bg-white shadow-[0_0_0_1px_rgba(11,21,36,0.06)]"}`}>
             <div className={`relative flex h-[260px] items-end justify-center overflow-hidden ${dark ? "bg-white/[0.03]" : "bg-paper-alt"}`}>
               {i === 0 ? (
-                <div className="mb-10 flex items-end gap-3 sm:gap-4">
+                <div className="mb-10 flex origin-bottom items-end gap-3 max-[359px]:scale-[0.8] sm:gap-4">
                   <AccessPoint place="Table 12" sub="Menu" size="sm" />
                   <AccessPoint place="Room 401" sub="Guest Directory" size="sm" colourway="platinum" className="-translate-y-4" />
                   <AccessPoint place="Spa" sub="Treatments" size="sm" colourway="stone" />
@@ -96,7 +96,7 @@ export function HowItWorksSteps({ dark = false, level = "h3" }: { dark?: boolean
 
 const USES: { group: string; photo: PhotoKey; items: string[]; future?: boolean }[] = [
   { group: "Restaurants", photo: "signatureDish", items: ["Menus", "Daily specials", "Drinks and wine lists", "Opening information", "Limited-time menus"] },
-  { group: "Hotels", photo: "hotelLounge", items: ["Guest directories", "Restaurant hours", "Room service menus", "Spa treatment menus", "Guest offers and experiences"] },
+  { group: "Hotels", photo: "hotelSuite", items: ["Guest directories", "Restaurant hours", "Room service menus", "Spa treatment menus", "Guest offers and experiences"] },
   {
     group: "And beyond",
     photo: "spaTreatment",

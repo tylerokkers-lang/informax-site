@@ -108,7 +108,8 @@ ok(await page.getByText("Informax Cloud is currently in development.", { exact: 
 // Owner decision (22 Oct 2026): no Coming Soon call to action may go to informax.cloud while it redirects to the V1 sign-in.
 const cloudLinks = await page.$$eval("main a[href*='informax.cloud']", (as) => as.map((a) => ({ href: a.getAttribute("href"), text: a.textContent.trim() })));
 ok(cloudLinks.every((l) => l.href === "https://informax.cloud/login" && /Customer log in/.test(l.text)), `only the customer log-in links to informax.cloud on the Cloud page (${JSON.stringify(cloudLinks)})`);
-ok(await page.getByRole("link", { name: "See what it will offer" }).first().isVisible(), "hero offers an on-page 'See what it will offer'");
+ok(await page.getByRole("link", { name: "See How It Works" }).first().isVisible(), "hero offers an on-page 'See How It Works'");
+ok((await page.locator("#how-it-works").count()) === 1, "'See How It Works' has an on-page target");
 ok((await page.getByRole("link", { name: "Ask about Informax Cloud" }).first().getAttribute("href")) === "/enquire?interest=informax-cloud", "closing CTA asks about Informax Cloud on this site");
 ok(await page.getByText("Already an Informax customer?", { exact: false }).isVisible(), "existing customers are told their account keeps working");
 for (const t of ["How it will work", "What it will offer"]) ok((await page.getByText(t, { exact: true }).count()) >= 1, `Cloud page has "${t}"`);

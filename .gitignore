@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# stock video sources (4K originals, not committed) and review contact sheets
+/media/source/
+/media/review/

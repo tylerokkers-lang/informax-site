@@ -7,7 +7,7 @@ import Photo from "@/components/site/Photo";
 import { Phone, type Highlight } from "@/components/site/Devices";
 import { useSteps } from "@/components/site/useSteps";
 import { ComingSoonBadge } from "@/components/site/ComingSoon";
-import { drawCodeOver, type PhotoKey } from "@/lib/photography";
+import { drawCodeOver, slotVideo, type PhotoKey } from "@/lib/photography";
 
 /** Where the first main dish sits on the guest's menu (fractions of the screen height, measured from the captures). */
 const DISH = { top: 0.428, height: 0.043 };
@@ -49,10 +49,23 @@ export default function MenuHero() {
   const { ref, step, choose, playing, intervalMs, pauseProps } = useSteps(STEPS.length, 6000);
   const staffFront = step === 1;
   const current = STEPS[step];
+  const heroFilm = slotVideo("restaurantRoom");
 
   return (
     <section className="relative overflow-hidden bg-charcoal-950 pb-16 pt-[112px] text-cream md:pb-24 md:pt-[136px]">
-      <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-brass/15 blur-[140px]" aria-hidden />
+      {/* Cinematic background (the restaurant interior film), only once its web version exists. */}
+      {heroFilm ? (
+        <>
+          <Photo slot="restaurantRoom" fill motion priority label={false} />
+          <div
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,10,18,0.94)_0%,rgba(6,10,18,0.82)_45%,rgba(6,10,18,0.7)_100%)] md:bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_50%,rgba(6,10,18,0.55)_100%)]"
+            aria-hidden
+          />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(0deg,#060a12,transparent)]" aria-hidden />
+        </>
+      ) : (
+        <div className="pointer-events-none absolute -left-40 top-24 h-[520px] w-[520px] rounded-full bg-brass/15 blur-[140px]" aria-hidden />
+      )}
       <div className="relative mx-auto grid max-w-8xl grid-cols-1 items-center gap-12 px-6 md:px-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
         <div className="ix-hero-rise">
           <p className="mb-5 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-light">

@@ -141,8 +141,8 @@ export default function InformaxCloudPage() {
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary">{DEMO_CTA.label}</Link>
-              <a href="#what-it-offers" className="ix-link text-brass-light hover:text-white">
-                See what it will offer <ArrowDown size={16} aria-hidden />
+              <a href="#how-it-works" className="ix-link text-brass-light hover:text-white">
+                See How It Works <ArrowDown size={16} aria-hidden />
               </a>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function InformaxCloudPage() {
       </header>
 
       {/* How Informax and Informax Cloud fit together. */}
-      <section className="bg-paper py-24 md:py-28" aria-labelledby="ecosystem-h">
+      <section id="how-it-works" className="scroll-mt-20 bg-paper py-24 md:py-28" aria-labelledby="ecosystem-h">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Heading
             id="ecosystem-h"
