@@ -6,7 +6,7 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026 (four of eight clips cleared; four have unresolved provenance and block production, see §0c). **Read §0c first**: a complete restaurant-first
+Last updated: 22 October 2026 (LAUNCHED: uncleared clips excluded, cleared clips used; see §0c). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
@@ -17,6 +17,36 @@ serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 `redesign/restaurant-first`. `main`, informax.co.uk, DNS, environment
 variables and Informax Cloud were not touched. **Do not merge to `main`
 without the owner's explicit approval**: merging deploys to production (§4).
+
+### LAUNCH (22 October 2026): owner-authorised merge and deploy
+The owner authorised the production deployment, accepted responsibility for
+the four uncleared clips, and asked that they not be published. So the four
+(restaurant interior `13476222`, hotel room `15358608`, bedside `12680170`,
+bathroom `14983318`) are **excluded from the production build, files and
+all** (`excluded` in `media/videos.json`; their folders were removed from
+`public/video/stock/`; originals stay in the git-ignored `media/source/`
+only). Their slots use cleared clips, temporarily:
+- `restaurantRoom` (home hero) → dining table (`2174411`);
+- `hotelSuite` (Hotels hero, room-upgrades scene, Possibilities card) →
+  dining table; `hotelLounge` (restaurant-hours scene) → fine dining
+  (`3769032`); `hotelBathroom` (bathroom spa scene) → spa (`6187887`).
+
+Each mapping carries a `TEMPORARY` comment in `src/lib/photography.ts`. The
+production guard (`next.config.ts`) was **not** changed: a
+`VERCEL_ENV=production` build now passes legitimately because every slot
+resolves to a cleared clip. Rollback target (production before this launch):
+`main` at `97c0899`, Vercel deployment `6722593592`
+(`informax-site-2arvk19v2-informax.vercel.app`).
+
+**Follow-ups (non-critical, after launch):**
+1. Replace the four temporary clips: re-download from their true Pexels pages
+   (or other footage with a verifiable licence), run `npm run media:build --
+   <slot>`, remove `excluded`, point the slots back, clear per
+   `media/README.md` §3, and re-run the QA.
+2. The Hotels page now shows food and spa footage, not a hotel room, in the
+   hero and the room-upgrades scene, until step 1.
+3. Test on a real iPhone in Safari; confirm one real enquiry shows "Delivered"
+   in resend.com/emails.
 
 ### Media licensing decision (22 October 2026): four clips cleared, four not
 **Verdict: NO-GO for production until four clips are resolved.** The website,

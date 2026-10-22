@@ -44,7 +44,8 @@ const pending = { src: "", licence: "", source: "" };
 export const PHOTOS = {
   restaurantRoom: {
     ...pending,
-    video: "restaurantInterior",
+    // TEMPORARY (22 Oct 2026): the "restaurantInterior" clip is not cleared for production, so this slot uses a cleared clip (homepage hero). See HANDOVER.md.
+    video: "diningTable",
     width: 2400,
     height: 1600,
     alt: "A restaurant table set for the evening, with a lamp, glasses and plates",
@@ -80,7 +81,8 @@ export const PHOTOS = {
   },
   hotelLounge: {
     ...pending,
-    video: "bedside",
+    // TEMPORARY (22 Oct 2026): the "bedside" clip is not cleared for production, so this slot uses a cleared clip (restaurant-hours story). See HANDOVER.md.
+    video: "fineDining",
     width: 2800,
     height: 1600,
     alt: "A lamp lit on a round bedside table beside a hotel bed",
@@ -89,7 +91,8 @@ export const PHOTOS = {
   },
   hotelBathroom: {
     ...pending,
-    video: "bathroom",
+    // TEMPORARY (22 Oct 2026): the "bathroom" clip is not cleared for production, so this slot uses a cleared clip (bathroom spa-menu scene). See HANDOVER.md.
+    video: "spa",
     width: 2400,
     height: 2400,
     alt: "A hotel bathroom with a round illuminated mirror, hanging towels and a glass basin",
@@ -107,7 +110,8 @@ export const PHOTOS = {
   },
   hotelSuite: {
     ...pending,
-    video: "hotelBedroom",
+    // TEMPORARY (22 Oct 2026): the "hotelBedroom" clip is not cleared for production, so this slot uses a cleared clip (Hotels hero and room-upgrades scene). See HANDOVER.md.
+    video: "diningTable",
     width: 2800,
     height: 1600,
     alt: "A hotel room door opening onto a desk and a lit lamp",

@@ -34,7 +34,8 @@
       "peopleAndBranding": "Third-party venue branding (gold 'RISTORANTE', a script venue name on the glass, a crest on the table runner) is cropped away with `region` and verified absent. Pexels does not permit implying endorsement by a brand or place, so the footage must also never name or suggest the venue.",
       "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
       "reviewedOn": "2026-10-22"
-    }
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- restaurantInterior`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
   },
   "diningTable": {
     "file": "2174411-hd_1920_1080_30fps.mp4",
@@ -172,7 +173,8 @@
       "peopleAndBranding": "Two third-party tent cards on the desk (hotel information, a small logo, a ~12 px code) are illegible in the published 1080p. No people.",
       "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
       "reviewedOn": "2026-10-22"
-    }
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- hotelBedroom`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
   },
   "bedside": {
     "file": "12680170_3840_2160_25fps.mp4",
@@ -208,7 +210,8 @@
       "peopleAndBranding": "No branding, no people.",
       "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
       "reviewedOn": "2026-10-22"
-    }
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- bedside`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
   },
   "bathroom": {
     "file": "14983318_3840_2160_25fps.mp4",
@@ -244,7 +247,8 @@
       "peopleAndBranding": "No branding, no people.",
       "conditions": "Clear only when the original listing is identified, or the clip is replaced, or the owner records an explicit risk acceptance (see HANDOVER.md).",
       "reviewedOn": "2026-10-22"
-    }
+    },
+    "excluded": "Not cleared for production (22 Oct 2026): source unknown, file-name ID wrong, file re-encoded (see provenance and rightsReview). Its files are NOT shipped. To restore: re-supply a clip with a verified source, remove this field, run `npm run media:build -- bathroom`, point the slot back in src/lib/photography.ts and clear it per media/README.md §3."
   },
   "spa": {
     "file": "6187887-uhd_3840_2160_25fps.mp4",
