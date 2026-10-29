@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 
 const BASE = process.env.BASE ?? "http://localhost:3200";
 const AXE = readFileSync(process.env.AXE_JS ?? "node_modules/axe-core/axe.min.js", "utf8");
-const PAGES = ["/", "/restaurants", "/hotels", "/how-it-works", "/informax-cloud", "/enquire", "/about", "/digital-experiences", "/privacy-policy"];
+const PAGES = ["/", "/restaurants", "/hotels", "/how-it-works", "/informax-cloud", "/pricing", "/signup", "/enquire", "/about", "/digital-experiences", "/privacy-policy"];
 let failures = 0;
 const ok = (cond, msg) => { console.log(`${cond ? "PASS" : "FAIL"}  ${msg}`); if (!cond) failures++; };
 
@@ -34,16 +34,15 @@ for (const [from, to] of [["/hospitality", "/hotels"], ["/touch-points", "/how-i
   ok(res.status() === 308 && res.headers().location?.endsWith(to), `redirect ${from} -> ${res.headers().location} (${res.status()})`);
 }
 
-// 2. Homepage hero: steps change what the phones show.
+// 2. Owner update (29 Oct): a balanced introduction; Hotels and Restaurants are dedicated routes.
 await page.goto(BASE + "/", { waitUntil: "networkidle" });
-const stepBtn = page.getByRole("list", { name: "How the menu update works" }).getByRole("button");
-await stepBtn.nth(2).click();
-await page.waitForTimeout(900);
-ok((await stepBtn.nth(2).getAttribute("aria-current")) === "step", "hero step 3 becomes current on click");
-const guestAlt = await page.locator('img[alt*="roast Cornish hake"]').first().evaluate((e) => getComputedStyle(e).opacity);
-ok(guestAlt === "1", "hero step 3 shows the updated menu on the guest phone");
-await page.waitForTimeout(6500);
-ok((await stepBtn.nth(2).getAttribute("aria-current")) === "step", "hero does not auto-advance after the visitor chooses a step");
+for (const [name, href] of [["Home", "/"], ["Informax Cloud", "/informax-cloud"], ["Hotels", "/hotels"], ["Restaurants", "/restaurants"], ["Pricing", "/pricing"]]) {
+  ok(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name, exact: true }).getAttribute("href") === href, `primary navigation: ${name} -> ${href}`);
+}
+ok(await page.getByRole("link", { name: "For hotels", exact: false }).first().getAttribute("href") === "/hotels", "home gives hotels a direct route");
+ok(await page.getByRole("link", { name: "For restaurants", exact: false }).first().getAttribute("href") === "/restaurants", "home gives restaurants a direct route");
+ok(await page.getByText("Informax sample designs, shown with fictional businesses.").isVisible(), "home labels sample designs honestly");
+await page.goto(BASE + "/restaurants", { waitUntil: "networkidle" });
 
 // 3. See It in Action: tabs (mouse and keyboard) and Next.
 const tabs = page.getByRole("tablist", { name: "Choose an industry" }).first();
@@ -120,36 +119,36 @@ await page.goto(BASE + "/restaurants", { waitUntil: "networkidle" });
 ok(await page.getByText("Same Code. Not reprinted.").isVisible(), "restaurants before/after shows the unchanged Code");
 ok(await page.getByText("Editing individual dishes inside Informax Cloud is not available today", { exact: false }).isVisible(), "restaurants page says dish editing is not available");
 await page.goto(BASE + "/hotels", { waitUntil: "networkidle" });
-for (const t of ["Digital hotel directory", "Spa Access Points", "Restaurant information", "Room upgrade opportunities", "Check room or treatment availability", "Take bookings or payments"]) {
+for (const t of ["Digital hotel directory", "Spa Scan Points", "Restaurant information", "Room upgrade opportunities", "Check room or treatment availability", "Take bookings or payments"]) {
   ok(await page.getByText(t, { exact: true }).first().isVisible(), `hotels shows "${t}"`);
 }
-// 8b. Informax Cloud page: Coming Soon, the in-development message and the informax.cloud link.
+// 8b. Cloud explains the workflow and distinguishes the development demo from the launch setup.
 await page.goto(BASE + "/informax-cloud", { waitUntil: "networkidle" });
-ok((await page.locator("h1").innerText()).trim() === "Meet Informax Cloud.", "Informax Cloud h1 is 'Meet Informax Cloud.'");
-ok(await page.locator("header").getByText("Coming Soon", { exact: true }).first().isVisible(), "Coming Soon badge visible in the hero");
-ok(await page.getByText("Informax Cloud is currently in development.", { exact: false }).first().isVisible(), "in-development message visible");
-// Owner decision (22 Oct 2026): no Coming Soon call to action may go to informax.cloud while it redirects to the V1 sign-in.
-const cloudLinks = await page.$$eval("main a[href*='informax.cloud']", (as) => as.map((a) => ({ href: a.getAttribute("href"), text: a.textContent.trim() })));
-ok(cloudLinks.every((l) => l.href === "https://informax.cloud/login" && /Customer log in/.test(l.text)), `only the customer log-in links to informax.cloud on the Cloud page (${JSON.stringify(cloudLinks)})`);
-ok(await page.getByRole("link", { name: "See How It Works" }).first().isVisible(), "hero offers an on-page 'See How It Works'");
-ok((await page.locator("#how-it-works").count()) === 1, "'See How It Works' has an on-page target");
-ok((await page.getByRole("link", { name: "Ask about Informax Cloud" }).first().getAttribute("href")) === "/enquire?interest=informax-cloud", "closing CTA asks about Informax Cloud on this site");
-ok(await page.getByText("Already an Informax customer?", { exact: false }).isVisible(), "existing customers are told their account keeps working");
-for (const t of ["How it will work", "What it will offer"]) ok((await page.getByText(t, { exact: true }).count()) >= 1, `Cloud page has "${t}"`);
-ok(!(await page.getByText(/sign up|register|free trial|countdown|launch date/i).count()), "no sign-up, registration, trial, countdown or launch-date wording");
-for (const t of ["Your property", "Your spaces", "Your Access Points", "Your content"]) ok(await page.getByRole("heading", { name: t, exact: true }).isVisible(), `structure shows "${t}"`);
-ok((await page.getByText("Built, still in testing").count()) >= 1 && (await page.getByText("Working in the development build").count()) >= 1, "feature status labels shown");
-ok(!(await page.getByText(/\bBlock\b/).count()), "no Block layer mentioned");
-for (const p of ["/", "/restaurants", "/hotels"]) {
-  await page.goto(BASE + p, { waitUntil: "networkidle" });
-  ok((await page.getByText(/preview of (Informax Cloud|upcoming functionality)/i).count()) >= 1, `${p} labels product screens as a preview`);
+ok(await page.getByRole("heading", { name: /Open. Update. Publish/ }).isVisible(), "Cloud leads with the simple workflow");
+ok((await page.locator("#cloud-workflow ol li").count()) === 4, "Cloud has four setup steps");
+ok(await page.getByText("Self-service account setup, billing and the simplified team model", { exact: false }).isVisible(), "launch-only features are labelled");
+ok(await page.getByRole("link", { name: "Find your plan" }).getAttribute("href") === "/pricing", "Cloud routes to pricing");
+for (const path of ["/", "/restaurants", "/hotels", "/informax-cloud"]) {
+  await page.goto(BASE + path, { waitUntil: "networkidle" });
+  ok((await page.getByText(/preview of (Informax Cloud|upcoming functionality)/i).count()) >= 1, `${path} labels product screens as a preview`);
+  ok(await page.getByText("Bespoke design is an optional, separately quoted service.", { exact: false }).isVisible(), `${path}: design is separate from the subscription`);
 }
-// 8c. No public "QR" wording and no pricing anywhere.
-for (const p of PAGES) {
-  await page.goto(BASE + p, { waitUntil: "networkidle" });
-  const text = await page.locator("body").innerText();
-  ok(!/\bQR\b/i.test(text), `${p} has no "QR" wording`);
-  ok(!/£\s?\d/.test(text), `${p} shows no prices in its text`);
+// 8c. Explicit prices and plan continuity, superseding the old no-pricing/no-QR copy rule.
+await page.goto(BASE + "/pricing", { waitUntil: "networkidle" });
+ok(await page.getByText("£1,788 billed upfront per year", { exact: true }).isVisible(), "annual amount and upfront billing are explicit");
+ok(await page.getByText("First 6 months, then £249/month", { exact: true }).isVisible(), "monthly increase is explicit");
+ok(await page.getByText("Save £900 in your first year", { exact: false }).isVisible(), "annual saving uses the introductory first year comparator");
+for (const plan of ["annual", "monthly"]) {
+  const label = `Choose ${plan}`;
+  const href = await page.getByRole("link", { name: label }).getAttribute("href");
+  ok(href === `/signup?plan=${plan}`, `${label} carries its plan to signup`);
+}
+await page.goto(BASE + "/signup?plan=annual", { waitUntil: "networkidle" });
+ok(await page.getByText("Annual: £1,788 upfront per year (£149/month equivalent)", { exact: true }).isVisible(), "signup retains the annual plan");
+const requestForm = page.getByRole("heading", { name: "Request your setup link" });
+if (await requestForm.count()) {
+  ok(await page.getByText("it does not create an account or take a payment", { exact: false }).isVisible(), "unconfigured signup explains what actually happens");
+  ok((await page.locator("textarea").inputValue()).includes("£1,788"), "setup request carries annual billing into the message");
 }
 
 // 8d. Site-wide: no Coming Soon or call-to-action link to informax.cloud other than the customer log-in; the log-in is secondary.

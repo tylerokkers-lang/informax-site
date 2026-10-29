@@ -67,7 +67,7 @@ export default function MenuBeforeAfter() {
           <div className="rounded-[24px] bg-white p-7 shadow-[0_0_0_1px_rgba(11,21,36,0.06),0_20px_50px_-30px_rgba(11,21,36,0.35)] sm:p-8">
             <p className="text-[15px] font-semibold text-brass-deep">With Informax</p>
             <ul className="mt-4 space-y-3">
-              {["Replace one PDF from your phone", "Every table’s Code opens the new menu", "The old menu stays in the history, ready to restore"].map((t) => (
+              {["Replace one PDF from your phone", "Every table’s Code opens the new menu", "Two previous PDF versions, ready to restore"].map((t) => (
                 <li key={t} className="flex items-start gap-3 text-[15.5px] text-ink">
                   <Check size={18} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />
                   {t}

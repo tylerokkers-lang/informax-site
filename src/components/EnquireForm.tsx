@@ -16,8 +16,8 @@ const initialValues = {
   message: "",
 };
 
-export default function EnquireForm({ initialInterests = [] }: { initialInterests?: string[] }) {
-  const [values, setValues] = useState(initialValues);
+export default function EnquireForm({ initialInterests = [], initialMessage = "" }: { initialInterests?: string[]; initialMessage?: string }) {
+  const [values, setValues] = useState({ ...initialValues, message: initialMessage });
   const [interests, setInterests] = useState<string[]>(initialInterests);
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});

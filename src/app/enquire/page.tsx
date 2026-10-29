@@ -6,14 +6,14 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Request a demo",
   description:
-    "Request a demonstration of Informax Cloud for your restaurant or hotel, or ask us anything about menus, guest information and Access Points.",
+    "Request a demonstration of Informax Cloud for your restaurant or hotel, or ask us anything about menus, guest information and Scan Points.",
   alternates: { canonical: "/enquire" },
 };
 
 const NEXT = [
   { n: "01", title: "A conversation", body: "We learn how your restaurant or hotel runs and what guests ask for most." },
-  { n: "02", title: "A demonstration", body: "We show you Informax Cloud with your own menu or guest information." },
-  { n: "03", title: "A clear proposal", body: "Scoped to the Access Points and Codes you actually need." },
+  { n: "02", title: "A demonstration", body: "We use our own sample menus and directories to show how your content could look." },
+  { n: "03", title: "A clear proposal", body: "Choose the Cloud plan for your property, with optional design work quoted separately." },
 ];
 
 /** Links can preselect one interest (e.g. "Ask about Informax Cloud"). Only these values are accepted. */
@@ -22,6 +22,7 @@ const PRESELECT: Record<string, string> = {
   demo: "A demonstration",
   restaurants: "Restaurant menus",
   hotels: "Hotel guest directory",
+  design: "Content design",
 };
 
 export default async function EnquirePage({ searchParams }: { searchParams: Promise<{ interest?: string | string[] }> }) {
@@ -42,8 +43,8 @@ export default async function EnquirePage({ searchParams }: { searchParams: Prom
             Let&rsquo;s talk about <span className="text-cream-mute">your guests.</span>
           </h1>
           <p className="mt-7 max-w-[42ch] text-[17px] leading-relaxed text-white/72">
-            Tell us a little about your restaurant or hotel. We&rsquo;ll come back
-            with a conversation, not a sales pitch.
+            Tell us a little about your restaurant or hotel. We will show you
+            the workflow, the guest experience and the options for your property.
           </p>
 
           <ol className="mt-12 border-t border-white/10">

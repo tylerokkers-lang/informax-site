@@ -29,18 +29,18 @@ export const DEMO_CTA = { label: "Request a Demo", href: "/enquire" } as const;
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Restaurants", href: "/restaurants" },
-  { label: "Hotels", href: "/hotels" },
-  { label: "How It Works", href: "/how-it-works" },
   { label: "Informax Cloud", href: "/informax-cloud" },
-  { label: "Contact", href: "/enquire" },
+  { label: "Hotels", href: "/hotels" },
+  { label: "Restaurants", href: "/restaurants" },
+  { label: "Pricing", href: "/pricing" },
 ] as const;
 
 export const FOOTER_PRODUCT_LINKS = [
   { label: "Restaurants", href: "/restaurants" },
   { label: "Hotels", href: "/hotels" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Informax Cloud (coming soon)", href: "/informax-cloud" },
+  { label: "Informax Cloud", href: "/informax-cloud" },
+  { label: "Pricing", href: "/pricing" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [
@@ -66,7 +66,8 @@ export const ENQUIRY_INTERESTS = [
   "Restaurant menus",
   "Hotel guest directory",
   "Spa & wellness",
-  "Access Points",
+  "Scan Points",
+  "Content design",
   "Informax Cloud",
   "Something else",
   "Not sure yet",

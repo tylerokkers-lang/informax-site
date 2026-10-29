@@ -1,3 +1,4 @@
+import { IndustryBenefits, DesignServices } from "@/components/site/CloudIntroduction";
 import type { Metadata } from "next";
 import Link from "next/link";
 import AccessPoint from "@/components/access/AccessPoint";
@@ -56,6 +57,8 @@ export default function RestaurantsPage() {
         </div>
       </header>
 
+      <IndustryBenefits industry="restaurant" />
+
       {/* The moment it starts: the chef film, full width. Only once the footage (or a photograph) exists. */}
       {slotHasMedia("chefPass") ? (
         <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
@@ -93,8 +96,7 @@ export default function RestaurantsPage() {
       >
         <p>
           Open the menu in Informax Cloud, choose <strong className="font-semibold text-ink">Replace menu</strong> and pick the
-          updated file. Informax Cloud tells you when it is live, and every earlier version stays in the history, ready to
-          restore.
+          updated file. Informax Cloud tells you when it is live, and the two previous PDF versions stay available to restore.
         </p>
         <p className="rounded-2xl bg-white px-5 py-4 text-[15px] text-ink-mute shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
           <strong className="font-semibold text-ink-soft">Good to know:</strong> menus are uploaded as PDFs, designed the way you
@@ -142,13 +144,14 @@ export default function RestaurantsPage() {
           that needs it: every copy opens the same, current menu.
         </p>
         <p>
-          Give chefs, managers and waiters their own sign-in to Informax Cloud, each with the access their job needs.
+          One main administrator looks after the account and invitations. Give colleagues their own sign-in to manage content, so the team can help without sharing a password.
         </p>
       </Story>
 
       <SeeItInAction initial="restaurant" />
+      <DesignServices industry="restaurant" />
 
-      <DemoCta title="Never reprint a menu again." body="See Informax Cloud with your own menu, and talk to us about Codes for your tables." />
+      <DemoCta title="Make the next menu update a simpler one." body="Explore our sample menus and see how one update reaches every table. Bring your own designs, or ask us to create them for your restaurant." />
     </>
   );
 }

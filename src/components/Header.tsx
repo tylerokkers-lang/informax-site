@@ -22,17 +22,11 @@ const TRANSPARENT_AT_TOP_ROUTES = new Set([
   "/websites",
 ]);
 
-/** Informax Cloud is in development: the nav says so wherever it names it. */
-function SoonTag() {
-  return (
-    <span className="ml-1.5 inline-block translate-y-[-1px] rounded-full bg-brass-light/15 px-1.5 py-[1px] align-middle text-[10px] font-semibold uppercase tracking-[0.06em] text-brass-light">
-      Soon
-    </span>
-  );
-}
-
 export default function Header() {
   const pathname = usePathname();
+  const logo = pathname === "/informax-cloud"
+    ? { src: "/brand/informax-cloud-logo-800.webp", alt: "Informax Cloud", width: 800, height: 213 }
+    : { src: "/brand/informax-logo-white-trim.png", alt: "Informax", width: 746, height: 224 };
   const canBeTransparent = TRANSPARENT_AT_TOP_ROUTES.has(pathname);
   const [scrolled, setScrolled] = useState(!canBeTransparent);
   const [open, setOpen] = useState(false);
@@ -67,7 +61,7 @@ export default function Header() {
       >
         <div className="mx-auto flex h-[68px] max-w-8xl items-center justify-between gap-6 px-6 md:h-[76px] md:px-10">
           <Link href="/" className="flex shrink-0 items-center" aria-label="Informax home">
-            <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={746} height={224} priority className="h-[34px] w-auto md:h-[38px]" />
+            <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} priority className="h-auto w-[113px] md:w-[127px]" />
           </Link>
 
           <nav className="hidden items-center gap-6 xl:flex" aria-label="Primary">
@@ -83,7 +77,6 @@ export default function Header() {
                   }`}
                 >
                   {link.label}
-                  {link.href === "/informax-cloud" ? <SoonTag /> : null}
                 </Link>
               );
             })}
@@ -142,8 +135,7 @@ export default function Header() {
                     className={`py-3 text-lg font-medium transition-colors duration-300 ${active ? "text-brass-light" : "text-cream hover:text-brass-light"}`}
                   >
                     {link.label}
-                    {link.href === "/informax-cloud" ? <SoonTag /> : null}
-                  </Link>
+                    </Link>
                 );
               })}
               <Link href={DEMO_CTA.href} onClick={() => setOpen(false)} className="ix-btn ix-btn-primary mt-6 w-full">
