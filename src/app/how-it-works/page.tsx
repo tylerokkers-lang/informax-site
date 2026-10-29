@@ -33,7 +33,7 @@ const QUESTIONS = [
   },
   {
     q: "Can I go back to an earlier version?",
-    a: "Yes. Every version is kept in the history, and you can restore any of them.",
+    a: "Yes. Each Scan Point keeps the current PDF and its two previous versions. You can restore either previous version.",
   },
   {
     q: "Can I edit a single dish inside Informax Cloud?",

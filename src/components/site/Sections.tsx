@@ -152,7 +152,7 @@ export function Possibilities() {
 /** The closing invitation on every page. */
 export function DemoCta({
   title = "See what Informax could do for you.",
-  body = "We will show you Informax Cloud with your own menus or guest information, and talk through where your Codes would go.",
+  body = "Explore Informax sample menus and directories, see the guest experience, and find out how Cloud could work for your property.",
 }: {
   title?: string;
   body?: string;

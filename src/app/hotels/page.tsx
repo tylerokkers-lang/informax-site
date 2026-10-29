@@ -1,3 +1,4 @@
+import { IndustryBenefits, DesignServices } from "@/components/site/CloudIntroduction";
 import type { Metadata } from "next";
 import AccessPoint from "@/components/access/AccessPoint";
 import HotelShowcase from "@/components/site/HotelShowcase";
@@ -23,7 +24,7 @@ const USES = [
     how: "Change restaurant times or anything else without reprinting the directory.",
   },
   {
-    title: "Spa Access Points",
+    title: "Spa Scan Points",
     what: "A Code in the guest bathroom opens spa treatments and offers.",
     how: "Promote an offer with an end time; the treatment menu comes back afterwards.",
   },
@@ -47,6 +48,7 @@ export default function HotelsPage() {
   return (
     <>
       <HotelShowcase as="header" heading="h1" />
+      <IndustryBenefits industry="hotel" />
 
       <section className="bg-paper py-24 md:py-28" aria-labelledby="hotel-uses-h">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
@@ -65,7 +67,7 @@ export default function HotelsPage() {
             <div className="rounded-[22px] bg-white p-6 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
               <p className="text-[15px] font-semibold text-ink">What Informax does</p>
               <ul className="mt-3 space-y-2">
-                {["Shows guests the information and offers you publish", "Ends temporary content at the time you set, then brings back your usual content", "Keeps every earlier version, ready to restore"].map((t) => (
+                {["Shows guests the information and offers you publish", "Ends temporary content at the time you set, then brings back your usual content", "Keeps the current PDF and two previous versions to restore"].map((t) => (
                   <li key={t} className="flex items-start gap-3 text-[15px] text-ink-soft"><Check size={17} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />{t}</li>
                 ))}
               </ul>
@@ -188,8 +190,8 @@ export default function HotelsPage() {
                 Update every bathroom at once. <span className="text-ink-mute">Or every bedside.</span>
               </h2>
               <p className="mt-6 max-w-[32rem] text-[17.5px] leading-relaxed text-ink-soft">
-                Group your Access Points by type, such as Bathroom, Coffee Table or Bedside Table, then publish one PDF or website to
-                all of them. Every Code stays the same, each keeps its own history, and you can undo it afterwards.
+                Group your Scan Points by type, such as Bathroom, Coffee Table or Bedside Table, then publish one PDF or website to
+                all of them. Every Code stays the same, each keeps its current PDF and two previous versions, and you can restore either previous version.
               </p>
               <div className="mt-5 max-w-[32rem]">
                 <PreviewNote>Coming with the new Informax Cloud. Shown: a real screen from the development build, fictional hotel.</PreviewNote>
@@ -204,7 +206,7 @@ export default function HotelsPage() {
                 Organised the way your hotel is.
               </h3>
               <p className="mt-5 max-w-[30rem] text-[17.5px] leading-relaxed text-ink-soft">
-                Bedrooms, the spa, restaurants and public areas each hold their own Access Points. At a glance you can see what is
+                Bedrooms, the spa, restaurants and public areas each hold their own Scan Points. At a glance you can see what is
                 live, what is temporary and what still needs setting up.
               </p>
               <div className="mt-5 max-w-[30rem]">
@@ -216,10 +218,11 @@ export default function HotelsPage() {
       </section>
 
       <SeeItInAction initial="hotel" />
+      <DesignServices industry="hotel" />
 
       <DemoCta
         title="Keep every guest up to date."
-        body="See Informax Cloud with your own directory and spa menu, and talk to us about where your Codes would sit."
+        body="Explore our sample hotel directory and spa menu. See how your team could keep guest information current, then choose a plan for your property."
       />
     </>
   );

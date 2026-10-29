@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
-const DEFAULT_TITLE = "Informax | Menus and guest information, always up to date";
+const DEFAULT_TITLE = "Informax | Guest information for hotels and restaurants";
 const DEFAULT_DESCRIPTION =
-  "Informax connects permanent Codes in restaurants and hotels to digital information your team can update without reprinting. Informax Cloud, the platform behind it, is coming soon.";
+  "Informax Cloud helps hotels and restaurants keep menus, directories and offers current. Update your content from one place and keep the same QR codes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

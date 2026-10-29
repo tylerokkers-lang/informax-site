@@ -32,7 +32,7 @@ const STORIES: Record<"restaurant" | "hotel", { label: string; intro: string; st
       },
       {
         title: "A manager updates the menu in Informax Cloud",
-        body: "From a phone: open the Restaurant Menu, tap Replace menu and pick the new PDF. Informax Cloud confirms it is live, and the earlier menu stays in the history.",
+        body: "From a phone: open the Restaurant Menu, tap Update content and pick the new PDF. Informax Cloud confirms it is live, and the two previous PDF versions stay available to restore.",
         visual: { kind: "phone", screen: "cloudMenuReplace", who: "Your phone · Informax Cloud" },
       },
       {
@@ -63,7 +63,7 @@ const STORIES: Record<"restaurant" | "hotel", { label: string; intro: string; st
       },
       {
         title: "The spa publishes this afternoon’s offer",
-        body: "Publish temporary content, choose the offer PDF and set it to end at 18:00.",
+        body: "Open Temporary content, choose your offer PDF and set when it should end. In this example, the offer runs until 18:00.",
         visual: { kind: "phone", screen: "cloudSpaCompose", who: "Your phone · Informax Cloud" },
       },
       {
@@ -175,9 +175,9 @@ export default function SeeItInAction({ initial = "restaurant", id = "see-it-in-
           </div>
 
           <div className="lg:sticky lg:top-24 lg:self-start">
-            <div className="relative mx-auto w-full max-w-[340px]" aria-live="polite">
+            <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[340px]" aria-live="polite">
               <p className="mb-3 text-center text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-mute">
-                {current.visual.kind === "phone" ? current.visual.who : current.visual.kind === "scene" ? current.visual.label : "At the Access Point"}
+                {current.visual.kind === "phone" ? current.visual.who : current.visual.kind === "scene" ? current.visual.label : "At the Scan Point"}
               </p>
               {current.visual.kind === "phone" ? (
                 <Phone key={`${industry}-${step}`} screens={[current.visual.screen]} highlight={current.visual.highlight} tone="light" className="ixp-enter-fade" sizes="340px" />

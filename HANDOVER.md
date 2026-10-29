@@ -11,6 +11,20 @@ redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
 
+## 29 October 2026: Cloud introduction, industry pages and pricing (Codex)
+
+Owner-approved website direction, branch `codex/cloud-hotels-restaurants`, based on `main` at `3411cb1`. Preserve the existing aesthetic: the colour tokens, typography, imagery, device components and design services remain. Main navigation is **Home, Informax Cloud, Hotels, Restaurants, Pricing**. The Home page introduces both industries equally, the dedicated industry pages explain specific benefits, and Cloud explains the simple workflow, team setup and optional branding/design services. The header uses the official Cloud logo only on `/informax-cloud`.
+
+Confirmed prices, per property: **annual £1,788 upfront (£149/month equivalent)**; **monthly £199 for six months, then £249/month**. Annual saves £900 against the £2,688 first-year monthly total, or £1,200 against twelve months at the standard £249 rate. Prices are total customer prices, no VAT added. The owner says Informax is not VAT registered; say that, rather than suggesting VAT is currently being charged. The owner intends to absorb VAT within these prices after registration. Bespoke content design is separately quoted. Demo material is Informax sample designs for fictional businesses, not customer testimonials or customer-supplied uploads.
+
+`/pricing` leads to `/signup?plan=annual|monthly`. **This website does not provision accounts or take payments.** `/signup` reads the deployment variable `CLOUD_SIGNUP_URL` (HTTPS only, no embedded credentials) and carries the selected plan into the Cloud app when configured. Until the new Cloud flow is ready, it clearly offers a setup request through the existing enquiry system and says this is not account creation or payment. Do not redirect new customers into the old V1 login as a fallback. Set this variable only after verifying the real signup route, plan keys and price mapping with the Cloud implementation. Existing customer login is unchanged.
+
+Latest retention decision: **three PDF versions total per Scan Point: the current PDF and two previous versions, either restorable**. This supersedes the older unlimited/permanent-history requirement. Backend cleanup must preserve PDFs referenced by another Scan Point, future schedule, temporary content, or active notice, and remove older unreferenced objects safely. The website copy reflects the intended policy; the Cloud app needs the matching retention implementation.
+
+The Cloud application is being implemented separately by Claude. Marketing copy explicitly labels the demo/development status and the self-service/team launch work still in progress. Do not present any unfinished account or billing functionality as live. No secrets, DNS, hosted environments or Cloud source are changed by this website branch. Production release is separate from the preview PR.
+
+Verification and screenshots are recorded in `docs/qa/cloud-industry-update.md`. The functional QA script has been updated for the owner's new requirements, superseding the former no-pricing/no-QR copy checks and restaurant-only homepage. Existing enquiry validation and the sector walkthrough checks remain.
+
 ## 0c. Restaurant-first redesign (20 to 21 October 2026): branch, NOT live
 
 **Status: not ready for production.** Built, tested and pushed on branch

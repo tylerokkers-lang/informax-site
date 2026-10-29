@@ -29,6 +29,8 @@ export function Phone({
   priority?: boolean;
   tone?: "dark" | "light";
 }) {
+  const appScreen = screens.every((key) => key.startsWith("cloud"));
+
   return (
     <div
       className={`relative aspect-[390/844] rounded-[15%/7%] p-[3.2%] ${
@@ -67,8 +69,8 @@ export function Phone({
             style={{ top: `${highlight.top * 100}%`, height: `${highlight.height * 100}%` }}
           />
         ) : null}
-        {/* Dynamic Island */}
-        <div className="absolute left-1/2 top-[1.6%] h-[3.3%] w-[30%] -translate-x-1/2 rounded-full bg-black" aria-hidden />
+        {/* Guest phones retain the device detail; app captures stay unobscured. */}
+        {!appScreen ? <div className="absolute left-1/2 top-[1.6%] h-[3.3%] w-[30%] -translate-x-1/2 rounded-full bg-black" aria-hidden /> : null}
       </div>
     </div>
   );
