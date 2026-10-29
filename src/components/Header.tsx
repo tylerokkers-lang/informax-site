@@ -61,7 +61,7 @@ export default function Header() {
       >
         <div className="mx-auto flex h-[68px] max-w-8xl items-center justify-between gap-6 px-6 md:h-[76px] md:px-10">
           <Link href="/" className="flex shrink-0 items-center" aria-label="Informax home">
-            <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} priority className="h-[34px] w-auto md:h-[38px]" />
+            <Image src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} priority className="h-auto w-[113px] md:w-[127px]" />
           </Link>
 
           <nav className="hidden items-center gap-6 xl:flex" aria-label="Primary">

@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/pricing",
     "/digital-experiences",
     "/about",
+    "/tyler-okkers",
     "/enquire",
     "/websites",
     "/digital-information",
