@@ -102,6 +102,45 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="bg-paper pb-24 md:pb-32" aria-labelledby="mission-heading">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <div className="grid grid-cols-1 gap-12 border-t border-line pt-14 md:grid-cols-12 md:gap-16 md:pt-16">
+            <Reveal className="md:col-span-4">
+              <span className="text-[15px] font-semibold text-brass-deep">
+                Our Purpose
+              </span>
+            </Reveal>
+            <div className="space-y-14 md:col-span-8 md:space-y-16">
+              <Reveal>
+                <h2 id="mission-heading" className="mb-5 text-[15px] font-semibold text-brass-deep">
+                  Our Mission
+                </h2>
+                <p className="mb-6 max-w-[27ch] font-serif-display text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.25] text-ink">
+                  To simplify how businesses share information by making every guest interaction seamless, instant, and effortlessly manageable.
+                </p>
+                <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                  We empower hospitality businesses and beyond with smarter digital solutions that transform how information is delivered, managed, and experienced. Through Informax Cloud, businesses can keep digital content current in one intuitive platform, without the complexity of outdated printed materials.
+                </p>
+                <p className="mt-5 text-[16px] font-semibold text-ink">
+                  Less administration. More flexibility. Better guest experiences.
+                </p>
+              </Reveal>
+              <Reveal>
+                <h2 className="mb-5 text-[15px] font-semibold text-brass-deep">
+                  Our Vision
+                </h2>
+                <p className="mb-6 max-w-[28ch] font-serif-display text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.25] text-ink">
+                  To become the global standard for how businesses connect people with information.
+                </p>
+                <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
+                  We envision a world where information is always accessible, accurate and up to date, without unnecessary printing, complicated systems or operational delays.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-charcoal-950 py-24 text-cream md:py-32">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Reveal className="mb-16 max-w-xl md:mb-20">
