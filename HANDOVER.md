@@ -6,10 +6,70 @@ up safely and correctly. It is kept up to date as the source of truth for
 current state — if something here conflicts with what you observe in the
 code or in production, trust what you observe and update this file.
 
-Last updated: 22 October 2026 (LAUNCHED: uncleared clips excluded, cleared clips used; see §0c). **Read §0c first**: a complete restaurant-first
+Last updated: 21 November 2026 (Done Right redesign on branch `redesign/done-right`, see the first section). Previously: 22 October 2026 (LAUNCHED: uncleared clips excluded, cleared clips used; see §0c). **Read §0c first**: a complete restaurant-first
 redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
+
+## 21 November 2026: "Digital experiences, Done Right." redesign (branch `redesign/done-right`, NOT live)
+
+A complete redesign of every main page, built on branch `redesign/done-right`
+from `main` at `8bac8e0`. **Not merged and not deployed**: merging to `main`
+deploys to production (§4), so it needs the owner's review of a preview and
+explicit approval first.
+
+**Structure.** Navigation: Informax Cloud, Solutions (menu: Hospitality,
+Restaurants, Galleries and exhibitions, Events and venues), How it works,
+Pricing, About, plus Customer log in and **Request a Demo**. Pages: `/`
+(hero "Digital experiences, Done Right." with an animated three-beat
+demonstration of real Cloud and guest screens), `/informax-cloud`,
+`/solutions` (galleries `#galleries`, events `#events`), `/hospitality`
+(replaces `/hotels`, which now 308s here; its share images moved with it),
+`/restaurants`, `/how-it-works`, `/about` (owner copy unchanged, restyled),
+`/enquire` (Request a Demo; `/request-a-demo` and `/demo` 308 here),
+`/contact` (new), `/pricing` (prices and plan logic unchanged, new header).
+Legacy pages (`/websites`, `/digital-*`, `/tyler-okkers`, legal) are
+unchanged apart from the shared header and footer.
+
+**Design system.** One light, translucent header on every page (no more
+transparent-at-top routes; dark heroes sit inside rounded panels below it).
+New components in `src/components/x/`: `ui.tsx` (Section, Heading, buttons,
+DemoBand, FAQ, ScreenNote), `ScanPoint.tsx` (the physical plate, fluid via
+container units), `Devices.tsx` (PhoneFrame and BrowserFrame with
+crossfading screens, highlight rings, `GUEST_SCALE` crop of the guest
+captures' browser strip), `HeroStage`, `Journey` (Property → Space → Scan
+Point → Content tabs with real screens), `Placements` (five settings),
+`Everywhere` (one publish lighting every copy), `ContentTypes`, `Steps`,
+`FilmBand`, `GuestScreens` (HTML sample guest pages for reception, gallery,
+event and local guide, labelled as sample designs). Tokens unchanged except
+`--color-ink-quiet` (#687284, the softer headline line, 4.5:1). `Reveal`
+now always starts from the same hidden state on server and client (no
+hydration mismatch with reduced motion). Removed unused components:
+CloudIntroduction, HotelShowcase, MenuBeforeAfter, MenuHero, SeeItInAction,
+ComingSoon, useSteps (all in git history).
+
+**Unchanged on purpose.** Enquiry form and `/api/enquire` (Resend), pricing
+figures and `/signup`, metadata/JSON-LD approach, sitemap/robots, the media
+licence guard and the four cleared films, the real Cloud captures. Honesty
+labels kept: development-build screens, fictional businesses, no dish
+editor, no bookings or payments, launch-only work labelled on
+`/informax-cloud`.
+
+**Photography.** Scan Points in real settings are drawn as studio scenes
+until real photographs exist. See `docs/photography-brief.md`, "Scan Points
+in place", and set `photo` in `src/lib/placements.ts`.
+
+**Verification (21 Nov 2026, local production build).** `tsc`, `eslint`,
+`next build` clean. `docs/qa/test-site.mjs` rewritten for the redesign:
+120/120 (axe WCAG 2.1 AA zero violations on 13 pages, links, redirects,
+navigation and Solutions menu, tabs by mouse and keyboard, no layout shift
+while the hero plays, mobile menu, enquiry API, pricing, honesty labels).
+`seo-checks` all pass, `film-contrast` all pass, `video-checks` 28 pass,
+enquiry end to end with mocked Resend delivered. No horizontal overflow at
+320, 390, 834 and 1440 px. Lighthouse mobile: Home 95, Hospitality 95,
+Restaurants 94, Informax Cloud 87 (largest image above the fold);
+accessibility, best practices and SEO 100; CLS 0. Not verified: real
+Safari/iOS, a Vercel preview.
 
 ## 29 October 2026: Cloud introduction, industry pages and pricing (Codex)
 

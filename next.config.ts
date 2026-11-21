@@ -29,8 +29,10 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/services", destination: "/informax-cloud", permanent: true },
-      { source: "/hospitality", destination: "/hotels", permanent: true },
+      { source: "/hotels", destination: "/hospitality", permanent: true },
       { source: "/touch-points", destination: "/how-it-works", permanent: true },
+      { source: "/request-a-demo", destination: "/enquire", permanent: true },
+      { source: "/demo", destination: "/enquire", permanent: true },
     ];
   },
 };

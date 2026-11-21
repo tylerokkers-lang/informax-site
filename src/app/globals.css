@@ -62,6 +62,8 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-mute: var(--ink-mute);
+  /* The quieter second line of a headline: 4.5:1 on paper, so it passes at any size. */
+  --color-ink-quiet: #687284;
   --color-cream: var(--cream);
   --color-cream-mute: var(--cream-mute);
 
@@ -457,4 +459,115 @@ svg {
     outline-offset: 3px;
     border-radius: 6px;
   }
+}
+
+/* -------------------------------------------------------------------------
+   "Done Right" redesign (November 2026). Display type, studio surfaces for
+   the Scan Point object, and the few motion primitives the new pages use.
+   ------------------------------------------------------------------------- */
+
+.x-display {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.048em;
+  line-height: 0.9;
+}
+.x-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.034em;
+  line-height: 1.02;
+}
+.x-num { font-variant-numeric: tabular-nums; }
+
+/* Studio surfaces: a backdrop and a tabletop, like a product photograph.
+   Used until real photography of a Scan Point in place is supplied. */
+.x-studio {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--x-wall, #efece6);
+}
+.x-studio::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--x-table-h, 38%);
+  background: var(--x-table, #dcd5ca);
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.35);
+  z-index: -1;
+}
+.x-studio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 60% at 30% 10%, rgba(255, 255, 255, 0.45), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+.x-studio-room { --x-wall: #ece6dc; --x-table: linear-gradient(180deg, #8a6a4f, #6f533c); }
+.x-studio-table { --x-wall: #2a221c; --x-table: linear-gradient(180deg, #efe9df, #d9d0c2); }
+.x-studio-reception { --x-wall: #e9edf1; --x-table: linear-gradient(180deg, #d9d6d0, #bcb7ae); }
+.x-studio-gallery { --x-wall: #f6f5f2; --x-table: linear-gradient(180deg, #d2cdc4, #b9b2a6); --x-table-h: 22%; }
+.x-studio-event { --x-wall: #15181f; --x-table: linear-gradient(180deg, #2b2f38, #1d2027); }
+.x-studio-spa { --x-wall: #e3e7e0; --x-table: linear-gradient(180deg, #bfc6b9, #a3ab9d); }
+
+/* A soft contact shadow under an object standing on a surface. */
+.x-contact-shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -10px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.38), transparent);
+  filter: blur(4px);
+  z-index: -1;
+}
+
+@keyframes x-ping {
+  0% { transform: scale(0.85); opacity: 0.55; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.x-ping { animation: x-ping 1.6s var(--ease-premium) both; }
+
+@keyframes x-dash { to { stroke-dashoffset: 0; } }
+.x-flow {
+  stroke-dasharray: 6 10;
+  stroke-dashoffset: 160;
+  animation: x-dash 3.2s linear infinite;
+}
+
+@keyframes x-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.x-bar { transform-origin: left; animation: x-bar var(--x-bar-dur, 4s) linear both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .x-ping, .x-flow, .x-bar { animation: none !important; }
+  .x-ping { opacity: 0; }
+  .x-bar { transform: scaleX(1); }
+}
+
+/* One update reaching every copy: each placement lights in turn, holds, then resets. */
+@keyframes x-lit {
+  0%, 18% { background-color: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+  26%, 88% { background-color: rgba(142, 209, 252, 0.14); box-shadow: inset 0 0 0 1px rgba(142, 209, 252, 0.45); }
+  100% { background-color: rgba(255, 255, 255, 0.06); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+}
+@keyframes x-lit-dot {
+  0%, 18% { background-color: rgba(255, 255, 255, 0.25); }
+  26%, 88% { background-color: #34d399; }
+  100% { background-color: rgba(255, 255, 255, 0.25); }
+}
+.x-lit { animation: x-lit 7s var(--ease-premium) infinite; animation-delay: var(--d, 0s); }
+.x-lit-dot { animation: x-lit-dot 7s var(--ease-premium) infinite; animation-delay: var(--d, 0s); }
+@keyframes x-send {
+  0%, 10% { transform: scale(1); }
+  14% { transform: scale(0.96); }
+  20%, 100% { transform: scale(1); }
+}
+.x-send { animation: x-send 7s var(--ease-premium) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .x-lit, .x-lit-dot, .x-send { animation: none !important; }
+  .x-lit { background-color: rgba(142, 209, 252, 0.14); box-shadow: inset 0 0 0 1px rgba(142, 209, 252, 0.45); }
+  .x-lit-dot { background-color: #34d399; }
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
-import FinalCta from "@/components/sections/FinalCta";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { DemoBand } from "@/components/x/ui";
 
 export const metadata: Metadata = {
   title: "About",
@@ -30,16 +32,14 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-paper pt-[140px] pb-20 md:pt-[180px] md:pb-28">
+      <section className="bg-paper pb-20 pt-[120px] md:pb-28 md:pt-[160px]">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <Reveal className="max-w-3xl">
-            <span className="mb-4 block text-[15px] font-semibold text-brass-deep">
-              About Informax
-            </span>
-            <h1 className="max-w-[20ch] font-serif-display font-medium leading-[1.06] tracking-[-0.01em] text-[clamp(34px,5.6vw,62px)] text-ink">
-              Built in hospitality. Designed for every business.
+          <div className="max-w-[1000px]">
+            <p className="ix-hero-rise text-[14px] font-semibold text-brass-deep">About Informax</p>
+            <h1 className="ix-hero-rise x-display mt-6 text-balance text-[clamp(46px,7vw,104px)] text-ink" style={{ ["--rise-delay" as string]: "0.08s" }}>
+              Built in hospitality. <span className="text-ink-quiet">Designed for every business.</span>
             </h1>
-          </Reveal>
+          </div>
         </div>
       </section>
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
               </span>
             </Reveal>
             <Reveal delay={0.08} className="md:col-span-8">
-              <p className="mb-6 font-serif-display text-[clamp(22px,2.6vw,30px)] font-medium leading-[1.35] text-ink">
+              <p className="x-title mb-8 text-[clamp(26px,3vw,38px)] leading-[1.2] text-ink">
                 Informax was born from nearly a decade of first-hand
                 experience in hospitality.
               </p>
@@ -92,7 +92,7 @@ export default function AboutPage() {
 
           <div className="mt-14 border-t border-line pt-10 md:mt-16 md:pt-12">
             <Reveal className="max-w-[52ch]">
-              <p className="font-serif-display text-[clamp(19px,2vw,24px)] font-medium italic leading-[1.5] text-ink">
+              <p className="x-title text-[clamp(22px,2.4vw,30px)] leading-[1.35] text-ink">
                 No generic templates. No unnecessary complexity. Just
                 thoughtfully designed digital experiences that help people
                 find what matters.
@@ -115,7 +115,7 @@ export default function AboutPage() {
                 <h2 id="mission-heading" className="mb-5 text-[15px] font-semibold text-brass-deep">
                   Our Mission
                 </h2>
-                <p className="mb-6 max-w-[27ch] font-serif-display text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.25] text-ink">
+                <p className="x-title mb-6 max-w-[27ch] text-[clamp(28px,3.4vw,44px)] leading-[1.15] text-ink">
                   To simplify how businesses share information by making every guest interaction seamless, instant, and effortlessly manageable.
                 </p>
                 <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
@@ -129,7 +129,7 @@ export default function AboutPage() {
                 <h2 className="mb-5 text-[15px] font-semibold text-brass-deep">
                   Our Vision
                 </h2>
-                <p className="mb-6 max-w-[28ch] font-serif-display text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.25] text-ink">
+                <p className="x-title mb-6 max-w-[28ch] text-[clamp(28px,3.4vw,44px)] leading-[1.15] text-ink">
                   To become the global standard for how businesses connect people with information.
                 </p>
                 <p className="max-w-[62ch] text-[16.5px] leading-[1.85] text-ink-mute">
@@ -141,13 +141,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-charcoal-950 py-24 text-cream md:py-32">
+      <section className="bg-charcoal-950 py-24 text-cream md:py-36">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
           <Reveal className="mb-16 max-w-xl md:mb-20">
             <span className="mb-4 block text-[15px] font-semibold text-brass-light">
               What We Believe
             </span>
-            <h2 className="font-serif-display font-medium leading-[1.12] tracking-[-0.01em] text-[clamp(28px,3.6vw,44px)] text-white">
+            <h2 className="x-title text-[clamp(32px,4.4vw,60px)] text-white">
               Three things that don&rsquo;t change.
             </h2>
           </Reveal>
@@ -158,12 +158,12 @@ export default function AboutPage() {
                 key={v.n}
                 className="border-b border-white/10 py-8 md:border-b-0 md:border-t md:py-0 md:pt-8"
               >
-                <span className="mb-4 block font-serif-display text-[15px] italic text-brass-light">
+                <span className="x-num mb-4 block text-[14px] font-semibold text-brass-light">
                   {v.n}
                 </span>
-                <h4 className="mb-2.5 text-[18px] font-semibold text-white">
+                <h3 className="mb-2.5 text-[20px] font-semibold tracking-[-0.015em] text-white">
                   {v.title}
-                </h4>
+                </h3>
                 <p className="max-w-[32ch] text-[14.5px] leading-relaxed text-cream-mute">
                   {v.desc}
                 </p>
@@ -173,10 +173,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <FinalCta
-        title={<>Take control of what your guests see.</>}
-        description="Tell us about your property and what you would like to connect."
-      />
+      <section aria-labelledby="founder-h" className="bg-paper py-20 md:py-28">
+        <div className="mx-auto max-w-8xl px-6 md:px-10">
+          <Reveal className="flex flex-col items-start justify-between gap-6 border-t border-line pt-12 md:flex-row md:items-center">
+            <div>
+              <h2 id="founder-h" className="x-title text-[clamp(26px,3vw,38px)] text-ink">Meet the founder.</h2>
+              <p className="mt-3 max-w-[40rem] text-[17px] leading-relaxed text-ink-mute">Tyler Okkers, on the hotel experience behind Informax.</p>
+            </div>
+            <Link href="/tyler-okkers" className="ix-link group text-brass-deep hover:text-ink">
+              Read more <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <DemoBand title="Take control of what your guests see." lead="Tell us about your property and what you would like to connect." />
     </>
   );
 }

@@ -35,9 +35,13 @@ function warmLogo() {
  */
 export default function CloudEntrance({
   variant,
+  tone = "dark",
 }: {
   variant: "header" | "drawer";
+  /** The surface it sits on: the redesign's header and drawer are light. */
+  tone?: "dark" | "light";
 }) {
+  const light = tone === "light";
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
@@ -94,7 +98,7 @@ export default function CloudEntrance({
           onClick={onClick}
           aria-label="Customer log in to Informax Cloud"
           // Deliberately quiet: for existing V1 customers, secondary to the nav and to Request a Demo.
-          className={`group hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1 py-2 text-[12.5px] font-medium text-cream-mute transition-colors duration-300 hover:text-white ${focusRing}`}
+          className={`group hidden lg:inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-1 py-2 text-[13px] font-medium transition-colors duration-300 ${light ? "text-ink-mute hover:text-ink" : "text-cream-mute hover:text-white"} ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={MARK} alt="" width={20} height={18} className="h-[13px] w-auto shrink-0 opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
@@ -107,7 +111,7 @@ export default function CloudEntrance({
           onTouchStart={warm}
           onClick={onClick}
           aria-label="Customer log in to Informax Cloud"
-          className={`group mt-8 flex w-full items-center gap-2.5 border-t border-white/10 pt-6 text-[14px] font-medium text-cream-mute transition-colors duration-300 hover:text-white ${focusRing}`}
+          className={`group mt-8 flex w-full items-center gap-2.5 border-t pt-6 text-[15px] font-medium transition-colors duration-300 ${light ? "border-line text-ink-mute hover:text-ink" : "border-white/10 text-cream-mute hover:text-white"} ${focusRing}`}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={MARK} alt="" width={20} height={18} className="h-[15px] w-auto shrink-0 opacity-70" />

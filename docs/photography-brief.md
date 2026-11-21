@@ -63,3 +63,27 @@ unsplash.com/s/photos/chef-plating, /fine-dining-table, /restaurant-interior,
 3. `npm run build`, then check the page at phone and desktop width: the
    subject must sit in the safe area above.
 4. When all nine are done, the production guard passes on its own.
+
+## Scan Points in place (redesign, November 2026)
+
+The redesigned site shows a Scan Point in five settings (`src/lib/placements.ts`):
+hotel rooms, restaurant tables, reception desks, galleries and events. Until
+real photographs exist, each is a studio scene drawn in code: the plate on a
+surface in the setting's materials, beside a phone showing what opens. When a
+photograph of a **real Informax Scan Point** in place is supplied, set the
+placement's `photo` (file in `public/photos/`, licence and source recorded);
+the scene then shows the photograph and stops drawing its own plate.
+
+What to shoot (owner's own venues or a commissioned shoot; no stock):
+
+| Placement | Subject | Shape and size |
+|---|---|---|
+| `room` | Scan Point on a bedside table or desk in a guest room, soft daylight | Landscape 16:9, 2800×1600 |
+| `table` | Scan Point on a laid restaurant table, evening light | Landscape 16:9, 2800×1600 |
+| `reception` | Scan Point on a reception or concierge desk | Landscape 16:9, 2800×1600 |
+| `gallery` | Scan Point beside a wall text in a gallery | Landscape 16:9, 2800×1600 |
+| `event` | Scan Point on a lanyard, delegate table or sign | Landscape 16:9, 2800×1600 |
+
+Keep the right 40% calm: a phone is drawn over it. No guest or staff faces
+without a signed release, no other venue's branding, and the venue's
+permission to publish the photograph.

@@ -27,20 +27,35 @@ export const SOCIAL_LINKS = {
 /** The demo request is the site's one primary action. */
 export const DEMO_CTA = { label: "Request a Demo", href: "/enquire" } as const;
 
+/** Primary navigation. Solutions opens a small menu of its own pages. */
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
   { label: "Informax Cloud", href: "/informax-cloud" },
-  { label: "Hotels", href: "/hotels" },
-  { label: "Restaurants", href: "/restaurants" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "How it works", href: "/how-it-works" },
   { label: "Pricing", href: "/pricing" },
+  { label: "About", href: "/about" },
+] as const;
+
+export const SOLUTION_LINKS = [
+  { label: "Hospitality", href: "/hospitality", body: "Hotels, resorts and spas" },
+  { label: "Restaurants", href: "/restaurants", body: "Menus that change with the kitchen" },
+  { label: "Galleries and exhibitions", href: "/solutions#galleries", body: "Guides for every room" },
+  { label: "Events and venues", href: "/solutions#events", body: "Programmes that keep up" },
 ] as const;
 
 export const FOOTER_PRODUCT_LINKS = [
-  { label: "Restaurants", href: "/restaurants" },
-  { label: "Hotels", href: "/hotels" },
-  { label: "How It Works", href: "/how-it-works" },
   { label: "Informax Cloud", href: "/informax-cloud" },
+  { label: "How it works", href: "/how-it-works" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Customer log in", href: CLOUD_LOGIN_URL },
+] as const;
+
+export const FOOTER_SOLUTION_LINKS = [
+  { label: "All solutions", href: "/solutions" },
+  { label: "Hospitality", href: "/hospitality" },
+  { label: "Restaurants", href: "/restaurants" },
+  { label: "Galleries and exhibitions", href: "/solutions#galleries" },
+  { label: "Events and venues", href: "/solutions#events" },
 ] as const;
 
 export const FOOTER_ALSO_LINKS = [
@@ -52,7 +67,7 @@ export const FOOTER_ALSO_LINKS = [
 export const FOOTER_COMPANY_LINKS = [
   { label: "About Informax", href: "/about" },
   { label: "Request a Demo", href: "/enquire" },
-  { label: "Contact", href: `mailto:${CONTACT_EMAIL}` },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const FOOTER_LEGAL_LINKS = [

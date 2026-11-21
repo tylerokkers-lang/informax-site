@@ -4,7 +4,7 @@ import { mkdirSync } from "node:fs";
 
 const BASE = process.env.BASE ?? "http://localhost:3200";
 const OUT = process.argv[2];
-const pages = (process.argv[3] ?? "/,/restaurants,/hotels,/how-it-works,/informax-cloud,/enquire").split(",");
+const pages = (process.argv[3] ?? "/,/informax-cloud,/solutions,/hospitality,/restaurants,/how-it-works,/pricing,/about,/enquire,/contact").split(",");
 const sizes = (process.argv[4] ?? "desktop,phone").split(",");
 mkdirSync(OUT, { recursive: true });
 
