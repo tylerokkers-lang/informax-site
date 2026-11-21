@@ -1,8 +1,8 @@
 export const CLOUD_PRICING = {
-  introductoryMonthly: 199,
-  introductoryMonths: 6,
-  standardMonthly: 249,
-  annual: 1788,
+  introductoryMonthly: 99,
+  introductoryMonths: 3,
+  standardMonthly: 149,
+  annual: 1188,
 } as const;
 
 export type CloudPlan = "annual" | "monthly";
