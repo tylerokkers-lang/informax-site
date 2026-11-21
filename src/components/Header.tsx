@@ -22,17 +22,33 @@ const SOLUTION_ROUTES = new Set(["/solutions", "/hospitality", "/restaurants"]);
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  // "dark" while the header sits over a section marked data-header-tone="dark" (the older film heroes).
+  const [onDark, setOnDark] = useState(false);
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const mid = 36;
+      setOnDark(
+        Array.from(document.querySelectorAll("[data-header-tone='dark']")).some((el) => {
+          const r = el.getBoundingClientRect();
+          return r.top <= mid && r.bottom >= mid;
+        }),
+      );
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname]);
+  const dark = onDark && !open;
 
   // Close everything on navigation (adjusting state during render, not in an effect).
   const [lastPath, setLastPath] = useState(pathname);
@@ -87,9 +103,13 @@ export default function Header() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-[100] transition-[background-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled || menu
-            ? "bg-white/82 shadow-[0_1px_0_rgba(11,21,36,0.07)] backdrop-blur-xl backdrop-saturate-150"
-            : "bg-white/0"
+          dark
+            ? scrolled
+              ? "bg-charcoal-950/80 shadow-[0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl backdrop-saturate-150"
+              : "bg-charcoal-950/0"
+            : scrolled || menu
+              ? "bg-white/82 shadow-[0_1px_0_rgba(11,21,36,0.07)] backdrop-blur-xl backdrop-saturate-150"
+              : "bg-white/0"
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between gap-6 px-6 md:h-[72px] md:px-10">
@@ -97,10 +117,10 @@ export default function Header() {
             <Image
               src="/brand/informax-logo-white-trim.png"
               alt="Informax"
-              width={746}
-              height={224}
+              width={118}
+              height={35}
               priority
-              className="h-auto w-[108px] brightness-0 md:w-[118px]"
+              className={`h-auto w-[108px] transition-[filter] duration-300 md:w-[118px] ${dark ? "" : "brightness-0"}`}
             />
           </Link>
 
@@ -108,7 +128,7 @@ export default function Header() {
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
               const base = `relative flex h-10 items-center gap-1 rounded-full px-4 text-[14.5px] font-medium tracking-[-0.01em] transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brass ${
-                active ? "text-ink" : "text-ink-mute hover:text-ink"
+                dark ? (active ? "text-white" : "text-white/70 hover:text-white") : active ? "text-ink" : "text-ink-mute hover:text-ink"
               }`;
               if (link.href === "/solutions") {
                 return (
@@ -122,7 +142,7 @@ export default function Header() {
                     >
                       {link.label}
                       <ChevronDown size={15} aria-hidden className={`transition-transform duration-300 ${menu ? "rotate-180" : ""}`} />
-                      {active ? <span aria-hidden className="absolute inset-x-4 -bottom-0.5 h-px bg-ink" /> : null}
+                      {active ? <span aria-hidden className={`absolute inset-x-4 -bottom-0.5 h-px ${dark ? "bg-white" : "bg-ink"}`} /> : null}
                     </button>
                     {/* Positioned by a plain wrapper: the animated layer owns its own transform. */}
                     <div className="absolute left-1/2 top-[calc(100%+10px)] w-[440px] -translate-x-1/2">
@@ -167,14 +187,14 @@ export default function Header() {
               return (
                 <Link key={link.href} href={link.href} aria-current={active ? "page" : undefined} className={base}>
                   {link.label}
-                  {active ? <span aria-hidden className="absolute inset-x-4 -bottom-0.5 h-px bg-ink" /> : null}
+                  {active ? <span aria-hidden className={`absolute inset-x-4 -bottom-0.5 h-px ${dark ? "bg-white" : "bg-ink"}`} /> : null}
                 </Link>
               );
             })}
           </nav>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <CloudEntrance variant="header" tone="light" />
+            <CloudEntrance variant="header" tone={dark ? "dark" : "light"} />
             <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary hidden min-h-10! rounded-full! px-5! text-[14px]! sm:inline-flex">
               {DEMO_CTA.label}
             </Link>
@@ -187,8 +207,8 @@ export default function Header() {
               className="relative z-[160] flex h-11 w-11 shrink-0 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-brass xl:hidden"
             >
               <span className="relative block h-[1.5px] w-[18px]">
-                <span className={`absolute left-0 h-[1.5px] w-[18px] bg-ink transition-transform duration-300 ${open ? "top-0 rotate-45" : "-top-[4px]"}`} />
-                <span className={`absolute left-0 h-[1.5px] w-[18px] bg-ink transition-transform duration-300 ${open ? "top-0 -rotate-45" : "top-[4px]"}`} />
+                <span className={`absolute left-0 h-[1.5px] w-[18px] transition-transform duration-300 ${dark ? "bg-white" : "bg-ink"} ${open ? "top-0 rotate-45" : "-top-[4px]"}`} />
+                <span className={`absolute left-0 h-[1.5px] w-[18px] transition-transform duration-300 ${dark ? "bg-white" : "bg-ink"} ${open ? "top-0 -rotate-45" : "top-[4px]"}`} />
               </span>
             </button>
           </div>

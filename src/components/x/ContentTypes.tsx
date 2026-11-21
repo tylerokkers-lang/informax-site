@@ -1,5 +1,5 @@
 import { BookOpen, CalendarDays, Clock3, Flower2, Globe, MapPin, Newspaper, UtensilsCrossed, Wifi } from "lucide-react";
-import { RevealStagger, RevealStaggerItem } from "@/components/Reveal";
+import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 
 /** Everything a Scan Point can deliver, as a calm grid. The last tile shows time-limited content at work. */
 const TYPES = [
@@ -14,21 +14,22 @@ const TYPES = [
 ] as const;
 
 export default function ContentTypes({ dark = false }: { dark?: boolean }) {
-  const card = dark ? "bg-white/[0.04] ring-1 ring-white/8" : "bg-white shadow-[0_0_0_1px_rgba(11,21,36,0.06)]";
   return (
-    <RevealStagger className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-      {TYPES.map(({ icon: Icon, title, body }) => (
-        <RevealStaggerItem key={title} className={`group flex flex-col rounded-[24px] p-6 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 md:p-7 ${card}`}>
-          <span className={`flex h-11 w-11 items-center justify-center rounded-[14px] ${dark ? "bg-brass/20 text-brass-light" : "bg-brass/10 text-brass-deep"}`}>
-            <Icon size={20} aria-hidden />
-          </span>
-          <h3 className={`mt-8 text-[18px] font-semibold tracking-[-0.015em] ${dark ? "text-white" : "text-ink"}`}>{title}</h3>
-          <p className={`mt-2 text-[15px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>{body}</p>
-        </RevealStaggerItem>
-      ))}
+    <div>
+      {/* A ruled list rather than a wall of cards: easier to scan, and calmer. */}
+      <RevealStagger className={`grid grid-cols-1 gap-x-10 sm:grid-cols-2 lg:grid-cols-4 ${dark ? "border-white/10" : "border-line"}`}>
+        {TYPES.map(({ icon: Icon, title, body }) => (
+          <RevealStaggerItem key={title} className={`border-t py-7 ${dark ? "border-white/12" : "border-line"}`}>
+            <Icon size={21} aria-hidden className={dark ? "text-brass-light" : "text-brass-deep"} />
+            <h3 className={`mt-5 text-[18px] font-semibold tracking-[-0.015em] ${dark ? "text-white" : "text-ink"}`}>{title}</h3>
+            <p className={`mt-2 text-[15px] leading-relaxed ${dark ? "text-cream-mute" : "text-ink-mute"}`}>{body}</p>
+          </RevealStaggerItem>
+        ))}
+      </RevealStagger>
 
+      <Reveal className="mt-10">
       {/* Temporary and scheduled content: the full width of the grid, with a day drawn as a timeline. */}
-      <RevealStaggerItem className={`overflow-hidden rounded-[24px] p-6 sm:col-span-2 md:p-8 lg:col-span-4 ${dark ? "bg-brass/15 ring-1 ring-brass-light/20" : "bg-ink text-white"}`}>
+      <div className={`overflow-hidden rounded-[28px] p-6 md:p-10 ${dark ? "bg-brass/15 ring-1 ring-brass-light/20" : "bg-ink text-white"}`}>
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <span className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-white/10 text-brass-light">
@@ -57,7 +58,8 @@ export default function ContentTypes({ dark = false }: { dark?: boolean }) {
             <p className="mt-3 text-[12.5px] text-white/50">A temporary offer from 14:00 to 18:00, then the usual content returns.</p>
           </div>
         </div>
-      </RevealStaggerItem>
-    </RevealStagger>
+      </div>
+      </Reveal>
+    </div>
   );
 }

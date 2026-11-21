@@ -34,7 +34,7 @@ const CREATE = [
 
 const STEPS = [
   { n: "01", title: "We design it", body: "Around your brand, your guests and the way your property runs." },
-  { n: "02", title: "We connect it", body: "Each experience is published in Informax Cloud, behind permanent Codes where guests need them." },
+  { n: "02", title: "We connect it", body: "Each experience is published in Informax Cloud, behind Scan Points where guests need them." },
   { n: "03", title: "It stays current", body: "Update it whenever something changes. Nothing is reprinted or replaced." },
 ];
 
@@ -161,7 +161,7 @@ export default function DigitalExperiencesPage() {
             </Display>
             <Lede className="mt-8">
               Publish the winter Guest Directory from a phone and every
-              room&rsquo;s Code opens it straight away.
+              room&rsquo;s Scan Point opens it straight away.
             </Lede>
           </Reveal>
           <Reveal delay={0.1}>

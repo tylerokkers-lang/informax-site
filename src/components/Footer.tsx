@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-line pb-16 md:grid-cols-4 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.1fr]">
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="inline-flex rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass" aria-label="Informax home">
-              <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={746} height={224} className="h-auto w-[128px] brightness-0" />
+              <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={128} height={38} className="h-auto w-[128px] brightness-0" />
             </Link>
             <p className="x-title mt-6 max-w-[16ch] text-[26px] text-ink">Digital experiences, Done Right.</p>
             <p className="mt-4 max-w-[34ch] text-[14.5px] leading-relaxed">

@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CONTACT_EMAIL, SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
-const DEFAULT_TITLE = "Informax | Guest information for hotels and restaurants";
+const DEFAULT_TITLE = "Informax | Guest information for hotels, restaurants and venues";
 const DEFAULT_DESCRIPTION =
-  "Informax Cloud helps hotels and restaurants keep menus, directories and offers current. Update your content from one place and keep the same QR codes.";
+  "Informax Cloud helps hotels, restaurants and venues keep menus, directories and offers current. Update everything from one place, without reprinting a thing.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +40,7 @@ const organizationLd = {
   url: SITE_URL,
   email: CONTACT_EMAIL,
   description:
-    "Informax builds Informax Cloud, which lets restaurants and hotels keep the menus and guest information behind their permanent Codes up to date.",
+    "Informax builds Informax Cloud, which lets restaurants and hotels keep the menus and guest information behind their Scan Points up to date.",
   logo: `${SITE_URL}/icon.png`,
   sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
 };

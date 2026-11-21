@@ -29,7 +29,7 @@ const USES = [
 const DINNER = { top: 0.318, height: 0.042 };
 
 const QUESTIONS = [
-  { q: "Do we need to visit every room to make a change?", a: "No. Every room's Scan Point is a printed copy of the same permanent Code. You change what it opens in Informax Cloud and every copy shows the update on the next scan." },
+  { q: "Do we need to visit every room to make a change?", a: "No. Every room's Scan Point is a printed copy of the same Scan Point. You change what it opens in Informax Cloud and every copy shows the update on the next scan." },
   { q: "Can different parts of the hotel show different things?", a: "Yes. Each purpose has its own Scan Point: the bedside directory, the bathroom spa card, the restaurant menu. Organise them in Spaces such as Bedrooms, Spa and Public Areas." },
   { q: "Does Informax take bookings or payments?", a: "No. Informax shows your information and offers. Guests book and pay with your team the way they do today, by phone or through your own booking pages." },
   { q: "Can we use our existing directory?", a: "Yes. Upload the PDF you already have, or link a page of your website. If you would like a new design, Informax can create one for you as a separate service." },
@@ -87,7 +87,7 @@ export default function HospitalityPage() {
             eyebrow="One change, every room"
             title="Dinner moves to 17:30."
             soft="Every room knows before guests return."
-            lead="Upload the new directory in Informax Cloud. The Scan Point by every bed is a copy of the same Code, so every room shows the update at once. Nobody prints, and nobody knocks."
+            lead="Upload the new directory in Informax Cloud. The Scan Point by every bed is a copy of the same one, so every room shows the update at once. Nobody prints, and nobody knocks."
           />
           <div className="mt-14 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8 md:mt-16 lg:mx-auto lg:max-w-[900px]">
             <Reveal>

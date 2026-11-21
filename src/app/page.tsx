@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const WHY = [
-  { k: "What it is", v: "Scan Points: permanent Codes on tables, in rooms and at the desk, connected to Informax Cloud." },
+  { k: "What it is", v: "Scan Points on tables, in rooms and at the desk. Guests scan one with their phone and see what you published in Informax Cloud." },
   { k: "Who it is for", v: "Hotels, restaurants, spas, galleries, exhibitions and event venues." },
   { k: "Why it matters", v: "Guests always see current information, and your team changes it in moments without reprinting a thing." },
 ];
@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <>
       {/* 1. Hero */}
-      <section aria-labelledby="hero-h" className="relative overflow-hidden bg-paper pb-20 pt-[112px] md:pb-28 md:pt-[150px]">
+      <section aria-labelledby="hero-h" className="relative overflow-hidden bg-paper pb-20 pt-[104px] md:pb-28 md:pt-[128px]">
         <Container wide>
           <div className="mx-auto max-w-[1100px] text-center">
             <p className="ix-hero-rise inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13.5px] font-medium text-ink-soft shadow-[0_0_0_1px_rgba(11,21,36,0.07)]" style={{ ["--rise-delay" as string]: "0s" }}>
@@ -52,23 +52,23 @@ export default function Home() {
             </p>
             <h1
               id="hero-h"
-              className="ix-hero-rise x-display mt-8 text-[clamp(52px,8.4vw,128px)] text-ink"
+              className="ix-hero-rise x-display mt-7 text-[clamp(50px,7.6vw,116px)] text-ink"
               style={{ ["--rise-delay" as string]: "0.08s", ["--rise-y" as string]: "26px" }}
             >
               Digital <span className="whitespace-nowrap">experiences,</span>
               <br className="hidden sm:block" /> <span className="text-brass-deep">Done Right.</span>
             </h1>
             <p
-              className="ix-hero-rise mx-auto mt-8 max-w-[40rem] text-pretty text-[19px] leading-[1.55] text-ink-soft md:text-[21px]"
+              className="ix-hero-rise mx-auto mt-7 max-w-[36rem] text-pretty text-[19px] leading-[1.55] text-ink-soft md:text-[21px]"
               style={{ ["--rise-delay" as string]: "0.2s" }}
             >
-              Informax changes how hotels, restaurants and venues deliver information to guests. Place a Scan Point once, then keep everything behind it current from Informax Cloud.
+              Transform how guests access menus, directories and information. Update everything from one place, without reprinting a thing.
             </p>
-            <div className="ix-hero-rise mt-10" style={{ ["--rise-delay" as string]: "0.3s" }}>
+            <div className="ix-hero-rise mt-9" style={{ ["--rise-delay" as string]: "0.3s" }}>
               <PrimaryActions center />
             </div>
           </div>
-          <div className="ix-hero-rise mt-16 md:mt-20" style={{ ["--rise-delay" as string]: "0.45s", ["--rise-y" as string]: "40px", ["--rise-dur" as string]: "1.3s" }}>
+          <div className="ix-hero-rise mt-12 md:mt-14" style={{ ["--rise-delay" as string]: "0.45s", ["--rise-y" as string]: "40px", ["--rise-dur" as string]: "1.3s" }}>
             <HeroStage />
             <div className="mt-6 text-center">
               <ScreenNote>Real Informax Cloud and guest screens from the development build. Marlowe Grand is a fictional hotel.</ScreenNote>
@@ -123,7 +123,7 @@ export default function Home() {
               eyebrow="Why it is different"
               title="Print once."
               soft="Update everywhere, instantly."
-              lead="Every Scan Point has one permanent Code. Print it for 4 rooms or 400: when you publish an update, every copy shows it on the next scan. Nobody visits a room, and nothing is reprinted."
+              lead="A Scan Point never changes once printed. Place it in 4 rooms or 400: when you publish an update, every copy shows it on the next scan. Nobody visits a room, and nothing is reprinted."
             />
             <Reveal>
               <MoreLink href="/how-it-works" dark>

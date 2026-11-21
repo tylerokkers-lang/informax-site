@@ -7,6 +7,7 @@ await p.getByLabel("Restaurant, hotel or company").fill("The Example Restaurant"
 await p.locator("#email").fill("test@example.com");
 await p.locator("#message").fill("End-to-end test of the enquiry form. Please ignore.");
 await p.getByRole("group", { name: "What would you like to explore?" }).getByText("A demonstration").click();
+await p.waitForTimeout(3000); // a person takes a few seconds; faster submissions are discarded as automated
 await p.getByRole("button", { name: "Send enquiry" }).click();
 await p.waitForTimeout(2500);
 console.log("SUCCESS SHOWN:", await p.getByText(/thank you|thanks/i).first().isVisible().catch(() => false));

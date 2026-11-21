@@ -19,7 +19,7 @@ const LEVELS: { key: string; label: string; icon: typeof Building2; title: strin
     icon: Building2,
     title: "Your property, at a glance.",
     body: "The overview shows how many Scan Points are live, what temporary content is running and whether anything needs attention.",
-    points: ["Live Codes and Spaces in one view", "Temporary content and when it ends", "Anything that needs attention"],
+    points: ["Live Scan Points and Spaces in one view", "Temporary content and when it ends", "Anything that needs attention"],
     screen: "deskHotelOverview",
   },
   {
@@ -36,8 +36,8 @@ const LEVELS: { key: string; label: string; icon: typeof Building2; title: strin
     label: "Scan Point",
     icon: ScanLine,
     title: "One Scan Point. Every copy.",
-    body: "A Scan Point is a permanent Code for one purpose, such as the bedside directory. Print it for every room: each copy shows the same, current content.",
-    points: ["Live or temporary, shown at a glance", "Unlimited printed placements", "The Code never changes"],
+    body: "A Scan Point serves one purpose, such as the bedside directory. Print it for every room: each copy shows the same, current content.",
+    points: ["Live or temporary, shown at a glance", "Unlimited printed placements", "Printed once, never replaced"],
     screen: "deskBedrooms",
   },
   {

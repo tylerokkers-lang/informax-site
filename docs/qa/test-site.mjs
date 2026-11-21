@@ -106,13 +106,28 @@ await mp.waitForTimeout(600);
 ok(!(await mobileNav.isVisible().catch(() => false)), "Escape closes the mobile menu");
 await m.close();
 
-// 6. Enquiry API (unchanged code): validation, honeypot, and the not-configured path locally.
-const bad = await page.request.post(BASE + "/api/enquire", { data: { name: "", email: "x" } });
-ok(bad.status() === 422, `enquiry validation -> ${bad.status()}`);
-const pot = await page.request.post(BASE + "/api/enquire", { data: { website: "spam" } });
-ok(pot.status() === 200, `enquiry honeypot is accepted silently -> ${pot.status()}`);
-const full = await page.request.post(BASE + "/api/enquire", { data: { name: "Test", company: "Test", email: "test@example.com", message: "Hello" } });
-ok(full.status() === 503, `valid enquiry without RESEND_API_KEY locally -> ${full.status()} (expected 503; production has the key)`);
+// 6. Enquiry API: validation, spam handling and the hardening added on 21 Nov 2026.
+// Each check uses its own client address so the per-client rate limit does not interfere (Vercel overwrites this header in production).
+let ip = 10;
+const post = (data, extra = {}) =>
+  page.request.post(BASE + "/api/enquire", { data, headers: { "x-forwarded-for": `203.0.113.${ip++}`, ...extra.headers }, ...extra.opts });
+const valid = { name: "QA Test", company: "QA Venue", email: "qa@example.com", message: "Hello", startedAt: Date.now() - 10_000 };
+ok((await post({ name: "", email: "x", startedAt: Date.now() - 10_000 })).status() === 422, "enquiry: missing fields -> 422");
+ok((await post({ ...valid, message: undefined })).status() === 503, "enquiry: message is optional (503 locally means it reached delivery)");
+ok((await post({ ...valid, website: "spam" })).status() === 200, "enquiry: honeypot is answered like success");
+ok((await post({ ...valid, startedAt: Date.now() })).status() === 200, "enquiry: an instant submission is answered like success (discarded)");
+ok((await post(valid)).status() === 503, "enquiry: valid enquiry without RESEND_API_KEY locally -> 503 (production has the key)");
+ok((await post({ ...valid, name: "QA\r\nBcc: x@example.com" })).status() === 422, "enquiry: line breaks in single-line fields -> 422");
+ok((await post({ ...valid, admin: true })).status() === 400, "enquiry: unknown fields -> 400");
+ok((await post({ ...valid, interests: ["Free money"] })).status() === 422, "enquiry: interests outside the list -> 422");
+ok((await post({ ...valid, message: "x".repeat(4001) })).status() === 422, "enquiry: overlong message -> 422");
+ok((await post({ ...valid, message: "x".repeat(20000) })).status() === 413, "enquiry: oversized body -> 413");
+ok((await post(valid, { headers: { origin: "https://evil.example" } })).status() === 403, "enquiry: cross-origin POST -> 403");
+const wrongType = await page.request.post(BASE + "/api/enquire", { headers: { "content-type": "text/plain", "x-forwarded-for": "203.0.113.200" }, data: "name=x" });
+ok(wrongType.status() === 415, `enquiry: non-JSON content type -> ${wrongType.status()}`);
+const statuses = [];
+for (let i = 0; i < 6; i++) statuses.push((await page.request.post(BASE + "/api/enquire", { data: { name: "" }, headers: { "x-forwarded-for": "203.0.113.250" } })).status());
+ok(statuses[5] === 429, `enquiry: sixth request in ten minutes from one client -> 429 (${statuses.join(", ")})`);
 
 // 7. The enquiry form shows field errors in the page.
 await page.goto(BASE + "/enquire", { waitUntil: "networkidle" });
@@ -138,20 +153,25 @@ for (const path of ["/", "/informax-cloud", "/hospitality", "/restaurants", "/ho
 }
 // 8c. Explicit prices and plan continuity, superseding the old no-pricing/no-QR copy rule.
 await page.goto(BASE + "/pricing", { waitUntil: "networkidle" });
-ok(await page.getByText("£1,788 billed upfront per year", { exact: true }).isVisible(), "annual amount and upfront billing are explicit");
-ok(await page.getByText("First 6 months, then £249/month", { exact: true }).isVisible(), "monthly increase is explicit");
-ok(await page.getByText("Save £900 in your first year", { exact: false }).isVisible(), "annual saving uses the introductory first year comparator");
+// Owner-confirmed prices (21 Nov 2026): annual £1,188 upfront (£99/month equivalent); monthly £99 for 3 months, then £149; first year £1,638; saving £450.
+ok(await page.getByText("£1,188 billed upfront per year", { exact: true }).isVisible(), "annual amount and upfront billing are explicit");
+ok(await page.getByText("First 3 months, then £149/month", { exact: true }).isVisible(), "monthly increase is explicit");
+ok(await page.getByText("Save £450 in your first year", { exact: false }).isVisible(), "annual saving uses the introductory first year comparator");
+ok(await page.getByText("£1,638 over the first 12 months", { exact: false }).isVisible(), "monthly first-year total is £1,638");
+ok(await page.getByText("Informax is not currently VAT registered", { exact: false }).first().isVisible(), "pricing says no VAT is added");
+const body = await page.locator("main").innerText();
+for (const old of ["£1,788", "£199", "£249", "£2,688", "£900", "six months"]) ok(!body.includes(old), `pricing no longer mentions ${old}`);
 for (const plan of ["annual", "monthly"]) {
   const label = `Choose ${plan}`;
   const href = await page.getByRole("link", { name: label }).getAttribute("href");
   ok(href === `/signup?plan=${plan}`, `${label} carries its plan to signup`);
 }
 await page.goto(BASE + "/signup?plan=annual", { waitUntil: "networkidle" });
-ok(await page.getByText("Annual: £1,788 upfront per year (£149/month equivalent)", { exact: true }).isVisible(), "signup retains the annual plan");
+ok(await page.getByText("Annual: £1,188 upfront per year (£99/month equivalent)", { exact: true }).isVisible(), "signup retains the annual plan");
 const requestForm = page.getByRole("heading", { name: "Request your setup link" });
 if (await requestForm.count()) {
   ok(await page.getByText("it does not create an account or take a payment", { exact: false }).isVisible(), "unconfigured signup explains what actually happens");
-  ok((await page.locator("textarea").inputValue()).includes("£1,788"), "setup request carries annual billing into the message");
+  ok((await page.locator("textarea").inputValue()).includes("£1,188"), "setup request carries annual billing into the message");
 }
 
 // 8d. Site-wide: no Coming Soon or call-to-action link to informax.cloud other than the customer log-in; the log-in is secondary.

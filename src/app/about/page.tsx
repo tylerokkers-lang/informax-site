@@ -181,7 +181,7 @@ export default function AboutPage() {
               <p className="mt-3 max-w-[40rem] text-[17px] leading-relaxed text-ink-mute">Tyler Okkers, on the hotel experience behind Informax.</p>
             </div>
             <Link href="/tyler-okkers" className="ix-link group text-brass-deep hover:text-ink">
-              Read more <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              Read about the founder <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </Reveal>
         </div>

@@ -19,9 +19,41 @@ if (process.env.VERCEL_ENV === "production" && PENDING_SLOTS.length > 0) {
 // these files, give it a new name so visitors never see the old one.
 const MEDIA_CACHE = "public, max-age=86400, stale-while-revalidate=2592000";
 
+// Security headers for every response. The site loads no third-party
+// scripts; vercel.live is allowed only for Vercel's preview toolbar. Next.js
+// needs inline scripts for hydration, and eval only in development.
+const dev = process.env.NODE_ENV !== "production";
+const CSP = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://vercel.live`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://vercel.live https://vercel.com",
+  "font-src 'self' data: https://vercel.live",
+  "media-src 'self' blob:",
+  "connect-src 'self' https://vercel.live wss://ws-us3.pusher.com",
+  "frame-src https://vercel.live",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "object-src 'none'",
+  ...(dev ? [] : ["upgrade-insecure-requests"]),
+].join("; ");
+
+const SECURITY_HEADERS = [
+  { key: "Content-Security-Policy", value: CSP },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+];
+
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   async headers() {
     return [
+      { source: "/:path*", headers: SECURITY_HEADERS },
       { source: "/video/:path*", headers: [{ key: "Cache-Control", value: MEDIA_CACHE }] },
       { source: "/brand/:path*", headers: [{ key: "Cache-Control", value: MEDIA_CACHE }] },
     ];

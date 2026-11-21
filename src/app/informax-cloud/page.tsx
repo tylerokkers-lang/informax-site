@@ -10,13 +10,13 @@ import { CLOUD_LOGIN_URL, DEMO_CTA } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Informax Cloud | The platform behind every Scan Point",
   description:
-    "Organise your property into Spaces and Scan Points. Publish a PDF or website, schedule temporary content, restore earlier versions and keep every Code current.",
+    "Organise your property into Spaces and Scan Points. Publish a PDF or website, schedule temporary content, restore earlier versions and keep every Scan Point current.",
   alternates: { canonical: "/informax-cloud" },
 };
 
 const FEATURES = [
   { icon: FileStack, title: "PDF or website", body: "Publish the PDFs you already make, or send a Scan Point to a page of your own website." },
-  { icon: QrCode, title: "Permanent Codes", body: "A Scan Point's Code never changes. Print it as often as you like." },
+  { icon: QrCode, title: "Print once", body: "A printed Scan Point never needs replacing. Place as many copies as you like." },
   { icon: Clock3, title: "Temporary content", body: "Set an end time. When it passes, the usual content returns by itself." },
   { icon: ScrollText, title: "Schedules", body: "Prepare content for the parts of the day, or the season, that change." },
   { icon: History, title: "Version history", body: "The current PDF and the two before it, each restorable." },
@@ -44,7 +44,7 @@ export default function CloudPage() {
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-[30%] h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-brass/20 blur-[160px]" />
         <Container wide className="relative">
           <div className="mx-auto max-w-[900px] text-center">
-            <Image src="/brand/informax-cloud-logo-800.webp" alt="" width={800} height={213} priority className="ix-hero-rise mx-auto h-auto w-[170px] md:w-[200px]" />
+            <Image src="/brand/informax-cloud-logo-800.webp" alt="" width={200} height={53} priority className="ix-hero-rise mx-auto h-auto w-[170px] md:w-[200px]" />
             <h1 id="cloud-hero-h" className="ix-hero-rise x-display mt-10 text-balance text-[clamp(46px,7.2vw,104px)] text-white" style={{ ["--rise-delay" as string]: "0.08s" }}>
               Every Scan Point. <span className="text-cream-mute">One calm place.</span>
             </h1>
@@ -177,6 +177,59 @@ export default function CloudPage() {
               </RevealStaggerItem>
             ))}
           </RevealStagger>
+        </Container>
+      </Section>
+
+      {/* What is available today, and what arrives with launch. */}
+      <Section tone="white" labelledBy="status-h">
+        <Container>
+          <Heading
+            id="status-h"
+            eyebrow="Where things stand"
+            title="Available today,"
+            soft="and arriving at launch."
+            lead="We would rather be precise than impressive. Here is what customers use now, and what the new Informax Cloud on this page adds."
+            size="md"
+          />
+          <div className="mt-12 grid grid-cols-1 gap-x-16 md:grid-cols-2">
+            {[
+              {
+                h: "Available today",
+                dot: "bg-moss",
+                items: [
+                  "Scan Points that open a PDF or a page of your website",
+                  "Temporary content with an end time",
+                  "Version history, with earlier versions to restore",
+                  "Personal sign-ins and a record of every change",
+                  "Optional design of menus, directories and brochures",
+                ],
+              },
+              {
+                h: "Arriving with the new Informax Cloud",
+                dot: "bg-brass",
+                items: [
+                  "The Property, Space and Scan Point workspace shown on this page",
+                  "The phone-first workflow for replacing a menu between services",
+                  "Online signup and subscription billing",
+                  "Self-service setup and inviting your own team",
+                ],
+              },
+            ].map((col) => (
+              <Reveal key={col.h}>
+                <h3 className="flex items-center gap-2.5 border-b border-line pb-4 text-[17px] font-semibold text-ink">
+                  <span aria-hidden className={`h-2 w-2 rounded-full ${col.dot}`} />
+                  {col.h}
+                </h3>
+                <ul>
+                  {col.items.map((t) => (
+                    <li key={t} className="border-b border-line py-4 text-[16.5px] text-ink-soft">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </Section>
 

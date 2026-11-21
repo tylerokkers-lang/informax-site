@@ -1,4 +1,3 @@
-import { Eyebrow } from "@/components/ui";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 export function LegalPage({
@@ -14,33 +13,29 @@ export function LegalPage({
 }) {
   return (
     <>
-      <section className="bg-charcoal-950 text-cream text-center pt-[112px] pb-14 md:pt-[128px]">
-        <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <Eyebrow tone="dark" center>
-            Legal
-          </Eyebrow>
-          <h1 className="font-serif-display font-medium text-[clamp(30px,4.2vw,46px)] text-white mb-3">
-            {title}
-          </h1>
-          <div className="text-sm text-cream-mute">Last updated: {updated}</div>
+      <section className="bg-paper pb-4 pt-[120px] md:pt-[160px]">
+        <div className="mx-auto max-w-[760px] px-6 md:px-8">
+          <p className="text-[14px] font-semibold text-brass-deep">Legal</p>
+          <h1 className="x-display mt-5 text-[clamp(40px,5.4vw,72px)] text-ink">{title}</h1>
+          <p className="mt-5 text-[14px] text-ink-mute">Last updated: {updated}</p>
         </div>
       </section>
 
-      <section className="bg-paper py-16 md:py-24">
+      <section className="bg-paper pb-24 pt-10 md:pb-32">
         <div className="mx-auto max-w-8xl px-6 md:px-8">
-          <div className="mx-auto max-w-[760px] rounded-3xl border border-line bg-panel px-7 py-12 sm:px-14">
+          <div className="mx-auto max-w-[760px] border-t border-line pt-10">
             {sections.map((s, i) => (
               <div key={s.heading} className={i === 0 ? "" : "mt-9"}>
-                <h2 className="font-serif-display font-medium text-[22px] text-ink mb-3.5">
+                <h2 className="mb-3.5 text-[21px] font-semibold tracking-[-0.015em] text-ink">
                   {s.heading}
                 </h2>
-                <div className="text-[15.5px] leading-[1.8] text-ink-mute [&_a]:text-brass-deep [&_a]:underline [&_a]:underline-offset-2">
+                <div className="text-[16px] leading-[1.75] text-ink-soft [&_a]:text-brass-deep [&_a]:underline [&_a]:underline-offset-2">
                   {s.body}
                 </div>
               </div>
             ))}
             <div className="mt-11 pt-8 border-t border-line">
-              <h2 className="font-serif-display font-medium text-[22px] text-ink mb-3">
+              <h2 className="mb-3 text-[21px] font-semibold tracking-[-0.015em] text-ink">
                 {contactQuestion}
               </h2>
               <p className="text-[15.5px] text-ink-mute">

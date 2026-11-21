@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const QUESTIONS = [
   { q: "Do guests need an app or an account?", a: "No. Guests scan the Scan Point with their phone's camera and the information opens in their browser." },
   { q: "What can a Scan Point open?", a: "A PDF, such as your menu or guest directory, or a page on your own website. You can switch between the two whenever you like." },
-  { q: "Do I need to reprint anything when the content changes?", a: "No. The Code is permanent. You change what it opens in Informax Cloud, and every copy of that Scan Point shows the new content." },
+  { q: "Do I need to reprint anything when the content changes?", a: "No. A printed Scan Point never needs to change. You change what it opens in Informax Cloud, and every copy of that Scan Point shows the new content." },
   { q: "How quickly do changes appear?", a: "As soon as Informax Cloud confirms it is live, anyone who scans gets the new version. A guest who already has the page open sees it when they refresh." },
   { q: "Can I show something for a limited time?", a: "Yes. Publish temporary content with an end time, such as a menu for tonight or a spa offer until 18:00. When it ends, the usual content comes back by itself." },
   { q: "Can I go back to an earlier version?", a: "Yes. Each Scan Point keeps the current PDF and its two previous versions. You can restore either previous version." },
@@ -54,7 +54,7 @@ export default function HowItWorksPage() {
             eyebrow="The idea that makes it work"
             title="One Scan Point."
             soft="As many copies as you need."
-            lead="A Scan Point is one permanent Code for one purpose, such as the bedside directory or the dinner menu. Print it for every room or every table. Every copy opens whatever you publish, the moment you publish it."
+            lead="A Scan Point serves one purpose, such as the bedside directory or the dinner menu. Print it for every room or every table. Every copy opens whatever you publish, the moment you publish it."
           />
           <Reveal className="mt-14 md:mt-16">
             <Everywhere />

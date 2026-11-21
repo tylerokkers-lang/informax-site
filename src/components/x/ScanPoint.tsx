@@ -79,8 +79,8 @@ export default function ScanPoint({
         <Image
           src="/brand/informax-logo-white-trim.png"
           alt=""
-          width={746}
-          height={224}
+          width={80}
+          height={24}
           className={`h-auto w-[36cqw] self-start ${f.logo}`}
         />
         <div className="flex flex-1 items-center justify-center">

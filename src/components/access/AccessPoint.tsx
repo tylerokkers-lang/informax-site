@@ -75,7 +75,7 @@ export default function AccessPoint({
       aria-label={`Informax Access Point for ${place}`}
       className={`relative flex aspect-[3/4] shrink-0 flex-col ${s.plate} ${f.plate} ${f.edge} ${className}`}
     >
-      <Image src="/brand/informax-logo-white-trim.png" alt="" width={746} height={224} className={`w-auto self-start ${s.logo} ${f.logo}`} />
+      <Image src="/brand/informax-logo-white-trim.png" alt="" width={120} height={36} className={`w-auto self-start ${s.logo} ${f.logo}`} />
       <div className="flex flex-1 items-center justify-center">
         <div className={`aspect-square bg-white ${s.code} shadow-[0_0_0_1px_rgba(11,21,36,0.06),0_1px_2px_rgba(0,0,0,0.08)]`}>
           <svg viewBox={QR_VIEWBOX} className="h-full w-full" shapeRendering="crispEdges" aria-hidden>

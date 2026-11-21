@@ -35,13 +35,13 @@ export const SCREENS = {
   cloudHotelOverviewPhone: phone("h-overview-phone-v2", "Informax Cloud overview for Marlowe Grand Hotel on a phone"),
 
   // Desktop.
-  deskMenuBefore: desk("r-menu-before-desk", "Informax Cloud on a computer: what a guest sees when they scan the Restaurant Menu Code"),
+  deskMenuBefore: desk("r-menu-before-desk", "Informax Cloud on a computer: what a guest sees when they scan the Restaurant Menu Scan Point"),
   deskMenuReplace: desk("r-menu-replace-desk", "Informax Cloud on a computer: replacing the default menu with a new PDF"),
   deskMenuPublished: desk("r-menu-after-desk", "Informax Cloud on a computer: the new menu is live, with two previous PDF versions available to restore"),
   deskDirectoryPublished: desk("h-directory-after-desk", "Informax Cloud on a computer: the Coffee Table Scan Point showing the updated guest directory"),
   deskSpaCompose: desk("h-spa-compose-desk", "Informax Cloud on a computer: publishing temporary content with an end time of 18:00"),
   deskSpaTemporary: desk("h-spa-temporary-desk", "Informax Cloud on a computer: temporary spa content showing until 18:00, then back to the spa treatments menu"),
-  deskHotelOverview: desk("h-overview-v2", "Informax Cloud overview for Marlowe Grand Hotel: Spaces, active Codes and temporary content running now"),
+  deskHotelOverview: desk("h-overview-v2", "Informax Cloud overview for Marlowe Grand Hotel: Spaces, live Scan Points and temporary content running now"),
   deskSpaces: desk("h-spaces", "Informax Cloud: the Spaces of Marlowe Grand Hotel (Bedrooms, Spa, The Garden Room, Public Areas) and the Scan Points in each"),
   deskBedrooms: desk("h-bedrooms", "Informax Cloud: the Scan Points in Bedrooms, each showing whether its content is live or temporary"),
   deskBulk: desk("h-bulk", "Informax Cloud: update many at once, publishing one PDF to every Bathroom Scan Point"),
