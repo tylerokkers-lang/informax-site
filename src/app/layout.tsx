@@ -36,11 +36,13 @@ export const metadata: Metadata = {
 const organizationLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: "Informax",
   url: SITE_URL,
   email: CONTACT_EMAIL,
   description:
-    "Informax builds Informax Cloud, which lets restaurants and hotels keep the menus and guest information behind their Scan Points up to date.",
+    "Informax makes Informax Cloud, the platform hotels, restaurants and venues use to keep the menus and guest information behind their Scan Points up to date.",
+  founder: { "@type": "Person", "@id": `${SITE_URL}/tyler-okkers#person`, name: "Tyler Okkers", jobTitle: "Founder" },
   logo: `${SITE_URL}/icon.png`,
   sameAs: Object.values(SOCIAL_LINKS).filter(Boolean),
 };

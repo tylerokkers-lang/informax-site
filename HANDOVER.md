@@ -11,6 +11,12 @@ redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
 
+## 22 November 2026: founder profile and a shorter homepage (branch `redesign/done-right`, PR #6, NOT live)
+
+- **Founder**: Tyler Okkers is "Founder of Informax" everywhere. No CEO or Chief Executive wording anywhere (tested on every page, including metadata). `/tyler-okkers` uses the owner's biography word for word; Person structured data `jobTitle: "Founder"`; the site-wide Organization has an `@id` and `founder`; Informax Cloud is the product (SoftwareApplication published by Informax), not a company.
+- **Homepage** cut to: hero with the demonstration (Informax Cloud), three benefits (a snap row on phones), four industries, closing call to action, compact footer. Length on a 390x844 phone: **16,101px (19.1 screens) before, 3,892px (4.6 screens) after**; 834px: 13,905 to about 4,050; 1440px: 12,796 to about 3,800. The test suite fails if the phone homepage exceeds 6 screens. Moved, not deleted: the placements explorer and the printed-vs-Informax table to `/how-it-works`; "What guests can open" to `/informax-cloud`; the Cloud levels already lived there.
+- Fixed: `ScanPoint` ignored a caller's `absolute` positioning (it always added `relative`).
+
 ## 21 November 2026 (evening): refinement, pricing correction and security pass (branch `redesign/done-right`, PR #6, NOT live)
 
 - **Pricing** corrected everywhere (see §0 prices): all figures derive from `PRICE` in `src/lib/cloud-plans.ts`. Pricing page rebuilt with a first-year side-by-side table; signup and legal pages moved to the light design. The website holds no Stripe configuration; Stripe prices in Informax Cloud were **not** checked (no access to that repo from this session) and must match £1,188 / £99 x 3 then £149.

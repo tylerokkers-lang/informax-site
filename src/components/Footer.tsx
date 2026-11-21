@@ -13,18 +13,18 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-paper pb-10 pt-20 text-ink-mute md:pt-24">
+    <footer className="bg-paper pb-8 pt-12 text-ink-mute md:pb-10 md:pt-20">
       <div className="mx-auto max-w-[1320px] px-6 md:px-10">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 border-b border-line pb-16 md:grid-cols-4 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.1fr]">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-9 border-b border-line pb-10 md:grid-cols-4 md:gap-y-12 md:pb-16 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.1fr]">
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Link href="/" className="inline-flex rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass" aria-label="Informax home">
               <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={128} height={38} className="h-auto w-[128px] brightness-0" />
             </Link>
-            <p className="x-title mt-6 max-w-[16ch] text-[26px] text-ink">Digital experiences, Done Right.</p>
-            <p className="mt-4 max-w-[34ch] text-[14.5px] leading-relaxed">
+            <p className="x-title mt-5 max-w-[16ch] text-[22px] text-ink md:mt-6 md:text-[26px]">Digital experiences, Done Right.</p>
+            <p className="mt-4 hidden max-w-[34ch] text-[14.5px] leading-relaxed md:block">
               Informax Cloud keeps menus, guest information and every Scan Point current. Built in hospitality, in the United Kingdom.
             </p>
-            <div className="mt-7 flex items-center gap-3">
+            <div className="mt-5 flex items-center gap-3 md:mt-7">
               <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary min-h-10! rounded-full! px-5! text-[14px]!">
                 {DEMO_CTA.label}
               </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 text-[13px]">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[13px] md:pt-8">
           <p>© {new Date().getFullYear()} Informax. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {FOOTER_LEGAL_LINKS.map((link) => (
@@ -101,8 +101,8 @@ export default function Footer() {
 function FooterCol({ title, links }: { title: string; links: readonly { label: string; href: string }[] }) {
   return (
     <div>
-      <h2 className="mb-5 text-[13px] font-semibold text-ink">{title}</h2>
-      <ul className="flex flex-col gap-3">
+      <h2 className="mb-3.5 text-[13px] font-semibold text-ink md:mb-5">{title}</h2>
+      <ul className="flex flex-col gap-2.5 md:gap-3">
         {links.map((link) => (
           <li key={link.href}>
             {link.href.startsWith("http") ? (

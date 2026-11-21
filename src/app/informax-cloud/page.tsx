@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Check, Clock3, FileStack, Globe, History, ImageIcon, LayoutGrid, MonitorSmartphone, QrCode, ScrollText, Users } from "lucide-react";
 import Journey from "@/components/x/Journey";
+import ContentTypes from "@/components/x/ContentTypes";
 import { BrowserFrame, PhoneFrame } from "@/components/x/Devices";
 import { ButtonLink, Container, DemoBand, Faq, Heading, ScreenNote, Section } from "@/components/x/ui";
 import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
@@ -89,8 +90,24 @@ export default function CloudPage() {
         </Container>
       </Section>
 
+      {/* What a Scan Point can open */}
+      <Section tone="paper" labelledBy="types-h">
+        <Container>
+          <Heading
+            id="types-h"
+            eyebrow="What guests can open"
+            title="Everything guests ask for,"
+            soft="one scan away."
+            lead="Use the PDFs you already make, or point a Scan Point at your own website. Informax can also design them for you."
+          />
+          <div className="mt-14 md:mt-16">
+            <ContentTypes />
+          </div>
+        </Container>
+      </Section>
+
       {/* Replace from a phone */}
-      <Section tone="paper" labelledBy="replace-h">
+      <Section tone="white" labelledBy="replace-h">
         <Container>
           <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
             <Heading

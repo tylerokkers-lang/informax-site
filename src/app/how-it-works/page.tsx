@@ -3,6 +3,8 @@ import Steps from "@/components/x/Steps";
 import Everywhere from "@/components/x/Everywhere";
 import { PhoneFrame } from "@/components/x/Devices";
 import { Container, DemoBand, Faq, Heading, PrimaryActions, ScreenNote, Section } from "@/components/x/ui";
+import { Check, Minus } from "lucide-react";
+import Placements from "@/components/x/Placements";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -11,6 +13,14 @@ export const metadata: Metadata = {
     "Map your property, place your Scan Points, publish your content, and guests scan with their camera. Every printed copy follows each update. No app, no reprinting.",
   alternates: { canonical: "/how-it-works" },
 };
+
+const COMPARE = [
+  { k: "A dish sells out", before: "Staff explain it table by table", after: "The menu is updated before the next order" },
+  { k: "Dinner hours change", before: "Reprint the directory for every room", after: "Publish once, every room follows" },
+  { k: "A spa offer for this afternoon", before: "A card at reception, if anyone sees it", after: "On every Scan Point until 18:00, then gone" },
+  { k: "A session moves room", before: "Handwritten signs and announcements", after: "The programme shows the new room on the next scan" },
+  { k: "Something goes wrong", before: "Find and recall the printed copies", after: "Restore the previous version in a tap" },
+];
 
 const QUESTIONS = [
   { q: "Do guests need an app or an account?", a: "No. Guests scan the Scan Point with their phone's camera and the information opens in their browser." },
@@ -62,7 +72,63 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section tone="paper" labelledBy="both-h">
+      <Section tone="white" labelledBy="places-h">
+        <Container wide>
+          <Heading
+            id="places-h"
+            center
+            eyebrow="Scan Points in place"
+            title="Wherever guests look,"
+            soft="the right information."
+            lead="A small, considered object on the table, by the bed or at the desk. Guests scan it with their phone's camera."
+          />
+          <div className="mt-14 md:mt-16">
+            <Placements />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Before and after: the moments that used to cost an afternoon. */}
+      <Section tone="paper" labelledBy="compare-h">
+        <Container>
+          <Heading id="compare-h" eyebrow="The difference" title="The moments that used to" soft="cost you an afternoon." />
+          <Reveal className="mt-14 overflow-hidden rounded-[28px] bg-white shadow-[0_0_0_1px_rgba(11,21,36,0.06)] md:mt-16">
+            <table className="w-full border-collapse text-left">
+              <caption className="sr-only">What happens with printed materials, and what happens with Informax</caption>
+              <thead>
+                <tr className="border-b border-line">
+                  <th scope="col" className="px-5 py-5 text-[13px] font-semibold text-ink-mute md:px-8">When</th>
+                  <th scope="col" className="hidden px-5 py-5 text-[13px] font-semibold text-ink-mute md:table-cell md:px-8">With printed materials</th>
+                  <th scope="col" className="px-5 py-5 text-[13px] font-semibold text-brass-deep md:px-8">With Informax</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARE.map((r) => (
+                  <tr key={r.k} className="border-b border-line last:border-0">
+                    <th scope="row" className="px-5 py-6 align-top text-[16px] font-semibold text-ink md:w-[28%] md:px-8 md:text-[17px]">
+                      {r.k}
+                    </th>
+                    <td className="hidden px-5 py-6 align-top text-[16px] text-ink-mute md:table-cell md:px-8">
+                      <span className="flex items-start gap-3">
+                        <Minus size={18} aria-hidden className="mt-0.5 shrink-0 text-ink-mute/60" />
+                        {r.before}
+                      </span>
+                    </td>
+                    <td className="px-5 py-6 align-top text-[16px] text-ink md:px-8">
+                      <span className="flex items-start gap-3">
+                        <Check size={18} aria-hidden className="mt-0.5 shrink-0 text-moss" />
+                        {r.after}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section tone="alt" labelledBy="both-h">
         <Container>
           <h2 id="both-h" className="sr-only">For your guests and for your team</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

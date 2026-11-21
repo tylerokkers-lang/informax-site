@@ -65,7 +65,8 @@ export default function ScanPoint({
       role={decorative ? undefined : "img"}
       aria-hidden={decorative ? true : undefined}
       aria-label={decorative ? undefined : `Informax Scan Point: ${place}`}
-      className={`relative isolate [container-type:inline-size] ${className}`}
+      // Positioned by the caller when it passes "absolute"; otherwise relative, for the ring and shadow.
+      className={`${/\babsolute\b/.test(className) ? "" : "relative"} isolate [container-type:inline-size] ${className}`}
     >
       {standing ? <span aria-hidden className="x-contact-shadow" /> : null}
       {pulse !== undefined && pulse !== null ? (

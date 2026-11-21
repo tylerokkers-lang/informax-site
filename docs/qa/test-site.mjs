@@ -60,12 +60,44 @@ const beats = page.locator("ol button[aria-pressed]");
 ok((await beats.count()) === 3, "hero demonstration has three beats");
 await beats.nth(2).click();
 ok((await beats.nth(2).getAttribute("aria-pressed")) === "true", "choosing a beat selects it");
+ok(await page.getByRole("button", { name: "Play the demonstration", exact: true }).isVisible(), "choosing a beat pauses: a Play control is offered");
+await page.getByRole("button", { name: "Replay the demonstration from the start" }).click();
+ok((await beats.nth(0).getAttribute("aria-pressed")) === "true", "Replay returns to the first beat");
+ok(await page.getByRole("button", { name: "Pause the demonstration", exact: true }).isVisible(), "after Replay the demonstration plays (Pause offered)");
+
+// 3a. The homepage stays short (owner, 22 Nov 2026): at most 6 screens on an iPhone-sized viewport, and the product in the first screen.
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true });
+  const mp = await ctx.newPage();
+  await mp.goto(BASE + "/", { waitUntil: "networkidle" });
+  const h = await mp.evaluate(() => document.documentElement.scrollHeight);
+  ok(h <= 844 * 6, `homepage on a 390x844 phone is ${(h / 844).toFixed(1)} screens (at most 6)`);
+  const demoTop = await mp.getByRole("heading", { name: "Informax Cloud", exact: true }).evaluate((e) => e.getBoundingClientRect().top);
+  ok(demoTop < 844 * 1.2, `phone: the Informax Cloud demonstration starts within the first screen and a bit (${Math.round(demoTop)}px)`);
+  await ctx.close();
+}
+
+// 3c. Founder profile (owner, 22 Nov 2026): Founder of Informax; no CEO wording anywhere; structured data agrees.
+await page.goto(BASE + "/tyler-okkers", { waitUntil: "networkidle" });
+ok(await page.getByText("Founder of Informax", { exact: true }).isVisible(), "founder page: Founder of Informax");
+ok(await page.getByText("Tyler Okkers founded Informax with a vision to simplify how businesses manage and deliver digital information.", { exact: true }).isVisible(), "founder page: approved biography");
+const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+ok(ld.some((t) => t.includes('"jobTitle":"Founder"')), "founder structured data: jobTitle Founder");
+for (const pth of PAGES.concat(["/tyler-okkers"])) {
+  await page.goto(BASE + pth, { waitUntil: "domcontentloaded" });
+  const html = await page.content();
+  ok(!/\bCEO\b|Chief Executive/i.test(html), `${pth}: no CEO or Chief Executive wording, including metadata`);
+}
+await page.goto(BASE + "/", { waitUntil: "networkidle" });
+// The placements and Cloud levels moved from the homepage to How it works and Informax Cloud (22 Nov 2026).
+await page.goto(BASE + "/how-it-works", { waitUntil: "networkidle" });
 const placeTabs = page.getByRole("tablist", { name: "Where Scan Points go" });
 await placeTabs.getByRole("tab", { name: "Galleries" }).click();
 ok(await page.getByRole("img", { name: /Room 3 of a gallery/ }).isVisible(), "placements: Galleries shows the gallery guide");
 await placeTabs.getByRole("tab", { name: "Galleries" }).focus();
 await page.keyboard.press("ArrowRight");
 ok((await placeTabs.getByRole("tab", { name: "Events" }).getAttribute("aria-selected")) === "true", "placements: ArrowRight moves to Events");
+await page.goto(BASE + "/informax-cloud", { waitUntil: "networkidle" });
 const levels = page.getByRole("tablist", { name: "The levels of Informax Cloud" });
 await levels.getByRole("tab", { name: /Scan Point/ }).click();
 await page.waitForTimeout(900);
