@@ -9,7 +9,7 @@ import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 import { DEMO_CTA } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: { absolute: "Informax | Digital experiences, Done Right." },
+  title: { absolute: "Informax | Digital experiences. Done right." },
   description:
     "Hotels, restaurants and venues deliver menus and guest information through Informax Scan Points. One Scan Point. Unlimited placements. Instant updates.",
   alternates: { canonical: "/" },
@@ -36,8 +36,8 @@ export default function Home() {
         <Container wide>
           <div className="mx-auto max-w-[1100px] text-center">
             <h1 id="hero-h" className="ix-hero-rise x-display text-[clamp(46px,7.6vw,116px)] text-ink" style={{ ["--rise-y" as string]: "22px" }}>
-              Digital <span className="whitespace-nowrap">experiences,</span>
-              <br className="hidden sm:block" /> <span className="text-brass-deep">Done Right.</span>
+              Digital <span className="whitespace-nowrap">experiences.</span>
+              <br className="hidden sm:block" /> <span className="text-brass-deep">Done right.</span>
             </h1>
             <p className="ix-hero-rise mx-auto mt-5 max-w-[34rem] text-pretty text-[17.5px] leading-[1.5] text-ink-soft md:mt-7 md:text-[21px]" style={{ ["--rise-delay" as string]: "0.12s" }}>
               Transform how guests access menus, directories and information. Update everything from one place, without reprinting a thing.

@@ -11,8 +11,28 @@ redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
 
+## Launch plan for PR #6 (prepared 21 November 2026, awaiting the owner's approval)
+
+**Release candidate:** the head of `redesign/done-right` when the owner approves (the commit reported in PR #6). `main` (`8bac8e0`) is fully contained in the branch: no sync needed, and nothing approved is lost.
+
+**Current production (rollback target):** Vercel deployment `informax-site-iv5irkrs4-informax.vercel.app`, built from `main` at `8bac8e0` (13 Nov 2026). Both `informax.co.uk` (A `76.76.21.21`, Vercel) and `www.informax.co.uk` (CNAME to the apex) were confirmed on 21 Nov 2026 by public DNS lookup to point at Vercel and to serve that deployment's content.
+
+**Before merging (owner):**
+1. Review the preview on a phone (iPhone Safari) and a desktop.
+2. On the preview, send one test enquiry labelled "TEST, please ignore" and confirm it arrives at info@informax.co.uk (or shows Delivered in resend.com/emails). Confirm `RESEND_API_KEY` is set for Production in Vercel (it already is for the live site).
+3. In Stripe (Informax Cloud), confirm prices: annual £1,188; monthly £99 for 3 months, then £149. Not changed by this release.
+
+**Deploy:**
+1. Merge PR #6 into `main` with "Create a merge commit" (keeps the history and makes a single revert possible). Vercel builds and promotes it automatically. `VERCEL_ENV=production next build` passes the media-licence guard (checked 21 Nov).
+2. Within 10 minutes: open informax.co.uk and www on a phone and a desktop; check the home headline, Pricing (£1,188 / £99 then £149), Customer log in (informax.cloud/login), `/hotels` → `/hospitality`; send one labelled enquiry.
+
+**Rollback (instant, no rebuild):** Vercel → Deployments → `informax-site-iv5irkrs4` → Promote to Production (or `npx vercel promote informax-site-iv5irkrs4-informax.vercel.app`). Then on `main`: `git revert -m 1 <merge commit>` and push, so a later push does not redeploy the redesign.
+
+**What this release does not touch:** DNS, Vercel environment variables, Resend domain records, Microsoft 365 mail, Stripe, and Informax Cloud (separate repo, separate domain `informax.cloud`, separate Vercel project and database). The website only links to `informax.cloud/login`. The new security headers apply to informax.co.uk responses only; HSTS deliberately omits `includeSubDomains` so mail-related subdomains (`email`, `autodiscover`) are unaffected.
+
 ## 22 November 2026: founder profile and a shorter homepage (branch `redesign/done-right`, PR #6, NOT live)
 
+- **Headline** (owner, 21 Nov 2026, late): "Digital experiences. Done right."
 - **Founder**: Tyler Okkers is "Founder of Informax" everywhere. No CEO or Chief Executive wording anywhere (tested on every page, including metadata). `/tyler-okkers` uses the owner's biography word for word; Person structured data `jobTitle: "Founder"`; the site-wide Organization has an `@id` and `founder`; Informax Cloud is the product (SoftwareApplication published by Informax), not a company.
 - **Homepage** cut to: hero with the demonstration (Informax Cloud), three benefits (a snap row on phones), four industries, closing call to action, compact footer. Length on a 390x844 phone: **16,101px (19.1 screens) before, 3,892px (4.6 screens) after**; 834px: 13,905 to about 4,050; 1440px: 12,796 to about 3,800. The test suite fails if the phone homepage exceeds 6 screens. Moved, not deleted: the placements explorer and the printed-vs-Informax table to `/how-it-works`; "What guests can open" to `/informax-cloud`; the Cloud levels already lived there.
 - Fixed: `ScanPoint` ignored a caller's `absolute` positioning (it always added `relative`).

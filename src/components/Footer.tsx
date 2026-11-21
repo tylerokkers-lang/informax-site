@@ -20,7 +20,7 @@ export default function Footer() {
             <Link href="/" className="inline-flex rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass" aria-label="Informax home">
               <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={128} height={38} className="h-auto w-[128px] brightness-0" />
             </Link>
-            <p className="x-title mt-5 max-w-[16ch] text-[22px] text-ink md:mt-6 md:text-[26px]">Digital experiences, Done Right.</p>
+            <p className="x-title mt-5 max-w-[16ch] text-[22px] text-ink md:mt-6 md:text-[26px]">Digital experiences. Done right.</p>
             <p className="mt-4 hidden max-w-[34ch] text-[14.5px] leading-relaxed md:block">
               Informax Cloud keeps menus, guest information and every Scan Point current. Built in hospitality, in the United Kingdom.
             </p>

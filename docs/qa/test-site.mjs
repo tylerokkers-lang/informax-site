@@ -37,7 +37,7 @@ for (const [from, to] of [["/hotels", "/hospitality"], ["/touch-points", "/how-i
 
 // 2. "Done Right" redesign (21 Nov 2026): the hero, the navigation and the two actions.
 await page.goto(BASE + "/", { waitUntil: "networkidle" });
-ok((await page.locator("h1").innerText()).replace(/\s+/g, " ").trim() === "Digital experiences, Done Right.", "home h1 is exactly \"Digital experiences, Done Right.\"");
+ok((await page.locator("h1").innerText()).replace(/\s+/g, " ").trim() === "Digital experiences. Done right.", "home h1 is exactly \"Digital experiences. Done right.\" (owner, 21 Nov 2026)");
 const hero = page.locator("section").first();
 ok((await hero.getByRole("link", { name: "Explore Informax Cloud" }).getAttribute("href")) === "/informax-cloud", "hero primary action: Explore Informax Cloud");
 ok((await hero.getByRole("link", { name: "Request a Demo" }).getAttribute("href")) === "/enquire", "hero secondary action: Request a Demo");

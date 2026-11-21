@@ -41,7 +41,9 @@ const CSP = [
 
 const SECURITY_HEADERS = [
   { key: "Content-Security-Policy", value: CSP },
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  // No includeSubDomains: informax.co.uk subdomains such as email (GoDaddy) and
+  // autodiscover (Microsoft 365) are not served by this site and may not all use HTTPS.
+  { key: "Strict-Transport-Security", value: "max-age=63072000" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
