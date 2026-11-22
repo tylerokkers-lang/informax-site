@@ -36,12 +36,13 @@ const BEATS = [
  */
 const CROP_H = 722;
 const CONTENT_LEFT = 0.214; // the content column starts here (fraction of the capture width)
-/** Pixel boxes on the capture: the Coffee Table row (Bedrooms) and the "Published. It is live now." banner. */
-const ROW_PX = [616, 714] as const;
-const BANNER_PX = [90, 156] as const;
-const ringBox = (px: readonly [number, number], phone: boolean) => ({
-  left: `${phone ? 0.4 : CONTENT_LEFT * 100}%`,
-  width: `${phone ? 96.6 : 76.1}%`,
+/** Pixel boxes on the capture (1800 wide): the Coffee Table card (Bedrooms, x 385 to 828) and the "Published. It is live now." banner. */
+const ROW_PX = [355, 721] as const;
+const BANNER_PX = [95, 152] as const;
+const ROW_X = { desk: [CONTENT_LEFT * 100, 24.6], phone: [0.4, 31.3] } as const; // [left %, width %]
+const ringBox = (px: readonly [number, number], phone: boolean, x?: typeof ROW_X) => ({
+  left: `${x ? (phone ? x.phone[0] : x.desk[0]) : phone ? 0.4 : CONTENT_LEFT * 100}%`,
+  width: `${x ? (phone ? x.phone[1] : x.desk[1]) : phone ? 96.6 : 76.1}%`,
   top: `${(px[0] / CROP_H) * 100}%`,
   height: `${((px[1] - px[0]) / CROP_H) * 100}%`,
 });
@@ -139,7 +140,7 @@ export default function Showcase() {
             {/* Phones show the content column only, so the highlights are placed for that crop. */}
             {([true, false] as const).map((phone) => (
               <span key={String(phone)} aria-hidden className={phone ? "sm:hidden" : "max-sm:hidden"}>
-                <span className={ring(shown === 0, "brand")} style={ringBox(ROW_PX, phone)} />
+                <span className={ring(shown === 0, "brand")} style={ringBox(ROW_PX, phone, ROW_X)} />
                 <span className={ring(shown === 1, "ok", "delay-[450ms]")} style={ringBox(BANNER_PX, phone)} />
               </span>
             ))}

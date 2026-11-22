@@ -83,7 +83,7 @@ function ap(i: "hotel" | "restaurant", name: string, area: string, classificatio
     area={{ id: "a1", name: area }} locationName={null}
     code={{ id: "code1", publicCode: "7m4k2x9q0p", url: "https://go.informax.cloud/c/7m4k2x9q0p", status: "active" }}
     classifications={[{ id: "c1", name: classification, status: "active" }]}
-    can={{ manage: true, archive: true, bulk: true }}
+    can={{ manage: true, archive: true, bulk: true, print: false }}
     notice={notice ? { kind: "ok", text: notice } : undefined}
     content={{ state, timeZone: tz, now: NOW, can: CAN }} />);
 }
@@ -145,17 +145,21 @@ export default async function Marketing({ params }: { params: Promise<{ shot: st
       return overview("hotel");
     case "h-bedrooms":
       return shell("hotel", <SpaceDetailView profile={PROFILES.hotel} space={{ id: "a1", name: "Bedrooms", status: "active", depth: 1, locationId: "l1" }} locationName={null} ancestors={[]}
-        inside={[{ id: "ap1", name: "Coffee Table", inside: 0, archived: false, codes: 1, content: "default" }, { id: "ap2", name: "Bathroom", inside: 0, archived: false, codes: 1, content: "temporary" }, { id: "ap3", name: "Bedside Table", inside: 0, archived: false, codes: 1, content: "default" }, { id: "ap4", name: "Room Service", inside: 0, archived: false, codes: 1, content: "default" }]}
+        inside={[
+          { id: "ap1", kind: "access_point", name: "Coffee Table", inside: 0, archived: false, codes: 1, content: "default", status: { kind: "default" }, pictures: [{ versionId: "p-dir", kind: "pdf", name: "Guest Directory" }] },
+          { id: "ap2", kind: "access_point", name: "Bathroom", inside: 0, archived: false, codes: 1, content: "temporary", status: { kind: "temporary", until: "18:00" }, pictures: [{ versionId: "p-temp", kind: "pdf", name: "Spa this afternoon" }] },
+          { id: "ap3", kind: "access_point", name: "Bedside Table", inside: 0, archived: false, codes: 1, content: "default", status: { kind: "default" }, pictures: [{ versionId: "p-dir", kind: "pdf", name: "Guest Directory" }] },
+          { id: "ap4", kind: "access_point", name: "Room Service", inside: 0, archived: false, codes: 1, content: "default", status: { kind: "default" }, pictures: [{ versionId: "p-dir", kind: "pdf", name: "Guest Directory" }] }]}
         childTotal={4} page={1} codes={[]} codeTotal={0} codePage={1} pageSize={50} showArchived={false} can={{ manage: true, codes: true }}
         content={{ state: { versions: [], defaults: [], temporaries: [], live: { live: null, default: null, scheduled: null } } as ContentState, timeZone: tz, now: NOW, can: CAN }}
         areaMode={{ classifications: [{ id: "c1", name: "Coffee Table" }, { id: "c2", name: "Bathroom" }], suggestions: PROFILES.hotel.suggestedAccessPoints, canBulk: true, emergency: null }} />);
     case "h-spaces":
       return shell("hotel", <SpacesView profile={PROFILES.hotel} canSeeLocations={false} sections={[{ locationId: "l1", locationName: H.loc.name, canManage: true, total: 5, page: 1, pageSize: 50, spaces: [
-        { id: "a1", name: "Bedrooms", inside: 4, codes: 4, children: [{ id: "ap1", name: "Coffee Table", inside: 0 }, { id: "ap2", name: "Bathroom", inside: 0 }, { id: "ap3", name: "Bedside Table", inside: 0 }, { id: "ap4", name: "Room Service", inside: 0 }] },
-        { id: "a2", name: "Spa", inside: 2, codes: 2, children: [{ id: "ap5", name: "Spa Entrance", inside: 0 }, { id: "ap6", name: "Relaxation Room", inside: 0 }] },
-        { id: "a3", name: "The Garden Room", inside: 2, codes: 2, children: [{ id: "ap7", name: "Restaurant Menu", inside: 0 }, { id: "ap8", name: "Wine List", inside: 0 }] },
-        { id: "a4", name: "Public Areas", inside: 2, codes: 2, children: [{ id: "ap9", name: "Reception", inside: 0 }, { id: "ap10", name: "Lobby Lounge", inside: 0 }] },
-        { id: "a5", name: "Suites", inside: 1, codes: 1, children: [{ id: "ap11", name: "Suite Bathroom", inside: 0 }] },
+        { id: "a1", name: "Bedrooms", inside: 4, codes: 4, status: { kind: "default" }, pictures: [{ versionId: "p-dir", kind: "pdf", name: "Guest Directory" }, { versionId: "p-temp", kind: "pdf", name: "Spa this afternoon" }], children: [{ id: "ap1", name: "Coffee Table", inside: 0 }, { id: "ap2", name: "Bathroom", inside: 0 }, { id: "ap3", name: "Bedside Table", inside: 0 }, { id: "ap4", name: "Room Service", inside: 0 }] },
+        { id: "a2", name: "Spa", inside: 2, codes: 2, status: { kind: "default" }, pictures: [{ versionId: "p-spa", kind: "pdf", name: "Spa treatments" }], children: [{ id: "ap5", name: "Spa Entrance", inside: 0 }, { id: "ap6", name: "Relaxation Room", inside: 0 }] },
+        { id: "a3", name: "The Garden Room", inside: 2, codes: 2, status: { kind: "default" }, pictures: [{ versionId: "p-menu", kind: "pdf", name: "Dinner menu" }], children: [{ id: "ap7", name: "Restaurant Menu", inside: 0 }, { id: "ap8", name: "Wine List", inside: 0 }] },
+        { id: "a4", name: "Public Areas", inside: 2, codes: 2, status: { kind: "default" }, pictures: [{ versionId: "p-dir", kind: "pdf", name: "Guest Directory" }], children: [{ id: "ap9", name: "Reception", inside: 0 }, { id: "ap10", name: "Lobby Lounge", inside: 0 }] },
+        { id: "a5", name: "Suites", inside: 1, codes: 1, status: { kind: "default" }, pictures: [{ versionId: "p-spa", kind: "pdf", name: "Spa treatments" }], children: [{ id: "ap11", name: "Suite Bathroom", inside: 0 }] },
       ] }]} />);
     case "h-bulk":
       return shell("hotel", <BulkView locations={[H.loc]} locationId="l1" locationName="Marlowe Grand"
