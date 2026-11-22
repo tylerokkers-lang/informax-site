@@ -4,7 +4,7 @@
 import { chromium } from "playwright-core";
 
 const BASE = process.env.BASE ?? "http://localhost:3200";
-const PAGES = ["/", "/restaurants", "/hotels"];
+const PAGES = ["/restaurants", "/hospitality"];
 let failures = 0;
 const ok = (cond, msg) => { console.log(`${cond ? "PASS" : "FAIL"}  ${msg}`); if (!cond) failures++; };
 const isVideo = (u) => /\/video\/stock\/.+\.(mp4|webm)(\?|$)/.test(u);

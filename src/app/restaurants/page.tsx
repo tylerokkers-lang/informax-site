@@ -1,157 +1,150 @@
-import { IndustryBenefits, DesignServices } from "@/components/site/CloudIntroduction";
 import type { Metadata } from "next";
-import Link from "next/link";
-import AccessPoint from "@/components/access/AccessPoint";
+import { ArrowRight } from "lucide-react";
 import Photo from "@/components/site/Photo";
-import SeeItInAction from "@/components/site/SeeItInAction";
-import MenuBeforeAfter from "@/components/site/MenuBeforeAfter";
-import { Phone } from "@/components/site/Devices";
-import { DemoCta, Story } from "@/components/site/Sections";
-import { DEMO_CTA } from "@/lib/constants";
-import { ComingSoonBadge, PreviewNote } from "@/components/site/ComingSoon";
-import { slotHasMedia } from "@/lib/photography";
+import { PhoneFrame } from "@/components/x/Devices";
+import ScanPoint from "@/components/x/ScanPoint";
+import FilmBand from "@/components/x/FilmBand";
+import { Container, DemoBand, Faq, Heading, PrimaryActions, ScreenNote, Section } from "@/components/x/ui";
+import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Restaurants: change your menu without reprinting",
+  title: "Restaurants | Digital menus that change with the kitchen",
   description:
-    "Sold out of a dish? With Informax Cloud (coming soon) you replace your menu from your phone and every table's Code shows the new one. No app, no reprinting.",
+    "A Scan Point on every table and menus you update from your phone in Informax Cloud. Temporary menus with an end time, no reprinting and no app for guests.",
   alternates: { canonical: "/restaurants" },
 };
+
+/** Where the changed dish sits on the captured menu. */
+const DISH = { top: 0.428, height: 0.043 };
+
+const MENUS = [
+  { place: "Lunch", sub: "12:00 to 14:30", finish: "ivory" },
+  { place: "Dinner", sub: "From 17:30", finish: "navy" },
+  { place: "Wine", sub: "By the glass", finish: "stone" },
+  { place: "Desserts", sub: "Tonight", finish: "graphite" },
+] as const;
+
+const QUESTIONS = [
+  { q: "Do guests need an app?", a: "No. Guests scan the Scan Point with their phone's camera and the menu opens in their browser, full screen and easy to read." },
+  { q: "Can I change a single dish inside Informax Cloud?", a: "Not today. You upload the updated menu as a PDF, made the way you already make it, or link a page of your website. If you would like us to design your menus, that is a separate service." },
+  { q: "How fast is an update?", a: "As soon as Cloud confirms it is live, the next guest to scan sees it. A guest who already has the menu open sees it when they refresh." },
+  { q: "Can I run a menu just for tonight?", a: "Yes. Publish a temporary menu for one, two or three hours, or until a time you choose. When it ends, your usual menu returns by itself." },
+];
 
 export default function RestaurantsPage() {
   return (
     <>
-      <header className="relative min-h-[100svh] overflow-hidden bg-charcoal-950 text-cream">
-        <Photo slot="restaurantTable" fill motion priority className="opacity-90" />
-        {/* Phones and tablets: the text spans the full width, so the overlay is even. From lg up: dark behind the text, the film clear on the right. */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.82)_0%,rgba(6,10,18,0.78)_60%,rgba(6,10,18,0.9)_100%)] lg:bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.15)_100%)]" aria-hidden />
-        <div className="relative mx-auto grid min-h-[100svh] max-w-8xl grid-cols-1 items-center gap-12 px-6 pb-16 pt-[120px] md:px-10 lg:grid-cols-[1fr_auto]">
-          <div className="ix-hero-rise max-w-[44rem]">
-            <p className="mb-5 flex flex-wrap items-center gap-3 text-[15px] font-semibold text-brass-light">
-              Informax Cloud for restaurants <ComingSoonBadge />
-            </p>
-            <h1 className="text-balance font-serif-display text-[clamp(42px,5.2vw,72px)] leading-[1] text-white">
-              A menu that&rsquo;s always right. <span className="text-cream-mute">Without printing a thing.</span>
-            </h1>
-            <p className="mt-7 max-w-[34rem] text-[18px] leading-relaxed text-white/78">
-              Specials, sold-out dishes, a new wine, the Christmas menu. Change what guests see from your phone, and the Code on
-              every table shows the latest version.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a href="#see-it-in-action" className="ix-btn ix-btn-primary">See It in Action</a>
-              <Link href={DEMO_CTA.href} className="ix-btn ix-btn-secondary-dark">{DEMO_CTA.label}</Link>
-            </div>
-            <div className="mt-8 max-w-[34rem]">
-              <PreviewNote dark />
-            </div>
-          </div>
-          <div className="relative mx-auto flex items-end gap-5 lg:mx-0">
-            <AccessPoint place="Table 12" sub="Menu" size="md" className="mb-10 hidden sm:flex" />
-            <div className="w-[240px] sm:w-[280px]">
-              <p className="mx-auto mb-3 w-fit rounded-full bg-[rgba(6,10,18,0.6)] px-3 py-1 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
-                What the guest sees
+      <section aria-labelledby="rest-h" className="bg-paper px-3 pt-[76px] md:px-4 md:pt-[84px]">
+        <div className="relative isolate flex min-h-[640px] overflow-hidden rounded-[32px] bg-charcoal-950 md:min-h-[min(820px,calc(100svh-100px))] md:rounded-[44px]">
+          <Photo slot="restaurantTable" fill motion priority className="-z-10" label={false} />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(6,10,18,0.94)_0%,rgba(6,10,18,0.8)_55%,rgba(6,10,18,0.55)_100%)] lg:bg-[linear-gradient(90deg,rgba(6,10,18,0.92)_0%,rgba(6,10,18,0.7)_45%,rgba(6,10,18,0.2)_100%)]" />
+          <div className="mx-auto flex w-full max-w-8xl items-end px-6 pb-14 pt-24 md:items-center md:px-10 md:pb-20">
+            <div className="max-w-[44rem]">
+              <p className="ix-hero-rise text-[14px] font-semibold text-brass-light">Restaurants</p>
+              <h1 id="rest-h" className="ix-hero-rise x-display mt-6 text-balance text-[clamp(44px,6.6vw,96px)] text-white" style={{ ["--rise-delay" as string]: "0.08s" }}>
+                The menu the kitchen <span className="text-white/75">is cooking tonight.</span>
+              </h1>
+              <p className="ix-hero-rise mt-7 max-w-[34rem] text-[19px] leading-relaxed text-white/78" style={{ ["--rise-delay" as string]: "0.18s" }}>
+                A Scan Point on every table, and a menu you can change from your phone between services. When a dish sells out, every table knows.
               </p>
-              <Phone screens={["guestMenuAfter"]} priority sizes="280px" />
+              <div className="ix-hero-rise mt-9" style={{ ["--rise-delay" as string]: "0.28s" }}>
+                <PrimaryActions dark cloudFirst={false} />
+              </div>
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
-      <IndustryBenefits industry="restaurant" />
-
-      {/* The moment it starts: the chef film, full width. Only once the footage (or a photograph) exists. */}
-      {slotHasMedia("chefPass") ? (
-        <section className="relative isolate overflow-hidden bg-charcoal-950 text-cream" aria-labelledby="kitchen-h">
-          <Photo slot="chefPass" fill motion sizes="100vw" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.78)_0%,rgba(6,10,18,0.84)_100%)] lg:bg-[linear-gradient(90deg,rgba(6,10,18,0.9)_0%,rgba(6,10,18,0.65)_55%,rgba(6,10,18,0.35)_100%)]" aria-hidden />
-          <div className="relative mx-auto flex min-h-[70svh] max-w-8xl items-end px-6 pb-16 pt-28 md:min-h-[78vh] md:px-10 md:pb-24">
-            <div className="max-w-[38rem]">
-              <p className="mb-4 text-[15px] font-semibold text-brass-light">During dinner service</p>
-              <h2 id="kitchen-h" className="text-balance font-serif-display text-[clamp(34px,4.8vw,62px)] leading-[1.02] text-white">
-                The sea bass is finished. <span className="text-cream-mute">The hake is ready to serve.</span>
-              </h2>
-              <p className="mt-6 max-w-[32rem] text-[18px] leading-relaxed text-white/80">
-                The kitchen has the replacement dish. The printed menus on the tables don&rsquo;t know that yet. With Informax, the
-                menu every guest opens changes in the time it takes to upload one file.
-              </p>
-            </div>
+      <Section tone="paper" labelledBy="sold-h">
+        <Container>
+          <Heading
+            id="sold-h"
+            eyebrow="Before the next order"
+            title="The sea bass is finished."
+            soft="The menu says so."
+            lead="Replace the menu PDF in Informax Cloud and every table's Scan Point opens the new version. No apologies table by table, and no reprint."
+          />
+          <div className="mt-14 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8 md:mt-16 lg:mx-auto lg:max-w-[900px]">
+            <Reveal>
+              <PhoneFrame screens={["guestMenuBefore"]} tone="light" highlight={{ ...DISH, tone: "warn" }} className="mx-auto w-full max-w-[280px]" sizes="(min-width: 768px) 280px, 38vw" />
+              <p className="mt-5 text-center text-[13px] font-semibold text-ink-mute">At 19:00</p>
+            </Reveal>
+            <Reveal delay={0.1} className="flex flex-col items-center gap-3">
+              <ScanPoint place="Table 12" sub="Dinner menu" finish="ivory" className="w-[72px] sm:w-[120px]" />
+              <ArrowRight size={20} aria-hidden className="text-ink-mute" />
+            </Reveal>
+            <Reveal delay={0.2}>
+              <PhoneFrame screens={["guestMenuAfter"]} tone="light" highlight={{ ...DISH, tone: "ok" }} className="mx-auto w-full max-w-[280px]" sizes="(min-width: 768px) 280px, 38vw" />
+              <p className="mt-5 text-center text-[13px] font-semibold text-ink">At 19:02</p>
+            </Reveal>
           </div>
-        </section>
-      ) : null}
-
-      <MenuBeforeAfter />
-
-      <Story
-        tone="alt"
-        flip
-        eyebrow="Change it in seconds"
-        title="Replace the menu"
-        soft="from your phone."
-        media={
-          <div className="mx-auto flex max-w-[520px] items-end justify-center gap-4 sm:gap-6">
-            <Phone screens={["cloudMenuReplace"]} tone="light" className="w-1/2" sizes="260px" />
-            <Phone screens={["cloudMenuPublished"]} tone="light" className="w-1/2 sm:-mb-8" sizes="260px" />
+          <div className="mt-10 text-center">
+            <ScreenNote>Real guest screens from the Informax Cloud development build. The Copper Table is a fictional restaurant; times are an example.</ScreenNote>
           </div>
-        }
-      >
-        <p>
-          Open the menu in Informax Cloud, choose <strong className="font-semibold text-ink">Replace menu</strong> and pick the
-          updated file. Informax Cloud tells you when it is live, and the two previous PDF versions stay available to restore.
-        </p>
-        <p className="rounded-2xl bg-white px-5 py-4 text-[15px] text-ink-mute shadow-[0_0_0_1px_rgba(11,21,36,0.06)]">
-          <strong className="font-semibold text-ink-soft">Good to know:</strong> menus are uploaded as PDFs, designed the way you
-          already make them, or the Code can open your own website. Editing individual dishes inside Informax Cloud is not
-          available today.
-        </p>
-      </Story>
+        </Container>
+      </Section>
 
-      <Story
-        tone="dark"
-        eyebrow="Temporary menus"
-        title="A menu for tonight."
-        soft="Gone by tomorrow."
-        media={
-          <div className="mx-auto w-full max-w-[300px]">
-            <Phone screens={["cloudMenuTemporary"]} sizes="300px" />
+      <FilmBand
+        id="kitchen-h"
+        slot="chefPass"
+        eyebrow="From the pass"
+        title="Change the menu without leaving the kitchen."
+        body={<p>Informax Cloud works on a phone. Open the menu, choose the new PDF, publish, and get straight back to service.</p>}
+      />
+
+      <Section tone="paper" labelledBy="phone-h">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <Heading
+              id="phone-h"
+              eyebrow="Informax Cloud on your phone"
+              title="Replace. Publish."
+              soft="Or just for tonight."
+              lead="Swap the menu for good, or publish a temporary menu for one, two or three hours. When it ends, your usual menu comes back on its own."
+              size="md"
+            />
+            <RevealStagger className="grid grid-cols-3 items-end gap-3 sm:gap-5">
+              {(["cloudMenuReplace", "cloudMenuPublished", "cloudMenuTemporary"] as const).map((k, n) => (
+                <RevealStaggerItem key={k} className={n === 1 ? "-translate-y-8" : ""}>
+                  <PhoneFrame screens={[k]} tone="light" sizes="(min-width: 1024px) 200px, 30vw" />
+                  <p className="mt-4 text-center text-[13px] font-semibold text-ink-mute">{["Choose the PDF", "Live everywhere", "Temporary menu"][n]}</p>
+                </RevealStaggerItem>
+              ))}
+            </RevealStagger>
           </div>
-        }
-      >
-        <p>
-          Sunday lunch, a wine evening, a set menu for a private party. Publish a temporary menu for one, two or three hours, or
-          choose exactly when it ends.
-        </p>
-        <p>When the time is up, every table goes back to your usual menu by itself. Nobody needs to remember to change it back.</p>
-      </Story>
-
-      <Story
-        eyebrow="Every table"
-        title="One Code for each menu."
-        soft="As many copies as you like."
-        media={
-          <div className="relative overflow-hidden rounded-[28px]">
-            <Photo slot="signatureDish" fill motion sizes="(min-width: 1024px) 560px, 100vw" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.2)_0%,rgba(6,10,18,0.55)_100%)]" aria-hidden />
-            <div className="relative flex flex-wrap items-end justify-center gap-4 px-6 pb-16 pt-14 sm:gap-5">
-              <AccessPoint place="Restaurant Menu" sub="Main Restaurant" size="md" />
-              <AccessPoint place="Drinks Menu" sub="Bar" size="md" colourway="stone" />
-              <AccessPoint place="Wine List" sub="Main Restaurant" size="md" colourway="graphite" />
-            </div>
+          <div className="mt-8">
+            <ScreenNote />
           </div>
-        }
-      >
-        <p>
-          Your Restaurant Menu, Drinks Menu and Wine List each have their own permanent Code. Print the same Code for every table
-          that needs it: every copy opens the same, current menu.
-        </p>
-        <p>
-          One main administrator looks after the account and invitations. Give colleagues their own sign-in to manage content, so the team can help without sharing a password.
-        </p>
-      </Story>
+        </Container>
+      </Section>
 
-      <SeeItInAction initial="restaurant" />
-      <DesignServices industry="restaurant" />
+      <Section tone="white" labelledBy="menus-h">
+        <Container>
+          <Heading
+            id="menus-h"
+            center
+            eyebrow="One Scan Point for each menu"
+            title="Lunch, dinner, wine, desserts."
+            soft="Each one always current."
+            lead="Give each menu its own Scan Point and place it on every table, at the bar and in the window. Print as many as you need: they all open the same, current menu."
+          />
+          <RevealStagger className="mx-auto mt-14 grid max-w-[820px] grid-cols-2 gap-6 sm:grid-cols-4 md:mt-16">
+            {MENUS.map((m) => (
+              <RevealStaggerItem key={m.place} className="px-3 sm:px-2">
+                <ScanPoint place={m.place} sub={m.sub} finish={m.finish} />
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </Container>
+      </Section>
 
-      <DemoCta title="Make the next menu update a simpler one." body="Explore our sample menus and see how one update reaches every table. Bring your own designs, or ask us to create them for your restaurant." />
+      <Section tone="alt" labelledBy="rest-faq-h">
+        <Container>
+          <Faq id="rest-faq-h" items={QUESTIONS} />
+        </Container>
+      </Section>
+
+      <DemoBand title="See your menus, done right." />
     </>
   );
 }

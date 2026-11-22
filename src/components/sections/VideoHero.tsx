@@ -89,7 +89,7 @@ export default function VideoHero({
   }, [reduceMotion]);
 
   return (
-    <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-charcoal-950 text-cream">
+    <section data-header-tone="dark" className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-charcoal-950 text-cream">
       {/* Film. The poster is the film's own first frame and sits on top,
           at the same scale, until the film is actually playing — then it
           fades away over identical pixels, so there is no jump or dip. */}

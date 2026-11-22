@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { ENQUIRY_INTERESTS } from "@/lib/constants";
+import { LIMITS } from "@/lib/enquiryValidation";
 
 type FieldErrors = Record<string, string>;
 type Status = "idle" | "submitting" | "success" | "error";
@@ -22,6 +23,8 @@ export default function EnquireForm({ initialInterests = [], initialMessage = ""
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [errorMessage, setErrorMessage] = useState("");
+  // When the form was shown: the server treats a form filled in under a few seconds as automated.
+  const [startedAt] = useState(() => Date.now());
 
   function update<K extends keyof typeof initialValues>(key: K, value: string) {
     setValues((v) => ({ ...v, [key]: value }));
@@ -45,8 +48,6 @@ export default function EnquireForm({ initialInterests = [], initialMessage = ""
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
       next.email = "Please enter a valid email address.";
     }
-    if (!values.message.trim())
-      next.message = "Tell us a little about your property.";
     return next;
   }
 
@@ -72,7 +73,7 @@ export default function EnquireForm({ initialInterests = [], initialMessage = ""
       const res = await fetch("/api/enquire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, interests, website: honeypot }),
+        body: JSON.stringify({ ...values, interests, website: honeypot, startedAt }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -150,30 +151,31 @@ export default function EnquireForm({ initialInterests = [], initialMessage = ""
       <Group n="02" title="About you">
         <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
           <Field label="Name" required error={errors.name} htmlFor="name">
-            <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={(e) => update("name", e.target.value)} aria-invalid={Boolean(errors.name)} className={inputClass(Boolean(errors.name))} />
+            <input id="name" name="name" maxLength={LIMITS.name} type="text" autoComplete="name" value={values.name} onChange={(e) => update("name", e.target.value)} aria-invalid={Boolean(errors.name)} className={inputClass(Boolean(errors.name))} />
           </Field>
           <Field label="Restaurant, hotel or company" required error={errors.company} htmlFor="company">
-            <input id="company" name="company" type="text" autoComplete="organization" value={values.company} onChange={(e) => update("company", e.target.value)} aria-invalid={Boolean(errors.company)} className={inputClass(Boolean(errors.company))} />
+            <input id="company" name="company" maxLength={LIMITS.company} type="text" autoComplete="organization" value={values.company} onChange={(e) => update("company", e.target.value)} aria-invalid={Boolean(errors.company)} className={inputClass(Boolean(errors.company))} />
           </Field>
           <Field label="Role" htmlFor="jobTitle">
-            <input id="jobTitle" name="jobTitle" type="text" autoComplete="organization-title" placeholder="General Manager" value={values.jobTitle} onChange={(e) => update("jobTitle", e.target.value)} className={inputClass(false)} />
+            <input id="jobTitle" name="jobTitle" maxLength={LIMITS.jobTitle} type="text" autoComplete="organization-title" placeholder="General Manager" value={values.jobTitle} onChange={(e) => update("jobTitle", e.target.value)} className={inputClass(false)} />
           </Field>
           <Field label="Email" required error={errors.email} htmlFor="email">
-            <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={(e) => update("email", e.target.value)} aria-invalid={Boolean(errors.email)} className={inputClass(Boolean(errors.email))} />
+            <input id="email" name="email" maxLength={LIMITS.email} type="email" autoComplete="email" value={values.email} onChange={(e) => update("email", e.target.value)} aria-invalid={Boolean(errors.email)} className={inputClass(Boolean(errors.email))} />
           </Field>
           <Field label="Phone" htmlFor="phone" full>
-            <input id="phone" name="phone" type="tel" autoComplete="tel" value={values.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass(false)} />
+            <input id="phone" name="phone" maxLength={LIMITS.phone} type="tel" autoComplete="tel" value={values.phone} onChange={(e) => update("phone", e.target.value)} className={inputClass(false)} />
           </Field>
         </div>
       </Group>
 
       <Group n="03" title="Your property">
-        <Field label="Tell us a little about it" required error={errors.message} htmlFor="message" full>
+        <Field label="Anything we should know? (optional)" error={errors.message} htmlFor="message" full>
           <textarea
             id="message"
             name="message"
             rows={5}
-            placeholder="Your restaurant or hotel, where guests need information, and anything else you'd like us to know."
+            maxLength={LIMITS.message}
+            placeholder="Your property, where guests look for information, and anything else that would help."
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             aria-invalid={Boolean(errors.message)}
@@ -204,7 +206,7 @@ export default function EnquireForm({ initialInterests = [], initialMessage = ""
 }
 
 function inputClass(hasError: boolean) {
-  return `w-full rounded-[12px] border bg-panel px-4 py-3.5 text-[15px] text-ink placeholder:text-ink-mute/70 transition-[border-color,box-shadow] duration-300 focus:outline-none focus-visible:border-ink focus-visible:shadow-[0_0_0_3px_rgba(6, 147, 227,0.18)] ${
+  return `w-full rounded-[12px] border bg-panel px-4 py-3.5 text-[15px] text-ink placeholder:text-ink-quiet transition-[border-color,box-shadow] duration-300 focus:outline-none focus-visible:border-ink focus-visible:shadow-[0_0_0_3px_rgba(6, 147, 227,0.18)] ${
     hasError ? "border-rust" : "border-line hover:border-ink/30"
   }`;
 }

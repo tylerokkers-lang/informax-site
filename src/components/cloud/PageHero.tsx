@@ -34,7 +34,7 @@ export default function PageHero({
   });
 
   return (
-    <section
+    <section data-header-tone="dark"
       className={`relative overflow-hidden bg-charcoal-950 text-cream ${
         image ? "flex min-h-[88svh] items-end pb-20 pt-[150px] md:pb-28" : "pb-20 pt-[150px] md:pb-28 md:pt-[190px]"
       }`}

@@ -1,39 +1,279 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Check } from "lucide-react";
-import { Browser, Phone } from "@/components/site/Devices";
-import { Heading, Story, DemoCta } from "@/components/site/Sections";
-import { PreviewNote } from "@/components/site/ComingSoon";
-import { DesignServices } from "@/components/site/CloudIntroduction";
+import Image from "next/image";
+import { Check, Clock3, FileStack, Globe, History, ImageIcon, LayoutGrid, MonitorSmartphone, QrCode, ScrollText, Users } from "lucide-react";
+import Journey from "@/components/x/Journey";
+import ContentTypes from "@/components/x/ContentTypes";
+import { BrowserFrame, PhoneFrame } from "@/components/x/Devices";
+import { ButtonLink, Container, DemoBand, Faq, Heading, ScreenNote, Section } from "@/components/x/ui";
+import { Reveal, RevealStagger, RevealStaggerItem } from "@/components/Reveal";
+import { CLOUD_LOGIN_URL, DEMO_CTA } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Informax Cloud | Simple updates, permanent QR codes",
-  description: "See how Informax Cloud works: organise Spaces and Scan Points, upload a PDF or website, preview your content and keep the same QR codes when it changes.",
+  title: "Informax Cloud | The platform behind every Scan Point",
+  description:
+    "Organise your property into Spaces and Scan Points. Publish a PDF or website, schedule temporary content, restore earlier versions and keep every Scan Point current.",
   alternates: { canonical: "/informax-cloud" },
 };
 
-const STEPS = [
-  { title: "Name your Space", body: "A Space is an area of your property, such as the Spa, Main Restaurant or Bedrooms. Keep the names familiar to your team." },
-  { title: "Add a Scan Point", body: "Give each thing guests need a place: Restaurant Menu, Spa Treatments or Guest Directory. Each Scan Point has its own permanent QR code." },
-  { title: "Choose what it shows", body: "Upload your PDF or add a website address. Check the preview, then publish when you are ready. Bring your existing content or use our design services." },
-  { title: "Download, print and update", body: "Place copies of the QR code wherever guests need them. When your information changes, update it in Cloud. Every copy keeps working." },
+const FEATURES = [
+  { icon: FileStack, title: "PDF or website", body: "Publish the PDFs you already make, or send a Scan Point to a page of your own website." },
+  { icon: QrCode, title: "Print once", body: "A printed Scan Point never needs replacing. Place as many copies as you like." },
+  { icon: Clock3, title: "Temporary content", body: "Set an end time. When it passes, the usual content returns by itself." },
+  { icon: ScrollText, title: "Schedules", body: "Prepare content for the parts of the day, or the season, that change." },
+  { icon: History, title: "Version history", body: "The current PDF and the two before it, each restorable." },
+  { icon: Users, title: "Your team", body: "A main administrator and a personal sign-in for each colleague." },
+  { icon: LayoutGrid, title: "Spaces", body: "Organised like your property, in your team's own words." },
+  { icon: ImageIcon, title: "Your brand", body: "Your logo on the loading screen guests see first." },
+  { icon: MonitorSmartphone, title: "Computer or phone", body: "Make a change from the office, or from the pass between services." },
+  { icon: Globe, title: "Nothing for guests to install", body: "The phone's camera opens your content in the browser." },
 ];
-const BENEFITS = ["PDFs and websites in one place", "The same QR code after each update", "Temporary content with an automatic end time", "Schedules for content that changes through the day", "Current PDF plus two previous versions to restore", "Updates from a phone or computer"];
+
+const QUESTIONS = [
+  { q: "Is Informax Cloud available today?", a: "The new Informax Cloud shown on this site is in development, and the screens are from its development build. Self-service setup and billing are being prepared for launch. Existing customers keep using their current account as they do today. Request a demo and we will show you the workflow and what it means for your property." },
+  { q: "What can a Scan Point open?", a: "A PDF, such as your menu or guest directory, or a page on your own website. You can switch between the two whenever you like." },
+  { q: "How quickly do changes appear?", a: "As soon as Cloud confirms it is live, anyone who scans gets the new version. A guest who already has the page open sees it when they refresh." },
+  { q: "Can I edit a single dish inside Cloud?", a: "Not today. You upload the updated PDF, made the way you already make it, or link your website. If you would like us to design your menus and directories, that is a separate service." },
+  { q: "Who can make changes?", a: "The main administrator looks after the account and invites colleagues. Each person signs in with their own details." },
+];
 
 export default function CloudPage() {
-  return <>
-    <header className="relative overflow-hidden bg-charcoal-950 pb-20 pt-[130px] text-cream md:pb-28 md:pt-[170px]">
-      <div className="pointer-events-none absolute -left-40 top-20 h-[520px] w-[520px] rounded-full bg-brass/20 blur-[140px]" aria-hidden />
-      <div className="relative mx-auto grid max-w-8xl grid-cols-1 items-center gap-14 px-6 md:px-10 lg:grid-cols-[1fr_1fr]">
-        <div><p className="mb-5 text-[15px] font-semibold text-brass-light">Meet Informax Cloud</p><h1 className="text-balance font-serif-display text-[clamp(42px,5.4vw,74px)] leading-[1] text-white">Open. Update. Publish.<br /><span className="text-cream-mute">Get on with your day.</span></h1><p className="mt-7 max-w-[34rem] text-[18px] leading-relaxed text-white/75">Guest information should not take over your working day. Informax Cloud puts your Spaces, Scan Points and content in one clear place, so your team can find the right item and keep it current.</p><div className="mt-9 flex flex-wrap gap-3"><Link href="/pricing" className="ix-btn ix-btn-primary">Find your plan</Link><a href="#cloud-workflow" className="ix-btn ix-btn-secondary-dark">See how easy it is</a></div></div>
-        <div><Browser screen="deskMenuPublished" /><div className="mt-5"><PreviewNote dark /></div></div>
-      </div>
-    </header>
-    <section id="cloud-workflow" className="scroll-mt-24 bg-paper py-20 md:py-28" aria-labelledby="workflow-h"><div className="mx-auto max-w-8xl px-6 md:px-10"><Heading id="workflow-h" eyebrow="A familiar way to work" title="From your first Space" soft="to your first guest scan." body="Start with one piece of content. Add more when you are ready." /><ol className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">{STEPS.map((step, i) => <li key={step.title} className="rounded-[22px] bg-white p-7 shadow-[0_0_0_1px_rgba(11,21,36,0.06)]"><span className="text-[13px] font-semibold text-brass-deep">Step {i + 1}</span><h3 className="mt-3 font-serif-display text-[25px] leading-tight text-ink">{step.title}</h3><p className="mt-4 text-[16px] leading-relaxed text-ink-soft">{step.body}</p></li>)}</ol></div></section>
-    <Story tone="alt" eyebrow="Check before you publish" title="Know what your guests" soft="are about to see." media={<Browser screen="deskMenuReplace" />}><p>Open the Scan Point, choose your updated PDF or website, and check it before publishing. The overview helps your team see what is showing and where to make the next change.</p><p>Menus are updated by uploading your revised PDF. Your existing design tools still do the design work; Cloud manages how guests access the result.</p></Story>
-    <Story tone="dark" eyebrow="Less to remember at the end of a shift" title="A special for today." soft="An end time you can trust." media={<div className="mx-auto max-w-[260px]"><Phone screens={["cloudSpaTemporary"]} sizes="260px" /></div>}><p>Show a seasonal menu, a spa offer or a temporary update, with a clear end time. When it ends, Cloud shows the scheduled content that is then due, or your usual content if there is no schedule.</p><p>Use the calendar to prepare content for different times. Keep the current PDF and two previous versions, so you can restore a recent version without storing every upload.</p></Story>
-    <section className="bg-paper py-20 md:py-28" aria-labelledby="team-h"><div className="mx-auto grid max-w-8xl grid-cols-1 gap-14 px-6 md:px-10 lg:grid-cols-2"><Heading id="team-h" eyebrow="A clear setup for your team" title="One main administrator." soft="Your team, working together." body="The main administrator looks after the account and invites colleagues. Each person uses their own login to manage content, while account settings stay with the main administrator. Add your property logo to the guest loading screen for a consistent first impression." /><div><h3 className="font-serif-display text-[25px] text-ink">Built around everyday updates</h3><ul className="mt-6 space-y-4">{BENEFITS.map((benefit) => <li key={benefit} className="flex items-start gap-3 text-[16px] text-ink-soft"><Check size={19} className="mt-0.5 shrink-0 text-brass-deep" aria-hidden />{benefit}</li>)}</ul><p className="mt-6 text-[13px] leading-relaxed text-ink-mute">Self-service account setup, billing and the simplified team model are being prepared for launch. The demo shows the current development experience.</p></div></div></section>
-    <DesignServices />
-    <DemoCta title="See it once. Picture it in your property." body="Our sample designs show the guest experience. Our demo shows the everyday workflow. Explore the plans when you are ready." />
-  </>;
+  return (
+    <>
+      {/* Hero: the product on a dark stage. */}
+      <section aria-labelledby="cloud-hero-h" className="bg-paper px-3 pt-[76px] md:px-4 md:pt-[84px]">
+       <div className="relative overflow-hidden rounded-[32px] bg-charcoal-950 pb-20 pt-16 text-cream md:rounded-[44px] md:pb-28 md:pt-24">
+        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[30%] h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-brass/20 blur-[160px]" />
+        <Container wide className="relative">
+          <div className="mx-auto max-w-[900px] text-center">
+            <Image src="/brand/informax-cloud-logo-800.webp" alt="" width={200} height={53} priority className="ix-hero-rise mx-auto h-auto w-[170px] md:w-[200px]" />
+            <h1 id="cloud-hero-h" className="ix-hero-rise x-display mt-10 text-balance text-[clamp(46px,7.2vw,104px)] text-white" style={{ ["--rise-delay" as string]: "0.08s" }}>
+              Every Scan Point. <span className="text-cream-mute">One calm place.</span>
+            </h1>
+            <p className="ix-hero-rise mx-auto mt-7 max-w-[38rem] text-pretty text-[19px] leading-relaxed text-white/72 md:text-[20px]" style={{ ["--rise-delay" as string]: "0.18s" }}>
+              Informax Cloud is where your team keeps every menu, directory and guest page current, across every room, table and desk, from a computer or a phone.
+            </p>
+            <div className="ix-hero-rise mt-10 flex flex-wrap justify-center gap-3" style={{ ["--rise-delay" as string]: "0.28s" }}>
+              <ButtonLink href={DEMO_CTA.href} arrow>
+                {DEMO_CTA.label}
+              </ButtonLink>
+              <ButtonLink href="/pricing" variant="secondary-dark">
+                See pricing
+              </ButtonLink>
+            </div>
+          </div>
+          <div className="ix-hero-rise relative mx-auto mt-16 max-w-[1120px] md:mt-20" style={{ ["--rise-delay" as string]: "0.4s", ["--rise-y" as string]: "40px" }}>
+            <BrowserFrame screens={["deskHotelOverview"]} priority className="w-[88%] md:w-[84%]" sizes="(min-width: 1180px) 940px, 88vw" />
+            <div className="absolute -bottom-[6%] right-0 w-[26%] md:w-[19%]">
+              <PhoneFrame screens={["cloudHotelOverviewPhone"]} sizes="(min-width: 1024px) 220px, 26vw" />
+            </div>
+          </div>
+          <div className="mt-16 text-center">
+            <ScreenNote dark />
+          </div>
+        </Container>
+       </div>
+      </section>
+
+      {/* The model */}
+      <Section tone="alt" labelledBy="levels-h">
+        <Container>
+          <Heading
+            id="levels-h"
+            eyebrow="How Cloud is organised"
+            title="Property, Space, Scan Point, Content."
+            soft="Nothing else to learn."
+            lead="Four levels that match how your property already runs. Your team always knows where to go, and guests always get the current version."
+          />
+          <div className="mt-14 md:mt-16">
+            <Journey />
+          </div>
+        </Container>
+      </Section>
+
+      {/* What a Scan Point can open */}
+      <Section tone="paper" labelledBy="types-h">
+        <Container>
+          <Heading
+            id="types-h"
+            eyebrow="What guests can open"
+            title="Everything guests ask for,"
+            soft="one scan away."
+            lead="Use the PDFs you already make, or point a Scan Point at your own website. Informax can also design them for you."
+          />
+          <div className="mt-14 md:mt-16">
+            <ContentTypes />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Replace from a phone */}
+      <Section tone="white" labelledBy="replace-h">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <Heading
+              id="replace-h"
+              eyebrow="Instant updates"
+              title="Open. Replace. Published."
+              soft="Before the next table sits down."
+              lead={
+                <>
+                  <p>Cloud shows exactly what guests see right now, with the actions to change it directly underneath. Choose the new PDF, check it, publish. Every printed copy of that Scan Point follows at once.</p>
+                  <p className="mt-4">No one walks the floor swapping cards. No one enters a guest room.</p>
+                </>
+              }
+            />
+            <RevealStagger className="grid grid-cols-3 items-end gap-3 sm:gap-5">
+              {(["cloudMenuBefore", "cloudMenuReplace", "cloudMenuPublished"] as const).map((k, n) => (
+                <RevealStaggerItem key={k} className={n === 1 ? "-translate-y-8" : ""}>
+                  <PhoneFrame screens={[k]} tone="light" sizes="(min-width: 1024px) 200px, 30vw" />
+                  <p className="mt-4 text-center text-[13px] font-semibold text-ink-mute">{["What guests see", "Choose the new PDF", "Live everywhere"][n]}</p>
+                </RevealStaggerItem>
+              ))}
+            </RevealStagger>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Temporary content */}
+      <Section tone="dark" labelledBy="temp-h">
+        <Container>
+          <Heading
+            id="temp-h"
+            dark
+            eyebrow="Temporary and scheduled content"
+            title="A spa offer until 18:00."
+            soft="Then back to normal, by itself."
+            lead="Publish something for a set time: tonight's menu, an afternoon offer, a session that has moved. When it ends, Cloud returns the Scan Point to its usual content. Nobody has to remember."
+          />
+          <div className="mt-14 grid grid-cols-1 items-end gap-6 md:mt-16 lg:grid-cols-[1.5fr_0.5fr] lg:gap-8">
+            <Reveal>
+              <BrowserFrame screens={["deskSpaTemporary"]} sizes="(min-width: 1180px) 860px, 94vw" />
+            </Reveal>
+            <Reveal delay={0.1} className="mx-auto w-[58%] max-w-[260px] lg:w-full">
+              <PhoneFrame screens={["guestSpaOffer"]} sizes="(min-width: 1024px) 260px, 58vw" />
+              <p className="mt-4 text-center text-[13px] font-semibold text-cream-mute">What guests see until 18:00</p>
+            </Reveal>
+          </div>
+          <div className="mt-6">
+            <ScreenNote dark />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Version history */}
+      <Section tone="white" labelledBy="history-h">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+            <Reveal className="order-2 lg:order-1">
+              <BrowserFrame screens={["deskMenuPublished"]} sizes="(min-width: 1180px) 700px, 94vw" />
+            </Reveal>
+            <div className="order-1 lg:order-2">
+              <Heading
+                id="history-h"
+                eyebrow="Version history"
+                title="Change your mind?"
+                soft="Restore in a tap."
+                lead="Every Scan Point keeps the current PDF and the two versions before it. Restore either one, or show it temporarily. And every change records who made it and when."
+                size="md"
+              />
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Everything included */}
+      <Section tone="alt" labelledBy="features-h">
+        <Container>
+          <Heading id="features-h" eyebrow="What is included" title="Everything a busy team needs." soft="Nothing it does not." />
+          <RevealStagger className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-[28px] bg-line sm:grid-cols-2 lg:grid-cols-5 md:mt-16">
+            {FEATURES.map(({ icon: Icon, title, body }) => (
+              <RevealStaggerItem key={title} className="bg-white p-6 md:p-7">
+                <Icon size={21} aria-hidden className="text-brass-deep" />
+                <h3 className="mt-6 text-[16.5px] font-semibold tracking-[-0.01em] text-ink">{title}</h3>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-ink-mute">{body}</p>
+              </RevealStaggerItem>
+            ))}
+          </RevealStagger>
+        </Container>
+      </Section>
+
+      {/* What is available today, and what arrives with launch. */}
+      <Section tone="white" labelledBy="status-h">
+        <Container>
+          <Heading
+            id="status-h"
+            eyebrow="Where things stand"
+            title="Available today,"
+            soft="and arriving at launch."
+            lead="We would rather be precise than impressive. Here is what customers use now, and what the new Informax Cloud on this page adds."
+            size="md"
+          />
+          <div className="mt-12 grid grid-cols-1 gap-x-16 md:grid-cols-2">
+            {[
+              {
+                h: "Available today",
+                dot: "bg-moss",
+                items: [
+                  "Scan Points that open a PDF or a page of your website",
+                  "Temporary content with an end time",
+                  "Version history, with earlier versions to restore",
+                  "Personal sign-ins and a record of every change",
+                  "Optional design of menus, directories and brochures",
+                ],
+              },
+              {
+                h: "Arriving with the new Informax Cloud",
+                dot: "bg-brass",
+                items: [
+                  "The Property, Space and Scan Point workspace shown on this page",
+                  "The phone-first workflow for replacing a menu between services",
+                  "Online signup and subscription billing",
+                  "Self-service setup and inviting your own team",
+                ],
+              },
+            ].map((col) => (
+              <Reveal key={col.h}>
+                <h3 className="flex items-center gap-2.5 border-b border-line pb-4 text-[17px] font-semibold text-ink">
+                  <span aria-hidden className={`h-2 w-2 rounded-full ${col.dot}`} />
+                  {col.h}
+                </h3>
+                <ul>
+                  {col.items.map((t) => (
+                    <li key={t} className="border-b border-line py-4 text-[16.5px] text-ink-soft">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Existing customers */}
+      <Section tone="paper" labelledBy="existing-h" tight>
+        <Container>
+          <Reveal className="flex flex-col items-start justify-between gap-6 rounded-[28px] bg-white p-8 shadow-[0_0_0_1px_rgba(11,21,36,0.06)] md:flex-row md:items-center md:p-10">
+            <div>
+              <h2 id="existing-h" className="text-[20px] font-semibold tracking-[-0.015em] text-ink">Already an Informax customer?</h2>
+              <p className="mt-2 max-w-[44rem] text-[16px] leading-relaxed text-ink-mute">
+                Your current account keeps working as it does today. Sign in as usual.
+              </p>
+            </div>
+            <a href={CLOUD_LOGIN_URL} className="ix-btn ix-btn-secondary shrink-0">
+              <Check size={17} aria-hidden /> Customer log in
+            </a>
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section tone="paper" labelledBy="cloud-faq-h" className="pt-0! md:pt-0!">
+        <Container>
+          <Faq id="cloud-faq-h" items={QUESTIONS} />
+        </Container>
+      </Section>
+
+      <DemoBand title="See Informax Cloud working for your property." />
+    </>
+  );
 }

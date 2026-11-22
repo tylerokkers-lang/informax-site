@@ -2,109 +2,77 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CONTACT_EMAIL,
+  DEMO_CTA,
   SOCIAL_LINKS,
   FOOTER_COMPANY_LINKS,
   FOOTER_LEGAL_LINKS,
   FOOTER_ALSO_LINKS,
   FOOTER_PRODUCT_LINKS,
+  FOOTER_SOLUTION_LINKS,
 } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal-950 text-cream-mute pt-20 pb-8">
-      <div className="mx-auto max-w-8xl px-6 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 pb-14 border-b border-line-dark">
-          <div>
-            <Link href="/" className="inline-flex">
-              <Image
-                src="/brand/informax-logo-white-trim.png"
-                alt="Informax"
-                width={746}
-                height={224}
-                className="h-[46px] w-auto"
-              />
+    <footer className="bg-paper pb-8 pt-12 text-ink-mute md:pb-10 md:pt-20">
+      <div className="mx-auto max-w-[1320px] px-6 md:px-10">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-9 border-b border-line pb-10 md:grid-cols-4 md:gap-y-12 md:pb-16 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.1fr]">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
+            <Link href="/" className="inline-flex rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brass" aria-label="Informax home">
+              <Image src="/brand/informax-logo-white-trim.png" alt="Informax" width={128} height={38} className="h-auto w-[128px] brightness-0" />
             </Link>
-            <p className="mt-5 max-w-[280px] text-sm leading-relaxed text-cream-mute">
-              Informax stands for ease of information. Informax Cloud keeps
-              menus, directories and guest information current, wherever
-              your Codes are. Built in hospitality.
+            <p className="x-title mt-5 max-w-[16ch] text-[22px] text-ink md:mt-6 md:text-[26px]">Digital experiences. Done right.</p>
+            <p className="mt-4 hidden max-w-[34ch] text-[14.5px] leading-relaxed md:block">
+              Informax Cloud keeps menus, guest information and every Scan Point current. Built in hospitality, in the United Kingdom.
             </p>
-            <div className="mt-6 flex gap-2.5">
-              <a
-                href={SOCIAL_LINKS.linkedin || undefined}
-                target={SOCIAL_LINKS.linkedin ? "_blank" : undefined}
-                rel={SOCIAL_LINKS.linkedin ? "noopener noreferrer" : undefined}
-                // Without an address it is not a link: an image with a label, never a dead link.
-                role={SOCIAL_LINKS.linkedin ? undefined : "img"}
-                aria-label={SOCIAL_LINKS.linkedin ? "Informax on LinkedIn" : "LinkedIn profile to be added"}
-                data-inactive={SOCIAL_LINKS.linkedin ? undefined : true}
-                title={SOCIAL_LINKS.linkedin ? undefined : "LinkedIn profile to be added"}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light data-[inactive]:opacity-40 data-[inactive]:hover:border-line-dark data-[inactive]:hover:text-cream-mute/80"
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
+            <div className="mt-5 flex items-center gap-3 md:mt-7">
+              <Link href={DEMO_CTA.href} className="ix-btn ix-btn-primary min-h-10! rounded-full! px-5! text-[14px]!">
+                {DEMO_CTA.label}
+              </Link>
               <a
                 href={SOCIAL_LINKS.instagram || undefined}
                 target={SOCIAL_LINKS.instagram ? "_blank" : undefined}
                 rel={SOCIAL_LINKS.instagram ? "noopener noreferrer" : undefined}
                 aria-label="Informax on Instagram"
                 aria-disabled={SOCIAL_LINKS.instagram ? undefined : true}
-                title={SOCIAL_LINKS.instagram ? undefined : "Instagram profile to be added"}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-line-dark text-cream-mute/80 transition-colors duration-300 hover:border-brass-light hover:text-brass-light aria-disabled:opacity-40 aria-disabled:hover:border-line-dark aria-disabled:hover:text-cream-mute/80"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-ink/5 text-ink-mute transition-colors duration-300 hover:bg-ink/10 hover:text-ink aria-disabled:opacity-40"
               >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="2" y="2" width="20" height="20" rx="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
+              {SOCIAL_LINKS.linkedin ? (
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Informax on LinkedIn"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-ink/5 text-ink-mute transition-colors duration-300 hover:bg-ink/10 hover:text-ink"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+              ) : null}
             </div>
           </div>
 
-          <FooterCol title="Explore" links={FOOTER_PRODUCT_LINKS} />
+          <FooterCol title="Product" links={FOOTER_PRODUCT_LINKS} />
+          <FooterCol title="Solutions" links={FOOTER_SOLUTION_LINKS} />
           <FooterCol title="Company" links={FOOTER_COMPANY_LINKS} />
-
           <div>
-            <h2 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
-              Get in Touch
-            </h2>
-            <a
-              href={`mailto:${CONTACT_EMAIL}`}
-              className="text-sm text-cream-mute transition-colors hover:text-brass-light"
-            >
+            <h2 className="mb-5 text-[13px] font-semibold text-ink">Get in touch</h2>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-[14.5px] transition-colors hover:text-ink">
               {CONTACT_EMAIL}
             </a>
-            <h2 className="mb-4 mt-9 text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute">
-              Also from Informax
-            </h2>
+            <h2 className="mb-4 mt-9 text-[13px] font-semibold text-ink">Also from Informax</h2>
             <ul className="flex flex-col gap-3">
               {FOOTER_ALSO_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-cream-mute transition-colors hover:text-brass-light">
+                  <Link href={link.href} className="text-[14.5px] transition-colors hover:text-ink">
                     {link.label}
                   </Link>
                 </li>
@@ -113,46 +81,39 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-7 flex flex-wrap items-center justify-between gap-3 text-[13px] text-cream-mute">
-          <div>© {new Date().getFullYear()} Informax. All rights reserved.</div>
-          <div className="flex gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[13px] md:pt-8">
+          <p>© {new Date().getFullYear()} Informax. All rights reserved.</p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {FOOTER_LEGAL_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-brass-light"
-              >
-                {link.label}
-              </Link>
+              <li key={link.href}>
+                <Link href={link.href} className="transition-colors hover:text-ink">
+                  {link.label}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({
-  title,
-  links,
-}: {
-  title: string;
-  links: readonly { label: string; href: string }[];
-}) {
+function FooterCol({ title, links }: { title: string; links: readonly { label: string; href: string }[] }) {
   return (
     <div>
-      <h2 className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-cream-mute mb-5">
-        {title}
-      </h2>
-      <ul className="flex flex-col gap-3">
+      <h2 className="mb-3.5 text-[13px] font-semibold text-ink md:mb-5">{title}</h2>
+      <ul className="flex flex-col gap-2.5 md:gap-3">
         {links.map((link) => (
           <li key={link.href}>
-            <Link
-              href={link.href}
-              className="text-sm text-cream-mute transition-colors hover:text-brass-light"
-            >
-              {link.label}
-            </Link>
+            {link.href.startsWith("http") ? (
+              <a href={link.href} className="text-[14.5px] transition-colors hover:text-ink">
+                {link.label}
+              </a>
+            ) : (
+              <Link href={link.href} className="text-[14.5px] transition-colors hover:text-ink">
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

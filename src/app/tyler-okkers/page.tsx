@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { SITE_URL } from "@/lib/constants";
 
 const profileUrl = `${SITE_URL}/tyler-okkers`;
-const title = "Tyler Okkers | Founder & CEO, Informax & Informax Cloud";
-const description = "Tyler Okkers is the Founder and Chief Executive Officer of Informax and Informax Cloud, helping hotels and restaurants keep guest information current.";
+const title = "Tyler Okkers | Founder of Informax";
+const description =
+  "Tyler Okkers founded Informax to simplify how businesses manage and deliver digital information, and led the development of Informax Cloud.";
 const personId = `${profileUrl}#person`;
+
+/** The owner's biography, word for word (approved 21 November 2026). */
+const BIOGRAPHY = [
+  "Tyler Okkers founded Informax with a vision to simplify how businesses manage and deliver digital information.",
+  "Drawing on his background in luxury hospitality, Tyler recognised the need for a more intuitive, efficient and reliable way for businesses to connect people with information.",
+  "This vision led to the development of Informax Cloud, a platform designed to help businesses deliver seamless digital experiences.",
+];
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -26,6 +35,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description, images: ["/twitter-image.jpg"] },
 };
 
+// Informax is the company; Informax Cloud is its product.
 const profileData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -44,8 +54,8 @@ const profileData = {
       givenName: "Tyler",
       familyName: "Okkers",
       url: profileUrl,
-      jobTitle: "Founder and Chief Executive Officer",
-      description,
+      jobTitle: "Founder",
+      description: BIOGRAPHY[0],
       worksFor: { "@id": `${SITE_URL}/#organization` },
       mainEntityOfPage: { "@id": `${profileUrl}#profile` },
     },
@@ -63,7 +73,6 @@ const profileData = {
       url: `${SITE_URL}/informax-cloud`,
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web browser",
-      creator: { "@id": personId },
       publisher: { "@id": `${SITE_URL}/#organization` },
     },
   ],
@@ -73,22 +82,28 @@ export default function FounderProfilePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileData).replace(/</g, "\\u003c") }} />
-      <section className="bg-paper pt-[140px] pb-20 md:pt-[180px] md:pb-28">
+      <section aria-labelledby="founder-h" className="bg-paper pb-24 pt-[120px] md:pb-32 md:pt-[160px]">
         <div className="mx-auto max-w-8xl px-6 md:px-10">
-          <div className="max-w-3xl">
-            <p className="mb-5 text-[15px] font-semibold text-brass-deep">Founder profile</p>
-            <h1 className="font-serif-display text-[clamp(44px,7vw,80px)] leading-[1.04] tracking-[-0.02em] text-ink">Tyler Okkers</h1>
-            <p className="mt-7 max-w-[40ch] text-[clamp(21px,2.8vw,30px)] leading-snug text-ink-soft">Founder and Chief Executive Officer of Informax and Informax Cloud.</p>
-          </div>
-          <div className="mt-14 grid gap-8 border-t border-line pt-10 md:mt-20 md:grid-cols-[1fr_2fr] md:gap-16 md:pt-14">
-            <h2 className="text-[15px] font-semibold text-brass-deep">About Tyler Okkers</h2>
-            <div className="max-w-[62ch] space-y-6 text-[17px] leading-relaxed text-ink-mute">
-              <p>Tyler Okkers is the Founder and Chief Executive Officer of Informax and Informax Cloud.</p>
-              <p>Informax builds Informax Cloud, a platform for hotels and restaurants to manage the information guests see. Menus, guest directories, spa information and offers can be updated through the same printed QR codes, helping teams keep information current.</p>
-              <p>Informax also offers design services to help businesses present their content clearly and consistently with their brand.</p>
-              <div className="flex flex-wrap gap-6 pt-3">
-                <Link href="/informax-cloud" className="ix-link text-brass-deep">Explore Informax Cloud</Link>
-                <Link href="/" className="ix-link text-brass-deep">Visit Informax</Link>
+          <h1 id="founder-h" className="x-display text-[clamp(46px,7vw,96px)] text-ink">
+            Tyler Okkers
+          </h1>
+          <p className="mt-4 text-[clamp(20px,2.2vw,26px)] text-ink-quiet">Founder of Informax</p>
+
+          <div className="mt-14 grid gap-10 border-t border-line pt-10 md:mt-20 md:grid-cols-[1fr_2fr] md:gap-16 md:pt-14">
+            <h2 className="text-[15px] font-semibold text-brass-deep">Biography</h2>
+            <div className="max-w-[60ch]">
+              <div className="space-y-6 text-[19px] leading-[1.65] text-ink-soft">
+                {BIOGRAPHY.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+              <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+                <Link href="/informax-cloud" className="ix-link group text-brass-deep hover:text-ink">
+                  Explore Informax Cloud <ArrowRight size={16} aria-hidden className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link href="/about" className="ix-link group text-brass-deep hover:text-ink">
+                  About Informax <ArrowRight size={16} aria-hidden className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
               </div>
             </div>
           </div>

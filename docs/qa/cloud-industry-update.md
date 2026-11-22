@@ -4,7 +4,7 @@
 
 Five navigation entries: Home, Informax Cloud, Hotels, Restaurants, Pricing. Existing fonts, colour tokens, photographs, video licensing guard and device components are retained. Cloud has the official Cloud header logo. The industry pages explain specific benefits; demo content showcases Informax samples and separately quoted design services.
 
-Final owner prices per property: annual £1,788 upfront (£149/month equivalent); monthly £199 for six months then £249. Monthly first year £2,688; annual saves £900 against that first year, or £1,200 against twelve months at £249. These are total prices with no VAT added. Informax is not currently VAT registered.
+Superseded on 21 November 2026 (now annual £1,188, monthly £99 for three months then £149; see HANDOVER.md). Earlier prices per property: annual £1,788 upfront (£149/month equivalent); monthly £199 for six months then £249. Monthly first year £2,688; annual saves £900 against that first year, or £1,200 against twelve months at £249. These are total prices with no VAT added. Informax is not currently VAT registered.
 
 Final owner retention decision: three PDFs total per Scan Point, current plus two previous versions, either restorable. Website text reflects this intended policy; implementation is delegated to the Cloud app PR. No production content was deleted. Cloud retention cleanup must be reference-aware.
 

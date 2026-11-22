@@ -1,91 +1,104 @@
 import { NextResponse } from "next/server";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import {
-  buildEnquiryEmailHtml,
-  buildEnquiryEmailText,
-  buildEnquirySubject,
-} from "@/lib/enquiryEmail";
+import { buildEnquiryEmailHtml, buildEnquiryEmailText, buildEnquirySubject } from "@/lib/enquiryEmail";
+import { MAX_BODY_BYTES, validateEnquiry } from "@/lib/enquiryValidation";
+import { clientKey, createRateLimiter } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
 
-interface EnquiryPayload {
-  name?: string;
-  company?: string;
-  jobTitle?: string;
-  email?: string;
-  phone?: string;
-  interests?: string[];
-  message?: string;
-  website?: string; // honeypot field: real visitors never fill this in
-}
+/*
+ * The enquiry endpoint. Order of checks: same origin, content type, body size,
+ * rate limit, strict validation, spam signals, then delivery through Resend.
+ * Logs never contain personal details from the enquiry: only outcomes and
+ * status codes. Error responses never reveal internal detail.
+ */
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// Per client: 5 enquiries per 10 minutes. Per instance: 40 per 10 minutes, a ceiling on email volume.
+const perClient = createRateLimiter({ limit: 5, windowMs: 10 * 60_000 });
+const perInstance = createRateLimiter({ limit: 40, windowMs: 10 * 60_000, maxKeys: 1 });
+
+const GENERIC_ERROR = `Something went wrong sending your enquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`;
+
+const json = (body: unknown, status = 200, headers: Record<string, string> = {}) =>
+  NextResponse.json(body, { status, headers: { "Cache-Control": "no-store", ...headers } });
+
+function sameOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  // Browsers always send Origin on a cross-site POST; a request without one is not a cross-site browser request.
+  if (!origin) return true;
+  try {
+    const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: Request) {
-  let data: EnquiryPayload;
-  try {
-    data = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  if (!sameOrigin(request)) return json({ error: "Forbidden." }, 403);
+
+  if (!(request.headers.get("content-type") ?? "").toLowerCase().startsWith("application/json")) {
+    return json({ error: "Unsupported request." }, 415);
   }
 
-  if (data.website) {
-    return NextResponse.json({ ok: true });
-  }
+  const declared = Number(request.headers.get("content-length") ?? "0");
+  if (declared > MAX_BODY_BYTES) return json({ error: "That message is too long." }, 413);
 
-  const fieldErrors: Record<string, string> = {};
-  if (!data.name?.trim()) fieldErrors.name = "Please enter your name.";
-  if (!data.company?.trim())
-    fieldErrors.company = "Please enter your company name.";
-  if (!data.email?.trim() || !isValidEmail(data.email.trim()))
-    fieldErrors.email = "Please enter a valid email address.";
-  if (!data.message?.trim())
-    fieldErrors.message = "Tell us a little about what you need.";
-
-  if (Object.keys(fieldErrors).length > 0) {
-    return NextResponse.json(
-      { error: "Please check the highlighted fields.", fieldErrors },
-      { status: 422 }
+  const key = clientKey(request.headers);
+  const client = perClient(key);
+  const instance = perInstance("all");
+  if (!client.allowed || !instance.allowed) {
+    console.warn("[enquire] rate limited");
+    return json(
+      { error: `You have sent several enquiries in a short time. Please wait a few minutes, or email us at ${CONTACT_EMAIL}.` },
+      429,
+      { "Retry-After": String(Math.max(client.retryAfterS, instance.retryAfterS)) },
     );
+  }
+
+  // Read the body ourselves so the size limit holds even without a Content-Length header.
+  let raw: string;
+  try {
+    raw = await request.text();
+  } catch {
+    return json({ error: "Invalid request." }, 400);
+  }
+  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json({ error: "That message is too long." }, 413);
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return json({ error: "Invalid request." }, 400);
+  }
+
+  const result = validateEnquiry(parsed);
+  if (!result.ok) {
+    if (result.fieldErrors.form) return json({ error: "Invalid request." }, 400);
+    return json({ error: "Please check the highlighted fields.", fieldErrors: result.fieldErrors }, 422);
+  }
+
+  // Spam is answered exactly like success, so automated senders learn nothing.
+  if (result.spam) {
+    console.info("[enquire] discarded as automated");
+    return json({ ok: true });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error(
-      "[enquire] RESEND_API_KEY is not configured. Enquiry was not delivered:",
-      data
-    );
-    return NextResponse.json(
-      {
-        error: `Something went wrong sending your enquiry. Please email us directly at ${CONTACT_EMAIL}.`,
-      },
-      { status: 503 }
-    );
+    console.error("[enquire] RESEND_API_KEY is not configured; enquiry not delivered");
+    return json({ error: GENERIC_ERROR }, 503);
   }
 
   const toEmail = process.env.ENQUIRY_TO_EMAIL || CONTACT_EMAIL;
-  const fromEmail =
-    process.env.ENQUIRY_FROM_EMAIL || "Informax Enquiries <onboarding@resend.dev>";
-
-  const enquiry = {
-    name: data.name!.trim(),
-    company: data.company!.trim(),
-    jobTitle: data.jobTitle?.trim() || undefined,
-    email: data.email!.trim(),
-    phone: data.phone?.trim() || undefined,
-    interests: data.interests?.length ? data.interests : undefined,
-    message: data.message!.trim(),
-  };
+  const fromEmail = process.env.ENQUIRY_FROM_EMAIL || "Informax Enquiries <onboarding@resend.dev>";
+  const e = result.enquiry;
+  const enquiry = { ...e, message: e.message ?? "(No message added.)" };
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: fromEmail,
         to: [toEmail],
@@ -94,34 +107,23 @@ export async function POST(request: Request) {
         html: buildEnquiryEmailHtml(enquiry),
         text: buildEnquiryEmailText(enquiry),
       }),
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!res.ok) {
-      const raw = await res.text();
-      let reason = raw;
-      try {
-        const parsed = JSON.parse(raw) as { name?: string; message?: string };
-        reason = parsed.message ? `${parsed.name}: ${parsed.message}` : raw;
-      } catch {
-        // Resend returned a non-JSON error body; fall back to the raw text.
-      }
-      console.error(`[enquire] Resend API error (status ${res.status}):`, reason);
-      return NextResponse.json(
-        {
-          error: `Something went wrong sending your enquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`,
-        },
-        { status: 502 }
-      );
+      // Status only: Resend's error text can echo the addresses it was given.
+      console.error(`[enquire] Resend rejected the email (status ${res.status})`);
+      return json({ error: GENERIC_ERROR }, 502);
     }
 
-    return NextResponse.json({ ok: true });
+    console.info("[enquire] delivered");
+    return json({ ok: true });
   } catch (err) {
-    console.error("[enquire] Failed to send enquiry email:", err);
-    return NextResponse.json(
-      {
-        error: `Something went wrong sending your enquiry. Please try again or email us directly at ${CONTACT_EMAIL}.`,
-      },
-      { status: 502 }
-    );
+    console.error(`[enquire] could not reach Resend (${err instanceof Error ? err.name : "unknown error"})`);
+    return json({ error: GENERIC_ERROR }, 502);
   }
+}
+
+export function GET() {
+  return json({ error: "Method not allowed." }, 405, { Allow: "POST" });
 }

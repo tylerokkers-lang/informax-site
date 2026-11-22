@@ -6,7 +6,7 @@
 import { chromium } from "playwright-core";
 
 const BASE = process.env.BASE ?? "http://localhost:3200";
-const PAGES = ["/", "/restaurants", "/hotels"];
+const PAGES = ["/restaurants", "/hospitality"];
 // Film sections below the hero that carry text (measured after scrolling them to the middle of the screen).
 const BANDS = { "/restaurants": ["#kitchen-h"] };
 const VIEWS = { desktop: { width: 1440, height: 900 }, tablet: { width: 834, height: 1112 }, phone: { width: 390, height: 844 } };
