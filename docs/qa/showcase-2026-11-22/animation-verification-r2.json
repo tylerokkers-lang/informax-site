@@ -3,14 +3,13 @@
   "beatSequence": [
    0,
    1,
-   2,
-   0
+   2
   ],
   "advancesThroughAllBeats": true,
   "pausedStays": true,
-  "phoneAfterOpacityAtEnd": "0",
+  "phoneAfterOpacityAtEnd": "1",
   "cls": 0,
-  "lcpMs": 3940,
+  "lcpMs": 4584,
   "scrollW": 1440,
   "viewport": 1440,
   "cloudImagesRequested": 5
@@ -19,14 +18,13 @@
   "beatSequence": [
    0,
    1,
-   2,
-   0
+   2
   ],
   "advancesThroughAllBeats": true,
   "pausedStays": true,
-  "phoneAfterOpacityAtEnd": "0",
+  "phoneAfterOpacityAtEnd": "1",
   "cls": 0,
-  "lcpMs": 3872,
+  "lcpMs": 4552,
   "scrollW": 834,
   "viewport": 834,
   "cloudImagesRequested": 5
@@ -35,14 +33,13 @@
   "beatSequence": [
    0,
    1,
-   2,
-   0
+   2
   ],
   "advancesThroughAllBeats": true,
   "pausedStays": true,
-  "phoneAfterOpacityAtEnd": "0",
+  "phoneAfterOpacityAtEnd": "1",
   "cls": 0,
-  "lcpMs": 3884,
+  "lcpMs": 8888,
   "scrollW": 390,
   "viewport": 390,
   "cloudImagesRequested": 5

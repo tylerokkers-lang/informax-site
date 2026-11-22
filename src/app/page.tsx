@@ -69,7 +69,7 @@ export default function Home() {
             </div>
             <Showcase />
             <div className="mx-auto mt-2 max-w-[880px] sm:mt-3">
-              <ScreenNote>Real Informax Cloud screens, development build. Marlowe Grand is a fictional hotel.</ScreenNote>
+              <ScreenNote>Real Informax Cloud screens (development build); the app still labels some items Access Points and Codes. Marlowe Grand is fictional.</ScreenNote>
             </div>
           </div>
         </Container>
@@ -80,7 +80,7 @@ export default function Home() {
         <Container>
           <Reveal className="mb-9 flex flex-col gap-3 md:mb-12 md:flex-row md:items-end md:justify-between">
             <h2 id="benefits-h" className="x-title max-w-[22ch] text-balance text-[clamp(30px,4vw,52px)] text-ink">
-              One Scan Point. <span className="text-ink-quiet">Unlimited placements. Instant updates.</span>
+              Always accurate. <span className="text-ink-quiet">Nothing for guests to install.</span>
             </h2>
             <Link href="/how-it-works" className="ix-link group shrink-0 text-brass-deep hover:text-ink">
               How it works <ArrowRight size={16} aria-hidden className="transition-transform group-hover:translate-x-0.5" />

@@ -94,6 +94,8 @@ export function BrowserFrame({
   address = "app.informax.cloud",
   children,
   aspect,
+  aspectClass,
+  imgClassName = "",
   compact = false,
 }: {
   screens: ScreenKey[];
@@ -105,6 +107,10 @@ export function BrowserFrame({
   children?: ReactNode;
   /** Crop the screen to this aspect ratio (CSS, e.g. "1800 / 820"), keeping the top of the capture. */
   aspect?: string;
+  /** Responsive aspect ratio as a class (overrides `aspect`), e.g. "aspect-[1415/722] sm:aspect-[1800/722]". */
+  aspectClass?: string;
+  /** Extra classes on every screen image, for example a zoom on small screens. */
+  imgClassName?: string;
   /** A slimmer title bar, for small compositions. */
   compact?: boolean;
 }) {
@@ -122,7 +128,7 @@ export function BrowserFrame({
         </span>
         <span className="hidden w-[38px] sm:block" />
       </div>
-      <div className="relative" style={{ aspectRatio: aspect ?? `${first.width} / ${first.height}` }}>
+      <div className={`relative ${aspectClass ?? ""}`} style={aspectClass ? undefined : { aspectRatio: aspect ?? `${first.width} / ${first.height}` }}>
         {screens.map((key, i) => {
           const s = SCREENS[key];
           return (
@@ -134,7 +140,7 @@ export function BrowserFrame({
               fill
               sizes={sizes}
               priority={priority && i === 0}
-              className={`object-cover object-top transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+              className={`object-cover object-top transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${imgClassName} ${
                 i === active ? "opacity-100" : "opacity-0"
               }`}
             />

@@ -541,7 +541,12 @@ svg {
 @keyframes x-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .x-bar { transform-origin: left; animation: x-bar var(--x-bar-dur, 4s) linear both; }
 
+/* The changed line on the guest's phone: a soft tint that comes in, rests, and leaves. No border. */
+@keyframes x-tint { 0% { opacity: 0; } 20%, 60% { opacity: 1; } 100% { opacity: 0; } }
+.x-tint { animation: x-tint 3600ms cubic-bezier(0.4, 0, 0.2, 1) 800ms both; }
+
 @media (prefers-reduced-motion: reduce) {
+  .x-tint { animation: none !important; opacity: 1; }
   .x-ping, .x-flow, .x-bar { animation: none !important; }
   .x-ping { opacity: 0; }
   .x-bar { transform: scaleX(1); }

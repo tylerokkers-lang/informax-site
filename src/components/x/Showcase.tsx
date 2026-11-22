@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useReducedMotion } from "framer-motion";
-import { Check, Pause, Play, RotateCcw } from "lucide-react";
+import { Pause, Play, RotateCcw } from "lucide-react";
 import { BrowserFrame, GUEST_SCALE, PhoneFrame } from "@/components/x/Devices";
 import ScanPoint from "@/components/x/ScanPoint";
 
@@ -14,26 +14,39 @@ import ScanPoint from "@/components/x/ScanPoint";
  * Everything on screen is real: the Cloud screens and the guest phone are
  * captures of the application (see src/lib/screens.ts) showing the fictional
  * Marlowe Grand Hotel. The Scan Point plate is drawn and its Code is
- * illustrative. The two highlight rings and the small confirmation are the
- * only additions, and they sit on top of the captures.
+ * illustrative. Three soft tints (the Coffee Table row, the published banner,
+ * the changed dinner line) and one small word, "Updated", are the only
+ * additions, and they sit on top of the captures.
  *
  * It plays only while on screen, has play, pause and replay controls, every
  * beat can be chosen by hand, and reduced motion shows the finished state
  * with no movement (the controls still step through it).
  */
 const BEATS = [
-  { label: "Open the Scan Point", body: "Coffee Table, in Bedrooms.", ms: 3600 },
-  { label: "Publish the update", body: "New dinner hours, published once.", ms: 3400 },
-  { label: "Guests see it", body: "The next scan shows the update.", ms: 4400 },
+  { label: "Open the Scan Point", body: "Coffee Table, in Bedrooms.", ms: 4200 },
+  { label: "Publish the update", body: "New dinner hours, published once.", ms: 4400 },
+  { label: "Guests see it", body: "The next scan shows the update.", ms: 6200 },
 ] as const;
 
-/** Both Cloud captures are cropped to their top part, which holds everything shown. */
-const CROP = "1800 / 820";
-/** Fractions of the cropped capture (its content column starts at 21.4% of the width). */
-const ROW = { left: 21.4, width: 76.1, top: 75.2, height: 11.3 }; // the Coffee Table row, Bedrooms
-const BANNER = { left: 21.4, width: 76.1, top: 11.4, height: 7.6 }; // "Published. It is live now."
+/**
+ * Both Cloud captures are cropped to their top 722 px (of 1125), which holds
+ * everything shown and leaves out the lower part of the page. Desktop shows the
+ * whole width; phones show the content column only (the sidebar is cropped
+ * away, never altered) so the dashboard can be larger.
+ */
+const CROP_H = 722;
+const CONTENT_LEFT = 0.214; // the content column starts here (fraction of the capture width)
+/** Pixel boxes on the capture: the Coffee Table row (Bedrooms) and the "Published. It is live now." banner. */
+const ROW_PX = [616, 714] as const;
+const BANNER_PX = [90, 156] as const;
+const ringBox = (px: readonly [number, number], phone: boolean) => ({
+  left: `${phone ? 0.4 : CONTENT_LEFT * 100}%`,
+  width: `${phone ? 96.6 : 76.1}%`,
+  top: `${(px[0] / CROP_H) * 100}%`,
+  height: `${((px[1] - px[0]) / CROP_H) * 100}%`,
+});
 /** Where the dinner row sits on the captured guest directory (fractions of the screen height). */
-const DINNER = { top: 0.318, height: 0.042 };
+const DINNER = { top: 0.3165, height: 0.0345 }; // between the row's own divider lines
 
 const noSubscribe = () => () => {};
 
@@ -95,64 +108,74 @@ export default function Showcase() {
     setPaused(!stopped);
   };
 
-  const ring = (on: boolean, tone: "brand" | "ok") =>
-    `pointer-events-none absolute rounded-[3px] transition-opacity duration-500 motion-reduce:transition-none sm:rounded-[5px] ${on ? "opacity-100" : "opacity-0"} ${
-      tone === "ok" ? "bg-emerald-400/10 shadow-[0_0_0_1.5px_rgba(16,185,129,0.85)]" : "bg-sky-400/10 shadow-[0_0_0_1.5px_rgba(6,147,227,0.8)]"
-    }`;
+  // Highlights are soft tints with no border; they arrive after the screen they sit on has settled, and leave quickly.
+  const ring = (on: boolean, tone: "brand" | "ok", delay = "delay-500") =>
+    `pointer-events-none absolute rounded-[3px] transition-opacity motion-reduce:transition-none sm:rounded-[5px] ${
+      on ? `opacity-100 duration-700 ${delay}` : "opacity-0 duration-300"
+    } ${tone === "ok" ? "bg-emerald-500/[0.12]" : "bg-sky-500/[0.12]"}`;
+  // One easing for all movement; screens cross-fade on their own, slower, curve.
+  const ease = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
   return (
     <div ref={box} className="mx-auto max-w-[880px]">
-      <div className="relative mx-auto h-[210px] w-full overflow-hidden rounded-[22px] bg-[linear-gradient(180deg,#eef1f5_0%,#e3e7ed_100%)] sm:h-auto sm:aspect-[880/320] sm:rounded-[28px]">
+      <div className="relative mx-auto h-[224px] w-full overflow-hidden rounded-[22px] bg-[linear-gradient(180deg,#eef1f5_0%,#e3e7ed_100%)] sm:h-auto sm:aspect-[880/306] sm:rounded-[28px]">
         <div aria-hidden className="absolute inset-0 bg-[radial-gradient(80%_70%_at_28%_0%,rgba(255,255,255,0.95),transparent_70%)]" />
 
-        {/* Informax Cloud, on a computer. It settles back once the guest has the update. */}
+        {/* Informax Cloud, on a computer. It recedes a little once the guest has the update. */}
         <div
-          className={`absolute left-[3%] top-[5%] w-[94%] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:top-[6%] sm:w-[66%] ${
-            guest ? "opacity-85 sm:scale-[0.99]" : "opacity-100"
+          className={`absolute left-[2%] top-[8px] w-[74%] transition-[transform,opacity] duration-[900ms] ${ease} motion-reduce:transition-none sm:left-[3%] sm:top-[6%] sm:w-[66%] ${
+            guest ? "opacity-90 sm:scale-[0.992]" : "opacity-100"
           }`}
         >
           <BrowserFrame
             screens={["deskBedrooms", "deskDirectoryPublished"]}
             active={published ? 1 : 0}
-            aspect={CROP}
+            aspectClass="aspect-[1415/722] sm:aspect-[1800/722]"
+            imgClassName="max-sm:origin-top-right max-sm:scale-[1.272]"
             compact
             priority
-            sizes="(min-width: 960px) 580px, (min-width: 640px) 66vw, 94vw"
+            sizes="(min-width: 960px) 580px, (min-width: 640px) 66vw, 100vw"
           >
-            <span aria-hidden className={ring(shown === 0, "brand")} style={{ left: `${ROW.left}%`, width: `${ROW.width}%`, top: `${ROW.top}%`, height: `${ROW.height}%` }} />
-            <span aria-hidden className={ring(shown === 1, "ok")} style={{ left: `${BANNER.left}%`, width: `${BANNER.width}%`, top: `${BANNER.top}%`, height: `${BANNER.height}%` }} />
+            {/* Phones show the content column only, so the highlights are placed for that crop. */}
+            {([true, false] as const).map((phone) => (
+              <span key={String(phone)} aria-hidden className={phone ? "sm:hidden" : "max-sm:hidden"}>
+                <span className={ring(shown === 0, "brand")} style={ringBox(ROW_PX, phone)} />
+                <span className={ring(shown === 1, "ok", "delay-[450ms]")} style={ringBox(BANNER_PX, phone)} />
+              </span>
+            ))}
           </BrowserFrame>
         </div>
 
-        {/* The physical Scan Point: lifts as the update reaches it. */}
+        {/* The physical Scan Point: lifts as the update is published. */}
         <div
-          className={`absolute bottom-[6%] left-[4%] w-[58px] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:bottom-[7%] sm:left-[71.2%] sm:w-[7.6%] ${
-            shown === 1 ? "-translate-y-1.5" : ""
+          className={`absolute bottom-[11px] left-[46%] w-[52px] transition-transform duration-[900ms] ${ease} motion-reduce:transition-none sm:bottom-[7%] sm:left-[71.2%] sm:w-[7.6%] ${
+            shown === 1 ? "-translate-y-1.5 delay-200" : ""
           }`}
         >
           <ScanPoint place="Coffee Table" sub="Guest directory" finish="navy" pulse={shown === 1 ? `p-${cycle}` : null} />
         </div>
 
-        {/* The guest's phone: lifts when the new directory arrives. */}
+        {/* The guest's phone: lifts when the new directory arrives, then the changed line is softly tinted and labelled. */}
         <div
-          className={`absolute bottom-[5%] right-[4%] w-[80px] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:bottom-auto sm:right-[4%] sm:top-[6%] sm:w-[15%] ${
-            guest ? "-translate-y-1.5" : ""
+          className={`absolute bottom-[11px] right-[3%] w-[24%] transition-transform duration-[900ms] ${ease} motion-reduce:transition-none sm:bottom-auto sm:right-[4%] sm:top-[6%] sm:w-[14.2%] ${
+            guest ? "-translate-y-1.5 delay-200" : ""
           }`}
         >
-          <div className="relative">
-            <PhoneFrame screens={["guestDirectoryBefore", "guestDirectoryAfter"]} active={guest ? 1 : 0} priority sizes="(min-width: 960px) 132px, 80px" />
+          <div className="relative [container-type:inline-size]">
+            <PhoneFrame screens={["guestDirectoryBefore", "guestDirectoryAfter"]} active={guest ? 1 : 0} priority sizes="(min-width: 960px) 125px, 90px" />
+            {/* The changed row: a soft tint behind the line, no border, and a small word beside the new hours. */}
             <span
               aria-hidden
-              className={`pointer-events-none absolute inset-x-[8%] rounded-[3px] bg-emerald-400/12 shadow-[0_0_0_1.5px_rgba(16,185,129,0.9)] transition-opacity duration-500 motion-reduce:transition-none ${guest ? "opacity-100" : "opacity-0"}`}
+              className={`pointer-events-none absolute inset-x-[8%] rounded-[2px] bg-white/[0.08] ${guest ? "x-tint" : "opacity-0"}`}
               style={{ top: `calc(1.3% + ${DINNER.top * 97.4 * GUEST_SCALE}%)`, height: `${DINNER.height * 97.4 * GUEST_SCALE}%` }}
             />
             <span
               aria-hidden
-              className={`absolute bottom-[5%] left-1/2 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-ink shadow-[0_6px_16px_-6px_rgba(11,21,36,0.45)] transition-all duration-500 motion-reduce:transition-none ${
-                guest ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
+              className={`pointer-events-none absolute right-[28%] flex items-center whitespace-nowrap font-medium leading-none tracking-[0.01em] text-white/60 [font-size:clamp(4px,4.8cqw,6.5px)] transition-opacity motion-reduce:transition-none ${
+                guest ? "opacity-100 duration-700 delay-[1400ms]" : "opacity-0 duration-300"
               }`}
+              style={{ top: `calc(1.3% + ${DINNER.top * 97.4 * GUEST_SCALE}%)`, height: `${DINNER.height * 97.4 * GUEST_SCALE}%` }}
             >
-              <Check size={10} strokeWidth={3} className="text-moss" />
               Updated
             </span>
           </div>
