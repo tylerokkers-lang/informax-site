@@ -11,6 +11,10 @@ redesign is on branch `redesign/restaurant-first`, NOT live. Production still
 serves `main` (the 28 September Access Point site, §0b). Once §0c is merged,
 §0b, §0a and §0 are historical wherever they conflict with it.
 
+## 22 November 2026: compact product showcase (branch `showcase/compact`, NOT live)
+
+PR #6 is live on `main` (merge commit `7fed6b4`; rollback target: Vercel deployment `informax-site-iv5irkrs4-informax.vercel.app`, `main` at `8bac8e0`). This branch replaces the homepage's `HeroStage` with `src/components/x/Showcase.tsx`, a compact composition: the real Marlowe Grand captures (Bedrooms list, then the published Coffee Table Scan Point), a drawn Scan Point plate and the real guest phone, in three beats. Section copy: "See Informax in action" / "One Scan Point. Unlimited placements. Instant updates.", with a discreet Explore Informax Cloud link. Size of the whole block: 913 to 506px (1440 wide), 738 to 440px (834), 721 to 440px (390). `BrowserFrame` gained `aspect` and `compact` options. Only the two highlight rings and the small "Updated" chip are added over the captures. Needs the owner's approval before merging (merging to `main` deploys). Evidence: `docs/qa/showcase-2026-11-22/`. Not re-checked against the current Cloud app (no access to that repo from this session); the captures are as recorded in "Informax Cloud screenshots".
+
 ## Launch plan for PR #6 (prepared 21 November 2026, awaiting the owner's approval)
 
 **Release candidate:** the head of `redesign/done-right` when the owner approves (the commit reported in PR #6). `main` (`8bac8e0`) is fully contained in the branch: no sync needed, and nothing approved is lost.

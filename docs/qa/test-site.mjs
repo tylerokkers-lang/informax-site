@@ -39,7 +39,7 @@ for (const [from, to] of [["/hotels", "/hospitality"], ["/touch-points", "/how-i
 await page.goto(BASE + "/", { waitUntil: "networkidle" });
 ok((await page.locator("h1").innerText()).replace(/\s+/g, " ").trim() === "Digital experiences. Done right.", "home h1 is exactly \"Digital experiences. Done right.\" (owner, 21 Nov 2026)");
 const hero = page.locator("section").first();
-ok((await hero.getByRole("link", { name: "Explore Informax Cloud" }).getAttribute("href")) === "/informax-cloud", "hero primary action: Explore Informax Cloud");
+ok((await hero.getByRole("link", { name: "Explore Informax Cloud" }).first().getAttribute("href")) === "/informax-cloud", "hero primary action: Explore Informax Cloud");
 ok((await hero.getByRole("link", { name: "Request a Demo" }).getAttribute("href")) === "/enquire", "hero secondary action: Request a Demo");
 const primary = page.getByRole("navigation", { name: "Primary", exact: true });
 for (const [name, href] of [["Informax Cloud", "/informax-cloud"], ["How it works", "/how-it-works"], ["Pricing", "/pricing"], ["About", "/about"]]) {
@@ -72,8 +72,8 @@ ok(await page.getByRole("button", { name: "Pause the demonstration", exact: true
   await mp.goto(BASE + "/", { waitUntil: "networkidle" });
   const h = await mp.evaluate(() => document.documentElement.scrollHeight);
   ok(h <= 844 * 6, `homepage on a 390x844 phone is ${(h / 844).toFixed(1)} screens (at most 6)`);
-  const demoTop = await mp.getByRole("heading", { name: "Informax Cloud", exact: true }).evaluate((e) => e.getBoundingClientRect().top);
-  ok(demoTop < 844 * 1.2, `phone: the Informax Cloud demonstration starts within the first screen and a bit (${Math.round(demoTop)}px)`);
+  const demoTop = await mp.getByRole("heading", { name: "See Informax in action", exact: true }).evaluate((e) => e.getBoundingClientRect().top);
+  ok(demoTop < 844 * 1.2, `phone: the showcase (See Informax in action) starts within the first screen and a bit (${Math.round(demoTop)}px)`);
   await ctx.close();
 }
 

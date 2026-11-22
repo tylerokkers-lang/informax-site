@@ -93,6 +93,8 @@ export function BrowserFrame({
   priority = false,
   address = "app.informax.cloud",
   children,
+  aspect,
+  compact = false,
 }: {
   screens: ScreenKey[];
   active?: number;
@@ -101,22 +103,26 @@ export function BrowserFrame({
   priority?: boolean;
   address?: string;
   children?: ReactNode;
+  /** Crop the screen to this aspect ratio (CSS, e.g. "1800 / 820"), keeping the top of the capture. */
+  aspect?: string;
+  /** A slimmer title bar, for small compositions. */
+  compact?: boolean;
 }) {
   const first = SCREENS[screens[0]];
   return (
     <figure
       className={`relative overflow-hidden rounded-[14px] bg-[#eef0f4] shadow-[0_0_0_1px_rgba(11,21,36,0.08),0_60px_120px_-50px_rgba(6,10,18,0.55),0_20px_40px_-30px_rgba(6,10,18,0.3)] md:rounded-[18px] ${className}`}
     >
-      <div className="flex h-7 items-center gap-1.5 px-3 md:h-9 md:px-4" aria-hidden>
-        <span className="h-2 w-2 rounded-full bg-[#ff5f57] md:h-2.5 md:w-2.5" />
-        <span className="h-2 w-2 rounded-full bg-[#febc2e] md:h-2.5 md:w-2.5" />
-        <span className="h-2 w-2 rounded-full bg-[#28c840] md:h-2.5 md:w-2.5" />
-        <span className="mx-auto hidden h-5 w-[min(320px,40%)] items-center justify-center rounded-md bg-white text-[11px] font-medium text-ink-soft sm:flex">
+      <div className={`flex items-center gap-1.5 px-3 ${compact ? "h-6 sm:h-7" : "h-7 md:h-9 md:px-4"}`} aria-hidden>
+        <span className={`rounded-full bg-[#ff5f57] ${compact ? "h-1.5 w-1.5 sm:h-2 sm:w-2" : "h-2 w-2 md:h-2.5 md:w-2.5"}`} />
+        <span className={`rounded-full bg-[#febc2e] ${compact ? "h-1.5 w-1.5 sm:h-2 sm:w-2" : "h-2 w-2 md:h-2.5 md:w-2.5"}`} />
+        <span className={`rounded-full bg-[#28c840] ${compact ? "h-1.5 w-1.5 sm:h-2 sm:w-2" : "h-2 w-2 md:h-2.5 md:w-2.5"}`} />
+        <span className={`mx-auto hidden w-[min(320px,40%)] items-center justify-center rounded-md bg-white font-medium text-ink-soft sm:flex ${compact ? "h-4 text-[10px]" : "h-5 text-[11px]"}`}>
           {address}
         </span>
         <span className="hidden w-[38px] sm:block" />
       </div>
-      <div className="relative" style={{ aspectRatio: `${first.width} / ${first.height}` }}>
+      <div className="relative" style={{ aspectRatio: aspect ?? `${first.width} / ${first.height}` }}>
         {screens.map((key, i) => {
           const s = SCREENS[key];
           return (
