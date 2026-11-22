@@ -69,7 +69,7 @@ export default function Home() {
             </div>
             <Showcase />
             <div className="mx-auto mt-2 max-w-[880px] sm:mt-3">
-              <ScreenNote>Real Informax Cloud screens (development build); the app still labels some items Access Points and Codes. Marlowe Grand is fictional.</ScreenNote>
+              <ScreenNote>Real Informax Cloud screens, development build. Marlowe Grand is a fictional hotel.</ScreenNote>
             </div>
           </div>
         </Container>
