@@ -70,7 +70,7 @@ const BENEFITS = [
 
 export default function Benefits() {
   return (
-    <ul className="scrollbar-none -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
+    <ul tabIndex={0} aria-label="Informax Cloud benefits" className="scrollbar-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8ed1fc] -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
       {BENEFITS.map((b) => (
         <li key={b.title} className="w-[80vw] max-w-[340px] shrink-0 snap-start md:w-auto md:max-w-none">
           <div aria-hidden className="h-[200px] overflow-hidden rounded-[24px] md:h-[230px]">
