@@ -17,7 +17,7 @@ const FLOW = [
     n: "01",
     icon: Smartphone,
     title: "Open",
-    desc: "Open it from an Access Point with their own phone. No app to find or install first.",
+    desc: "Open it from a Scan Point with their own phone. No app to find or install first.",
   },
   {
     n: "02",

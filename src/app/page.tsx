@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import HeroStage from "@/components/x/HeroStage";
+import Showcase from "@/components/x/Showcase";
 import Benefits from "@/components/x/Benefits";
 import ScanPoint from "@/components/x/ScanPoint";
 import { Container, ScreenNote } from "@/components/x/ui";
@@ -53,14 +53,23 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="ix-hero-rise mt-10 md:mt-14" style={{ ["--rise-delay" as string]: "0.36s", ["--rise-y" as string]: "36px", ["--rise-dur" as string]: "1.2s" }}>
-            <div className="mb-4 flex flex-col items-center gap-1 text-center md:mb-6 md:flex-row md:justify-center md:gap-3">
-              <h2 className="text-[15px] font-semibold text-ink">Informax Cloud</h2>
-              <p className="text-[15px] text-ink-mute">Change it once. Every Scan Point, and every guest, sees it instantly.</p>
+          <div className="ix-hero-rise mt-9 md:mt-12" style={{ ["--rise-delay" as string]: "0.36s", ["--rise-y" as string]: "36px", ["--rise-dur" as string]: "1.2s" }}>
+            <div className="mx-auto max-w-[880px]">
+              <div className="mb-3 md:mb-4">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h2 className="x-title text-[21px] text-ink md:text-[28px]">See Informax in action</h2>
+                  <Link href="/informax-cloud" className="ix-link group shrink-0 text-[14px] text-brass-deep hover:text-ink md:text-[15px]">
+                    <span className="max-sm:hidden">Explore Informax Cloud</span>
+                    <span className="sm:hidden">Explore Cloud</span>
+                    <ArrowRight size={15} aria-hidden className="transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+                <p className="mt-0.5 text-[15px] leading-snug text-ink-mute">One Scan Point. Unlimited placements. Instant updates.</p>
+              </div>
             </div>
-            <HeroStage />
-            <div className="mt-5 text-center">
-              <ScreenNote>Real Informax Cloud and guest screens from the development build. Marlowe Grand is a fictional hotel.</ScreenNote>
+            <Showcase />
+            <div className="mx-auto mt-2 max-w-[880px] sm:mt-3">
+              <ScreenNote>Real Informax Cloud screens, development build. Marlowe Grand is a fictional hotel.</ScreenNote>
             </div>
           </div>
         </Container>
@@ -71,7 +80,7 @@ export default function Home() {
         <Container>
           <Reveal className="mb-9 flex flex-col gap-3 md:mb-12 md:flex-row md:items-end md:justify-between">
             <h2 id="benefits-h" className="x-title max-w-[22ch] text-balance text-[clamp(30px,4vw,52px)] text-ink">
-              One Scan Point. <span className="text-ink-quiet">Unlimited placements. Instant updates.</span>
+              Always accurate. <span className="text-ink-quiet">Nothing for guests to install.</span>
             </h2>
             <Link href="/how-it-works" className="ix-link group shrink-0 text-brass-deep hover:text-ink">
               How it works <ArrowRight size={16} aria-hidden className="transition-transform group-hover:translate-x-0.5" />

@@ -1,0 +1,61 @@
+{
+ "desktop1440": {
+  "beatSequence": [
+   0,
+   1,
+   2
+  ],
+  "advancesThroughAllBeats": true,
+  "pausedStays": true,
+  "phoneAfterOpacityAtEnd": "1",
+  "cls": 0,
+  "lcpMs": 4584,
+  "scrollW": 1440,
+  "viewport": 1440,
+  "cloudImagesRequested": 5
+ },
+ "tablet834": {
+  "beatSequence": [
+   0,
+   1,
+   2
+  ],
+  "advancesThroughAllBeats": true,
+  "pausedStays": true,
+  "phoneAfterOpacityAtEnd": "1",
+  "cls": 0,
+  "lcpMs": 4552,
+  "scrollW": 834,
+  "viewport": 834,
+  "cloudImagesRequested": 5
+ },
+ "phone390": {
+  "beatSequence": [
+   0,
+   1,
+   2
+  ],
+  "advancesThroughAllBeats": true,
+  "pausedStays": true,
+  "phoneAfterOpacityAtEnd": "1",
+  "cls": 0,
+  "lcpMs": 8888,
+  "scrollW": 390,
+  "viewport": 390,
+  "cloudImagesRequested": 5
+ },
+ "reduced-desktop": {
+  "phoneAfterOpacity": "1",
+  "runningBars": 0,
+  "pressed": [
+   "03Guests see itThe next scan shows the update."
+  ]
+ },
+ "reduced-phone": {
+  "phoneAfterOpacity": "1",
+  "runningBars": 0,
+  "pressed": [
+   "Step 3: Guests see it"
+  ]
+ }
+}
