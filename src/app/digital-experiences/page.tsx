@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const BENEFITS = [
-  { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, from the Access Point in their room." },
+  { title: "Answers in seconds", body: "Opening times, menus, Wi-Fi and services, from the Scan Point in their room." },
   { title: "Fewer repeat questions", body: "Reception spends less time answering what the directory already explains." },
   { title: "Always current", body: "Change it once in Informax Cloud and every room shows the new version." },
   { title: "Unmistakably yours", body: "Designed around your brand, your tone and your property. No templates." },
@@ -96,7 +96,7 @@ export default function DigitalExperiencesPage() {
               the way a guest actually looks for things.
             </Lede>
             <ul className="mt-10 max-w-md">
-              {["Designed to match your brand", "Opens from any Informax Access Point", "Every room shows the same, current version"].map((l) => (
+              {["Designed to match your brand", "Opens from any Informax Scan Point", "Every room shows the same, current version"].map((l) => (
                 <li key={l} className="border-t border-line py-4 text-[15.5px] text-ink">
                   {l}
                 </li>

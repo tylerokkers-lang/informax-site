@@ -72,7 +72,7 @@ export default function AccessPoint({
   return (
     <div
       role="img"
-      aria-label={`Informax Access Point for ${place}`}
+      aria-label={`Informax Scan Point for ${place}`}
       className={`relative flex aspect-[3/4] shrink-0 flex-col ${s.plate} ${f.plate} ${f.edge} ${className}`}
     >
       <Image src="/brand/informax-logo-white-trim.png" alt="" width={120} height={36} className={`w-auto self-start ${s.logo} ${f.logo}`} />
